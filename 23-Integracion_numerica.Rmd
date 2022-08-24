@@ -11,8 +11,7 @@ $$MISE\left( \hat{f} \right) =\int E\left[ \left( \hat{f}(x) - f(x) \right)^2\ri
 Cuando el numero de dimensiones es pequeño, nos puede interesar emplear un método numérico para aproximar este tipo de integrales. 
 
 
-Integración numérica unidimensional
------------------------------------
+## Integración numérica unidimensional
 
 Supongamos que nos interesa aproximar una integral de la forma:
 $$I = \int_a^b h(x)  dx.$$. 
@@ -168,8 +167,7 @@ area(fun, 0, 1)
 ```
 
 
-Integración numérica bidimensional
------------------------------------
+## Integración numérica bidimensional
 
 Supongamos que nos interesa aproximar una integral de la forma:
 $$I=\int_{a_x}^{b_x}\int_{a_y}^{b_y}f(x, y)dy dx$$. 

@@ -12,11 +12,15 @@ github-repo: rubenfcasal/simbook
 description: "Apuntes de la asignatura de Simulación Estadística del Máster en Técnicas Estadísticas."
 ---
 
+# Prólogo {-}
 
 ```{r , child = '_global_options.Rmd'}
 ```
 
-# Prólogo {-}
+<!-- 
+PENDENTE: 
+- Codigo simres en capítulos
+-->
 
 Este libro contiene los apuntes de la asignatura de [Simulación Estadística](http://eamo.usc.es/pub/mte/index.php/es/?option=com_content&view=article&id=2201&idm=13&a%C3%B1o=2019) del [Máster en Técnicas Estadísticas](http://eio.usc.es/pub/mte). 
 

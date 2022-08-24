@@ -11,8 +11,7 @@ $$MISE\left( \hat{f} \right) =\int E\left[ \left( \hat{f}(x) - f(x) \right)^2\ri
 Cuando el numero de dimensiones es pequeño, nos puede interesar emplear un método numérico para aproximar este tipo de integrales. 
 
 
-Integración numérica unidimensional
------------------------------------
+## Integración numérica unidimensional
 
 Supongamos que nos interesa aproximar una integral de la forma:
 $$I = \int_a^b h(x)  dx.$$. 
@@ -29,9 +28,7 @@ abline(h = 0, lty = 2)
 abline(v = c(0, 1), lty = 2)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{23-Integracion_numerica_files/figure-latex/unnamed-chunk-2-1} \end{center}
+<img src="23-Integracion_numerica_files/figure-html/unnamed-chunk-2-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 ### Método del trapezoide 
@@ -200,8 +197,7 @@ area(fun, 0, 1)
 ```
 
 
-Integración numérica bidimensional
------------------------------------
+## Integración numérica bidimensional
 
 Supongamos que nos interesa aproximar una integral de la forma:
 $$I=\int_{a_x}^{b_x}\int_{a_y}^{b_y}f(x, y)dy dx$$. 
@@ -259,9 +255,7 @@ persp3D.f2d <- function(f2d, ax=-1, bx=1, ay=-1, by=1, nx=21, ny=21, ...) {
 persp3D.f2d(f2d, -1, 1, -1, 1, 50, 50, ticktype = "detailed") 
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{23-Integracion_numerica_files/figure-latex/unnamed-chunk-9-1} \end{center}
+<img src="23-Integracion_numerica_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 ### Método del trapezoide 

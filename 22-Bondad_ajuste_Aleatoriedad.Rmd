@@ -1,5 +1,4 @@
-Bondad de Ajuste y Aleatoriedad {#gof-aleat}
-===============================
+# Bondad de Ajuste y Aleatoriedad {#gof-aleat}
 
 ```{r , child = '_global_options.Rmd'}
 ```

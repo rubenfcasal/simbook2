@@ -327,7 +327,7 @@ En este libro sólo consideraremos los números pseudoaleatorios y por comodidad
 
 ### Números pseudo-aleatorios
 
-La mayoría de los métodos de simulación se basan en la posibilidad de generar números pseudoaleatorios que imiten las propiedades de valores independientes de una distribución $\mathcal{U}(0,1)$, es decir, que imiten las propiedades de una muestra aleatoria simple^[Aunque hay que distinguir entre secuencia y muestra. En un problema de inferencia, en principio estamos interesados en una característica desconocida de la población. En cambio, en un problema de simulación "la población" es el modelo y lo conocemos por completo (no obstante el problema de simulación puede surgir como solución de un problema de inferencia).]. 
+La mayoría de los métodos de simulación se basan en la posibilidad de generar números pseudoaleatorios que imiten las propiedades de valores independientes de la distribución $\mathcal{U}(0,1)$, es decir, que imiten las propiedades de una muestra aleatoria simple^[Aunque hay que distinguir entre secuencia y muestra. En un problema de inferencia, en principio estamos interesados en una característica desconocida de la población. En cambio, en un problema de simulación "la población" es el modelo y lo conocemos por completo (no obstante el problema de simulación puede surgir como solución de un problema de inferencia).] de esta distribución. 
 
 El procedimiento habitual para obtener estas secuencias es emplear un algoritmo recursivo denominado *generador*:
 

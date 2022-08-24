@@ -1,7 +1,7 @@
 --- 
 title: "Simulación Estadística"
 author: "Rubén Fernández Casal (ruben.fcasal@udc.es), Ricardo Cao (rcao@udc.es)"
-date: "Edición: Agosto de 2022. Impresión: 2022-08-23"
+date: "Edición: Agosto de 2022. Impresión: 2022-08-24"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -12,11 +12,15 @@ github-repo: rubenfcasal/simbook
 description: "Apuntes de la asignatura de Simulación Estadística del Máster en Técnicas Estadísticas."
 ---
 
-
-
-
-
 # Prólogo {-}
+
+
+
+
+<!-- 
+PENDENTE: 
+- Codigo simres en capítulos
+-->
 
 Este libro contiene los apuntes de la asignatura de [Simulación Estadística](http://eamo.usc.es/pub/mte/index.php/es/?option=com_content&view=article&id=2201&idm=13&a%C3%B1o=2019) del [Máster en Técnicas Estadísticas](http://eio.usc.es/pub/mte). 
 
@@ -54,8 +58,7 @@ Para generar el libro (compilar) serán necesarios paquetes adicionales,
 para lo que se recomendaría consultar el libro de ["Escritura de libros con bookdown" ](https://rubenfcasal.github.io/bookdown_intro) en castellano.
 Pueden ser también de interés los enlaces mostrados en el Apéndice \@ref(links).
 
-
-\begin{flushleft}\includegraphics[width=0.1\linewidth]{images/by-nc-nd-88x31} \end{flushleft}
+<img src="images/by-nc-nd-88x31.png" width="10%" style="display: block; margin: auto auto auto 0;" />
 
 Este obra está bajo una licencia de [Creative Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_ES) 
 (esperamos poder liberarlo bajo una licencia menos restrictiva más adelante...).
