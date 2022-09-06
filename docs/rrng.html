@@ -32,7 +32,7 @@
   
 <link rel="prev" href="tipos-de-números-aleatorios.html"/>
 <link rel="next" href="ejercicios.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -186,11 +186,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="sim-con.html"><a href="sim-con.html"><i class="fa fa-check"></i><b>4</b> Simulación de variables continuas</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="método-de-inversión.html"><a href="método-de-inversión.html"><i class="fa fa-check"></i><b>4.1</b> Método de inversión</a>
+<li class="chapter" data-level="4.1" data-path="inversion.html"><a href="inversion.html"><i class="fa fa-check"></i><b>4.1</b> Método de inversión</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="método-de-inversión.html"><a href="método-de-inversión.html#algunas-distribuciones-que-pueden-simularse-por-el-método-de-inversión"><i class="fa fa-check"></i><b>4.1.1</b> Algunas distribuciones que pueden simularse por el método de inversión</a></li>
-<li class="chapter" data-level="4.1.2" data-path="método-de-inversión.html"><a href="método-de-inversión.html#ventajas-e-inconvenientes"><i class="fa fa-check"></i><b>4.1.2</b> Ventajas e inconvenientes</a></li>
-<li class="chapter" data-level="4.1.3" data-path="método-de-inversión.html"><a href="método-de-inversión.html#inversión-aproximada"><i class="fa fa-check"></i><b>4.1.3</b> Inversión aproximada</a></li>
+<li class="chapter" data-level="4.1.1" data-path="inversion.html"><a href="inversion.html#algunas-distribuciones-que-pueden-simularse-por-el-método-de-inversión"><i class="fa fa-check"></i><b>4.1.1</b> Algunas distribuciones que pueden simularse por el método de inversión</a></li>
+<li class="chapter" data-level="4.1.2" data-path="inversion.html"><a href="inversion.html#ventajas-e-inconvenientes"><i class="fa fa-check"></i><b>4.1.2</b> Ventajas e inconvenientes</a></li>
+<li class="chapter" data-level="4.1.3" data-path="inversion.html"><a href="inversion.html#inversión-aproximada"><i class="fa fa-check"></i><b>4.1.3</b> Inversión aproximada</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="AR.html"><a href="AR.html"><i class="fa fa-check"></i><b>4.2</b> Método de aceptación rechazo</a>
 <ul>
@@ -200,10 +200,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.4" data-path="AR.html"><a href="AR.html#elección-de-la-densidad-auxiliar"><i class="fa fa-check"></i><b>4.2.4</b> Elección de la densidad auxiliar</a></li>
 <li class="chapter" data-level="4.2.5" data-path="AR.html"><a href="AR.html#bayes-ar"><i class="fa fa-check"></i><b>4.2.5</b> Ejemplo: inferencia bayesiana</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="modificaciones-del-método-de-aceptación-rechazo.html"><a href="modificaciones-del-método-de-aceptación-rechazo.html"><i class="fa fa-check"></i><b>4.3</b> Modificaciones del método de aceptación-rechazo</a>
+<li class="chapter" data-level="4.3" data-path="modAR.html"><a href="modAR.html"><i class="fa fa-check"></i><b>4.3</b> Modificaciones del método de aceptación-rechazo</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="modificaciones-del-método-de-aceptación-rechazo.html"><a href="modificaciones-del-método-de-aceptación-rechazo.html#ars"><i class="fa fa-check"></i><b>4.3.1</b> Muestreo por rechazo adaptativo (ARS)</a></li>
-<li class="chapter" data-level="4.3.2" data-path="modificaciones-del-método-de-aceptación-rechazo.html"><a href="modificaciones-del-método-de-aceptación-rechazo.html#método-del-cociente-de-uniformes"><i class="fa fa-check"></i><b>4.3.2</b> Método del cociente de uniformes</a></li>
+<li class="chapter" data-level="4.3.1" data-path="modAR.html"><a href="modAR.html#ars"><i class="fa fa-check"></i><b>4.3.1</b> Muestreo por rechazo adaptativo (ARS)</a></li>
+<li class="chapter" data-level="4.3.2" data-path="modAR.html"><a href="modAR.html#método-del-cociente-de-uniformes"><i class="fa fa-check"></i><b>4.3.2</b> Método del cociente de uniformes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="composicion.html"><a href="composicion.html"><i class="fa fa-check"></i><b>4.4</b> Método de composición (o de simulación condicional)</a></li>
 <li class="chapter" data-level="4.5" data-path="notables-cont.html"><a href="notables-cont.html"><i class="fa fa-check"></i><b>4.5</b> Métodos específicos para la generación de algunas distribuciones notables</a>
@@ -437,10 +437,10 @@ Ejemplo:</p>
 <span id="cb23-4"><a href="rrng.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">CPUtimeprint</span>()</span></code></pre></div>
 <pre><code>## Tiempo última operación:
 ##    user  system elapsed 
-##    0.13    0.00    0.12 
+##    0.07    0.00    0.08 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.13    0.00    0.12</code></pre>
+##    0.07    0.00    0.08</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="rrng.html#cb25-1" aria-hidden="true" tabindex="-1"></a>result2 <span class="ot">&lt;-</span> <span class="fu">funtest</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">3</span>)</span>
 <span id="cb25-2"><a href="rrng.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">CPUtimeprint</span>()</span></code></pre></div>
 <pre><code>## Tiempo última operación:
@@ -448,7 +448,7 @@ Ejemplo:</p>
 ##       0       0       0 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.13    0.00    0.12</code></pre>
+##    0.07    0.00    0.08</code></pre>
 <p>Hay diversos paquetes que implementan herramientas similares, por ejemplo:</p>
 <ul>
 <li><p>El paquete <code>tictoc</code>:</p>
@@ -466,9 +466,9 @@ Ejemplo:</p>
 <span id="cb27-9"><a href="rrng.html#cb27-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">toc</span>() <span class="co"># inner</span></span></code></pre></div>
 <pre><code>## inner: 0 sec elapsed</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="rrng.html#cb29-1" aria-hidden="true" tabindex="-1"></a>   <span class="fu">toc</span>() <span class="co"># middle</span></span></code></pre></div>
-<pre><code>## middle: 0.01 sec elapsed</code></pre>
+<pre><code>## middle: 0 sec elapsed</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="rrng.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>() <span class="co"># outer</span></span></code></pre></div>
-<pre><code>## outer: 0.09 sec elapsed</code></pre>
+<pre><code>## outer: 0.11 sec elapsed</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="rrng.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Timing in a loop and analyzing the results later using tic.log().</span></span>
 <span id="cb33-2"><a href="rrng.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tic.clearlog</span>()</span>
 <span id="cb33-3"><a href="rrng.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
@@ -482,8 +482,8 @@ Ejemplo:</p>
 <span id="cb33-11"><a href="rrng.html#cb33-11" aria-hidden="true" tabindex="-1"></a>log.times <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, <span class="fu">tic.log</span>(<span class="at">format =</span> <span class="cn">FALSE</span>))</span>
 <span id="cb33-12"><a href="rrng.html#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(log.times)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    10 obs. of  3 variables:
-##  $ tic: num  4.65 4.65 4.65 4.65 4.65 4.65 4.65 4.67 4.67 4.67
-##  $ toc: num  4.65 4.65 4.65 4.65 4.65 4.65 4.67 4.67 4.67 4.67
+##  $ tic: num  3.04 3.04 3.04 3.04 3.04 3.04 3.04 3.04 3.04 3.04
+##  $ toc: num  3.04 3.04 3.04 3.04 3.04 3.04 3.04 3.04 3.04 3.04
 ##  $ msg: chr  &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="rrng.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic.clearlog</span>()</span>
 <span id="cb35-2"><a href="rrng.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -491,7 +491,7 @@ Ejemplo:</p>
 <span id="cb35-4"><a href="rrng.html#cb35-4" aria-hidden="true" tabindex="-1"></a>log.times<span class="sc">$</span>timings <span class="ot">&lt;-</span> <span class="fu">with</span>(log.times, toc <span class="sc">-</span> tic)</span>
 <span id="cb35-5"><a href="rrng.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(log.times<span class="sc">$</span>timings)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   0.000   0.000   0.002   0.000   0.020</code></pre></li>
+##       0       0       0       0       0       0</code></pre></li>
 </ul></li>
 <li><p>La función <a href="https://rubenfcasal.github.io/simres/reference/cpu.time.html"><code>cpu.time()</code></a> del paquete <code>simres</code>:</p>
 <ul>

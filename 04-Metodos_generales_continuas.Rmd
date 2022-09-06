@@ -28,11 +28,11 @@ Empregar exemplos en lugar de exercicios
 ```{r , child = '_global_options.Rmd'}
 ```
 
-En este capítulo se expondrán métodos generales para simular distribuciones continuas: el método de inversión y los basados en aceptación-rechazo. 
+En este capítulo se expondrán métodos generales para simular distribuciones continuas: el método de inversión (siguiente sección), los basados en aceptación-rechazo (secciones \@ref(AR) y \@ref(modAR)) y el método de composición (Sección \@ref(composicion)). 
 En todos los casos como punto de partida es necesario disponer de un método de generación de números pseudoaleatorios uniformes en $(0,1)$.
 
 
-## Método de inversión
+## Método de inversión {#inversion}
 
 En general sería el método preferible para la simulación de una variable continua (siempre que se disponga de la función cuantil). 
 Está basado en los siguientes resultados:
@@ -141,7 +141,7 @@ innecesarios (tal y como se hizo en el ejemplo de la exponencial).
 ```{exercise, label="ddexp", name="distribución doble exponencial"}
 ```
 
-La distribución doble exponencial (o distribución de Laplace) de
+La distribución doble exponencial^[Esta distribución también se puede generar fácilmente simulando una distribución exponencial y asignando un signo positivo o negativo con equiprobabilidad (ver Ejemplo \@ref(exm:dexp-mix)) y función `r cite_fsimres("rdexp", lnk = "ddexp", pkg = TRUE)` (fichero [*ddexp.R*](R/ddexp.R)).] (o distribución de Laplace) de
 parámetro $\lambda$ tiene función de densidad:
 $$f(x)  =\frac{\lambda}{2}e^{-\lambda\left\vert x\right\vert
 }\text{, }x\in\mathbb{R}$$ 
@@ -204,10 +204,6 @@ c)  Representar el histograma y compararlo con la densidad teórica.
     ```
     
     Como se trata de un método exacto de simulación, si está bien implementado, la distribución de los valores generados debería comportarse como una muestra genuina de la distribución objetivo.
-    
-```{remark}
-Esta distribución también se puede generar fácilmente simulando una distribución exponencial y asignando un signo positivo o negativo con equiprobabilidad (ver Ejemplo \@ref(exm:dexp-mix)).
-```
     
 
 ### Ventajas e inconvenientes
@@ -841,7 +837,7 @@ a)  Generar una muestra i.i.d. $X_{i}\sim N(\theta_{0},1)$ de tamaño
 b)  Repetir el apartado anterior con $n=100$.
 
 
-## Modificaciones del método de aceptación-rechazo
+## Modificaciones del método de aceptación-rechazo {#modAR}
 
 En el tiempo de computación del algoritmo de aceptación-rechazo influye:
 
@@ -981,31 +977,14 @@ C_{f^{\ast}} & = \left\{ (u, v) \in \mathbb{R}^{2} : 0 <u \leq \frac{1}{\sqrt{1 
 dando como resultando que $C_{f^{\ast}}$ es el semicírculo de radio uno, y podemos generar valores con distribución uniforme en esta región a partir de $\mathcal{U}\left([0,1]\times[-1,1] \right)$.
 
 
-Por tanto, podemos emplear el siguiente código para generar valores de la densidad objetivo:
+El correspondiente algoritmo está implementado en la función  `r cite_fsimres("rcauchy.rou")` del paquete `r cite_simres()` (fichero [*ar.R*](R/ar.R))::
 
 ```{r rcauchy-rou, fig.cap="Distribución de los valores generados mediante el método de cociente de uniformes."}
-rcauchy.rou <- function(nsim) {
-# Cauchy mediante cociente de uniformes  
-  ngen <- nsim
-  u <- runif(nsim, 0, 1)
-  v <- runif(nsim, -1, 1)
-  x <- v/u
-  ind <- u^2 + v^2 > 1 # TRUE si no verifica condición
-  # Volver a generar si no verifica condición
-  while (le <- sum(ind)){ # mientras le = sum(ind) > 0
-    ngen <- ngen + le
-    u <- runif(le, 0, 1)
-    v <- runif(le, -1, 1)
-    x[ind] <- v/u
-    ind[ind] <- u^2 + v^2 > 1 # TRUE si no verifica condición
-  }
-  attr(x, "ngen") <- ngen
-  return(x)
-}  
+simres::rcauchy.rou
 
 set.seed(1)
 nsim <- 10^4
-rx <- rcauchy.rou(nsim)
+rx <- simres::rcauchy.rou(nsim)
 
 hist(rx, breaks = "FD", freq = FALSE, main = "", xlim = c(-6, 6))
 curve(dcauchy, add = TRUE)
@@ -1060,13 +1039,15 @@ f_{2}(x) = \left\{
 \end{array}
 \ \right.$$
 
-El algoritmo resultante sería el siguiente (empleando dos números pseudo aleatorios uniformes, el primero para seleccionar el índice y el segundo para generar un valor de la correspondiente componente mediante el método de inversión):
+El algoritmo resultante sería el siguiente (empleando dos números pseudoaleatorios uniformes, el primero para seleccionar el índice y el segundo para generar un valor de la correspondiente componente mediante el método de inversión):
 
 1. Generar $U,V\sim \mathcal{U}(0, 1)$.
 
 2. Si $U<0.5$ devolver $X=-\ln \left( 1-V\right)/\lambda$.
 
 3. En caso contrario devolver $X=\ln(V)/\lambda$.
+
+Este método está implementado en la función `r cite_fsimres("rdexp", lnk = "ddexp")` del paquete `r cite_simres()` (fichero [*ddexp.R*](R/ddexp.R)).
 
 Observaciones:
 
@@ -1105,9 +1086,9 @@ Sin embargo, además de que muchos de ellos servirían como ilustración de la a
 
 Entre los distintos métodos disponibles para la generación de las distribuciones continuas más conocidas podríamos destacar:
 
-* Método de Box-Müller para la generación de normales independientes (pero que se puede generalizar para otras distribuciones y dependencia).
+* Método de Box-Müller para la generación de normales independientes (que se puede generalizar para otras distribuciones o incorporar dependencia).
 
-* Algoritmos de Jöhnk (1963) y Cheng (1978) para la generación de la distribución beta (como ejemplo de las eficiencias de los métodos de aceptación-rechazo).
+* Algoritmos de Jöhnk (1963) y Cheng (1978) para la generación de la distribución beta (como ejemplo de la eficiencia de los métodos de aceptación-rechazo).
 
 ### Método de Box-Müller
 
