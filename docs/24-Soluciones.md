@@ -129,10 +129,14 @@ symbols(0, 0, circles = 1, inches = FALSE, add = TRUE)
 symbols(0, 0, squares = 2, inches = FALSE, add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="24-Soluciones_files/figure-html/simpiplot-1.png" alt="Valores generados con distribución uniforme bidimensional, con colores y símbolos indicando si están dentro del círculo unidad." width="70%" />
-<p class="caption">(\#fig:simpiplot)Valores generados con distribución uniforme bidimensional, con colores y símbolos indicando si están dentro del círculo unidad.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/simpiplot-1} 
+
+}
+
+\caption{Valores generados con distribución uniforme bidimensional, con colores y símbolos indicando si están dentro del círculo unidad.}(\#fig:simpiplot)
+\end{figure}
 
 
 
@@ -167,10 +171,14 @@ mean(x)
 barplot(100*table(x)/nsim, ylab = "Porcentaje") # Representar porcentajes 
 ```
 
-<div class="figure" style="text-align: center">
-<img src="24-Soluciones_files/figure-html/simberplot-1.png" alt="Frecuencias relativas de los valores generados con distribución Bernoulli (aproximaciones por simulación de las probabilidades teóricas)." width="70%" />
-<p class="caption">(\#fig:simberplot)Frecuencias relativas de los valores generados con distribución Bernoulli (aproximaciones por simulación de las probabilidades teóricas).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/simberplot-1} 
+
+}
+
+\caption{Frecuencias relativas de los valores generados con distribución Bernoulli (aproximaciones por simulación de las probabilidades teóricas).}(\#fig:simberplot)
+\end{figure}
 
 ---
 
@@ -204,10 +212,14 @@ plot(n, cumsum(x)/n, type="l", ylab="Proporción de caras",
 abline(h=p, lty=2, col="red")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="24-Soluciones_files/figure-html/simberconv-1.png" alt="Gráfico de convergencia de la aproximación por simulación a la probabilidad teórica." width="70%" />
-<p class="caption">(\#fig:simberconv)Gráfico de convergencia de la aproximación por simulación a la probabilidad teórica.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/simberconv-1} 
+
+}
+
+\caption{Gráfico de convergencia de la aproximación por simulación a la probabilidad teórica.}(\#fig:simberconv)
+\end{figure}
 
 
 ### Ejercicio [1.3](ejercicios.html#exr:circuito) {#sol-circuito}
@@ -218,14 +230,17 @@ Simular el paso de corriente a través del siguiente circuito, donde
 figuran las probabilidades de que pase corriente por cada uno de los
 interruptores:
 
-<img src="images/circuito2.png" width="50%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.5\linewidth]{images/circuito2} \end{center}
 
 Considerar que cada interruptor es una variable aleatoria de Bernoulli independiente
 para simular 1000 valores de cada una de ellas.
     
-\BeginKnitrBlock{remark}<div class="remark">\iffalse{} <span class="remark"><em>Nota: </em></span>  \fi{}R maneja internamente los valores lógicos como 1 (`TRUE`) y 0 (`FALSE`).
+\BeginKnitrBlock{remark}
+\iffalse{} <span class="remark"><em>Nota: </em></span>  \fi{}R maneja internamente los valores lógicos como 1 (`TRUE`) y 0 (`FALSE`).
 Recíprocamente, cualquier número puede ser tratado como lógico (al estilo de C).
-El entero 0 es equivalente a `FALSE` y cualquier entero distinto de 0 a `TRUE`.</div>\EndKnitrBlock{remark}
+El entero 0 es equivalente a `FALSE` y cualquier entero distinto de 0 a `TRUE`.
+\EndKnitrBlock{remark}
 
 ---
 
@@ -433,7 +448,9 @@ hist(evol[20, ], breaks = "FD", freq = FALSE,
 abline(v = limits[, 20], lty = 2)
 ```
 
-<img src="24-Soluciones_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 Representar las realizaciones del proceso y los intervalos de predicción puntuales:
 
@@ -444,7 +461,9 @@ matplot(1:max_len, evol, type = "l", col = "lightgray", lty = 1,
 matlines(1:max_len, t(limits), lty = c(2, 1, 2), col = 1)
 ```
 
-<img src="24-Soluciones_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-16-1} \end{center}
 
 
 ## Capítulo 2 [Generación de números pseudoaleatorios](gen-pseudo.html)
@@ -480,26 +499,22 @@ simres::rvng
 ```
 
 ```
-## function(n, seed = as.numeric(Sys.time()), k = 4) {
-##   seed <- seed %% 10^k
-##   aux <- 10^(2*k-k/2)
-##   aux2 <- 10^(k/2)
-##   u <- numeric(n)
-##   for(i in 1:n) {
-##     z <- seed^2
-##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
-##     u[i] <- seed/10^k
-##   }
-##   # Almacenar semilla y parámetros
-##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
-##       envir = globalenv())
-##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
-##   # Para continuar con semilla y parámetros:
-##   #   with(.rng, rvng(n, seed, parameters$k))
-##   # Devolver valores
-##   return(u)
+## function (n, seed = as.numeric(Sys.time()), k = 4) 
+## {
+##     seed <- seed%%10^k
+##     aux <- 10^(2 * k - k/2)
+##     aux2 <- 10^(k/2)
+##     u <- numeric(n)
+##     for (i in 1:n) {
+##         z <- seed^2
+##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
+##         u[i] <- seed/10^k
+##     }
+##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
+##         envir = globalenv())
+##     return(u)
 ## }
-## <bytecode: 0x00000000331268d0>
+## <bytecode: 0x0000000020bcf678>
 ## <environment: namespace:simres>
 ```
 

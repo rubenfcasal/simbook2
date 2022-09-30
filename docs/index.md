@@ -1,7 +1,7 @@
 --- 
 title: "Simulación Estadística"
 author: "Rubén Fernández Casal (ruben.fcasal@udc.es), Ricardo Cao (rcao@udc.es)"
-date: "Edición: Agosto de 2022. Impresión: 2022-08-24"
+date: "Edición: Agosto de 2022. Impresión: 2022-09-30"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -22,15 +22,16 @@ PENDENTE:
 - Codigo simres en capítulos
 -->
 
-Este libro contiene los apuntes de la asignatura de [Simulación Estadística](http://eamo.usc.es/pub/mte/index.php/es/?option=com_content&view=article&id=2201&idm=13&a%C3%B1o=2019) del [Máster en Técnicas Estadísticas](http://eio.usc.es/pub/mte). 
+Esta es la segunda edición del libro, **en proceso de elaboración** (se puede acceder a la primera edición a través de este [enlace](https://rubenfcasal.github.io/simbook/index.html)).
 
-Este libro ha sido escrito en [R-Markdown](http://rmarkdown.rstudio.com) empleando el paquete [`bookdown`](https://bookdown.org/yihui/bookdown/) y está disponible en el repositorio Github: [rubenfcasal/simbook](https://github.com/rubenfcasal/simbook). 
+Este libro contiene los apuntes de la asignatura de [Simulación Estadística](http://eamo.usc.es/pub/mte/index.php/es/?option=com_content&view=article&id=2201&idm=13&a%C3%B1o=2019) del [Máster en Técnicas Estadísticas](http://eio.usc.es/pub/mte) y material de apoyo a la docencia de la asignatura de [Técnicas de Simulación y Remuestreo](https://guiadocente.udc.es/guia_docent/index.php?centre=614&ensenyament=614G02&assignatura=614G02036&idioma=cast) del [Grado en Ciencia e Ingeniería de Datos](https://estudos.udc.es/es/study/start/614G02V01) de la [UDC](https://www.udc.es). 
+
+Este libro ha sido escrito en [R-Markdown](http://rmarkdown.rstudio.com) empleando el paquete [`bookdown`](https://bookdown.org/yihui/bookdown/) y está disponible en el repositorio Github: [rubenfcasal/simbook2](https://github.com/rubenfcasal/simbook2). 
 Se puede acceder a la versión en línea a través del siguiente enlace:
 
-<https://rubenfcasal.github.io/simbook/index.html>.
+<https://rubenfcasal.github.io/simbook2/index.html>.
 
-donde puede descargarse en formato [pdf](https://rubenfcasal.github.io/simbook/Simulacion.pdf).
-
+donde puede descargarse en formato [pdf](https://rubenfcasal.github.io/simbook2/Simulacion.pdf).
 
 Para poder ejecutar los ejemplos mostrados en el libro es recomendable emplear el paquete [`simres`](https://rubenfcasal.github.io/simres), ***no disponible actualmente en CRAN***, aunque se puede instalar la versión de desarrollo en [GitHub](https://github.com/rubenfcasal/simres)):
 
@@ -41,7 +42,7 @@ remotes::install_github("rubenfcasal/simres")
 Alternativamente se pueden emplear los ficheros de la carpeta *codigo*.
 
 
-Para instalar los paquetes necesarios se puede emplear el siguiente comando:
+Para instalar los paquetes necesarios se puede emplear los siguientes comandos:
 
 ```r
 pkgs <- c('tictoc', 'boot', 'randtoolbox', 'MASS', 'DEoptim', 'nortest', 'geoR', 'copula',
@@ -58,7 +59,8 @@ Para generar el libro (compilar) serán necesarios paquetes adicionales,
 para lo que se recomendaría consultar el libro de ["Escritura de libros con bookdown" ](https://rubenfcasal.github.io/bookdown_intro) en castellano.
 Pueden ser también de interés los enlaces mostrados en el Apéndice \@ref(links).
 
-<img src="images/by-nc-nd-88x31.png" width="10%" style="display: block; margin: auto auto auto 0;" />
+
+\begin{flushleft}\includegraphics[width=0.1\linewidth]{images/by-nc-nd-88x31} \end{flushleft}
 
 Este obra está bajo una licencia de [Creative Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_ES) 
 (esperamos poder liberarlo bajo una licencia menos restrictiva más adelante...).
