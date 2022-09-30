@@ -180,7 +180,7 @@
 
 \title{Simulación Estadística}
 \author{Rubén Fernández Casal (\href{mailto:ruben.fcasal@udc.es}{\nolinkurl{ruben.fcasal@udc.es}}), Ricardo Cao (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}})}
-\date{Edición: Agosto de 2022. Impresión: 2022-09-06}
+\date{Edición: Agosto de 2022. Impresión: 2022-09-30}
 
 \begin{document}
 \maketitle
@@ -723,17 +723,17 @@ Entre las herramientas implementadas en el paquete base de R podemos destacar:
 Además están disponibles otros paquetes que implementan distribuciones adicionales (ver \href{https://cran.r-project.org/view=Distributions}{CRAN Task View: Probability Distributions}).
 Entre ellos podríamos destacar los paquetes \href{http://distr.r-forge.r-project.org}{\texttt{distr}} (clases S4; con extensiones en otros paquetes) y \href{https://alan-turing-institute.github.io/distr6/index.html}{\texttt{distr6}} (clases R6).
 
-La semilla se almacena (en \texttt{globalenv}) en \texttt{.Random.seed}; es un vector
-de enteros cuya dimensión depende del tipo de generador:
+La semilla se almacena en \texttt{.Random.seed}:
 
 \begin{itemize}
 \item
-  No debe ser modificado manualmente; se guarda con el entorno de trabajo (por ejemplo, si se guarda al terminar la sesión en un fichero \emph{.RData}, se restaurará la semilla al iniciar una nueva sesión y podremos continuar con las simulaciones).
+  Inicialmente no existe.
+  La recomendación es establecerla con \texttt{set.seed()}, en caso contrario se generará a partir del reloj del sistema\footnote{y del identificador asignado por el sistema operativo al proceso.} cuando se necesite.
 \item
-  Si no se especifica con \texttt{set.seed} (o no existe) se genera a partir del reloj del sistema.
+  Se almacena como un objeto oculto en el entorno de trabajo (o entorno global \texttt{.GlobalEnv}). Con las opciones por defecto de R, si al terminar una sesión almacenamos el entorno (en un fichero \emph{.RData}), al iniciar una nueva sesión se restaurará también la semilla (y se podría continuar con las simulaciones).
 \item
-  Puede ser recomendable almacenarla antes de generar simulaciones, e.g.~\texttt{seed\ \textless{}-\ .Random.seed}.
-  Esto permite reproducir los resultados y facilita la depuración de posibles errores.
+  Es un vector de enteros cuya estructura depende del tipo de generador (en la Sección \ref{ext-cong} se dan algunos detalles sobre la configuración por defecto), por lo que no debería ser modificado manualmente.\\
+  Puede ser recomendable almacenar (el objeto completo) antes de generar simulaciones, e.g.~\texttt{seed\ \textless{}-\ .Random.seed}. Esto permite reproducir los resultados y facilita la depuración de posibles errores.
 \end{itemize}
 
 En la mayoría de los ejemplos de este libro se generan todos los valores de una vez,
@@ -909,10 +909,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.06    0.02    0.08 
+##    0.11    0.00    0.11 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.06    0.02    0.08
+##    0.11    0.00    0.11
 \end{verbatim}
 
 \begin{Shaded}
@@ -925,10 +925,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.02    0.00    0.02 
+##    0.01    0.00    0.02 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.08    0.02    0.10
+##    0.12    0.00    0.13
 \end{verbatim}
 
 Hay diversos paquetes que implementan herramientas similares, por ejemplo:
@@ -978,7 +978,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## outer: 0.08 sec elapsed
+## outer: 0.12 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -1000,8 +1000,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ## 'data.frame':    10 obs. of  3 variables:
-##  $ tic: num  2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7
-##  $ toc: num  2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7
+##  $ tic: num  4.53 4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54
+##  $ toc: num  4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54 4.54
 ##  $ msg: chr  "1" "2" "3" "4" ...
 \end{verbatim}
 
@@ -1017,7 +1017,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##       0       0       0       0       0       0
+##   0.000   0.000   0.000   0.001   0.000   0.010
 \end{verbatim}
   \end{itemize}
 \item
@@ -1182,22 +1182,19 @@ Este método está implementado\footnote{Aunque de forma no muy eficiente. Para 
 \end{Shaded}
 
 \begin{verbatim}
-## function(n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 1) {
-##   u <- numeric(n)
-##   for(i in 1:n) {
-##     seed <- (a * seed + c) %% m
-##     u[i] <- seed/m # (seed + 1)/(m + 1)
-##   }
-##   # Almacenar semilla y parámetros
-##   assign(".rng", list(seed = seed, type = "lcg",
-##           parameters = list(a = a, c = c, m = m)), envir = globalenv())
-##   # .rng <<- list(seed = seed, type = "lcg", parameters = list(a = a, c = c, m = m))
-##   # Para continuar con semilla y parámetros:
-##   #   with(.rng, rlcg(n, seed, parameters$a, parameters$c, parameters$m))
-##   # Devolver valores
-##   return(u)
+## function (n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 
+##     1) 
+## {
+##     u <- numeric(n)
+##     for (i in 1:n) {
+##         seed <- (a * seed + c)%%m
+##         u[i] <- seed/m
+##     }
+##     assign(".rng", list(seed = seed, type = "lcg", parameters = list(a = a, 
+##         c = c, m = m)), envir = globalenv())
+##     return(u)
 ## }
-## <bytecode: 0x0000000029540950>
+## <bytecode: 0x00000000108e3660>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -1414,8 +1411,8 @@ u_{n+1}  & =\frac{x_{n+1}}{512},\ n=0,1,\dots\nonumber
 \end{verbatim}
 \end{enumerate}
 
-\hypertarget{extensiones}{%
-\section{Extensiones}\label{extensiones}}
+\hypertarget{ext-cong}{%
+\section{Extensiones}\label{ext-cong}}
 
 Se han considerado diversas extensiones del generador congruencial lineal simple:
 
@@ -1542,50 +1539,48 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 \end{Shaded}
 
 \begin{verbatim}
-## function(x, distribution = "norm", nclass = floor(length(x)/5),
-##                             output = TRUE, nestpar = 0, ...) {
-##   # Función distribución
-##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##   # Puntos de corte
-##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##   tol <- sqrt(.Machine$double.eps)
-##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##   # Gráficos y frecuencias
-##   if (output) {
-##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
-##                   lty = 2, border = "grey50")
-##     # Función densidad
-##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
-##     curve(d.distrib(x, ...), add = TRUE)
-##   } else {
-##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##   }
-##   # Cálculo estadístico y p-valor
-##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
-##   E <- length(x)/nclass
-##   DNAME <- deparse(substitute(x))
-##   METHOD <- "Pearson's Chi-squared test"
-##   STATISTIC <- sum((O - E)^2/E)
-##   names(STATISTIC) <- "X-squared"
-##   PARAMETER <- nclass - nestpar - 1
-##   names(PARAMETER) <- "df"
-##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##   # Preparar resultados
-##   classes <- format(xbreaks)
-##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
-##                    sep = "")
-##   RESULTS <- list(classes = classes, observed = O, expected = E,
-##                   residuals = (O - E)/sqrt(E))
-##   if (output) {
-##     cat("\nPearson's Chi-squared test table\n")
-##     print(as.data.frame(RESULTS))
-##   }
-##   if (any(E < 5))
-##     warning("Chi-squared approximation may be incorrect")
-##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
-##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
+## function (x, distribution = "norm", nclass = floor(length(x)/5), 
+##     output = TRUE, nestpar = 0, ...) 
+## {
+##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##     tol <- sqrt(.Machine$double.eps)
+##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##     if (output) {
+##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
+##             border = "grey50")
+##         d.distrib <- eval(parse(text = paste("d", distribution, 
+##             sep = "")))
+##         curve(d.distrib(x, ...), add = TRUE)
+##     }
+##     else {
+##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##     }
+##     O <- xhist$counts
+##     E <- length(x)/nclass
+##     DNAME <- deparse(substitute(x))
+##     METHOD <- "Pearson's Chi-squared test"
+##     STATISTIC <- sum((O - E)^2/E)
+##     names(STATISTIC) <- "X-squared"
+##     PARAMETER <- nclass - nestpar - 1
+##     names(PARAMETER) <- "df"
+##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##     classes <- format(xbreaks)
+##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
+##         "]", sep = "")
+##     RESULTS <- list(classes = classes, observed = O, expected = E, 
+##         residuals = (O - E)/sqrt(E))
+##     if (output) {
+##         cat("\nPearson's Chi-squared test table\n")
+##         print(as.data.frame(RESULTS))
+##     }
+##     if (any(E < 5)) 
+##         warning("Chi-squared approximation may be incorrect")
+##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
+##         p.value = PVAL, method = METHOD, data.name = DNAME), 
+##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x000000001575b970>
+## <bytecode: 0x000000002e95d430>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2049,26 +2044,22 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 \end{Shaded}
 
 \begin{verbatim}
-## function(n, seed = as.numeric(Sys.time()), k = 4) {
-##   seed <- seed %% 10^k
-##   aux <- 10^(2*k-k/2)
-##   aux2 <- 10^(k/2)
-##   u <- numeric(n)
-##   for(i in 1:n) {
-##     z <- seed^2
-##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
-##     u[i] <- seed/10^k
-##   }
-##   # Almacenar semilla y parámetros
-##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
-##       envir = globalenv())
-##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
-##   # Para continuar con semilla y parámetros:
-##   #   with(.rng, rvng(n, seed, parameters$k))
-##   # Devolver valores
-##   return(u)
+## function (n, seed = as.numeric(Sys.time()), k = 4) 
+## {
+##     seed <- seed%%10^k
+##     aux <- 10^(2 * k - k/2)
+##     aux2 <- 10^(k/2)
+##     u <- numeric(n)
+##     for (i in 1:n) {
+##         z <- seed^2
+##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
+##         u[i] <- seed/10^k
+##     }
+##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
+##         envir = globalenv())
+##     return(u)
 ## }
-## <bytecode: 0x00000000156599b0>
+## <bytecode: 0x00000000211e02d8>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2278,8 +2269,8 @@ Podemos añadir también los correspondientes intervalos de confianza al gráfic
 \begin{Highlighting}[]
 \NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim}
 \NormalTok{est }\OtherTok{\textless{}{-}} \FunctionTok{cumsum}\NormalTok{(rx)}\SpecialCharTok{/}\NormalTok{n}
-\CommentTok{\# (cumsum(rx\^{}2) {-} n*est\^{}2)/(n{-}1) \# Varianzas muestrales}
-\NormalTok{esterr }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{((}\FunctionTok{cumsum}\NormalTok{(rx}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{{-}}\NormalTok{ est}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\NormalTok{(n}\DecValTok{{-}1}\NormalTok{)) }\CommentTok{\# Errores estándar}
+\CommentTok{\# (cumsum(rx\^{}2) {-} n*est\^{}2)/(n{-}1) \# Cuasi{-}varianzas muestrales}
+\NormalTok{esterr }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{((}\FunctionTok{cumsum}\NormalTok{(rx}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{{-}}\NormalTok{ est}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\NormalTok{(n}\DecValTok{{-}1}\NormalTok{)) }\CommentTok{\# Errores estándar de la media}
 \FunctionTok{plot}\NormalTok{(est, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Número de generaciones"}\NormalTok{, }
      \AttributeTok{ylab =} \StringTok{"Media y rango de error"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{))}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{h =}\NormalTok{ est[nsim], }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)}
@@ -2318,7 +2309,7 @@ Un algoritmo (para un lenguaje de programación vectorial como R) podría ser el
 \def\labelenumi{\arabic{enumi}.}
 \item
   Hacer \(j=0\)
-  y fijar un tamaño inicial \(n_{0}\) (e.g.~30 ó 60).
+  y fijar un tamaño inicial \(n_{0}\) (e.g.~60 ó 100, dependiendo del tiempo de computación requerido).
 \item
   Generar \(\left\{ X_{i}\right\} _{i=1}^{n_{0}}\)
   y calcular \(\overline{X}_{n_0}\) y \(\widehat{S}_{n_{0}}\).
@@ -2492,15 +2483,13 @@ Esta forma de proceder podría ser adecuada para tratar de aproximar la precisi�
 ## [1] 0.02277402
 \end{verbatim}
 
-pero no sería eficiente para aproximar la media. Siempre será preferible emplear
-todas las observaciones.
+pero no sería la más eficiente para aproximar la media. Siempre es preferible emplear todas las observaciones.
 
-Por ejemplo, se podría pensar en considerar las medias de grupos de 24 valores
-consecutivos y suponer que hay independencia entre ellas:
+Por ejemplo, se podría pensar en considerar las medias de grupos de 25 valores consecutivos y suponer que hay independencia entre ellas:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rxm }\OtherTok{\textless{}{-}} \FunctionTok{rowMeans}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(rx, }\AttributeTok{ncol =}\NormalTok{ lag, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{))}
+\NormalTok{rxm }\OtherTok{\textless{}{-}} \FunctionTok{rowMeans}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(rx, }\AttributeTok{ncol =}\NormalTok{ lag }\SpecialCharTok{+} \DecValTok{1}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{))}
 \NormalTok{nrxm }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(rxm)}
 \NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nrxm}
 \NormalTok{est }\OtherTok{\textless{}{-}} \FunctionTok{cumsum}\NormalTok{(rxm)}\SpecialCharTok{/}\NormalTok{n}
@@ -2523,60 +2512,19 @@ consecutivos y suponer que hay independencia entre ellas:
 \caption{Gráfico de convergencia de las medias por lotes.}\label{fig:conv-dep-lotes}
 \end{figure}
 
-Esta es la idea del método de medias por lotes
-(\emph{batch means}; \emph{macro-micro replicaciones}) para la estimación de la varianza.
-En el ejemplo anterior se calcula el error estándar de la aproximación por simulación de la proporción:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{esterr[nrxm]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.01582248
-\end{verbatim}
-
-pero si el objetivo es la aproximación de la varianza (de la variable y no de las medias por lotes), habrá que reescalarlo adecuadamente.
-Supongamos que la correlación entre \(X_i\) y \(X_{i+k}\) es aproximadamente nula,
-y consideramos las subsecuencias (lotes) \((X_{t+1},X_{t+2},\ldots,X_{t+k})\) con \(t=(j-1)k\), \(j=1,\ldots,m\) y \(n = mk\).
+Esta es la idea del método de medias por lotes (\emph{batch means}; \emph{macro-micro replicaciones}) para la estimación de la precisión.
+Supongamos que la correlación entre \(X_i\) y \(X_{i+k}\) es aproximadamente nula, y consideramos las subsecuencias (lotes) \((X_{t+1},X_{t+2},\ldots,X_{t+k})\) con \(t=(j-1)k\), \(j=1,\ldots,m\) y \(n = mk\).
 Entonces:
 
 \[\begin{aligned}
 Var \left(\bar X \right) &= Var \left(\frac{1}{n} \sum_{i=1}^n X_i\right) 
 = Var \left( \frac{1}{m}\sum_{j=1}^m \left(\frac{1}{k} \sum_{t=(i-1)k + 1}^{ik} X_t\right) \right) \\
 &\approx \frac{1}{m^2} \sum_{j=1}^m Var \left(\frac{1}{k} \sum_{t=(i-1)k + 1}^{ik} X_t\right)
-\approx \frac{1}{m} Var \left(\bar{X}_k \right)
+= \frac{1}{m} Var \left(\bar{X}_k \right)
 \end{aligned}\]
 donde \(\bar{X}_k\) es la media de una subsecuencia de longitud \(k\).
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{var.aprox }\OtherTok{\textless{}{-}}\NormalTok{ nsim }\SpecialCharTok{*}\NormalTok{ esterr[}\FunctionTok{length}\NormalTok{(rxm)]}\SpecialCharTok{\^{}}\DecValTok{2}
-\NormalTok{var.aprox}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2.50351
-\end{verbatim}
-
-Obtenida asumiendo independencia entre las medias por lotes, y que será
-una mejor aproximación que asumir independencia entre las generaciones
-de la variable:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{var}\NormalTok{(rx)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.2115267
-\end{verbatim}
-
-Alternativamente se podría recurrir a la generación de múltiples secuencias
-independientes entre sí:
+Alternativamente se podría recurrir a la generación de múltiples secuencias independientes entre sí:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2597,8 +2545,7 @@ independientes entre sí:
 \end{Highlighting}
 \end{Shaded}
 
-La idea sería considerar las medias de las series como una muestra independiente
-de una nueva variable y estimar su varianza de la forma habitual:
+La idea sería considerar las medias de las series como una muestra independiente de una nueva variable y estimar su varianza de la forma habitual:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2651,8 +2598,7 @@ de una nueva variable y estimar su varianza de la forma habitual:
 ## [1] 0.02403491
 \end{verbatim}
 
-Trataremos este tipo de problemas en la diagnosis de algoritmos de
-simulación Monte Carlo de Cadenas de Markov (MCMC).
+Trataremos este tipo de problemas en la diagnosis de algoritmos Monte Carlo de Cadenas de Markov (MCMC, Capítulo XX).
 Aparecen también en la simulación dinámica (por eventos o cuantos).
 
 \hypertarget{periodo-de-calentamiento}{%
@@ -2690,7 +2636,7 @@ Como ejemplo comparamos la simulación del Ejemplo \ref{exm:mmc} con la obtenida
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{03-Analisis_resultados_files/figure-latex/unnamed-chunk-17-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{03-Analisis_resultados_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 En estos casos puede ser recomendable ignorar los primeros valores generados (por ejemplo los primeros 2000) y recalcular los
 estadísticos deseados.
@@ -2698,7 +2644,7 @@ estadísticos deseados.
 También trataremos este tipo de problemas en la diagnosis de algoritmos MCMC.
 
 \begin{example}[simulación de un proceso autorregresivo, serie de tiempo]
-\protect\hypertarget{exm:unnamed-chunk-18}{}{\label{exm:unnamed-chunk-18} \iffalse (simulación de un proceso autorregresivo, serie de tiempo) \fi{} }
+\protect\hypertarget{exm:unnamed-chunk-15}{}{\label{exm:unnamed-chunk-15} \iffalse (simulación de un proceso autorregresivo, serie de tiempo) \fi{} }
 \end{example}
 
 \[X_t = \mu + \rho * (X_{t-1} - \mu) + \varepsilon_t\]
@@ -2740,12 +2686,14 @@ Para simular la serie, al ser un \(AR(1)\), normalmente simularíamos el primer 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rx[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ xmed, }\AttributeTok{sd =} \FunctionTok{sqrt}\NormalTok{(xvar))}
+\NormalTok{x[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ xmed, }\AttributeTok{sd =} \FunctionTok{sqrt}\NormalTok{(xvar))}
 \end{Highlighting}
 \end{Shaded}
 
-o lo fijamos a la media (en este caso nos alejamos un poco de la distribución estacionaria, para que el ``periodo de calentamiento'' sea mayor).
-Después generamos los siguientes valores de forma recursiva:
+o lo fijamos a la media.
+Después generamos los siguientes valores de forma recursiva.
+
+Como ejemplo nos alejamos un poco de la distribución estacionaria, para que el ``periodo de calentamiento'' sea mayor:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2900,7 +2848,7 @@ El código para implementar este algoritmo en R podría ser el siguiente:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.02
+##    0.02    0.00    0.01
 \end{verbatim}
 
 \begin{Shaded}
@@ -3012,7 +2960,7 @@ y función de distribución:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.01    0.03
+##    0.04    0.00    0.05
 \end{verbatim}
 \item
   Representar el histograma y compararlo con la densidad teórica.
@@ -3290,7 +3238,7 @@ Empleando estas funciones podemos generar una muestra de \(10^3\) observaciones 
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.01    0.00    0.02
+##    0.05    0.00    0.04
 \end{verbatim}
 
 Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):
@@ -3478,7 +3426,7 @@ Generamos una muestra de \(10^4\) observaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.09    0.00    0.09
+##    0.11    0.00    0.10
 \end{verbatim}
 
 Evaluamos la eficiencia:
@@ -3999,25 +3947,24 @@ El correspondiente algoritmo está implementado en la función \href{https://rub
 \end{Shaded}
 
 \begin{verbatim}
-## function(n) {
-##   # Cauchy mediante cociente de uniformes
-##   ngen <- n
-##   u <- runif(n, 0, 1)
-##   v <- runif(n, -1, 1)
-##   x <- v/u
-##   ind <- u^2 + v^2 > 1 # TRUE si no verifica condición
-##   # Volver a generar si no verifica condición
-##   while (le <- sum(ind)){ # mientras le = sum(ind) > 0
-##     ngen <- ngen + le
-##     u <- runif(le, 0, 1)
-##     v <- runif(le, -1, 1)
-##     x[ind] <- v/u
-##     ind[ind] <- u^2 + v^2 > 1 # TRUE si no verifica condición
-##   }
-##   attr(x, "ngen") <- ngen
-##   return(x)
+## function (n) 
+## {
+##     ngen <- n
+##     u <- runif(n, 0, 1)
+##     v <- runif(n, -1, 1)
+##     x <- v/u
+##     ind <- u^2 + v^2 > 1
+##     while (le <- sum(ind)) {
+##         ngen <- ngen + le
+##         u <- runif(le, 0, 1)
+##         v <- runif(le, -1, 1)
+##         x[ind] <- v/u
+##         ind[ind] <- u^2 + v^2 > 1
+##     }
+##     attr(x, "ngen") <- ngen
+##     return(x)
 ## }
-## <bytecode: 0x000000002f346f18>
+## <bytecode: 0x00000000219f7be0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4707,50 +4654,48 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 \end{Shaded}
 
 \begin{verbatim}
-## function(x, distribution = "norm", nclass = floor(length(x)/5),
-##                             output = TRUE, nestpar = 0, ...) {
-##   # Función distribución
-##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##   # Puntos de corte
-##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##   tol <- sqrt(.Machine$double.eps)
-##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##   # Gráficos y frecuencias
-##   if (output) {
-##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
-##                   lty = 2, border = "grey50")
-##     # Función densidad
-##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
-##     curve(d.distrib(x, ...), add = TRUE)
-##   } else {
-##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##   }
-##   # Cálculo estadístico y p-valor
-##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
-##   E <- length(x)/nclass
-##   DNAME <- deparse(substitute(x))
-##   METHOD <- "Pearson's Chi-squared test"
-##   STATISTIC <- sum((O - E)^2/E)
-##   names(STATISTIC) <- "X-squared"
-##   PARAMETER <- nclass - nestpar - 1
-##   names(PARAMETER) <- "df"
-##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##   # Preparar resultados
-##   classes <- format(xbreaks)
-##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
-##                    sep = "")
-##   RESULTS <- list(classes = classes, observed = O, expected = E,
-##                   residuals = (O - E)/sqrt(E))
-##   if (output) {
-##     cat("\nPearson's Chi-squared test table\n")
-##     print(as.data.frame(RESULTS))
-##   }
-##   if (any(E < 5))
-##     warning("Chi-squared approximation may be incorrect")
-##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
-##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
+## function (x, distribution = "norm", nclass = floor(length(x)/5), 
+##     output = TRUE, nestpar = 0, ...) 
+## {
+##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##     tol <- sqrt(.Machine$double.eps)
+##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##     if (output) {
+##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
+##             border = "grey50")
+##         d.distrib <- eval(parse(text = paste("d", distribution, 
+##             sep = "")))
+##         curve(d.distrib(x, ...), add = TRUE)
+##     }
+##     else {
+##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##     }
+##     O <- xhist$counts
+##     E <- length(x)/nclass
+##     DNAME <- deparse(substitute(x))
+##     METHOD <- "Pearson's Chi-squared test"
+##     STATISTIC <- sum((O - E)^2/E)
+##     names(STATISTIC) <- "X-squared"
+##     PARAMETER <- nclass - nestpar - 1
+##     names(PARAMETER) <- "df"
+##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##     classes <- format(xbreaks)
+##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
+##         "]", sep = "")
+##     RESULTS <- list(classes = classes, observed = O, expected = E, 
+##         residuals = (O - E)/sqrt(E))
+##     if (output) {
+##         cat("\nPearson's Chi-squared test table\n")
+##         print(as.data.frame(RESULTS))
+##     }
+##     if (any(E < 5)) 
+##         warning("Chi-squared approximation may be incorrect")
+##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
+##         p.value = PVAL, method = METHOD, data.name = DNAME), 
+##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x0000000028c40c20>
+## <bytecode: 0x00000000307d6d20>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -6413,26 +6358,22 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 \end{Shaded}
 
 \begin{verbatim}
-## function(n, seed = as.numeric(Sys.time()), k = 4) {
-##   seed <- seed %% 10^k
-##   aux <- 10^(2*k-k/2)
-##   aux2 <- 10^(k/2)
-##   u <- numeric(n)
-##   for(i in 1:n) {
-##     z <- seed^2
-##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
-##     u[i] <- seed/10^k
-##   }
-##   # Almacenar semilla y parámetros
-##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
-##       envir = globalenv())
-##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
-##   # Para continuar con semilla y parámetros:
-##   #   with(.rng, rvng(n, seed, parameters$k))
-##   # Devolver valores
-##   return(u)
+## function (n, seed = as.numeric(Sys.time()), k = 4) 
+## {
+##     seed <- seed%%10^k
+##     aux <- 10^(2 * k - k/2)
+##     aux2 <- 10^(k/2)
+##     u <- numeric(n)
+##     for (i in 1:n) {
+##         z <- seed^2
+##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
+##         u[i] <- seed/10^k
+##     }
+##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
+##         envir = globalenv())
+##     return(u)
 ## }
-## <bytecode: 0x0000000029ccb380>
+## <bytecode: 0x0000000020bcf678>
 ## <environment: namespace:simres>
 \end{verbatim}
 

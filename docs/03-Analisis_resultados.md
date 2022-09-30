@@ -202,8 +202,8 @@ Podemos añadir también los correspondientes intervalos de confianza al gráfic
 ```r
 n <- 1:nsim
 est <- cumsum(rx)/n
-# (cumsum(rx^2) - n*est^2)/(n-1) # Varianzas muestrales
-esterr <- sqrt((cumsum(rx^2)/n - est^2)/(n-1)) # Errores estándar
+# (cumsum(rx^2) - n*est^2)/(n-1) # Cuasi-varianzas muestrales
+esterr <- sqrt((cumsum(rx^2)/n - est^2)/(n-1)) # Errores estándar de la media
 plot(est, type = "l", lwd = 2, xlab = "Número de generaciones", 
      ylab = "Media y rango de error", ylim = c(-1, 1))
 abline(h = est[nsim], lty=2)
@@ -240,7 +240,7 @@ $$z_{1-\alpha /2}\dfrac{\widehat{S}_{n}}{\sqrt{n}}<\varepsilon$$
 Un algoritmo (para un lenguaje de programación vectorial como R) podría ser el siguiente:
 
 1.  Hacer $j=0$
-    y fijar un tamaño inicial $n_{0}$ (e.g. 30 ó 60).
+    y fijar un tamaño inicial $n_{0}$ (e.g. 60 ó 100, dependiendo del tiempo de computación requerido).
 
 2.  Generar $\left\{ X_{i}\right\} _{i=1}^{n_{0}}$ 
     y calcular $\overline{X}_{n_0}$ y $\widehat{S}_{n_{0}}$.
@@ -407,15 +407,13 @@ esterr[nrxi]
 ```
 ## [1] 0.02277402
 ```
-pero no sería eficiente para aproximar la media. Siempre será preferible emplear
-todas las observaciones. 
+pero no sería la más eficiente para aproximar la media. Siempre es preferible emplear todas las observaciones. 
 
-Por ejemplo, se podría pensar en considerar las medias de grupos de 24 valores 
-consecutivos y suponer que hay independencia entre ellas:
+Por ejemplo, se podría pensar en considerar las medias de grupos de 25 valores consecutivos y suponer que hay independencia entre ellas:
 
 
 ```r
-rxm <- rowMeans(matrix(rx, ncol = lag, byrow = TRUE))
+rxm <- rowMeans(matrix(rx, ncol = lag + 1, byrow = TRUE))
 nrxm <- length(rxm)
 n <- 1:nrxm
 est <- cumsum(rxm)/n
@@ -437,57 +435,21 @@ abline(h = 1/3, col="darkgray")     # Prob. teor. cadenas Markov
 \caption{Gráfico de convergencia de las medias por lotes.}(\#fig:conv-dep-lotes)
 \end{figure}
 
-Esta es la idea del método de medias por lotes 
-(*batch means*; *macro-micro replicaciones*) para la estimación de la varianza.
-En el ejemplo anterior se calcula el error estándar de la aproximación por simulación de la proporción:
-
-```r
-esterr[nrxm]
-```
-
-```
-## [1] 0.01582248
-```
-pero si el objetivo es la aproximación de la varianza (de la variable y no de las medias por lotes), habrá que reescalarlo adecuadamente. 
-Supongamos que la correlación entre $X_i$ y $X_{i+k}$ es aproximadamente nula,
-y consideramos las subsecuencias (lotes) $(X_{t+1},X_{t+2},\ldots,X_{t+k})$ con $t=(j-1)k$, $j=1,\ldots,m$ y $n = mk$. 
+Esta es la idea del método de medias por lotes (*batch means*; *macro-micro replicaciones*) para la estimación de la precisión.
+Supongamos que la correlación entre $X_i$ y $X_{i+k}$ es aproximadamente nula, y consideramos las subsecuencias (lotes) $(X_{t+1},X_{t+2},\ldots,X_{t+k})$ con $t=(j-1)k$, $j=1,\ldots,m$ y $n = mk$. 
 Entonces:
 
 $$\begin{aligned}
 Var \left(\bar X \right) &= Var \left(\frac{1}{n} \sum_{i=1}^n X_i\right) 
 = Var \left( \frac{1}{m}\sum_{j=1}^m \left(\frac{1}{k} \sum_{t=(i-1)k + 1}^{ik} X_t\right) \right) \\
 &\approx \frac{1}{m^2} \sum_{j=1}^m Var \left(\frac{1}{k} \sum_{t=(i-1)k + 1}^{ik} X_t\right)
-\approx \frac{1}{m} Var \left(\bar{X}_k \right)
+= \frac{1}{m} Var \left(\bar{X}_k \right)
 \end{aligned}$$
 donde $\bar{X}_k$ es la media de una subsecuencia de longitud $k$.
 
 <!-- Ecuaciones p.237 Gentle, Random numbers & MC methods -->
 
-
-```r
-var.aprox <- nsim * esterr[length(rxm)]^2
-var.aprox
-```
-
-```
-## [1] 2.50351
-```
-
-Obtenida asumiendo independencia entre las medias por lotes, y que será
-una mejor aproximación que asumir independencia entre las generaciones
-de la variable:
-
-
-```r
-var(rx)
-```
-
-```
-## [1] 0.2115267
-```
-
-Alternativamente se podría recurrir a la generación de múltiples secuencias
-independientes entre sí: 
+Alternativamente se podría recurrir a la generación de múltiples secuencias independientes entre sí: 
 
 ```r
 # Variable dicotómica 0/1 (FALSE/TRUE)  
@@ -505,8 +467,8 @@ for (i in 1:nsec) {
     rxm[i, j] <- if (rxm[i, j-1]) runif(1) > beta else runif(1) < alpha
 }
 ```
-La idea sería considerar las medias de las series como una muestra independiente
-de una nueva variable y estimar su varianza de la forma habitual:
+
+La idea sería considerar las medias de las series como una muestra independiente de una nueva variable y estimar su varianza de la forma habitual:
 
 ```r
 # Media de cada secuencia
@@ -552,8 +514,8 @@ mesterr[nsim]
 ```
 ## [1] 0.02403491
 ```
-Trataremos este tipo de problemas en la diagnosis de algoritmos de
-simulación Monte Carlo de Cadenas de Markov (MCMC). 
+
+Trataremos este tipo de problemas en la diagnosis de algoritmos Monte Carlo de Cadenas de Markov (MCMC, Capítulo XX). 
 Aparecen también en la simulación dinámica (por eventos o cuantos). 
 
 
@@ -592,7 +554,7 @@ abline(h = 1/3, col="darkgray")
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{03-Analisis_resultados_files/figure-latex/unnamed-chunk-17-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{03-Analisis_resultados_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 
 En estos casos puede ser recomendable ignorar los primeros valores generados (por ejemplo los primeros 2000) y recalcular los 
@@ -601,7 +563,7 @@ estadísticos deseados.
 También trataremos este tipo de problemas en la diagnosis de algoritmos MCMC. 
 
 \BeginKnitrBlock{example}\iffalse{-91-115-105-109-117-108-97-99-105-243-110-32-100-101-32-117-110-32-112-114-111-99-101-115-111-32-97-117-116-111-114-114-101-103-114-101-115-105-118-111-44-32-115-101-114-105-101-32-100-101-32-116-105-101-109-112-111-93-}\fi{}
-<span class="example" id="exm:unnamed-chunk-18"><strong>(\#exm:unnamed-chunk-18)  \iffalse (simulación de un proceso autorregresivo, serie de tiempo) \fi{} </strong></span>
+<span class="example" id="exm:unnamed-chunk-15"><strong>(\#exm:unnamed-chunk-15)  \iffalse (simulación de un proceso autorregresivo, serie de tiempo) \fi{} </strong></span>
 \EndKnitrBlock{example}
 
 $$X_t = \mu + \rho * (X_{t-1} - \mu) + \varepsilon_t$$
@@ -634,10 +596,12 @@ evar <- xvar*(1 - rho^2)
 Para simular la serie, al ser un $AR(1)$, normalmente simularíamos el primer valor
 
 ```r
-rx[1] <- rnorm(1, mean = xmed, sd = sqrt(xvar))
+x[1] <- rnorm(1, mean = xmed, sd = sqrt(xvar))
 ```
-o lo fijamos a la media (en este caso nos alejamos un poco de la distribución estacionaria, para que el "periodo de calentamiento" sea mayor). 
-Después generamos los siguientes valores de forma recursiva:
+o lo fijamos a la media. 
+Después generamos los siguientes valores de forma recursiva.
+
+Como ejemplo nos alejamos un poco de la distribución estacionaria, para que el "periodo de calentamiento" sea mayor:
 
 ```r
 set.seed(1)

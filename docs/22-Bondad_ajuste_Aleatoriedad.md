@@ -274,50 +274,48 @@ simres::chisq.cont.test
 ```
 
 ```
-## function(x, distribution = "norm", nclass = floor(length(x)/5),
-##                             output = TRUE, nestpar = 0, ...) {
-##   # Función distribución
-##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##   # Puntos de corte
-##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##   tol <- sqrt(.Machine$double.eps)
-##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##   # Gráficos y frecuencias
-##   if (output) {
-##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
-##                   lty = 2, border = "grey50")
-##     # Función densidad
-##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
-##     curve(d.distrib(x, ...), add = TRUE)
-##   } else {
-##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##   }
-##   # Cálculo estadístico y p-valor
-##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
-##   E <- length(x)/nclass
-##   DNAME <- deparse(substitute(x))
-##   METHOD <- "Pearson's Chi-squared test"
-##   STATISTIC <- sum((O - E)^2/E)
-##   names(STATISTIC) <- "X-squared"
-##   PARAMETER <- nclass - nestpar - 1
-##   names(PARAMETER) <- "df"
-##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##   # Preparar resultados
-##   classes <- format(xbreaks)
-##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
-##                    sep = "")
-##   RESULTS <- list(classes = classes, observed = O, expected = E,
-##                   residuals = (O - E)/sqrt(E))
-##   if (output) {
-##     cat("\nPearson's Chi-squared test table\n")
-##     print(as.data.frame(RESULTS))
-##   }
-##   if (any(E < 5))
-##     warning("Chi-squared approximation may be incorrect")
-##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
-##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
+## function (x, distribution = "norm", nclass = floor(length(x)/5), 
+##     output = TRUE, nestpar = 0, ...) 
+## {
+##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##     tol <- sqrt(.Machine$double.eps)
+##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##     if (output) {
+##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
+##             border = "grey50")
+##         d.distrib <- eval(parse(text = paste("d", distribution, 
+##             sep = "")))
+##         curve(d.distrib(x, ...), add = TRUE)
+##     }
+##     else {
+##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##     }
+##     O <- xhist$counts
+##     E <- length(x)/nclass
+##     DNAME <- deparse(substitute(x))
+##     METHOD <- "Pearson's Chi-squared test"
+##     STATISTIC <- sum((O - E)^2/E)
+##     names(STATISTIC) <- "X-squared"
+##     PARAMETER <- nclass - nestpar - 1
+##     names(PARAMETER) <- "df"
+##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##     classes <- format(xbreaks)
+##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
+##         "]", sep = "")
+##     RESULTS <- list(classes = classes, observed = O, expected = E, 
+##         residuals = (O - E)/sqrt(E))
+##     if (output) {
+##         cat("\nPearson's Chi-squared test table\n")
+##         print(as.data.frame(RESULTS))
+##     }
+##     if (any(E < 5)) 
+##         warning("Chi-squared approximation may be incorrect")
+##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
+##         p.value = PVAL, method = METHOD, data.name = DNAME), 
+##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x0000000028c40c20>
+## <bytecode: 0x00000000307d6d20>
 ## <environment: namespace:simres>
 ```
 

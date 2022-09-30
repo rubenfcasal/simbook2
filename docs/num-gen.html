@@ -32,7 +32,7 @@
   
 <link rel="prev" href="convergencia.html"/>
 <link rel="next" href="el-problema-de-la-dependencia.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -162,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="gen-pseudo.html"><a href="gen-pseudo.html"><i class="fa fa-check"></i><b>2</b> Generación de números pseudoaleatorios</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="gen-cong.html"><a href="gen-cong.html"><i class="fa fa-check"></i><b>2.1</b> Generadores congruenciales lineales</a></li>
-<li class="chapter" data-level="2.2" data-path="extensiones.html"><a href="extensiones.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
+<li class="chapter" data-level="2.2" data-path="ext-cong.html"><a href="ext-cong.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
 <li class="chapter" data-level="2.3" data-path="calgen.html"><a href="calgen.html"><i class="fa fa-check"></i><b>2.3</b> Análisis de la calidad de un generador</a>
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="calgen.html"><a href="calgen.html#repetición-de-contrastes"><i class="fa fa-check"></i><b>2.3.1</b> Repetición de contrastes</a></li>
@@ -312,7 +312,7 @@ Para una precisión absoluta <span class="math inline">\(\varepsilon\)</span>, s
 <p>Un algoritmo (para un lenguaje de programación vectorial como R) podría ser el siguiente:</p>
 <ol style="list-style-type: decimal">
 <li><p>Hacer <span class="math inline">\(j=0\)</span>
-y fijar un tamaño inicial <span class="math inline">\(n_{0}\)</span> (e.g. 30 ó 60).</p></li>
+y fijar un tamaño inicial <span class="math inline">\(n_{0}\)</span> (e.g. 60 ó 100, dependiendo del tiempo de computación requerido).</p></li>
 <li><p>Generar <span class="math inline">\(\left\{ X_{i}\right\} _{i=1}^{n_{0}}\)</span>
 y calcular <span class="math inline">\(\overline{X}_{n_0}\)</span> y <span class="math inline">\(\widehat{S}_{n_{0}}\)</span>.</p></li>
 <li><p>Mientras <span class="math inline">\(\left. z_{1-\alpha /2}\widehat{S}_{n_j}\right/ \sqrt{n_{j}}&gt;\varepsilon\)</span> hacer:</p>

@@ -47,5 +47,6 @@ fig.path <- "images/"
                             if (!is.null(lnk)) lnk else x,
                             ".html)",
                             collapse = ", ")
+      # downlit::autolink_url
     }  
 ```

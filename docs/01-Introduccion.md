@@ -495,15 +495,15 @@ Entre las herramientas implementadas en el paquete base de R podemos destacar:
 Además están disponibles otros paquetes que implementan distribuciones adicionales (ver [CRAN Task View: Probability Distributions](https://cran.r-project.org/view=Distributions)). 
 Entre ellos podríamos destacar los paquetes [`distr`](http://distr.r-forge.r-project.org) (clases S4; con extensiones en otros paquetes) y [`distr6`](https://alan-turing-institute.github.io/distr6/index.html) (clases R6).
 
-La semilla se almacena (en `globalenv`) en `.Random.seed`; es un vector
-de enteros cuya dimensión depende del tipo de generador:
+La semilla se almacena en `.Random.seed`:
 
--   No debe ser modificado manualmente; se guarda con el entorno de trabajo (por ejemplo, si se guarda al terminar la sesión en un fichero *.RData*, se restaurará la semilla al iniciar una nueva sesión y podremos continuar con las simulaciones).
+-   Inicialmente no existe. 
+La recomendación es establecerla con `set.seed()`, en caso contrario se generará a partir del reloj del sistema^[y del identificador asignado por el sistema operativo al proceso.] cuando se necesite.
 
--   Si no se especifica con `set.seed` (o no existe) se genera a partir del reloj del sistema.
+-   Se almacena como un objeto oculto en el entorno de trabajo (o entorno global `.GlobalEnv`). Con las opciones por defecto de R, si al terminar una sesión almacenamos el entorno (en un fichero *.RData*), al iniciar una nueva sesión se restaurará también la semilla (y se podría continuar con las simulaciones).
 
--   Puede ser recomendable almacenarla antes de generar simulaciones, e.g. `seed <- .Random.seed`. 
-    Esto permite reproducir los resultados y facilita la depuración de posibles errores.
+-   Es un vector de enteros cuya estructura depende del tipo de generador (en la Sección \@ref(ext-cong) se dan algunos detalles sobre la configuración por defecto), por lo que no debería ser modificado manualmente.  
+Puede ser recomendable almacenar (el objeto completo) antes de generar simulaciones, e.g. `seed <- .Random.seed`. Esto permite reproducir los resultados y facilita la depuración de posibles errores.
 
 En la mayoría de los ejemplos de este libro se generan todos los valores de una vez,
 se guardan y se procesan vectorialmente (normalmente empleando la función `apply`).
@@ -670,10 +670,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.06    0.02    0.08 
+##    0.11    0.00    0.11 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.06    0.02    0.08
+##    0.11    0.00    0.11
 ```
 
 ```r
@@ -684,10 +684,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.02    0.00    0.02 
+##    0.01    0.00    0.02 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.08    0.02    0.10
+##    0.12    0.00    0.13
 ```
 
 
@@ -730,7 +730,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## outer: 0.08 sec elapsed
+    ## outer: 0.12 sec elapsed
     ```
     
     ```r
@@ -750,8 +750,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ## 'data.frame':	10 obs. of  3 variables:
-    ##  $ tic: num  2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7
-    ##  $ toc: num  2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7 2.7
+    ##  $ tic: num  4.53 4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54
+    ##  $ toc: num  4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54 4.54
     ##  $ msg: chr  "1" "2" "3" "4" ...
     ```
     
@@ -765,7 +765,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##       0       0       0       0       0       0
+    ##   0.000   0.000   0.000   0.001   0.000   0.010
     ```
 
 * La función [`cpu.time()`](https://rubenfcasal.github.io/simres/reference/cpu.time.html) del paquete `simres`:

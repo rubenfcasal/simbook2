@@ -32,7 +32,7 @@
   
 <link rel="prev" href="calgen.html"/>
 <link rel="next" href="resultados.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -162,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="gen-pseudo.html"><a href="gen-pseudo.html"><i class="fa fa-check"></i><b>2</b> Generación de números pseudoaleatorios</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="gen-cong.html"><a href="gen-cong.html"><i class="fa fa-check"></i><b>2.1</b> Generadores congruenciales lineales</a></li>
-<li class="chapter" data-level="2.2" data-path="extensiones.html"><a href="extensiones.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
+<li class="chapter" data-level="2.2" data-path="ext-cong.html"><a href="ext-cong.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
 <li class="chapter" data-level="2.3" data-path="calgen.html"><a href="calgen.html"><i class="fa fa-check"></i><b>2.3</b> Análisis de la calidad de un generador</a>
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="calgen.html"><a href="calgen.html#repetición-de-contrastes"><i class="fa fa-check"></i><b>2.3.1</b> Repetición de contrastes</a></li>
@@ -322,26 +322,22 @@ se puede utilizar que:
 /10^{\frac{k}2}\right\rfloor\]</span></p>
 <p>Este algoritmo está implementado en la función <code>simres::rvng()</code> (ver también <code>simres::rng()</code>; fichero <a href="R/rng.R"><em>rng.R</em></a>):</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="ejercicios-1.html#cb90-1" aria-hidden="true" tabindex="-1"></a>simres<span class="sc">::</span>rvng</span></code></pre></div>
-<pre><code>## function(n, seed = as.numeric(Sys.time()), k = 4) {
-##   seed &lt;- seed %% 10^k
-##   aux &lt;- 10^(2*k-k/2)
-##   aux2 &lt;- 10^(k/2)
-##   u &lt;- numeric(n)
-##   for(i in 1:n) {
-##     z &lt;- seed^2
-##     seed &lt;- trunc((z - trunc(z/aux)*aux)/aux2)
-##     u[i] &lt;- seed/10^k
-##   }
-##   # Almacenar semilla y parámetros
-##   assign(&quot;.rng&quot;, list(seed = seed, type = &quot;vm&quot;, parameters = list(k = k)),
-##       envir = globalenv())
-##   # .rng &lt;&lt;- list(seed = seed, type = &quot;vm&quot;, parameters = list(k = k))
-##   # Para continuar con semilla y parámetros:
-##   #   with(.rng, rvng(n, seed, parameters$k))
-##   # Devolver valores
-##   return(u)
+<pre><code>## function (n, seed = as.numeric(Sys.time()), k = 4) 
+## {
+##     seed &lt;- seed%%10^k
+##     aux &lt;- 10^(2 * k - k/2)
+##     aux2 &lt;- 10^(k/2)
+##     u &lt;- numeric(n)
+##     for (i in 1:n) {
+##         z &lt;- seed^2
+##         seed &lt;- trunc((z - trunc(z/aux) * aux)/aux2)
+##         u[i] &lt;- seed/10^k
+##     }
+##     assign(&quot;.rng&quot;, list(seed = seed, type = &quot;vm&quot;, parameters = list(k = k)), 
+##         envir = globalenv())
+##     return(u)
 ## }
-## &lt;bytecode: 0x00000000290614c0&gt;
+## &lt;bytecode: 0x00000000317f9008&gt;
 ## &lt;environment: namespace:simres&gt;</code></pre>
 <p>Estudiar las características del generador de cuadrados medios a partir de una secuencia de 500 valores.
 Emplear únicamente métodos gráficos.</p>

@@ -32,7 +32,7 @@
   
 <link rel="prev" href="composicion.html"/>
 <link rel="next" href="referencias.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -162,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="gen-pseudo.html"><a href="gen-pseudo.html"><i class="fa fa-check"></i><b>2</b> Generación de números pseudoaleatorios</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="gen-cong.html"><a href="gen-cong.html"><i class="fa fa-check"></i><b>2.1</b> Generadores congruenciales lineales</a></li>
-<li class="chapter" data-level="2.2" data-path="extensiones.html"><a href="extensiones.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
+<li class="chapter" data-level="2.2" data-path="ext-cong.html"><a href="ext-cong.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
 <li class="chapter" data-level="2.3" data-path="calgen.html"><a href="calgen.html"><i class="fa fa-check"></i><b>2.3</b> Análisis de la calidad de un generador</a>
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="calgen.html"><a href="calgen.html#repetición-de-contrastes"><i class="fa fa-check"></i><b>2.3.1</b> Repetición de contrastes</a></li>
@@ -303,7 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="notables-cont" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Métodos específicos para la generación de algunas distribuciones notables</h2>
 <p>En el pasado se ha realizado un esfuerzo considerable para desarrollar métodos eficientes para la simulación de las distribuciones de probabilidad más importantes.
-Estos algoritmos se describen en la mayoría de los libros clásicos de simulación (e.g. Cao, 2002, Capítulo 5)<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>, principalmente porque resultaba necesario implementar estos métodos durante el desarrollo de software estadístico.
+Estos algoritmos se describen en la mayoría de los libros clásicos de simulación (e.g. Cao, 2002, Capítulo 5)<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>, principalmente porque resultaba necesario implementar estos métodos durante el desarrollo de software estadístico.
 Hoy en día estos algoritmos están disponibles en numerosas bibliotecas y no es necesario su implementación (por ejemplo, se puede recurrir a R o emplear su librería matemática disponible en <a href="https://svn.r-project.org/R/trunk/src/nmath" class="uri">https://svn.r-project.org/R/trunk/src/nmath</a>).
 Sin embargo, además de que muchos de ellos servirían como ilustración de la aplicación de los métodos generales expuestos en secciones anteriores, pueden servir como punto de partida para la generación de otras distribuciones.</p>
 <p>Entre los distintos métodos disponibles para la generación de las distribuciones continuas más conocidas podríamos destacar:</p>
@@ -367,7 +367,7 @@ algoritmo de Jöhnk (1964).</p>
 <p>El método resulta extremadamente ineficiente para <span class="math inline">\(a\)</span> ó <span class="math inline">\(b\)</span> mayores que 1.
 Esto es debido a que la condición <span class="math inline">\(S\leq1\)</span> del paso 3 puede tardar muchísimo en verificarse.
 Por este motivo, el algoritmo de Jöhnk sólo es recomendable para <span class="math inline">\(a&lt;1\)</span> y <span class="math inline">\(b&lt;1\)</span>.
-Como remedio a esto puede usarse el algoritmo de Cheng (1978) que es algo más complicado de implementar<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> pero mucho más eficiente.</p>
+Como remedio a esto puede usarse el algoritmo de Cheng (1978) que es algo más complicado de implementar<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> pero mucho más eficiente.</p>
 
 <div class="conjecture">
 <p><span id="cnj:cheng" class="conjecture"><strong>Algoritmo 4.11  (de Cheng, 1978)  </strong></span><br></p>
@@ -391,9 +391,9 @@ Como remedio a esto puede usarse el algoritmo de Cheng (1978) que es algo más c
 <!-- </div> -->
 <div class="footnotes">
 <hr />
-<ol start="15">
-<li id="fn15"><p>Cuidado con la notación y la parametrización empleadas, puede variar entre referencias. Por ejemplo, en Cao (2002) la notación de la distribución Gamma es ligeramente distinta a la empleada en R y en el presente libro.<a href="notables-cont.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>R implementa este algoritmo en el fichero fuente <a href="https://svn.r-project.org/R/trunk/src/nmath/rbeta.c">rbeta.c</a>.<a href="notables-cont.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<ol start="16">
+<li id="fn16"><p>Cuidado con la notación y la parametrización empleadas, puede variar entre referencias. Por ejemplo, en Cao (2002) la notación de la distribución Gamma es ligeramente distinta a la empleada en R y en el presente libro.<a href="notables-cont.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>R implementa este algoritmo en el fichero fuente <a href="https://svn.r-project.org/R/trunk/src/nmath/rbeta.c">rbeta.c</a>.<a href="notables-cont.html#fnref17" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -32,7 +32,7 @@
   
 <link rel="prev" href="sim-con.html"/>
 <link rel="next" href="AR.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -162,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="gen-pseudo.html"><a href="gen-pseudo.html"><i class="fa fa-check"></i><b>2</b> Generación de números pseudoaleatorios</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="gen-cong.html"><a href="gen-cong.html"><i class="fa fa-check"></i><b>2.1</b> Generadores congruenciales lineales</a></li>
-<li class="chapter" data-level="2.2" data-path="extensiones.html"><a href="extensiones.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
+<li class="chapter" data-level="2.2" data-path="ext-cong.html"><a href="ext-cong.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
 <li class="chapter" data-level="2.3" data-path="calgen.html"><a href="calgen.html"><i class="fa fa-check"></i><b>2.3</b> Análisis de la calidad de un generador</a>
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="calgen.html"><a href="calgen.html#repetición-de-contrastes"><i class="fa fa-check"></i><b>2.3.1</b> Repetición de contrastes</a></li>
@@ -350,21 +350,21 @@ Figura 4.1: Ilustración de la simulación de una distribución exponencial por 
 </p>
 </div>
 <p>El código para implementar este algoritmo en R podría ser el siguiente:</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="inversion.html#cb136-1" aria-hidden="true" tabindex="-1"></a>tini <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
-<span id="cb136-2"><a href="inversion.html#cb136-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-3"><a href="inversion.html#cb136-3" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb136-4"><a href="inversion.html#cb136-4" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span></span>
-<span id="cb136-5"><a href="inversion.html#cb136-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb136-6"><a href="inversion.html#cb136-6" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="fu">runif</span>(nsim)</span>
-<span id="cb136-7"><a href="inversion.html#cb136-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(U)<span class="sc">/</span>lambda <span class="co"># -log(1-U)/lambda</span></span>
-<span id="cb136-8"><a href="inversion.html#cb136-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-9"><a href="inversion.html#cb136-9" aria-hidden="true" tabindex="-1"></a>tiempo <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> tini</span>
-<span id="cb136-10"><a href="inversion.html#cb136-10" aria-hidden="true" tabindex="-1"></a>tiempo</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="inversion.html#cb130-1" aria-hidden="true" tabindex="-1"></a>tini <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb130-2"><a href="inversion.html#cb130-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-3"><a href="inversion.html#cb130-3" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb130-4"><a href="inversion.html#cb130-4" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span></span>
+<span id="cb130-5"><a href="inversion.html#cb130-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb130-6"><a href="inversion.html#cb130-6" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="fu">runif</span>(nsim)</span>
+<span id="cb130-7"><a href="inversion.html#cb130-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(U)<span class="sc">/</span>lambda <span class="co"># -log(1-U)/lambda</span></span>
+<span id="cb130-8"><a href="inversion.html#cb130-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-9"><a href="inversion.html#cb130-9" aria-hidden="true" tabindex="-1"></a>tiempo <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> tini</span>
+<span id="cb130-10"><a href="inversion.html#cb130-10" aria-hidden="true" tabindex="-1"></a>tiempo</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.05    0.00    0.04</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="inversion.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(X, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb138-2"><a href="inversion.html#cb138-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">2.5</span>))</span>
-<span id="cb138-3"><a href="inversion.html#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dexp</span>(x, lambda), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+##    0.01    0.00    0.01</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="inversion.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(X, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb132-2"><a href="inversion.html#cb132-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">2.5</span>))</span>
+<span id="cb132-3"><a href="inversion.html#cb132-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dexp</span>(x, lambda), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:exp-inv-plot"></span>
 <img src="04-Metodos_generales_continuas_files/figure-html/exp-inv-plot-1.png" alt="Distribución de los valores generados de una exponencial mediante el método de inversión." width="70%" />
 <p class="caption">
@@ -437,7 +437,7 @@ innecesarios (tal y como se hizo en el ejemplo de la exponencial).</p>
 <div class="exercise">
 <span id="exr:ddexp" class="exercise"><strong>Ejercicio 4.1  (distribución doble exponencial)  </strong></span>
 </div>
-<p>La distribución doble exponencial<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> (o distribución de Laplace) de
+<p>La distribución doble exponencial<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> (o distribución de Laplace) de
 parámetro <span class="math inline">\(\lambda\)</span> tiene función de densidad:
 <span class="math display">\[f(x)  =\frac{\lambda}{2}e^{-\lambda\left\vert x\right\vert
 }\text{, }x\in\mathbb{R}\]</span></p>
@@ -451,39 +451,39 @@ parámetro <span class="math inline">\(\lambda\)</span> tiene función de densid
 <ol style="list-style-type: lower-alpha">
 <li><p>Escribir una función que permita generar, por el método de
 inversión, una muestra de <span class="math inline">\(n\)</span> observaciones de esta distribución.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="inversion.html#cb139-1" aria-hidden="true" tabindex="-1"></a>ddexp <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">lambda =</span> <span class="dv">1</span>){</span>
-<span id="cb139-2"><a href="inversion.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Densidad doble exponencial</span></span>
-<span id="cb139-3"><a href="inversion.html#cb139-3" aria-hidden="true" tabindex="-1"></a>  lambda<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>lambda<span class="sc">*</span><span class="fu">abs</span>(x))<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb139-4"><a href="inversion.html#cb139-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb139-5"><a href="inversion.html#cb139-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-6"><a href="inversion.html#cb139-6" aria-hidden="true" tabindex="-1"></a>rdexp <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">lambda =</span> <span class="dv">1</span>){</span>
-<span id="cb139-7"><a href="inversion.html#cb139-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulación por inversión</span></span>
-<span id="cb139-8"><a href="inversion.html#cb139-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Doble exponencial</span></span>
-<span id="cb139-9"><a href="inversion.html#cb139-9" aria-hidden="true" tabindex="-1"></a>  U <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>)</span>
-<span id="cb139-10"><a href="inversion.html#cb139-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (U<span class="sc">&lt;</span><span class="fl">0.5</span>) {</span>
-<span id="cb139-11"><a href="inversion.html#cb139-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">log</span>(<span class="dv">2</span><span class="sc">*</span>U)<span class="sc">/</span>lambda)</span>
-<span id="cb139-12"><a href="inversion.html#cb139-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb139-13"><a href="inversion.html#cb139-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="sc">-</span><span class="fu">log</span>(<span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>U))<span class="sc">/</span>lambda)</span>
-<span id="cb139-14"><a href="inversion.html#cb139-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb139-15"><a href="inversion.html#cb139-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb139-16"><a href="inversion.html#cb139-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-17"><a href="inversion.html#cb139-17" aria-hidden="true" tabindex="-1"></a>rdexpn <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">lambda =</span> <span class="dv">1</span>) {</span>
-<span id="cb139-18"><a href="inversion.html#cb139-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulación n valores de doble exponencial</span></span>
-<span id="cb139-19"><a href="inversion.html#cb139-19" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
-<span id="cb139-20"><a href="inversion.html#cb139-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) x[i]<span class="ot">&lt;-</span><span class="fu">rdexp</span>(lambda)</span>
-<span id="cb139-21"><a href="inversion.html#cb139-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
-<span id="cb139-22"><a href="inversion.html#cb139-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="inversion.html#cb133-1" aria-hidden="true" tabindex="-1"></a>ddexp <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">lambda =</span> <span class="dv">1</span>){</span>
+<span id="cb133-2"><a href="inversion.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Densidad doble exponencial</span></span>
+<span id="cb133-3"><a href="inversion.html#cb133-3" aria-hidden="true" tabindex="-1"></a>  lambda<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>lambda<span class="sc">*</span><span class="fu">abs</span>(x))<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb133-4"><a href="inversion.html#cb133-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb133-5"><a href="inversion.html#cb133-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-6"><a href="inversion.html#cb133-6" aria-hidden="true" tabindex="-1"></a>rdexp <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">lambda =</span> <span class="dv">1</span>){</span>
+<span id="cb133-7"><a href="inversion.html#cb133-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulación por inversión</span></span>
+<span id="cb133-8"><a href="inversion.html#cb133-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Doble exponencial</span></span>
+<span id="cb133-9"><a href="inversion.html#cb133-9" aria-hidden="true" tabindex="-1"></a>  U <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>)</span>
+<span id="cb133-10"><a href="inversion.html#cb133-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (U<span class="sc">&lt;</span><span class="fl">0.5</span>) {</span>
+<span id="cb133-11"><a href="inversion.html#cb133-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">log</span>(<span class="dv">2</span><span class="sc">*</span>U)<span class="sc">/</span>lambda)</span>
+<span id="cb133-12"><a href="inversion.html#cb133-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb133-13"><a href="inversion.html#cb133-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="sc">-</span><span class="fu">log</span>(<span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>U))<span class="sc">/</span>lambda)</span>
+<span id="cb133-14"><a href="inversion.html#cb133-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb133-15"><a href="inversion.html#cb133-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb133-16"><a href="inversion.html#cb133-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-17"><a href="inversion.html#cb133-17" aria-hidden="true" tabindex="-1"></a>rdexpn <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">lambda =</span> <span class="dv">1</span>) {</span>
+<span id="cb133-18"><a href="inversion.html#cb133-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulación n valores de doble exponencial</span></span>
+<span id="cb133-19"><a href="inversion.html#cb133-19" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb133-20"><a href="inversion.html#cb133-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) x[i]<span class="ot">&lt;-</span><span class="fu">rdexp</span>(lambda)</span>
+<span id="cb133-21"><a href="inversion.html#cb133-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(x)</span>
+<span id="cb133-22"><a href="inversion.html#cb133-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
 <li><p>Generar <span class="math inline">\(10^{4}\)</span> valores de la distribución doble exponencial de
 parámetro <span class="math inline">\(\lambda=2\)</span> y obtener el tiempo de CPU que tarda en
 generar la secuencia.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="inversion.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">54321</span>)</span>
-<span id="cb140-2"><a href="inversion.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(x <span class="ot">&lt;-</span> <span class="fu">rdexpn</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">4</span>, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="inversion.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">54321</span>)</span>
+<span id="cb134-2"><a href="inversion.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(x <span class="ot">&lt;-</span> <span class="fu">rdexpn</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">4</span>, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.04    0.00    0.05</code></pre></li>
+##    0.03    0.02    0.05</code></pre></li>
 <li><p>Representar el histograma y compararlo con la densidad teórica.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="inversion.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb142-2"><a href="inversion.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lines(density(x), col = &#39;blue&#39;)</span></span>
-<span id="cb142-3"><a href="inversion.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ddexp</span>(x, <span class="dv">2</span>), <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="inversion.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb136-2"><a href="inversion.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lines(density(x), col = &#39;blue&#39;)</span></span>
+<span id="cb136-3"><a href="inversion.html#cb136-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ddexp</span>(x, <span class="dv">2</span>), <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ddexp-inv"></span>
 <img src="04-Metodos_generales_continuas_files/figure-html/ddexp-inv-1.png" alt="Distribución de los valores generados de una doble exponencial mediante el método de inversión." width="70%" />
 <p class="caption">
@@ -508,7 +508,7 @@ cuantil <span class="math inline">\(F^{-1}\left( u\right)\)</span>, se dispone d
 buena que se puede emplear en el algoritmo anterior (se obtendrían simulaciones
 con una distribución aproximada a la deseada).</p>
 <p>Por ejemplo, para aproximar la función cuantil de la normal estándar,
-Odeh y Evans (1974) consideraron la siguiente función auxiliar<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>:
+Odeh y Evans (1974) consideraron la siguiente función auxiliar<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>:
 <span class="math display">\[ g\left( v\right)  =\sqrt{-2\ln v}\frac{A\left( \sqrt{-2\ln v}\right)
 }{B\left( \sqrt{-2\ln v}\right)  },\]</span>
 siendo <span class="math inline">\(A(x) =\sum_{i=0}^{4}a_{i}x^{i}\)</span>
@@ -544,9 +544,9 @@ las correspondientes a la normal estándar).</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="11">
-<li id="fn11"><p>Esta distribución también se puede generar fácilmente simulando una distribución exponencial y asignando un signo positivo o negativo con equiprobabilidad (ver Ejemplo <a href="composicion.html#exm:dexp-mix">4.6</a>) y función <a href="https://rubenfcasal.github.io/simres/reference/ddexp.html"><code>simres::rdexp()</code></a> (fichero <a href="R/ddexp.R"><em>ddexp.R</em></a>).<a href="inversion.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p>R emplea una aproximación similar, basada en el algoritmo de Wichura (1988) más preciso, y que está implementado en el fichero fuente <a href="https://svn.r-project.org/R/trunk/src/nmath/qnorm.c">qnorm.c</a>.<a href="inversion.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<ol start="12">
+<li id="fn12"><p>Esta distribución también se puede generar fácilmente simulando una distribución exponencial y asignando un signo positivo o negativo con equiprobabilidad (ver Ejemplo <a href="composicion.html#exm:dexp-mix">4.6</a>) y función <a href="https://rubenfcasal.github.io/simres/reference/ddexp.html"><code>simres::rdexp()</code></a> (fichero <a href="R/ddexp.R"><em>ddexp.R</em></a>).<a href="inversion.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>R emplea una aproximación similar, basada en el algoritmo de Wichura (1988) más preciso, y que está implementado en el fichero fuente <a href="https://svn.r-project.org/R/trunk/src/nmath/qnorm.c">qnorm.c</a>.<a href="inversion.html#fnref13" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

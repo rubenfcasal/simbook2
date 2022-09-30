@@ -203,7 +203,7 @@ c)  Aproximar (mediante simulación) la probabilidad del intervalo
     mean((0.4 < u) & (u < 0.8))     # Alternativa
     ```
 
-## Extensiones 
+## Extensiones {#ext-cong}
 
 Se han considerado diversas extensiones del generador congruencial lineal simple:
 

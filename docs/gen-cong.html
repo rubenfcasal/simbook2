@@ -31,8 +31,8 @@
   
   
 <link rel="prev" href="gen-pseudo.html"/>
-<link rel="next" href="extensiones.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<link rel="next" href="ext-cong.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -162,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="gen-pseudo.html"><a href="gen-pseudo.html"><i class="fa fa-check"></i><b>2</b> Generación de números pseudoaleatorios</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="gen-cong.html"><a href="gen-cong.html"><i class="fa fa-check"></i><b>2.1</b> Generadores congruenciales lineales</a></li>
-<li class="chapter" data-level="2.2" data-path="extensiones.html"><a href="extensiones.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
+<li class="chapter" data-level="2.2" data-path="ext-cong.html"><a href="ext-cong.html"><i class="fa fa-check"></i><b>2.2</b> Extensiones</a></li>
 <li class="chapter" data-level="2.3" data-path="calgen.html"><a href="calgen.html"><i class="fa fa-check"></i><b>2.3</b> Análisis de la calidad de un generador</a>
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="calgen.html"><a href="calgen.html#repetición-de-contrastes"><i class="fa fa-check"></i><b>2.3.1</b> Repetición de contrastes</a></li>
@@ -312,27 +312,24 @@ x_{i}  &amp; = (ax_{i-1}+c) \bmod m \\
 u_{i}  &amp; = \dfrac{x_{i}}{m} \\
 i  &amp; =1,2,\ldots
 \end{aligned}\]</span>
-donde <span class="math inline">\(a\)</span> (<em>multiplicador</em>), <span class="math inline">\(c\)</span> (<em>incremento</em>) y <span class="math inline">\(m\)</span> (<em>módulo</em>) son enteros positivos<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> fijados de antemano (los parámetros de este generador). Si <span class="math inline">\(c=0\)</span> el generador se denomina congruencial <em>multiplicativo</em> (Lehmer, 1951) y en caso contrario se dice que es <em>mixto</em> (Rotenburg, 1960).</p>
+donde <span class="math inline">\(a\)</span> (<em>multiplicador</em>), <span class="math inline">\(c\)</span> (<em>incremento</em>) y <span class="math inline">\(m\)</span> (<em>módulo</em>) son enteros positivos<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> fijados de antemano (los parámetros de este generador). Si <span class="math inline">\(c=0\)</span> el generador se denomina congruencial <em>multiplicativo</em> (Lehmer, 1951) y en caso contrario se dice que es <em>mixto</em> (Rotenburg, 1960).</p>
 <p>Obviamente los parámetros y la semilla determinan los valores generados, que también se pueden obtener de forma no recursiva:
 <span class="math display">\[x_{i}=\left( a^{i}x_0+c\frac{a^{i}-1}{a-1}\right) \bmod m\]</span></p>
-<p>Este método está implementado<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> en la función <code>rlcg()</code> del paquete <a href="https://rubenfcasal.github.io/simres"><code>simres</code></a>, imitando el funcionamiento del generador uniforme de R (ver también <code>simres::rng()</code>; fichero <a href="R/rng.R"><em>rng.R</em></a>):</p>
+<p>Este método está implementado<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> en la función <code>rlcg()</code> del paquete <a href="https://rubenfcasal.github.io/simres"><code>simres</code></a>, imitando el funcionamiento del generador uniforme de R (ver también <code>simres::rng()</code>; fichero <a href="R/rng.R"><em>rng.R</em></a>):</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="gen-cong.html#cb37-1" aria-hidden="true" tabindex="-1"></a>simres<span class="sc">::</span>rlcg</span></code></pre></div>
-<pre><code>## function(n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 1) {
-##   u &lt;- numeric(n)
-##   for(i in 1:n) {
-##     seed &lt;- (a * seed + c) %% m
-##     u[i] &lt;- seed/m # (seed + 1)/(m + 1)
-##   }
-##   # Almacenar semilla y parámetros
-##   assign(&quot;.rng&quot;, list(seed = seed, type = &quot;lcg&quot;,
-##           parameters = list(a = a, c = c, m = m)), envir = globalenv())
-##   # .rng &lt;&lt;- list(seed = seed, type = &quot;lcg&quot;, parameters = list(a = a, c = c, m = m))
-##   # Para continuar con semilla y parámetros:
-##   #   with(.rng, rlcg(n, seed, parameters$a, parameters$c, parameters$m))
-##   # Devolver valores
-##   return(u)
+<pre><code>## function (n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 
+##     1) 
+## {
+##     u &lt;- numeric(n)
+##     for (i in 1:n) {
+##         seed &lt;- (a * seed + c)%%m
+##         u[i] &lt;- seed/m
+##     }
+##     assign(&quot;.rng&quot;, list(seed = seed, type = &quot;lcg&quot;, parameters = list(a = a, 
+##         c = c, m = m)), envir = globalenv())
+##     return(u)
 ## }
-## &lt;bytecode: 0x0000000013371c78&gt;
+## &lt;bytecode: 0x0000000021e835a0&gt;
 ## &lt;environment: namespace:simres&gt;</code></pre>
 <p>Ejemplos de parámetros:</p>
 <ul>
@@ -375,13 +372,13 @@ que <span class="math inline">\(a^{q}=1 \bmod m\)</span> es <span class="math in
 </ol>
 <p>Además de preocuparse de la longitud del ciclo, las secuencias generadas deben aparentar muestras i.i.d. <span class="math inline">\(\mathcal{U}(0,1)\)</span>.</p>
 <p>Uno de los principales problemas es que los valores generados pueden mostrar una clara estructura reticular.
-Este es el caso por ejemplo del generador RANDU de IBM muy empleado en la década de los 70 (ver Figura <a href="gen-cong.html#fig:randu">2.1</a>)<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>.
+Este es el caso por ejemplo del generador RANDU de IBM muy empleado en la década de los 70 (ver Figura <a href="gen-cong.html#fig:randu">2.1</a>)<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.
 Por ejemplo, el conjunto de datos <code>randu</code> contiene 400 tripletas de números sucesivos obtenidos con la implementación de VAX/VMS 1.5 (1977).</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="gen-cong.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simres)</span>
 <span id="cb39-2"><a href="gen-cong.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(u <span class="ot">&lt;-</span> <span class="fu">rlcg</span>(<span class="at">n =</span> <span class="dv">9999</span>, </span>
 <span id="cb39-3"><a href="gen-cong.html#cb39-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">seed =</span> <span class="dv">543210</span>, <span class="at">a =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">16</span> <span class="sc">+</span> <span class="dv">3</span>, <span class="at">c =</span> <span class="dv">0</span>, <span class="at">m =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">31</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##       0       0       0</code></pre>
+##    0.02    0.00    0.01</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="gen-cong.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># xyz &lt;- matrix(u, ncol = 3, byrow = TRUE)</span></span>
 <span id="cb41-2"><a href="gen-cong.html#cb41-2" aria-hidden="true" tabindex="-1"></a>xyz <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">embed</span>(u, <span class="dv">3</span>)</span>
 <span id="cb41-3"><a href="gen-cong.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plot3D)</span>
@@ -462,11 +459,11 @@ Error absoluto <span class="math inline">\(3.90625\times 10^{-5}\)</span>.</p></
 </div>
 <div class="footnotes">
 <hr />
-<ol start="5">
-<li id="fn5"><p>Se supone además que <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span> y <span class="math inline">\(x_0\)</span> son menores que <span class="math inline">\(m\)</span>, ya que, dadas las propiedades algebraicas de la suma y el producto en el conjunto de clases de resto módulo <span class="math inline">\(m\)</span> (que es un anillo), cualquier otra elección de valores mayores o iguales que <span class="math inline">\(m\)</span> tiene un equivalente verificando esta restricción.<a href="gen-cong.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>Aunque de forma no muy eficiente. Para evitar problemas computacionales, se recomienda realizar el cálculo de los valores empleando el método de Schrage (ver Bratley <em>et al.</em>, 1987; L’Ecuyer, 1988).<a href="gen-cong.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p>Alternativamente se podría utilizar la función <code>plot3d</code> del paquete <code>rgl</code>, y rotar la figura (pulsando con el ratón) para ver los hiperplanos:
-<code>rgl::plot3d(xyz)</code><a href="gen-cong.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<ol start="6">
+<li id="fn6"><p>Se supone además que <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span> y <span class="math inline">\(x_0\)</span> son menores que <span class="math inline">\(m\)</span>, ya que, dadas las propiedades algebraicas de la suma y el producto en el conjunto de clases de resto módulo <span class="math inline">\(m\)</span> (que es un anillo), cualquier otra elección de valores mayores o iguales que <span class="math inline">\(m\)</span> tiene un equivalente verificando esta restricción.<a href="gen-cong.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Aunque de forma no muy eficiente. Para evitar problemas computacionales, se recomienda realizar el cálculo de los valores empleando el método de Schrage (ver Bratley <em>et al.</em>, 1987; L’Ecuyer, 1988).<a href="gen-cong.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Alternativamente se podría utilizar la función <code>plot3d</code> del paquete <code>rgl</code>, y rotar la figura (pulsando con el ratón) para ver los hiperplanos:
+<code>rgl::plot3d(xyz)</code><a href="gen-cong.html#fnref8" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -475,7 +472,7 @@ Error absoluto <span class="math inline">\(3.90625\times 10^{-5}\)</span>.</p></
         </div>
       </div>
 <a href="gen-pseudo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="extensiones.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ext-cong.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
