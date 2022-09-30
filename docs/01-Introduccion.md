@@ -124,9 +124,7 @@ hist(nsobres, breaks = "FD", freq = FALSE,
 lines(density(nsobres))
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-3-1} \end{center}
+<img src="01-Introduccion_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" />
 
 Aproximación por simulación del número medio de sobres para completar la colección:
 
@@ -150,9 +148,7 @@ plot(1:nsim, cumsum(nsobres)/1:nsim, type = "l",
 abline(h = sol)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-5-1} \end{center}
+<img src="01-Introduccion_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" />
 -->
 
 Número mínimo de sobres para asegurar de que se completa la colección con una probabilidad del 95\%:
@@ -186,9 +182,7 @@ abline(v = sol)
 abline(v = nmin, lty = 2)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-6-1} \end{center}
+<img src="01-Introduccion_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" />
 
 Por supuesto, la distribución del gasto necesario para completar la colección es esta misma reescalada.
 
@@ -197,9 +191,7 @@ Por supuesto, la distribución del gasto necesario para completar la colección 
 res <- simres::mc.plot(nsobres*0.8)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-7-1} \end{center}
+<img src="01-Introduccion_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" />
 
 Aproximación del gasto medio:
 
@@ -302,14 +294,10 @@ Se distingue entre tres tipos de secuencias:
 Normalmente son obtenidos por procesos físicos (loterías, ruletas, ruidos...) y, hasta hace una décadas, se almacenaban en *tablas de dígitos aleatorios*. 
 Por ejemplo, en 1955 la Corporación RAND publicó el libro [*A Million Random Digits with 100,000 Normal Deviates*](https://www.rand.org/pubs/monograph_reports/MR1418.html) que contenía números aleatorios generados mediante una ruleta electrónica conectada a una computadora (ver Figura \@ref(fig:randbook)).
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.3\linewidth]{images/RAND} 
-
-}
-
-\caption{Líneas 10580-10594, columnas 21-40, del libro *A Million Random Digits with 100,000 Normal Deviates*.}(\#fig:randbook)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/RAND.png" alt="Líneas 10580-10594, columnas 21-40, del libro *A Million Random Digits with 100,000 Normal Deviates*." width="30%" />
+<p class="caption">(\#fig:randbook)Líneas 10580-10594, columnas 21-40, del libro *A Million Random Digits with 100,000 Normal Deviates*.</p>
+</div>
 
 <!-- 
 Pendiente:
@@ -372,14 +360,10 @@ plot(sobol(n, dim = 2), xlab = 'x1', ylab = 'x2')
 plot(torus(n, dim = 2), xlab = 'x1', ylab = 'x2')
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=1\linewidth]{01-Introduccion_files/figure-latex/randtoolbox-1} 
-
-}
-
-\caption{Secuencias cuasi-aleatorias bidimensionales obtenidas con los métodos de Halton (izquierda), Sobol (centro) y Torus (derecha).}(\#fig:randtoolbox)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="01-Introduccion_files/figure-html/randtoolbox-1.png" alt="Secuencias cuasi-aleatorias bidimensionales obtenidas con los métodos de Halton (izquierda), Sobol (centro) y Torus (derecha)." width="100%" />
+<p class="caption">(\#fig:randtoolbox)Secuencias cuasi-aleatorias bidimensionales obtenidas con los métodos de Halton (izquierda), Sobol (centro) y Torus (derecha).</p>
+</div>
 
 ```r
 par(par.old)
@@ -495,15 +479,15 @@ Entre las herramientas implementadas en el paquete base de R podemos destacar:
 Además están disponibles otros paquetes que implementan distribuciones adicionales (ver [CRAN Task View: Probability Distributions](https://cran.r-project.org/view=Distributions)). 
 Entre ellos podríamos destacar los paquetes [`distr`](http://distr.r-forge.r-project.org) (clases S4; con extensiones en otros paquetes) y [`distr6`](https://alan-turing-institute.github.io/distr6/index.html) (clases R6).
 
-La semilla se almacena en `.Random.seed`:
+La semilla se almacena (en `globalenv`) en `.Random.seed`; es un vector
+de enteros cuya dimensión depende del tipo de generador:
 
--   Inicialmente no existe. 
-La recomendación es establecerla con `set.seed()`, en caso contrario se generará a partir del reloj del sistema^[y del identificador asignado por el sistema operativo al proceso.] cuando se necesite.
+-   No debe ser modificado manualmente; se guarda con el entorno de trabajo (por ejemplo, si se guarda al terminar la sesión en un fichero *.RData*, se restaurará la semilla al iniciar una nueva sesión y podremos continuar con las simulaciones).
 
--   Se almacena como un objeto oculto en el entorno de trabajo (o entorno global `.GlobalEnv`). Con las opciones por defecto de R, si al terminar una sesión almacenamos el entorno (en un fichero *.RData*), al iniciar una nueva sesión se restaurará también la semilla (y se podría continuar con las simulaciones).
+-   Si no se especifica con `set.seed` (o no existe) se genera a partir del reloj del sistema.
 
--   Es un vector de enteros cuya estructura depende del tipo de generador (en la Sección \@ref(ext-cong) se dan algunos detalles sobre la configuración por defecto), por lo que no debería ser modificado manualmente.  
-Puede ser recomendable almacenar (el objeto completo) antes de generar simulaciones, e.g. `seed <- .Random.seed`. Esto permite reproducir los resultados y facilita la depuración de posibles errores.
+-   Puede ser recomendable almacenarla antes de generar simulaciones, e.g. `seed <- .Random.seed`. 
+    Esto permite reproducir los resultados y facilita la depuración de posibles errores.
 
 En la mayoría de los ejemplos de este libro se generan todos los valores de una vez,
 se guardan y se procesan vectorialmente (normalmente empleando la función `apply`).
@@ -670,10 +654,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.11    0.00    0.11 
+##    0.13    0.00    0.12 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.11    0.00    0.11
+##    0.13    0.00    0.12
 ```
 
 ```r
@@ -684,10 +668,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.01    0.00    0.02 
+##       0       0       0 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.12    0.00    0.13
+##    0.13    0.00    0.12
 ```
 
 
@@ -722,7 +706,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## middle: 0 sec elapsed
+    ## middle: 0.01 sec elapsed
     ```
     
     ```r
@@ -730,7 +714,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## outer: 0.12 sec elapsed
+    ## outer: 0.09 sec elapsed
     ```
     
     ```r
@@ -750,8 +734,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ## 'data.frame':	10 obs. of  3 variables:
-    ##  $ tic: num  4.53 4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54
-    ##  $ toc: num  4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54 4.54
+    ##  $ tic: num  4.65 4.65 4.65 4.65 4.65 4.65 4.65 4.67 4.67 4.67
+    ##  $ toc: num  4.65 4.65 4.65 4.65 4.65 4.65 4.67 4.67 4.67 4.67
     ##  $ msg: chr  "1" "2" "3" "4" ...
     ```
     
@@ -765,7 +749,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##   0.000   0.000   0.000   0.001   0.000   0.010
+    ##   0.000   0.000   0.000   0.002   0.000   0.020
     ```
 
 * La función [`cpu.time()`](https://rubenfcasal.github.io/simres/reference/cpu.time.html) del paquete `simres`:
@@ -787,9 +771,7 @@ Después de ejecutar el código, llamando a `Rprof(NULL)` se desactiva el muestr
 
 ## Ejercicios
 
-\BeginKnitrBlock{exercise}
-<span class="exercise" id="exr:simpi"><strong>(\#exr:simpi) </strong></span>
-\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:simpi"><strong>(\#exr:simpi) </strong></span></div>\EndKnitrBlock{exercise}
 
 Sea $(X,Y)$ es un vector aleatorio con distribución uniforme en el
 cuadrado $[-1,1]\times\lbrack-1,1]$ de área 4.
@@ -807,9 +789,7 @@ Ver solución en Sección \@ref(sol-simpi).
 ---    
 
 
-\BeginKnitrBlock{exercise}\iffalse{-91-69-120-112-101-114-105-109-101-110-116-111-32-100-101-32-66-101-114-110-111-117-108-108-105-93-}\fi{}
-<span class="exercise" id="exr:bernoulli"><strong>(\#exr:bernoulli)  \iffalse (Experimento de Bernoulli) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}\iffalse{-91-69-120-112-101-114-105-109-101-110-116-111-32-100-101-32-66-101-114-110-111-117-108-108-105-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:bernoulli"><strong>(\#exr:bernoulli)  \iffalse (Experimento de Bernoulli) \fi{} </strong></span></div>\EndKnitrBlock{exercise}
 Consideramos el experimento de Bernoulli consistente en el
 lanzamiento de una moneda.
 
@@ -829,33 +809,26 @@ Ver solución en Sección \@ref(sol-bernoulli).
 
 ---    
 
-\BeginKnitrBlock{exercise}\iffalse{-91-83-105-109-117-108-97-99-105-243-110-32-100-101-32-117-110-32-99-105-114-99-117-105-116-111-93-}\fi{}
-<span class="exercise" id="exr:circuito"><strong>(\#exr:circuito)  \iffalse (Simulación de un circuito) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}\iffalse{-91-83-105-109-117-108-97-99-105-243-110-32-100-101-32-117-110-32-99-105-114-99-117-105-116-111-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:circuito"><strong>(\#exr:circuito)  \iffalse (Simulación de un circuito) \fi{} </strong></span></div>\EndKnitrBlock{exercise}
 Simular el paso de corriente a través del siguiente circuito, donde
 figuran las probabilidades de que pase corriente por cada uno de los
 interruptores:
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{images/circuito2} \end{center}
+<img src="images/circuito2.png" width="50%" style="display: block; margin: auto;" />
 
 Considerar que cada interruptor es una variable aleatoria de Bernoulli independiente
 para simular 1000 valores de cada una de ellas.
     
-\BeginKnitrBlock{remark}
-\iffalse{} <span class="remark"><em>Nota: </em></span>  \fi{}R maneja internamente los valores lógicos como 1 (`TRUE`) y 0 (`FALSE`).
+\BeginKnitrBlock{remark}<div class="remark">\iffalse{} <span class="remark"><em>Nota: </em></span>  \fi{}R maneja internamente los valores lógicos como 1 (`TRUE`) y 0 (`FALSE`).
 Recíprocamente, cualquier número puede ser tratado como lógico (al estilo de C).
-El entero 0 es equivalente a `FALSE` y cualquier entero distinto de 0 a `TRUE`.
-\EndKnitrBlock{remark}
+El entero 0 es equivalente a `FALSE` y cualquier entero distinto de 0 a `TRUE`.</div>\EndKnitrBlock{remark}
 
 
 Ver solución en Sección \@ref(sol-circuito).
 
 ---    
 
-\BeginKnitrBlock{exercise}\iffalse{-91-69-108-32-112-114-111-98-108-101-109-97-32-100-101-108-32-67-97-98-97-108-108-101-114-111-32-100-101-32-77-233-114-233-93-}\fi{}
-<span class="exercise" id="exr:mere"><strong>(\#exr:mere)  \iffalse (El problema del Caballero de Méré) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}\iffalse{-91-69-108-32-112-114-111-98-108-101-109-97-32-100-101-108-32-67-97-98-97-108-108-101-114-111-32-100-101-32-77-233-114-233-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:mere"><strong>(\#exr:mere)  \iffalse (El problema del Caballero de Méré) \fi{} </strong></span></div>\EndKnitrBlock{exercise}
 En 1651, el Caballero de Méré le planteó a Pascal una pregunta
 relacionada con las apuestas y los juegos de azar: ¿es ventajoso
 apostar a que en cuatro lanzamientos de un dado se obtiene al menos
@@ -879,9 +852,7 @@ Ver solución en Sección \@ref(sol-mere).
 
 ---    
 
-\BeginKnitrBlock{exercise}\iffalse{-91-118-97-114-105-97-99-105-243-110-32-100-101-108-32-112-114-111-98-108-101-109-97-32-100-101-108-32-99-111-108-101-99-99-105-111-110-105-115-116-97-32-40-99-97-100-101-110-97-32-100-101-32-77-97-114-107-111-118-41-93-}\fi{}
-<span class="exercise" id="exr:album"><strong>(\#exr:album)  \iffalse (variación del problema del coleccionista (cadena de Markov)) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}\iffalse{-91-118-97-114-105-97-99-105-243-110-32-100-101-108-32-112-114-111-98-108-101-109-97-32-100-101-108-32-99-111-108-101-99-99-105-111-110-105-115-116-97-32-40-99-97-100-101-110-97-32-100-101-32-77-97-114-107-111-118-41-93-}\fi{}<div class="exercise"><span class="exercise" id="exr:album"><strong>(\#exr:album)  \iffalse (variación del problema del coleccionista (cadena de Markov)) \fi{} </strong></span></div>\EndKnitrBlock{exercise}
 
 Continuando con el ejemplo de la Sección \@ref(ealbum)
 (álbum con $n = 75$ cromos y sobres con $m = 6$). A partir de $nsim=2000$ simulaciones de coleccionistas de cromos, aproximar por simulación la evolución del proceso de compra de un coleccionista (número de cromos distintos dependiendo de los sobres comprados).

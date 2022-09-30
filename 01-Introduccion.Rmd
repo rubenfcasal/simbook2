@@ -432,15 +432,15 @@ Entre las herramientas implementadas en el paquete base de R podemos destacar:
 Además están disponibles otros paquetes que implementan distribuciones adicionales (ver [CRAN Task View: Probability Distributions](https://cran.r-project.org/view=Distributions)). 
 Entre ellos podríamos destacar los paquetes `r citepkg('distr', 'http://distr.r-forge.r-project.org')` (clases S4; con extensiones en otros paquetes) y `r citepkg('distr6', 'https://alan-turing-institute.github.io/distr6/index.html')` (clases R6).
 
-La semilla se almacena en `.Random.seed`:
+La semilla se almacena (en `globalenv`) en `.Random.seed`; es un vector
+de enteros cuya dimensión depende del tipo de generador:
 
--   Inicialmente no existe. 
-La recomendación es establecerla con `set.seed()`, en caso contrario se generará a partir del reloj del sistema^[y del identificador asignado por el sistema operativo al proceso.] cuando se necesite.
+-   No debe ser modificado manualmente; se guarda con el entorno de trabajo (por ejemplo, si se guarda al terminar la sesión en un fichero *.RData*, se restaurará la semilla al iniciar una nueva sesión y podremos continuar con las simulaciones).
 
--   Se almacena como un objeto oculto en el entorno de trabajo (o entorno global `.GlobalEnv`). Con las opciones por defecto de R, si al terminar una sesión almacenamos el entorno (en un fichero *.RData*), al iniciar una nueva sesión se restaurará también la semilla (y se podría continuar con las simulaciones).
+-   Si no se especifica con `set.seed` (o no existe) se genera a partir del reloj del sistema.
 
--   Es un vector de enteros cuya estructura depende del tipo de generador (en la Sección \@ref(ext-cong) se dan algunos detalles sobre la configuración por defecto), por lo que no debería ser modificado manualmente.  
-Puede ser recomendable almacenar (el objeto completo) antes de generar simulaciones, e.g. `seed <- .Random.seed`. Esto permite reproducir los resultados y facilita la depuración de posibles errores.
+-   Puede ser recomendable almacenarla antes de generar simulaciones, e.g. `seed <- .Random.seed`. 
+    Esto permite reproducir los resultados y facilita la depuración de posibles errores.
 
 En la mayoría de los ejemplos de este libro se generan todos los valores de una vez,
 se guardan y se procesan vectorialmente (normalmente empleando la función `apply`).

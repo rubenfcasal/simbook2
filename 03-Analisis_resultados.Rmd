@@ -148,12 +148,11 @@ Como medida de la precisión de la aproximación podemos utilizar el error máxi
 (es habitual emplear 2 en lugar de 1.96, 
 lo que se correspondería con $1 - \alpha = 0.9545$ en el caso de normalidad).
 Podemos añadir también los correspondientes intervalos de confianza al gráfico de convergencia:
-
 ```{r conv-esterr, fig.cap='Gráfico de convergencia incluyendo el error de la aproximación.'}
 n <- 1:nsim
 est <- cumsum(rx)/n
-# (cumsum(rx^2) - n*est^2)/(n-1) # Cuasi-varianzas muestrales
-esterr <- sqrt((cumsum(rx^2)/n - est^2)/(n-1)) # Errores estándar de la media
+# (cumsum(rx^2) - n*est^2)/(n-1) # Varianzas muestrales
+esterr <- sqrt((cumsum(rx^2)/n - est^2)/(n-1)) # Errores estándar
 plot(est, type = "l", lwd = 2, xlab = "Número de generaciones", 
      ylab = "Media y rango de error", ylim = c(-1, 1))
 abline(h = est[nsim], lty=2)
@@ -162,9 +161,9 @@ lines(est - 2*esterr, lty=3)
 abline(h = xmed)
 ```
 
-
-Podemos generar este gráfico empleando la función `r cite_fsimres("conv.plot", lnk = "mc.plot")` (o `r cite_fsimres("mc.plot")`) del paquete `r cite_simres()` (fichero [*mc.plot.R*](R/mc.plot.R)).
-
+<!-- 
+Implementar en una función aprox.mean?
+-->
 
 ## Determinación del número de generaciones {#num-gen}
 
@@ -178,10 +177,10 @@ Para una precisión absoluta $\varepsilon$, se trata de determinar
 $n$ de forma que:
 $$z_{1-\alpha /2}\dfrac{\widehat{S}_{n}}{\sqrt{n}}<\varepsilon$$
 
-Un algoritmo (para un lenguaje de programación vectorial como R) podría ser el siguiente:
+Un algoritmo podría ser el siguiente:
 
 1.  Hacer $j=0$
-    y fijar un tamaño inicial $n_{0}$ (e.g. 60 ó 100, dependiendo del tiempo de computación requerido).
+    y fijar un tamaño inicial $n_{0}$ (e.g. 30 ó 60).
 
 2.  Generar $\left\{ X_{i}\right\} _{i=1}^{n_{0}}$ 
     y calcular $\overline{X}_{n_0}$ y $\widehat{S}_{n_{0}}$.
@@ -202,10 +201,6 @@ Para una precisión relativa $\varepsilon \left\vert \mu \right\vert$ se procede
 $$z_{1-\alpha /2}\dfrac{\widehat{S}_{n}}{\sqrt{n}}<\varepsilon \left\vert 
 \overline{X}_{n}\right\vert .$$
 
-
-<!-- 
-Calcular $\overline{X}_{n_j}$ y $\widehat{S}_{n_j}$ como actualización?
--->
 
 ## El problema de la dependencia
 
@@ -291,12 +286,14 @@ Esta forma de proceder podría ser adecuada para tratar de aproximar la precisi�
 ```{r}
 esterr[nrxi]
 ```
-pero no sería la más eficiente para aproximar la media. Siempre es preferible emplear todas las observaciones. 
+pero no sería eficiente para aproximar la media. Siempre será preferible emplear
+todas las observaciones. 
 
-Por ejemplo, se podría pensar en considerar las medias de grupos de 25 valores consecutivos y suponer que hay independencia entre ellas:
+Por ejemplo, se podría pensar en considerar las medias de grupos de 24 valores 
+consecutivos y suponer que hay independencia entre ellas:
 
 ```{r conv-dep-lotes,message=FALSE, warning=FALSE, fig.cap='Gráfico de convergencia de las medias por lotes.'}
-rxm <- rowMeans(matrix(rx, ncol = lag + 1, byrow = TRUE))
+rxm <- rowMeans(matrix(rx, ncol = lag, byrow = TRUE))
 nrxm <- length(rxm)
 n <- 1:nrxm
 est <- cumsum(rxm)/n
@@ -309,21 +306,42 @@ lines(est - 2*esterr, lty=2)
 abline(h = 1/3, col="darkgray")     # Prob. teor. cadenas Markov
 ```
 
-Esta es la idea del método de medias por lotes (*batch means*; *macro-micro replicaciones*) para la estimación de la precisión.
-Supongamos que la correlación entre $X_i$ y $X_{i+k}$ es aproximadamente nula, y consideramos las subsecuencias (lotes) $(X_{t+1},X_{t+2},\ldots,X_{t+k})$ con $t=(j-1)k$, $j=1,\ldots,m$ y $n = mk$. 
+Esta es la idea del método de medias por lotes 
+(*batch means*; *macro-micro replicaciones*) para la estimación de la varianza.
+En el ejemplo anterior se calcula el error estándar de la aproximación por simulación de la proporción:
+```{r}
+esterr[nrxm]
+```
+pero si el objetivo es la aproximación de la varianza (de la variable y no de las medias por lotes), habrá que reescalarlo adecuadamente. 
+Supongamos que la correlación entre $X_i$ y $X_{i+k}$ es aproximadamente nula,
+y consideramos las subsecuencias (lotes) $(X_{t+1},X_{t+2},\ldots,X_{t+k})$ con $t=(j-1)k$, $j=1,\ldots,m$ y $n = mk$. 
 Entonces:
 
 $$\begin{aligned}
 Var \left(\bar X \right) &= Var \left(\frac{1}{n} \sum_{i=1}^n X_i\right) 
 = Var \left( \frac{1}{m}\sum_{j=1}^m \left(\frac{1}{k} \sum_{t=(i-1)k + 1}^{ik} X_t\right) \right) \\
 &\approx \frac{1}{m^2} \sum_{j=1}^m Var \left(\frac{1}{k} \sum_{t=(i-1)k + 1}^{ik} X_t\right)
-= \frac{1}{m} Var \left(\bar{X}_k \right)
+\approx \frac{1}{m} Var \left(\bar{X}_k \right)
 \end{aligned}$$
 donde $\bar{X}_k$ es la media de una subsecuencia de longitud $k$.
 
 <!-- Ecuaciones p.237 Gentle, Random numbers & MC methods -->
 
-Alternativamente se podría recurrir a la generación de múltiples secuencias independientes entre sí: 
+```{r }
+var.aprox <- nsim * esterr[length(rxm)]^2
+var.aprox
+```
+
+Obtenida asumiendo independencia entre las medias por lotes, y que será
+una mejor aproximación que asumir independencia entre las generaciones
+de la variable:
+
+```{r }
+var(rx)
+```
+
+Alternativamente se podría recurrir a la generación de múltiples secuencias
+independientes entre sí: 
 ```{r}
 # Variable dicotómica 0/1 (FALSE/TRUE)  
 set.seed(1)
@@ -340,8 +358,8 @@ for (i in 1:nsec) {
     rxm[i, j] <- if (rxm[i, j-1]) runif(1) > beta else runif(1) < alpha
 }
 ```
-
-La idea sería considerar las medias de las series como una muestra independiente de una nueva variable y estimar su varianza de la forma habitual:
+La idea sería considerar las medias de las series como una muestra independiente
+de una nueva variable y estimar su varianza de la forma habitual:
 ```{r conv-dep-nsec, fig.cap='Gráfico de convergencia de la media de 10 secuencias generadas de forma independiente.'}
 # Media de cada secuencia
 n <- 1:nsim
@@ -364,8 +382,8 @@ mest[nsim] # mean(rxm)
 # Error estándar
 mesterr[nsim]
 ```
-
-Trataremos este tipo de problemas en la diagnosis de algoritmos Monte Carlo de Cadenas de Markov (MCMC, Capítulo XX). 
+Trataremos este tipo de problemas en la diagnosis de algoritmos de
+simulación Monte Carlo de Cadenas de Markov (MCMC). 
 Aparecen también en la simulación dinámica (por eventos o cuantos). 
 
 
@@ -438,12 +456,10 @@ evar <- xvar*(1 - rho^2)
 
 Para simular la serie, al ser un $AR(1)$, normalmente simularíamos el primer valor
 ```{r eval=FALSE}
-x[1] <- rnorm(1, mean = xmed, sd = sqrt(xvar))
+rx[1] <- rnorm(1, mean = xmed, sd = sqrt(xvar))
 ```
-o lo fijamos a la media. 
-Después generamos los siguientes valores de forma recursiva.
-
-Como ejemplo nos alejamos un poco de la distribución estacionaria, para que el "periodo de calentamiento" sea mayor:
+o lo fijamos a la media (en este caso nos alejamos un poco de la distribución estacionaria, para que el "periodo de calentamiento" sea mayor). 
+Después generamos los siguientes valores de forma recursiva:
 ```{r sim-ar1, fig.cap="Ejemplo de una simulación de una serie de tiempo autorregresiva."}
 set.seed(1)
 x <- numeric(nsim + nburn)

@@ -203,7 +203,7 @@ c)  Aproximar (mediante simulación) la probabilidad del intervalo
     mean((0.4 < u) & (u < 0.8))     # Alternativa
     ```
 
-## Extensiones {#ext-cong}
+## Extensiones 
 
 Se han considerado diversas extensiones del generador congruencial lineal simple:
 
@@ -464,7 +464,7 @@ ks.test(pvalor, "punif",  min = 0, max = 1)
 
 Como podemos observar, obtendríamos los mismos resultados que al analizar la distribución del estadístico. 
 
-Alternativamente podríamos emplear la función [`rephtest()`](https://rubenfcasal.github.io/simres/reference/rephtest.html) del paquete `simres` (fichero [*test.R*](R/test.R)):
+Alternativamente podríamos emplear la función [`rephtest()`](https://rubenfcasal.github.io/simres/reference/rephtest.html) del paquete `simres`:
 
 ```{r}
 set.rng(543210, "lcg", a = 2^16 + 3, c = 0, m = 2^31)
