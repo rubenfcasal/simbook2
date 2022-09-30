@@ -464,7 +464,7 @@ ks.test(pvalor, "punif",  min = 0, max = 1)
 
 Como podemos observar, obtendríamos los mismos resultados que al analizar la distribución del estadístico. 
 
-Alternativamente podríamos emplear la función [`rephtest()`](https://rubenfcasal.github.io/simres/reference/rephtest.html) del paquete `simres`:
+Alternativamente podríamos emplear la función [`rephtest()`](https://rubenfcasal.github.io/simres/reference/rephtest.html) del paquete `simres` (fichero [*test.R*](R/test.R)):
 
 ```{r}
 set.rng(543210, "lcg", a = 2^16 + 3, c = 0, m = 2^31)

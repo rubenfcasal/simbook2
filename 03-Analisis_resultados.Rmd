@@ -148,6 +148,7 @@ Como medida de la precisión de la aproximación podemos utilizar el error máxi
 (es habitual emplear 2 en lugar de 1.96, 
 lo que se correspondería con $1 - \alpha = 0.9545$ en el caso de normalidad).
 Podemos añadir también los correspondientes intervalos de confianza al gráfico de convergencia:
+
 ```{r conv-esterr, fig.cap='Gráfico de convergencia incluyendo el error de la aproximación.'}
 n <- 1:nsim
 est <- cumsum(rx)/n
@@ -161,9 +162,9 @@ lines(est - 2*esterr, lty=3)
 abline(h = xmed)
 ```
 
-<!-- 
-Implementar en una función aprox.mean?
--->
+
+Podemos generar este gráfico empleando la función `r cite_fsimres("conv.plot", lnk = "mc.plot")` (o `r cite_fsimres("mc.plot")`) del paquete `r cite_simres()` (fichero [*mc.plot.R*](R/mc.plot.R)).
+
 
 ## Determinación del número de generaciones {#num-gen}
 
@@ -177,7 +178,7 @@ Para una precisión absoluta $\varepsilon$, se trata de determinar
 $n$ de forma que:
 $$z_{1-\alpha /2}\dfrac{\widehat{S}_{n}}{\sqrt{n}}<\varepsilon$$
 
-Un algoritmo podría ser el siguiente:
+Un algoritmo (para un lenguaje de programación vectorial como R) podría ser el siguiente:
 
 1.  Hacer $j=0$
     y fijar un tamaño inicial $n_{0}$ (e.g. 30 ó 60).
@@ -201,6 +202,10 @@ Para una precisión relativa $\varepsilon \left\vert \mu \right\vert$ se procede
 $$z_{1-\alpha /2}\dfrac{\widehat{S}_{n}}{\sqrt{n}}<\varepsilon \left\vert 
 \overline{X}_{n}\right\vert .$$
 
+
+<!-- 
+Calcular $\overline{X}_{n_j}$ y $\widehat{S}_{n_j}$ como actualización?
+-->
 
 ## El problema de la dependencia
 
