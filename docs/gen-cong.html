@@ -329,7 +329,7 @@ donde <span class="math inline">\(a\)</span> (<em>multiplicador</em>), <span cla
 ##         c = c, m = m)), envir = globalenv())
 ##     return(u)
 ## }
-## &lt;bytecode: 0x0000000021e835a0&gt;
+## &lt;bytecode: 0x000000002e5f9568&gt;
 ## &lt;environment: namespace:simres&gt;</code></pre>
 <p>Ejemplos de parámetros:</p>
 <ul>
@@ -343,33 +343,31 @@ propuesta por Park, Miller y Stockmeyer (1993).</p></li>
 <p>A pesar de su simplicidad, una adecuada elección de los parámetros permite obtener de manera eficiente secuencias de números “aparentemente” i.i.d. <span class="math inline">\(\mathcal{U}(0,1)\)</span>.
 Durante los primeros años, el procedimiento habitual consistía en escoger <span class="math inline">\(m\)</span> de forma que se pudiera realizar eficientemente la operación del módulo, aprovechando la arquitectura del ordenador (por ejemplo <span class="math inline">\(m = 2^{31}\)</span> si se emplean enteros con signo de 32 bits).
 Posteriormente se seleccionaban <span class="math inline">\(c\)</span> y <span class="math inline">\(a\)</span> de forma que el período <span class="math inline">\(p\)</span> fuese lo más largo posible (o suficientemente largo), empleando los resultados mostrados a continuación.</p>
-
 <div class="theorem">
-<p><span id="thm:hull-dobell" class="theorem"><strong>Teorema 2.1  (Hull y Dobell, 1962)  </strong></span><br>
+<p><span id="thm:hull-dobell" class="theorem"><strong>Teorema 2.1  (Hull y Dobell 1962) </strong></span><br>
 Un generador congruencial tiene período máximo (<span class="math inline">\(p=m\)</span>) si y solo si:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(c\)</span> y <span class="math inline">\(m\)</span> son primos relativos (i.e. <span class="math inline">\(m.c.d.(c, m) = 1\)</span>).</p></li>
 <li><p><span class="math inline">\(a-1\)</span> es múltiplo de todos los factores primos de <span class="math inline">\(m\)</span> (i.e.
 <span class="math inline">\(a \equiv 1 \bmod q\)</span>, para todo <span class="math inline">\(q\)</span> factor primo de <span class="math inline">\(m\)</span>).</p></li>
 <li><p>Si <span class="math inline">\(m\)</span> es múltiplo de <span class="math inline">\(4\)</span>, entonces <span class="math inline">\(a-1\)</span> también lo ha de
-ser (i.e. <span class="math inline">\(m \equiv 0 \bmod 4\Rightarrow a \equiv 1 \bmod 4\)</span>).</p>
-</div></li>
+ser (i.e. <span class="math inline">\(m \equiv 0 \bmod 4\Rightarrow a \equiv 1 \bmod 4\)</span>).</p></li>
 </ol>
+</div>
 <p>Algunas consecuencias:</p>
 <ul>
 <li><p>Si <span class="math inline">\(m\)</span> primo, <span class="math inline">\(p=m\)</span> si y solo si <span class="math inline">\(a=1\)</span>.</p></li>
 <li><p>Un generador multiplicativo no cumple la condición 1 (<span class="math inline">\(m.c.d.(0, m)=m\)</span>).</p></li>
 </ul>
-
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-3" class="theorem"><strong>Teorema 2.2  </strong></span><br>
+<p><span id="thm:unlabeled-div-2" class="theorem"><strong>Teorema 2.2  </strong></span><br>
 Un generador multiplicativo tiene período máximo (<span class="math inline">\(p=m-1\)</span>) si:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(m\)</span> es primo.</p></li>
 <li><p><span class="math inline">\(a\)</span> es una raiz primitiva de <span class="math inline">\(m\)</span> (i.e. el menor entero <span class="math inline">\(q\)</span> tal
-que <span class="math inline">\(a^{q}=1 \bmod m\)</span> es <span class="math inline">\(q=m-1\)</span>).</p>
-</div></li>
+que <span class="math inline">\(a^{q}=1 \bmod m\)</span> es <span class="math inline">\(q=m-1\)</span>).</p></li>
 </ol>
+</div>
 <p>Además de preocuparse de la longitud del ciclo, las secuencias generadas deben aparentar muestras i.i.d. <span class="math inline">\(\mathcal{U}(0,1)\)</span>.</p>
 <p>Uno de los principales problemas es que los valores generados pueden mostrar una clara estructura reticular.
 Este es el caso por ejemplo del generador RANDU de IBM muy empleado en la década de los 70 (ver Figura <a href="gen-cong.html#fig:randu">2.1</a>)<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.
@@ -378,7 +376,7 @@ Por ejemplo, el conjunto de datos <code>randu</code> contiene 400 tripletas de n
 <span id="cb39-2"><a href="gen-cong.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(u <span class="ot">&lt;-</span> <span class="fu">rlcg</span>(<span class="at">n =</span> <span class="dv">9999</span>, </span>
 <span id="cb39-3"><a href="gen-cong.html#cb39-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">seed =</span> <span class="dv">543210</span>, <span class="at">a =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">16</span> <span class="sc">+</span> <span class="dv">3</span>, <span class="at">c =</span> <span class="dv">0</span>, <span class="at">m =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">31</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.02    0.00    0.01</code></pre>
+##       0       0       0</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="gen-cong.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># xyz &lt;- matrix(u, ncol = 3, byrow = TRUE)</span></span>
 <span id="cb41-2"><a href="gen-cong.html#cb41-2" aria-hidden="true" tabindex="-1"></a>xyz <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">embed</span>(u, <span class="dv">3</span>)</span>
 <span id="cb41-3"><a href="gen-cong.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plot3D)</span>
@@ -413,10 +411,8 @@ de problemas.</p></li>
 producir secuencias muy largas de números i.i.d. <span class="math inline">\(\mathcal{U}(0,1)\)</span>,
 son un elemento básico en generadores más avanzados (siguiente sección).</p></li>
 </ul>
-
 <div class="example">
-<span id="exm:congru512" class="example"><strong>Ejemplo 2.1  </strong></span>
-</div>
+<p><span id="exm:congru512" class="example"><strong>Ejemplo 2.1  </strong></span><br></p>
 <p>Consideramos el generador congruencial, de ciclo máximo, definido por:
 <span class="math display">\[\begin{aligned}
 x_{n+1}  &amp; =(5x_{n}+1)\ \bmod\ 512,\nonumber\\
@@ -456,6 +452,7 @@ Error absoluto <span class="math inline">\(3.90625\times 10^{-5}\)</span>.</p></
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="gen-cong.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((<span class="fl">0.4</span> <span class="sc">&lt;</span> u) <span class="sc">&amp;</span> (u <span class="sc">&lt;</span> <span class="fl">0.8</span>))     <span class="co"># Alternativa</span></span></code></pre></div>
 <pre><code>## [1] 0.402</code></pre></li>
 </ol>
+</div>
 </div>
 <div class="footnotes">
 <hr />

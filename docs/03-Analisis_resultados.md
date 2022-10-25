@@ -1,6 +1,6 @@
 <!-- 
 ---
-title: 'Análisis de resultados de simulación'
+title: "Análisis de resultados de simulación"
 author: "Simulación Estadística (UDC)"
 date: "Máster en Técnicas Estadísticas"
 output: 
@@ -36,21 +36,22 @@ Al final del capítulo se incluye una breve introducción a los problemas de est
 Supongamos que estamos interesados en aproximar la media teórica $\mu = E\left( X\right)$ a partir de una secuencia i.i.d. $X_{1}$, $X_{2}$, $\ldots$, $X_{n}$ obtenida mediante simulación, utilizando para ello la media muestral $\bar{X}_{n}$.
 Una justificación teórica de la validez de esta aproximación es *la ley (débil^[*La ley fuerte* establece la convergencia casi segura.]) de los grandes números*:
 
-\BeginKnitrBlock{theorem}\iffalse{-91-76-101-121-32-100-233-98-105-108-32-100-101-32-108-111-115-32-103-114-97-110-100-101-115-32-110-250-109-101-114-111-115-59-32-75-104-105-110-116-99-104-105-110-101-44-32-49-57-50-56-93-}\fi{}
-<span class="theorem" id="thm:khinchine"><strong>(\#thm:khinchine)  \iffalse (Ley débil de los grandes números; Khintchine, 1928) \fi{} </strong></span><br>
+::: {.theorem #khinchine name="Ley débil de los grandes números; Khintchine 1928"}
+<br>
 Si $X_{1}$, $X_{2}$, $\ldots$ es una secuencia de variables aleatorias independientes e idénticamente distribuidas con media finita $E\left( X_{i}\right) =\mu$ (i.e. $E\left( \left\vert X_{i} \right\vert \right) < \infty$) entonces $\overline{X}_{n}=\left( X_{1}+\ldots +X_{n}\right) /n$ 
 converge en probabilidad a $\mu$: $$\overline{X}_{n}\ \overset{p}{ \longrightarrow }\ \mu$$
 Es decir, para cualquier $\varepsilon >0$:
 $$\lim\limits_{n\rightarrow \infty }P\left( \left\vert \overline{X}_{n}-\mu
 \right\vert <\varepsilon \right) = 1.$$
 
-\EndKnitrBlock{theorem}
+:::
 
 
-\BeginKnitrBlock{example}\iffalse{-91-65-112-114-111-120-105-109-97-99-105-243-110-32-100-101-32-117-110-97-32-112-114-111-98-97-98-105-108-105-100-97-100-93-}\fi{}
-<span class="example" id="exm:unnamed-chunk-2"><strong>(\#exm:unnamed-chunk-2)  \iffalse (Aproximación de una probabilidad) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example name="Aproximación de una probabilidad"}
+<br>
+
 Simulamos una variable aleatoria $X$ con distribución de Bernoulli de parámetro $p=0.5$:
+  
 
 ```r
 p <- 0.5
@@ -85,6 +86,8 @@ abline(h = p)
 
 \caption{Aproximación de la proporción en función del número de generaciones.}(\#fig:proporcion)
 \end{figure}
+
+:::
 
 
 ### Detección de problemas de convergencia
@@ -144,14 +147,15 @@ donde $S_n^{2}$ es la varianza muestral. Hay que tener en cuenta que en simulaci
 Los valores obtenidos servirían como medidas básicas de la precisión de la aproximación, aunque su principal aplicación es la construcción de intervalos de confianza.
 Si se endurecen las suposiciones de la ley débil de los grandes números (Teorema \@ref(thm:khinchine)), exigiendo la existencia de varianza finita ($E\left( X_{i}^2 \right) < \infty$), se dispone de un resultado más preciso sobre las variaciones de la aproximación por simulación en torno al límite teórico.
 
-\BeginKnitrBlock{theorem}\iffalse{-91-99-101-110-116-114-97-108-32-100-101-108-32-108-237-109-105-116-101-44-32-67-76-84-93-}\fi{}
-<span class="theorem" id="thm:tcl"><strong>(\#thm:tcl)  \iffalse (central del límite, CLT) \fi{} </strong></span><br>
+::: {.theorem #tcl name="central del límite CLT"}
+<br>
+
 Si $X_{1}$, $X_{2}$, $\ldots$ es una secuencia de variables aleatorias independientes e idénticamente distribuidas con $E\left( X_{i}\right) =\mu$ y
 $Var\left( X_{i}\right) = \sigma ^{2}<\infty$, entonces la media muestral estandarizada converge en distribución a una normal estándar:
 $$Z_{n}=\frac{\overline{X}_{n}-\mu }{\frac{\sigma }{\sqrt{n}}}
 \overset{d}{ \longrightarrow } N(0,1).$$
 Es decir, $\lim\limits_{n\rightarrow \infty }F_{Z_{n}}(z)=\Phi (z)$.
-\EndKnitrBlock{theorem}
+:::
 
 Por tanto, un intervalo de confianza asintótico para $\mu$ es:
 $$IC_{1-\alpha }(\mu ) = \left( \overline{X}_{n}
@@ -164,10 +168,10 @@ El CLT es un resultado asintótico. En la práctica la convergencia es aleatoria
 Además, la convergencia puede considerarse lenta, en el sentido de que, por ejemplo, para doblar la precisión (disminuir el error a la mitad), necesitaríamos un número de generaciones cuatro veces mayor (Ver Sección \@ref(num-gen)). 
 Pero una ventaja es que este error no depende del número de dimensiones (en el caso multidimensional puede ser mucho más rápida que otras alternativas numéricas; ver Apéndice \@ref(int-num)).
 
-\BeginKnitrBlock{example}\iffalse{-91-65-112-114-111-120-105-109-97-99-105-243-110-32-100-101-32-108-97-32-109-101-100-105-97-32-100-101-32-117-110-97-32-100-105-115-116-114-105-98-117-99-105-243-110-32-110-111-114-109-97-108-93-}\fi{}
-<span class="example" id="exm:unnamed-chunk-5"><strong>(\#exm:unnamed-chunk-5)  \iffalse (Aproximación de la media de una distribución normal) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example name="Aproximación de la media de una distribución normal"}
+<br>
 
+Como ejemplo simulamos valores de una normal estándar:
 
 ```r
 xsd <- 1
@@ -221,8 +225,9 @@ abline(h = xmed)
 \caption{Gráfico de convergencia incluyendo el error de la aproximación.}(\#fig:conv-esterr)
 \end{figure}
 
-
 Podemos generar este gráfico empleando la función [`conv.plot()`](https://rubenfcasal.github.io/simres/reference/mc.plot.html) (o [`mc.plot()`](https://rubenfcasal.github.io/simres/reference/mc.plot.html)) del paquete [`simres`](https://rubenfcasal.github.io/simres) (fichero [*mc.plot.R*](R/mc.plot.R)).
+
+:::
 
 
 ## Determinación del número de generaciones {#num-gen}
@@ -275,12 +280,13 @@ $$Var\left( \overline{X}\right) =\frac{1}{n^{2}}\left(
 
 <!-- PENDIENTE: Teorema convergencia -->
 
-\BeginKnitrBlock{example}\iffalse{-91-97-112-114-111-120-105-109-97-99-105-243-110-32-100-101-32-117-110-97-32-112-114-111-112-111-114-99-105-243-110-32-98-97-106-111-32-100-101-112-101-110-100-101-110-99-105-97-44-32-99-97-100-101-110-97-32-100-101-32-77-97-114-107-111-118-93-}\fi{}
-<span class="example" id="exm:mmc"><strong>(\#exm:mmc)  \iffalse (aproximación de una proporción bajo dependencia, cadena de Markov) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example #mmc name="aproximación de una proporción bajo dependencia cadena de Markov"}
+<br>
+
 Supongamos que en A Coruña llueve de media uno de cada tres días al año,
 y que la probabilidad de que un día llueva solo depende de lo que ocurrió el día anterior, 
 siendo 0.94 si el día anterior llovió y 0.03 si no.
+
 Podemos generar valores de la variable indicadora de día lluvioso con el siguiente código:
 
 ```r
@@ -515,7 +521,9 @@ mesterr[nsim]
 ## [1] 0.02403491
 ```
 
-Trataremos este tipo de problemas en la diagnosis de algoritmos Monte Carlo de Cadenas de Markov (MCMC, Capítulo XX). 
+:::
+
+Trataremos este tipo de problemas en la diagnosis de algoritmos Monte Carlo de Cadenas de Markov (MCMC, Capítulo 10). 
 Aparecen también en la simulación dinámica (por eventos o cuantos). 
 
 
@@ -554,7 +562,7 @@ abline(h = 1/3, col="darkgray")
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{03-Analisis_resultados_files/figure-latex/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{03-Analisis_resultados_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 
 En estos casos puede ser recomendable ignorar los primeros valores generados (por ejemplo los primeros 2000) y recalcular los 
@@ -562,9 +570,8 @@ estadísticos deseados.
 
 También trataremos este tipo de problemas en la diagnosis de algoritmos MCMC. 
 
-\BeginKnitrBlock{example}\iffalse{-91-115-105-109-117-108-97-99-105-243-110-32-100-101-32-117-110-32-112-114-111-99-101-115-111-32-97-117-116-111-114-114-101-103-114-101-115-105-118-111-44-32-115-101-114-105-101-32-100-101-32-116-105-101-109-112-111-93-}\fi{}
-<span class="example" id="exm:unnamed-chunk-15"><strong>(\#exm:unnamed-chunk-15)  \iffalse (simulación de un proceso autorregresivo, serie de tiempo) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example name="simulación de un proceso autorregresivo serie de tiempo"}
+<br>
 
 $$X_t = \mu + \rho * (X_{t-1} - \mu) + \varepsilon_t$$
 Podemos tener en cuenta que en este caso la varianza es:
@@ -630,12 +637,13 @@ y eliminamos el periodo de calentamiento:
 rx <- x[-seq_len(nburn)]
 ```
 
+:::
 
 
 Para simular una serie de tiempo en R se puede emplear la función `arima.sim` del paquete base `stats`.
 En este caso el periodo de calentamiento se establece mediante el parámetro `n.start` (que se fija automáticamente a un valor adecuado).
 
-Por ejemplo, podemos generar este serie autoregressiva con:
+Por ejemplo, podemos generar este serie autoregresiva con:
 
 ```r
 rx2 <- arima.sim(list(order = c(1,0,0), ar = rho), n = nsim, 

@@ -302,30 +302,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="composicion" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Método de composición (o de simulación condicional)</h2>
-<p>En ocasiones la densidad de interés se puede expresar como una
-mixtura discreta de densidades:
+<p>En ocasiones la densidad de interés se puede expresar como una mixtura discreta de densidades:
 <span class="math display">\[f(x)=\sum_{j=1}^{k}p_{j}f_{j}(x)\]</span>
-con <span class="math inline">\(\sum_{j=1}^{k}p_j=1\)</span>, <span class="math inline">\(p_j\geq 0\)</span> y <span class="math inline">\(f_j\)</span> densidades
-(sería también válido para funciones de distribución o variables aleatorias,
-incluyendo el caso discreto).</p>
-
+con <span class="math inline">\(\sum_{j=1}^{k}p_j=1\)</span>, <span class="math inline">\(p_j\geq 0\)</span> y <span class="math inline">\(f_j\)</span> densidades (sería también válido para funciones de distribución, incluyendo el caso discreto).</p>
 <div class="conjecture">
-<p><span id="cnj:mixtura-discreta" class="conjecture"><strong>Algoritmo 4.6  (simulación de una mixtura discreta)  </strong></span><br></p>
+<p><span id="cnj:mixtura-discreta" class="conjecture"><strong>Algoritmo 4.6  (simulación de una mixtura discreta) </strong></span><br></p>
 <ol style="list-style-type: decimal">
 <li><p>Generar <span class="math inline">\(J\)</span> con distribución <span class="math inline">\(P\left( J=j \right) = p_j\)</span>.</p></li>
 <li><p>Generar <span class="math inline">\(X\sim f_J\)</span>.</p></li>
 </ol>
 </div>
-
 <div class="example">
-<span id="exm:dexp-mix" class="example"><strong>Ejemplo 4.6  (distribución doble exponencial)  </strong></span>
-</div>
+<p><span id="exm:dexp-mix" class="example"><strong>Ejemplo 4.6  (distribución doble exponencial) </strong></span><br></p>
 <p>A partir de la densidad de la distribución doble exponencial:
-<span class="math display">\[f(x) =\frac{\lambda }{2}e^{-\lambda \left\vert x\right\vert }%
-\text{, }\forall x\in \mathbb{R},\]</span>
+<span class="math display">\[f(x) =\frac{\lambda }{2}e^{-\lambda \left\vert x\right\vert } \text{, }\forall x\in \mathbb{R},\]</span>
 se deduce que:
-<span class="math display">\[f(x) =\frac{1}{2}f_{1}(x) +\frac{1}{2}f_{2}\left(
-x\right)\]</span>
+<span class="math display">\[f(x) = \frac{1}{2}f_{1}(x) + \frac{1}{2}f_{2}(x)\]</span>
 siendo:
 <span class="math display">\[f_{1}(x) = \left\{ 
 \begin{array}{ll}
@@ -341,11 +333,12 @@ f_{2}(x) = \left\{
 \ \right.\]</span></p>
 <p>El algoritmo resultante sería el siguiente (empleando dos números pseudoaleatorios uniformes, el primero para seleccionar el índice y el segundo para generar un valor de la correspondiente componente mediante el método de inversión):</p>
 <ol style="list-style-type: decimal">
-<li><p>Generar <span class="math inline">\(U,V\sim \mathcal{U}(0, 1)\)</span>.</p></li>
-<li><p>Si <span class="math inline">\(U&lt;0.5\)</span> devolver <span class="math inline">\(X=-\ln \left( 1-V\right)/\lambda\)</span>.</p></li>
-<li><p>En caso contrario devolver <span class="math inline">\(X=\ln(V)/\lambda\)</span>.</p></li>
+<li><p>Generar <span class="math inline">\(U,V \sim \mathcal{U}(0, 1)\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(U&lt;0.5\)</span> devolver <span class="math inline">\(X= -\ln( 1-V )/\lambda\)</span>.</p></li>
+<li><p>En caso contrario devolver <span class="math inline">\(X= \ln(V)/\lambda\)</span>.</p></li>
 </ol>
 <p>Este método está implementado en la función <a href="https://rubenfcasal.github.io/simres/reference/ddexp.html"><code>rdexp()</code></a> del paquete <a href="https://rubenfcasal.github.io/simres"><code>simres</code></a> (fichero <a href="R/ddexp.R"><em>ddexp.R</em></a>).</p>
+</div>
 <p>Observaciones:</p>
 <ul>
 <li><p>En ocasiones se hace un reciclado de los números aleatorios
@@ -359,9 +352,8 @@ tamaño <span class="math inline">\(n\)</span>, se simulan muestras de tamaño <
 Simular a partir de una estimación de este tipo es lo que se conoce como <em>bootstrap suavizado</em>.</p>
 <p>En el caso de una mixtura continua tendríamos:
 <span class="math display">\[f(x)=\int g(x|y)h(y)dy\]</span></p>
-
 <div class="conjecture">
-<p><span id="cnj:mixtura-continua" class="conjecture"><strong>Algoritmo 4.7  (simulación de una mixtura continua)  </strong></span><br></p>
+<p><span id="cnj:mixtura-continua" class="conjecture"><strong>Algoritmo 4.7  (simulación de una mixtura continua) </strong></span><br></p>
 <ol style="list-style-type: decimal">
 <li><p>Generar <span class="math inline">\(Y\sim h\)</span>.</p></li>
 <li><p>Generar <span class="math inline">\(X\sim g(\cdot |Y)\)</span>.</p></li>

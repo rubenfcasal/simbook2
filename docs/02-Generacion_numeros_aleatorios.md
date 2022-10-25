@@ -1,5 +1,4 @@
 <!--
-
 ---
 title: "Generación de números pseudoaleatorios"
 author: "Simulación Estadística (UDC)"
@@ -72,7 +71,7 @@ simres::rlcg
 ##         c = c, m = m)), envir = globalenv())
 ##     return(u)
 ## }
-## <bytecode: 0x00000000108e3660>
+## <bytecode: 0x00000000130aed68>
 ## <environment: namespace:simres>
 ```
 
@@ -94,8 +93,8 @@ Durante los primeros años, el procedimiento habitual consistía en escoger $m$ 
 Posteriormente se seleccionaban $c$ y $a$ de forma que el período $p$ fuese lo más largo posible (o suficientemente largo), empleando los resultados mostrados a continuación.
 
 
-\BeginKnitrBlock{theorem}\iffalse{-91-72-117-108-108-32-121-32-68-111-98-101-108-108-44-32-49-57-54-50-93-}\fi{}
-<span class="theorem" id="thm:hull-dobell"><strong>(\#thm:hull-dobell)  \iffalse (Hull y Dobell, 1962) \fi{} </strong></span><br>
+::: {.theorem #hull-dobell name="Hull y Dobell 1962"}
+<br>
 Un generador congruencial tiene período máximo ($p=m$) si y solo si:
 
 1.  $c$ y $m$ son primos relativos (i.e. $m.c.d.(c, m) = 1$).
@@ -107,7 +106,7 @@ Un generador congruencial tiene período máximo ($p=m$) si y solo si:
     ser (i.e. $m \equiv 0 \bmod 4\Rightarrow a \equiv
     1 \bmod 4$).
  
-\EndKnitrBlock{theorem}
+:::
 
 Algunas consecuencias:
 
@@ -116,8 +115,8 @@ Algunas consecuencias:
 -   Un generador multiplicativo no cumple la condición 1 ($m.c.d.(0, m)=m$).
 
 
-\BeginKnitrBlock{theorem}
-<span class="theorem" id="thm:unnamed-chunk-3"><strong>(\#thm:unnamed-chunk-3) </strong></span><br>
+::: {.theorem}
+<br>
 Un generador multiplicativo tiene período máximo ($p=m-1$) si:
 
 1.  $m$ es primo.
@@ -125,7 +124,7 @@ Un generador multiplicativo tiene período máximo ($p=m-1$) si:
 2.  $a$ es una raiz primitiva de $m$ (i.e. el menor entero $q$ tal
     que $a^{q}=1 \bmod m$ es $q=m-1$).
    
-\EndKnitrBlock{theorem}
+:::
 
 Además de preocuparse de la longitud del ciclo, las secuencias generadas deben aparentar muestras i.i.d. $\mathcal{U}(0,1)$. 
 
@@ -190,9 +189,8 @@ Miller, 1988, estudiaron que parámetros son adecuados para $m=2^{31}-1$).
     son un elemento básico en generadores más avanzados (siguiente sección).
 
     
-\BeginKnitrBlock{example}
-<span class="example" id="exm:congru512"><strong>(\#exm:congru512) </strong></span>
-\EndKnitrBlock{example}
+::: {.example #congru512}
+<br>
 
 Consideramos el generador congruencial, de ciclo máximo, definido por: 
 $$\begin{aligned}
@@ -273,6 +271,9 @@ c)  Aproximar (mediante simulación) la probabilidad del intervalo
     ```
     ## [1] 0.402
     ```
+
+:::
+
 
 ## Extensiones {#ext-cong}
 
@@ -383,8 +384,8 @@ Sin embargo, los métodos clásicos pueden no ser muy adecuados para evaluar gen
 La recomendación sería emplear baterías de contrastes recientes, como las descritas en la Subsección \@ref(baterias).
 
 Hay que destacar algunas diferencias entre el uso de este tipo de métodos en inferencia y en simulación. 
-Por ejemplo, si empleamos un constrate de hipótesis del modo habitual, desconfiamos del generador si la muestra (secuencia) no se ajusta a la distribución teórica ($p$-valor $\leq \alpha$).
-En simulación, además, también se sospecha si se ajusta demasiado bien a la distribución teórica ($p$-valor $\geq1-\alpha$), lo que indicaría que no reproduce adecuadamente la variabilidad.
+Por ejemplo, si empleamos un constrate de hipótesis del modo habitual, desconfiamos del generador si la muestra (secuencia) no se ajusta a la distribución teórica (p-valor $\leq \alpha$).
+En simulación, además, también se sospecha si se ajusta demasiado bien a la distribución teórica (p-valor $\geq1-\alpha$), lo que indicaría que no reproduce adecuadamente la variabilidad.
 
 Uno de los contrastes más conocidos es el test chi-cuadrado de bondad de ajuste (`chisq.test` para el caso discreto). 
 Aunque si la variable de interés es continua, habría que discretizarla (con la correspondiente perdida de información). 
@@ -437,14 +438,13 @@ simres::chisq.cont.test
 ##         p.value = PVAL, method = METHOD, data.name = DNAME), 
 ##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x000000002e95d430>
+## <bytecode: 0x0000000013691fb0>
 ## <environment: namespace:simres>
 ```
 
-\BeginKnitrBlock{example}\iffalse{-91-97-110-225-108-105-115-105-115-32-100-101-32-117-110-32-103-101-110-101-114-97-100-111-114-32-99-111-110-103-114-117-101-110-99-105-97-108-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
-<span class="example" id="exm:congru512b"><strong>(\#exm:congru512b)  \iffalse (análisis de un generador congruencial, continuación) \fi{} </strong></span>
-\EndKnitrBlock{example}
-
+::: {.example #congru512b name="análisis de un generador congruencial continuación"}
+<br>
+  
 Continuando con el generador congruencial del Ejemplo \@ref(exm:congru512): 
 
 
@@ -499,7 +499,7 @@ chisq.cont.test(u, distribution = "unif",
 
 Alternativamente, por ejemplo si solo se pretende aplicar el contraste, se podría emplear  la función `simres::freq.test()` (fichero [*test.R*](R/test.R))  para este caso particular (ver Sección \@ref(freq-test)).
 
-Como se muestra en la Figura \@ref(fig:chisq-test-unif) el histograma de la secuencia generada es muy plano (comparado con lo que cabría esperar de una muestra de tamaño 500 de una uniforme), y consecuentemente el $p$-valor del contraste chi-cuadrado es prácticamente 1, lo que indicaría que este generador no reproduce adecuadamente la variabilidad de una distribución uniforme.   
+Como se muestra en la Figura \@ref(fig:chisq-test-unif) el histograma de la secuencia generada es muy plano (comparado con lo que cabría esperar de una muestra de tamaño 500 de una uniforme), y consecuentemente el p-valor del contraste chi-cuadrado es prácticamente 1, lo que indicaría que este generador no reproduce adecuadamente la variabilidad de una distribución uniforme.   
 
 Otro contraste de bondad de ajuste muy conocido es el test de Kolmogorov-Smirnov, implementado en `ks.test` (ver Sección \@ref(ks-test)). 
 Este contraste de hipótesis compara la función de distribución bajo la hipótesis nula con la función de distribución empírica (ver Sección \@ref(empdistr)), representadas en la Figura \@ref(fig:empdistrunif):
@@ -567,6 +567,8 @@ plot(u[-nsim],u[-1])
 \caption{Gráfico de dispersión retardado de los valores generados.}(\#fig:plot-ret)
 \end{figure}
 
+Si se observa algún tipo de patrón indicaría dependencia (se podría considerar como una versión descriptiva del denominado “Parking lot test”), ver Ejemplo \@ref(exm:ret-gen).
+
 También podemos analizar las autocorrelaciones (las correlaciones de $(u_{i},u_{i+k})$, con $k=1,\ldots,K$): 
 
 
@@ -598,6 +600,8 @@ Box.test(u, lag = 10, type = "Ljung")
 ## X-squared = 22.533, df = 10, p-value = 0.01261
 ```
 
+:::
+
 
 ### Repetición de contrastes
 
@@ -612,18 +616,18 @@ En simulación tiene mucho más sentido realizar un gran número de pruebas:
     bajo $H_0$ (se podría realizar un nuevo contraste de bondad
     de ajuste).
 
--   Los $p$-valores obtenidos deberían ajustarse a una
+-   Los p-valores obtenidos deberían ajustarse a una
     $\mathcal{U}\left(0,1\right)$ (se podría realizar también un
     contraste de bondad de ajuste).
 
 Este procedimiento es también el habitual para validar un método de
 contraste de hipótesis por simulación (ver Sección \@ref(contrastes)).
 
-\BeginKnitrBlock{example}
-<span class="example" id="exm:rep-test-randu"><strong>(\#exm:rep-test-randu) </strong></span>
-\EndKnitrBlock{example}
-
+::: {.example #rep-test-randu}
+<br>
+  
 Continuando con el generador congruencial RANDU, podemos pensar en estudiar la uniformidad de los valores generados empleando repetidamente el test chi-cuadrado:
+  
 
 
 ```r
@@ -668,7 +672,7 @@ Las proporciones de rechazo obtenidas deberían comportarse como una aproximaci�
 En este caso no se observa nada extraño, por lo que no habría motivos para sospechar de la uniformidad de los valores generados (aparentemente no hay problemas con la uniformidad de este generador).
 
 
-Adicionalmente, si queremos estudiar la proporción de rechazos (el *tamaño del contraste*) para los posibles valores de $\alpha$, podemos emplear la distribución empírica del $p$-valor (proporción de veces que resultó menor que un determinado valor):
+Adicionalmente, si queremos estudiar la proporción de rechazos (el *tamaño del contraste*) para los posibles valores de $\alpha$, podemos emplear la distribución empírica del p-valor (proporción de veces que resultó menor que un determinado valor):
 
 
 ```r
@@ -732,8 +736,8 @@ ks.test(estadistico, "pchisq", df = 99)
 
 En este caso la distribución observada del estadístico es la que cabría esperar de una muestra de este tamaño de la distribución teórica, por tanto, según este criterio, aparentemente no habría problemas con la uniformidad de este generador (hay que recordar que estamos utilizando contrastes de hipótesis como herramienta para ver si hay algún problema con el generador, no tiene mucho sentido hablar de aceptar o rechazar una hipótesis).
 
-En lugar de estudiar la distribución del estadístico de contraste  siempre podemos analizar la distribución del $p$-valor.
-Mientras que la distribución teórica del estadístico depende del contraste y puede ser complicada, la del $p$-valor es siempre una uniforme.
+En lugar de estudiar la distribución del estadístico de contraste  siempre podemos analizar la distribución del p-valor.
+Mientras que la distribución teórica del estadístico depende del contraste y puede ser complicada, la del p-valor es siempre una uniforme.
 
 
 ```r
@@ -748,7 +752,7 @@ abline(h=1) # curve(dunif(x,0,1), add=TRUE)
 
 }
 
-\caption{Distribución del $p$-valor del constraste.}(\#fig:rep-test-pval)
+\caption{Distribución del p-valor del constraste.}(\#fig:rep-test-pval)
 \end{figure}
 
 ```r
@@ -776,18 +780,18 @@ Alternativamente podríamos emplear la función [`rephtest()`](https://rubenfcas
 set.rng(543210, "lcg", a = 2^16 + 3, c = 0, m = 2^31)
 # res <- rephtest(n = 30, test = chisq.cont.test, rand.gen = rng,
 #          distribution = "unif", output = FALSE, nestpar = 0)
-res <- rephtest(n = 30, test = freq.test, rand.gen = rng)
+res <- rephtest(n = 30, test = freq.test, rand.gen = rng, nclass = 6)
 str(res)
 ```
 
 ```
 ## List of 2
-##  $ statistics: num [1:1000] 0.2 0.6 6.2 0 1.4 0.8 0.8 7.2 2.6 0.6 ...
-##  $ p.values  : num [1:1000] 0.905 0.741 0.045 1 0.497 ...
+##  $ statistics: num [1:1000] 5.2 6.8 12.4 0.8 5.6 7.6 6.4 9.6 5.2 3.2 ...
+##  $ p.values  : num [1:1000] 0.392 0.2359 0.0297 0.977 0.3471 ...
 ##  - attr(*, "class")= chr "rhtest"
 ##  - attr(*, "method")= chr "Chi-squared test for given probabilities"
 ##  - attr(*, "names.stat")= chr "X-squared"
-##  - attr(*, "parameter")= Named num 2
+##  - attr(*, "parameter")= Named num 5
 ##   ..- attr(*, "names")= chr "df"
 ```
 
@@ -798,25 +802,29 @@ summary(res)
 ```
 ## Proportion of rejections:
 ##    1%    5%   10%   25%   50% 
-## 0.010 0.053 0.112 0.210 0.626
+## 0.013 0.054 0.096 0.255 0.544
 ```
 
 ```r
-plot(res)
+old.par <- par(mfrow = c(1, 2))
+plot(res, 2:3)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.9\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/rephtest-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/unnamed-chunk-14-1} \end{center}
+}
 
+\caption{Distribución de los p-valores y proporción de rechazos.}(\#fig:rephtest)
+\end{figure}
 
+```r
+par(old.par)
+```
 
-\begin{center}\includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/unnamed-chunk-14-2} \end{center}
-
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/unnamed-chunk-14-3} \end{center}
-
+:::
+  
 
 ### Baterías de contrastes {#baterias}
 
@@ -853,13 +861,11 @@ Ejercicios
 ----------
 
 
-\BeginKnitrBlock{exercise}\iffalse{-91-77-233-116-111-100-111-32-100-101-32-108-111-115-32-99-117-97-100-114-97-100-111-115-32-109-101-100-105-111-115-93-}\fi{}
-<span class="exercise" id="exr:RANDVN"><strong>(\#exr:RANDVN)  \iffalse (Método de los cuadrados medios) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
-Uno de los primeros generadores utilizados fue el denominado método de los
-cuadrados medios propuesto por Von Neumann (1946). Con este
-procedimiento se generan números pseudoaleatorios de 4 dígitos de la
-siguiente forma:
+::: {.exercise #RANDVN name="Método de los cuadrados medios"}
+<br>
+  
+Uno de los primeros generadores utilizados fue el denominado método de los cuadrados medios propuesto por Von Neumann (1946). 
+Con este procedimiento se generan números pseudoaleatorios de 4 dígitos de la siguiente forma:
 
 i.  Se escoge un número de cuatro dígitos $x_0$ (semilla).
 
@@ -873,6 +879,11 @@ Para obtener los $k$ (número par) dígitos centrales de $x_{i}^2$
 se puede utilizar que:
 $$x_{i+1}=\left\lfloor \left(  x_{i}^2-\left\lfloor \dfrac{x_{i}^2}{10^{(2k-\frac{k}2)}}\right\rfloor 10^{(2k-\frac{k}2)}\right)
 /10^{\frac{k}2}\right\rfloor$$ 
+  
+Estudiar las características de este generador a partir de una secuencia de 500 valores. 
+Emplear únicamente métodos gráficos.  
+  
+:::
 
 Este algoritmo está implementado en la función `simres::rvng()` (ver también `simres::rng()`; fichero [*rng.R*](R/rng.R)):
 
@@ -897,15 +908,15 @@ simres::rvng
 ##         envir = globalenv())
 ##     return(u)
 ## }
-## <bytecode: 0x00000000211e02d8>
+## <bytecode: 0x0000000032f4cf30>
 ## <environment: namespace:simres>
 ```
 
-Estudiar las características del generador de cuadrados medios a partir de una secuencia de 500 valores. 
-Emplear únicamente métodos gráficos.
 
-\BeginKnitrBlock{exercise}
-<span class="exercise" id="exr:parkmiller"><strong>(\#exr:parkmiller) </strong></span>
-\EndKnitrBlock{exercise}
+::: {.exercise #parkmiller}
+<br>
+  
 Considerando el generador congruencial multiplicativo de parámetros $a=7^{5}=16807$, $c=0$ y $m=2^{31}-1$ (*minimal standar* de Park y Miller, 1988). 
 ¿Se observan los mismos problemas que con el algoritmo RANDU al considerar las tripletas $(x_{k},x_{k+1},x_{k+2})$?
+
+:::

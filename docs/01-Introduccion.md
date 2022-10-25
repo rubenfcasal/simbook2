@@ -1,5 +1,4 @@
 <!-- 
-
 ---
 title: "Introducción a la simulación"
 author: "Simulación Estadística (UDC)"
@@ -124,9 +123,14 @@ hist(nsobres, breaks = "FD", freq = FALSE,
 lines(density(nsobres))
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/distr-ealbum-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-3-1} \end{center}
+}
+
+\caption{Aproximación por simulación de la distribución del número de sobres para completar la colección.}(\#fig:distr-ealbum)
+\end{figure}
 
 Aproximación por simulación del número medio de sobres para completar la colección:
 
@@ -152,7 +156,7 @@ abline(h = sol)
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-4-1} \end{center}
 -->
 
 Número mínimo de sobres para asegurar de que se completa la colección con una probabilidad del 95\%:
@@ -186,9 +190,14 @@ abline(v = sol)
 abline(v = nmin, lty = 2)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/distr-ealbum2-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-6-1} \end{center}
+}
+
+\caption{Aproximaciones por simulación de la distribución del número de sobres para completar la colección, de su valor esperado (línea vertical continua) y del cuantil 0.95 (línea vertical discontinua).}(\#fig:distr-ealbum2)
+\end{figure}
 
 Por supuesto, la distribución del gasto necesario para completar la colección es esta misma reescalada.
 
@@ -197,9 +206,14 @@ Por supuesto, la distribución del gasto necesario para completar la colección 
 res <- simres::mc.plot(nsobres*0.8)
 ```
 
+\begin{figure}[!htb]
 
+{\centering \includegraphics[width=0.9\linewidth]{01-Introduccion_files/figure-latex/mc-plot-ealbum-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-7-1} \end{center}
+}
+
+\caption{Gráficos exploratorios de las simulaciones del gasto para completar la colección obtenidos con la función `simres::mc.plot()`.}(\#fig:mc-plot-ealbum)
+\end{figure}
 
 Aproximación del gasto medio:
 
@@ -684,10 +698,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.01    0.00    0.02 
+##       0       0       0 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.12    0.00    0.13
+##    0.11    0.00    0.11
 ```
 
 
@@ -714,7 +728,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## inner: 0 sec elapsed
+    ## inner: 0.02 sec elapsed
     ```
     
     ```r
@@ -722,7 +736,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## middle: 0 sec elapsed
+    ## middle: 0.02 sec elapsed
     ```
     
     ```r
@@ -730,7 +744,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## outer: 0.12 sec elapsed
+    ## outer: 0.1 sec elapsed
     ```
     
     ```r
@@ -750,8 +764,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ## 'data.frame':	10 obs. of  3 variables:
-    ##  $ tic: num  4.53 4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54
-    ##  $ toc: num  4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54 4.54
+    ##  $ tic: num  4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.15 4.15
+    ##  $ toc: num  4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.15 4.15 4.15
     ##  $ msg: chr  "1" "2" "3" "4" ...
     ```
     
@@ -787,10 +801,9 @@ Después de ejecutar el código, llamando a `Rprof(NULL)` se desactiva el muestr
 
 ## Ejercicios
 
-\BeginKnitrBlock{exercise}
-<span class="exercise" id="exr:simpi"><strong>(\#exr:simpi) </strong></span>
-\EndKnitrBlock{exercise}
-
+::: {.exercise #simpi}
+<br>
+  
 Sea $(X,Y)$ es un vector aleatorio con distribución uniforme en el
 cuadrado $[-1,1]\times\lbrack-1,1]$ de área 4.
 
@@ -802,14 +815,15 @@ a)  Aproximar mediante simulación $P\left(X + Y \leq 0 \right)$ y
 b)  Aproximar el valor de $\pi$ mediante simulación a partir de
     $P\left( X^2 +Y^2 \leq 1 \right)$.
 
+:::
+
 Ver solución en Sección \@ref(sol-simpi).
 
----    
 
 
-\BeginKnitrBlock{exercise}\iffalse{-91-69-120-112-101-114-105-109-101-110-116-111-32-100-101-32-66-101-114-110-111-117-108-108-105-93-}\fi{}
-<span class="exercise" id="exr:bernoulli"><strong>(\#exr:bernoulli)  \iffalse (Experimento de Bernoulli) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
+::: {.exercise #bernoulli name="Experimento de Bernoulli"}
+<br>
+
 Consideramos el experimento de Bernoulli consistente en el
 lanzamiento de una moneda.
 
@@ -824,38 +838,42 @@ b)  En R pueden generarse valores de la distribución de Bernoulli
     lanzamientos (de 1 a 10000) y en el eje $Y$ la frecuencia
     relativa del suceso cara (puede ser recomendable emplear la
     función `cumsum`).
+:::
+
 
 Ver solución en Sección \@ref(sol-bernoulli).
 
----    
 
-\BeginKnitrBlock{exercise}\iffalse{-91-83-105-109-117-108-97-99-105-243-110-32-100-101-32-117-110-32-99-105-114-99-117-105-116-111-93-}\fi{}
-<span class="exercise" id="exr:circuito"><strong>(\#exr:circuito)  \iffalse (Simulación de un circuito) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
-Simular el paso de corriente a través del siguiente circuito, donde
-figuran las probabilidades de que pase corriente por cada uno de los
-interruptores:
+::: {.exercise #circuito name="Simulación de un circuito"}
+<br>
+  
+Simular el paso de corriente a través del circuito mostrado en la Figura \@ref(fig:circuito2), donde se muestran las probabilidades de que pase corriente por cada uno de los interruptores, que se suponen variables aleatorias de Bernoulli independientes.
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.5\linewidth]{images/circuito2} 
+
+}
+
+\caption{Esquema de un circuito eléctrico con interruptores aleatorios.}(\#fig:circuito2)
+\end{figure}
+:::
 
 
-\begin{center}\includegraphics[width=0.5\linewidth]{images/circuito2} \end{center}
 
-Considerar que cada interruptor es una variable aleatoria de Bernoulli independiente
-para simular 1000 valores de cada una de ellas.
-    
-\BeginKnitrBlock{remark}
-\iffalse{} <span class="remark"><em>Nota: </em></span>  \fi{}R maneja internamente los valores lógicos como 1 (`TRUE`) y 0 (`FALSE`).
+::: {.remark}
+R maneja internamente los valores lógicos como 1 (`TRUE`) y 0 (`FALSE`).
 Recíprocamente, cualquier número puede ser tratado como lógico (al estilo de C).
 El entero 0 es equivalente a `FALSE` y cualquier entero distinto de 0 a `TRUE`.
-\EndKnitrBlock{remark}
+:::
 
 
 Ver solución en Sección \@ref(sol-circuito).
 
----    
 
-\BeginKnitrBlock{exercise}\iffalse{-91-69-108-32-112-114-111-98-108-101-109-97-32-100-101-108-32-67-97-98-97-108-108-101-114-111-32-100-101-32-77-233-114-233-93-}\fi{}
-<span class="exercise" id="exr:mere"><strong>(\#exr:mere)  \iffalse (El problema del Caballero de Méré) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
+::: {.exercise #mere name="El problema del Caballero de Méré"}
+<br>
+
 En 1651, el Caballero de Méré le planteó a Pascal una pregunta
 relacionada con las apuestas y los juegos de azar: ¿es ventajoso
 apostar a que en cuatro lanzamientos de un dado se obtiene al menos
@@ -873,18 +891,20 @@ b)  Utilizar la función anterior para simular $nsim=10000$ jugadas
     apuesta (obtener al menos un 6 en $n$ lanzamientos), usando
     $n=4$. Comparar el resultado con la probabilidad teórica
     $1-(5/6)^{n}$.
-
+    
+    
+:::
 
 Ver solución en Sección \@ref(sol-mere).
 
----    
 
-\BeginKnitrBlock{exercise}\iffalse{-91-118-97-114-105-97-99-105-243-110-32-100-101-108-32-112-114-111-98-108-101-109-97-32-100-101-108-32-99-111-108-101-99-99-105-111-110-105-115-116-97-32-40-99-97-100-101-110-97-32-100-101-32-77-97-114-107-111-118-41-93-}\fi{}
-<span class="exercise" id="exr:album"><strong>(\#exr:album)  \iffalse (variación del problema del coleccionista (cadena de Markov)) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
+::: {.exercise #album name="variación del problema del coleccionista (cadena de Markov)"}
+<br>
 
 Continuando con el ejemplo de la Sección \@ref(ealbum)
 (álbum con $n = 75$ cromos y sobres con $m = 6$). A partir de $nsim=2000$ simulaciones de coleccionistas de cromos, aproximar por simulación la evolución del proceso de compra de un coleccionista (número de cromos distintos dependiendo de los sobres comprados).
+
+:::
 
 Ver solución en Sección \@ref(sol-album).
 

@@ -50,19 +50,18 @@ $$F^{-1}\left( U \right) \sim X$$
 
 A partir de este resultado se deduce el siguiente algoritmo genérico para simular una variable continua con función de distribución $F$ invertible:
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-77-233-116-111-100-111-32-100-101-32-105-110-118-101-114-115-105-243-110-93-}\fi{}
-<span class="conjecture" id="cnj:inversion"><strong>(\#cnj:inversion)  \iffalse (Método de inversión) \fi{} </strong></span><br>
+::: {.conjecture #inversion name="Método de inversión"}
+<br>
   
 1. Generar $U \sim \mathcal{U}(0, 1)$.
 
 2. Devolver $X = F^{-1}\left( U \right)$.
 
-\EndKnitrBlock{conjecture}
+:::
 <!-- \@ref(cnj:inversion) -->
 
-\BeginKnitrBlock{example}\iffalse{-91-115-105-109-117-108-97-99-105-243-110-32-100-101-32-117-110-97-32-100-105-115-116-114-105-98-117-99-105-243-110-32-101-120-112-111-110-101-110-99-105-97-108-93-}\fi{}
-<span class="example" id="exm:exp-inv"><strong>(\#exm:exp-inv)  \iffalse (simulación de una distribución exponencial) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example #exp-inv name="simulación de una distribución exponencial"}
+<br>
 
 La distribución exponencial $\exp \left( \lambda \right)$ de parámetro $\lambda>0$
 tiene como función de densidad $f(x) =\lambda e^{-\lambda x}$, si $x\geq 0$,
@@ -101,8 +100,8 @@ tini <- proc.time()
 lambda <- 2
 nsim <- 10^5
 set.seed(1)
-U <- runif(nsim)
-X <- -log(U)/lambda # -log(1-U)/lambda
+u <- runif(nsim)
+x <- -log(u)/lambda # -log(1-u)/lambda
 
 tiempo <- proc.time() - tini
 tiempo
@@ -110,11 +109,11 @@ tiempo
 
 ```
 ##    user  system elapsed 
-##    0.02    0.00    0.01
+##    0.01    0.00    0.02
 ```
 
 ```r
-hist(X, breaks = "FD", freq = FALSE, 
+hist(x, breaks = "FD", freq = FALSE, 
         main = "", xlim = c(0, 5), ylim = c(0, 2.5))
 curve(dexp(x, lambda), lwd = 2, add = TRUE)
 ```
@@ -129,6 +128,8 @@ curve(dexp(x, lambda), lwd = 2, add = TRUE)
 \end{figure}
 
 Como se observa en la Figura \@ref(fig:exp-inv-plot) se trata de un método exacto (si está bien implementado) y la distribución de los valores generados se aproxima a la distribución teórica como cabría esperar con una muestra de ese tamaño.
+
+:::
 
 
 ### Algunas distribuciones que pueden simularse por el método de inversión
@@ -147,9 +148,8 @@ innecesarios (tal y como se hizo en el ejemplo de la exponencial).
 | Weibull ($\lambda,\alpha>0$) | $\alpha\lambda^{\alpha}x^{\alpha-1}e^{-\left( \lambda x\right)  ^{\alpha}}$, si $x\geq0$ | $1-e^{-\left( \lambda x\right)^{\alpha}}$ | $\dfrac{\left( -\ln\left(1-U\right)  \right)^{1/\alpha}}\lambda$ | $\dfrac{\left( -\ln U\right)^{1/\alpha}}\lambda$ | 
 
 
-\BeginKnitrBlock{exercise}\iffalse{-91-100-105-115-116-114-105-98-117-99-105-243-110-32-100-111-98-108-101-32-101-120-112-111-110-101-110-99-105-97-108-93-}\fi{}
-<span class="exercise" id="exr:ddexp"><strong>(\#exr:ddexp)  \iffalse (distribución doble exponencial) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
+::: {.exercise #ddexp name="distribución doble exponencial"}
+<br>
 
 La distribución doble exponencial^[Esta distribución también se puede generar fácilmente simulando una distribución exponencial y asignando un signo positivo o negativo con equiprobabilidad (ver Ejemplo \@ref(exm:dexp-mix)) y función [`simres::rdexp()`](https://rubenfcasal.github.io/simres/reference/ddexp.html) (fichero [*ddexp.R*](R/ddexp.R)).] (o distribución de Laplace) de
 parámetro $\lambda$ tiene función de densidad:
@@ -178,11 +178,11 @@ a)  Escribir una función que permita generar, por el método de
     rdexp <- function(lambda = 1){
     # Simulación por inversión
     # Doble exponencial
-      U <- runif(1)
-      if (U<0.5) {
-        return(log(2*U)/lambda)
+      u <- runif(1)
+      if (u<0.5) {
+        return(log(2*u)/lambda)
       } else {
-        return(-log(2*(1-U))/lambda)
+        return(-log(2*(1-u))/lambda)
       }
     }
     
@@ -207,7 +207,7 @@ b)  Generar $10^{4}$ valores de la distribución doble exponencial de
     
     ```
     ##    user  system elapsed 
-    ##    0.04    0.00    0.05
+    ##    0.04    0.00    0.04
     ```
 
 
@@ -231,6 +231,8 @@ c)  Representar el histograma y compararlo con la densidad teórica.
     
     Como se trata de un método exacto de simulación, si está bien implementado, la distribución de los valores generados debería comportarse como una muestra genuina de la distribución objetivo.
     
+:::
+
 
 ### Ventajas e inconvenientes
 
@@ -272,8 +274,8 @@ y $-g\left( u\right)$ si $u\in[\frac12,1-10^{-20}]$. Para $u\notin
 $2\cdot10^{-20}$) la aproximación no es recomendable.
 
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-100-101-32-79-100-101-104-32-121-32-69-118-97-110-115-93-}\fi{}
-<span class="conjecture" id="cnj:Odeh-Evans"><strong>(\#cnj:Odeh-Evans)  \iffalse (de Odeh y Evans) \fi{} </strong></span><br>
+::: {.conjecture #Odeh-Evans name="de Odeh y Evans"}
+<br>
 
 1. Generar $U \sim U(0, 1)$.
 
@@ -284,7 +286,7 @@ $2\cdot10^{-20}$) la aproximación no es recomendable.
 
 4. Devolver $X$.
 
-\EndKnitrBlock{conjecture}
+:::
 <!-- \@ref(cnj:Odeh-Evans) -->
 
 
@@ -319,30 +321,30 @@ $$ P\left( a<X<b\right) = \frac{\text{Area de }\left\{ \left( x,y\right) \in
 A_{f}} \\
 = \int_{a}^{b}f(x) dx $$
 
-El resultado anterior es también válido para una cuasi-densidad $f^{\ast}$ (no depende de la constante normalizadora). 
-El resultado general sería en siguiente:
+El resultado anterior es también válido para una cuasi-densidad $f^{\ast}$ (no depende de la constante normalizadora): 
 
-* Si $X$ es una variable aleatoria con función de densidad $f$ 
+* Si $\left( X,Y\right) \sim \mathcal{U}\left(A_{f^{\ast}}\right)$ entonces^[Emplearemos también $X\sim f$ para indicar que $X$ es una variable aleatoria con función de densidad $f$.] $X\sim f$.
+
+Para simular una distribución uniforme en el hipografo $A_{f}$ (o en $A_{f^{\ast}}$), lo que se hace es utilizar una variable aleatoria auxiliar $T$ con función de densidad $g$, similar a $f$ y fácil de simular, y una constante $c > 0$ verificando:
+$$f(x) \leq c\cdot g(x) \text{, }\forall x\in \mathbb{R}.$$
+Podemos generar valores en $A_{cg} \supset A_{f}$ empleando el resultado:
+
+* Si $T$ es una variable aleatoria con función de densidad $g$ 
   y $U \sim \mathcal{U}(0, 1)$ entonces
-  $$\left( X,c\cdot U\cdot f(x) \right) \sim \mathcal{U}\left(
-  A_{cf}\right)$$
+  $$\left( T,c\cdot U\cdot g(x) \right) \sim \mathcal{U}\left(
+  A_{cg}\right)$$
   siendo
-  $A_{cf}=\left\{ \left( x, y \right) \in \mathbb{R}^{2} : 0 \leq y \leq
-  cf\left( x \right) \right\}$.
+  $A_{cg}=\left\{ \left( x, y \right) \in \mathbb{R}^{2} : 0 \leq y \leq
+  cg\left( x \right) \right\}$.
 
-* Recíprocamente si $\left( X,Y\right) \sim \mathcal{U}\left(A_{cf}\right)$ entonces^[Emplearemos también $X\sim f$ para indicar que $X$ es una variable aleatoria con función de densidad $f$.] $X\sim f$.
-
-Para generar valores de una variable aleatoria bidimensional con distribución uniforme
-en $A_{f}$ (o en $A_{f^{\ast}}$), se emplea el resultado anterior para 
-generar valores en $A_{cg} \supset A_{f}$, siendo $g$ una densidad auxiliar
-(preferiblemente fácil de simular y similar a $f$).
 Teniendo en cuenta además que:
 
-* Si $\left( X,Y\right) \sim \mathcal{U}\left( A\right)$ y 
-  $B \subset A\Rightarrow \left. \left( X,Y\right) \right\vert _{B}
-  \sim \mathcal{U}\left(B\right)$
+* Si $\left( T,Y\right) \sim \mathcal{U}\left( A\right)$ y 
+  $B \subset A\Rightarrow \left. \left( T,Y\right) \right\vert _{B}
+  \sim \mathcal{U}\left(B\right)$.
   
-Por tanto, si $\left( T, Y \right)$ sigue una distribución uniforme en $A_{cg}$, aceptando los valores de $\left( T, Y\right)$ que pertenezcan a $A_{f}$ (o a $A_{f^{\ast}}$) se obtendrán generaciones con distribución uniforme sobre $A_{f}$ (o $A_{f^{\ast}}$) y la densidad de la primera componente $T$ será $f$.
+Entonces, si $\left( T, Y \right)$ sigue una distribución uniforme en $A_{cg}$, aceptando los valores de $\left( T, Y\right)$ que pertenezcan a $A_{f}$ (o a $A_{f^{\ast}}$) se obtendrán generaciones con distribución uniforme sobre $A_{f}$ (o $A_{f^{\ast}}$) y la densidad de la primera componente será $f$.
+
 
 ### Algoritmo
 
@@ -353,8 +355,8 @@ $$f(x) \leq c\cdot g(x)
 \text{, }\forall x\in \mathbb{R},$$
 (de donde se deduce que el soporte de $g$ debe contener el de $f$).
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-77-233-116-111-100-111-32-100-101-32-97-99-101-112-116-97-99-105-243-110-45-114-101-99-104-97-122-111-59-32-86-111-110-32-78-101-117-109-97-110-44-32-49-57-53-49-93-}\fi{}
-<span class="conjecture" id="cnj:aceptacion-rechazo"><strong>(\#cnj:aceptacion-rechazo)  \iffalse (Método de aceptación-rechazo; Von Neuman, 1951) \fi{} </strong></span><br>
+::: {.conjecture #aceptacion-rechazo name="Método de aceptación-rechazo; Von Neuman 1951"}
+<br>
 
 1.  Generar $U \sim \mathcal{U}(0, 1)$.
 
@@ -365,7 +367,7 @@ $$f(x) \leq c\cdot g(x)
 
     en caso contrario volver al paso 1.
 
-\EndKnitrBlock{conjecture}
+:::
 <!-- \@ref(cnj:aceptacion-rechazo) -->
 
 
@@ -393,22 +395,26 @@ Así pues, el algoritmo quedaría como sigue:
     en caso contrario volver al paso 1.
 
 
-**Nota**: no confundir $M$ con $c = M \left( b - a \right)$.
+::: {.remark}
+No confundir $M$ con $c = M \left( b - a \right)$.
+:::
 
 <!-- 
 Pendiente: cambiar beta por triangular en [0, 2] 
 Emplear código dtri?
 -->
 
-\BeginKnitrBlock{example}\iffalse{-91-115-105-109-117-108-97-99-105-243-110-32-100-101-32-100-105-115-116-114-105-98-117-99-105-243-110-32-98-101-116-97-32-97-32-112-97-114-116-105-114-32-100-101-32-108-97-32-117-110-105-102-111-114-109-101-93-}\fi{}
-<span class="example" id="exm:dbeta-dunif-ar"><strong>(\#exm:dbeta-dunif-ar)  \iffalse (simulación de distribución beta a partir de la uniforme) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example #dbeta-dunif-ar name="simulación de distribución beta a partir de la uniforme"}
+<br>
 
 Para simular una variable con función de densidad $\mathcal{Beta}(\alpha, \beta)$:
 $$f(x)=\frac{\Gamma (\alpha + \beta )}{\Gamma (\alpha )\Gamma (\beta )}
 x^{\alpha -1}(1-x)^{\beta -1}\text{ si }0 \leq x \leq 1,$$
 (siguiendo la notación de la función `dbeta(x, shape1, shape2)` de `R`), podemos considerar como distribución auxiliar una $\mathcal{U}(0,1)$,
 con $g(x) = 1$ si $0 \leq x \leq 1$.
+
+
+:::
 
 Esta distribución está acotada y es unimodal, si $\alpha$ y $\beta$ son mayores^[Si $\alpha$ o $\beta$ son iguales a 1 puede simularse fácilmente por el método de inversión y si alguno es menor que 1 esta densidad no está acotada.] que 1, y su moda es $\frac{\alpha - 1} {\alpha + \beta - 2}$, por lo que: 
 $$c = M = \max_{0 \leq x \leq 1}f(x) = f\left( \frac{\alpha - 1} {\alpha + \beta - 2} \right).$$
@@ -422,9 +428,9 @@ Por ejemplo, considerando $\alpha = 2$ y $\beta = 4$, si comparamos la densidad 
 s1 <- 2
 s2 <- 4
 curve(dbeta(x, s1, s2), -0.1, 1.1, lwd = 2)
-c <- dbeta((s1 - 1)/(s1 + s2 - 2), s1, s2)
-# abline(h = c, lty = 2)
-segments(0, c, 1, c, lty = 2, lwd = 2)
+m <- dbeta((s1 - 1)/(s1 + s2 - 2), s1, s2)
+# abline(h = m, lty = 2)
+segments(0, m, 1, m, lty = 2, lwd = 2)
 abline(v = 0, lty = 3)
 abline(v = 1, lty = 3)
 abline(h = 0, lty = 3)
@@ -448,12 +454,12 @@ ngen <- 0
 rbeta2 <- function(s1 = 2, s2 = 2) {
   # Simulación por aceptación-rechazo
   # Beta a partir de uniforme
-  c <- dbeta((s1 - 1)/(s1 + s2 - 2), s1, s2)
+  m <- dbeta((s1 - 1)/(s1 + s2 - 2), s1, s2)
   while (TRUE) {
-    U <- runif(1)
-    X <- runif(1)
+    u <- runif(1)
+    x <- runif(1)
     ngen <<- ngen+1
-    if (c*U <= dbeta(X, s1, s2)) return(X)
+    if (m*u <= dbeta(x, s1, s2)) return(x)
   }
 }
 
@@ -477,7 +483,7 @@ system.time(x <- rbeta2n(nsim, s1, s2))
 
 ```
 ##    user  system elapsed 
-##    0.05    0.00    0.04
+##    0.03    0.00    0.03
 ```
 
 Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):
@@ -514,13 +520,15 @@ curve(dbeta(x, s1, s2), col = 2, lwd = 2, add = TRUE)
 
 Al ser un método exacto de simulación (si está bien implementado), la distribución de los valores generados debería comportarse como una muestra genuina de la distribución objetivo.
 
-\BeginKnitrBlock{exercise}
-<span class="exercise" id="exr:dacotada-ar"><strong>(\#exr:dacotada-ar) </strong></span>
-\EndKnitrBlock{exercise}
+
+::: {.exercise #dacotada-ar}
+<br>
+
 Dar un algoritmo para simular la función de densidad dada por 
 $f\left(x\right) = \frac{1}{16} \left( 3x^{2}+2x+2 \right)$ si
 $0 \le x \le 2$, cero en otro caso. Estudiar su eficiencia.
 
+:::
 
 ### Eficiencia del algoritmo
 
@@ -537,21 +545,19 @@ $$c_{\text{opt}}=\max_{\{x : g(x) > 0\}} \frac{f(x)}{g(x)}.$$
 
 <br>
 
-\BeginKnitrBlock{remark}
-\iffalse{} <span class="remark"><em>Nota: </em></span>  \fi{}Hay que tener en cuenta que la cota óptima es el número medio de iteraciones $c$ solo si conocemos las constantes normalizadoras. 
+::: {.remark}
+Hay que tener en cuenta que la cota óptima es el número medio de iteraciones $c$ solo si conocemos las constantes normalizadoras. 
 Si solo se conoce la cuasidensidad $f^{\ast}$ de la distribución objetivo (o de la auxiliar), la correspondiente cota óptima:
 $$\tilde{c} = \max_{\{x : g(x) > 0\}} \frac{f^{\ast}(x)}{g(x)}$$ 
 asumirá la constante desconocida, aunque siempre podemos aproximar por simulación el verdadero valor de $c$ y a partir de él la constante normalizadora (ver Ejercicio \@ref(exr:post-pri-ar)).
 Basta con tener en cuenta que, si $f(x) = f^{\ast}(x)/k$:
 $$\frac{1}{c} = \frac{\text{area}\left(A_{f^{\ast}}\right)}{\text{area}\left( A_{\tilde{c}g}\right)} = \frac{k}{\tilde{c}},$$
 y por tanto $k= \tilde{c}/c$.
-\EndKnitrBlock{remark}
+:::
 
+
+::: {.example #dnorm-ddexp-ar name="simulación de la normal a partir de la doble exponencial"}
 <br>
-
-\BeginKnitrBlock{example}\iffalse{-91-115-105-109-117-108-97-99-105-243-110-32-100-101-32-108-97-32-110-111-114-109-97-108-32-97-32-112-97-114-116-105-114-32-100-101-32-108-97-32-100-111-98-108-101-32-101-120-112-111-110-101-110-99-105-97-108-93-}\fi{}
-<span class="example" id="exm:dnorm-ddexp-ar"><strong>(\#exm:dnorm-ddexp-ar)  \iffalse (simulación de la normal a partir de la doble exponencial) \fi{} </strong></span>
-\EndKnitrBlock{example}
 
 Se trata de simular la distribución normal estándar, con función de densidad:
 $$f(x)  =\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}} \text{, } x\in\mathbb{R}\text{, }$$
@@ -635,11 +641,11 @@ rnormAR <- function() {
   c.opt <- sqrt(2*exp(1)/pi)
   lambda.opt <- 1
   while (TRUE) {
-    U <- runif(1)
-    X <- rdexp(lambda.opt) # rdexpn(1, lambda.opt)
+    u <- runif(1)
+    x <- rdexp(lambda.opt) # rdexpn(1, lambda.opt)
     ngen <<- ngen + 1 # Comentar esta línea para uso normal
-    # if (U*exp((X^2+1)*0.5-abs(X)) <= 1) return(X)
-    if (c.opt * U * ddexp(X, lambda.opt) <= dnorm(X)) return(X)
+    # if (u*exp((x^2+1)*0.5-abs(x)) <= 1) return(x)
+    if (c.opt * u * ddexp(x, lambda.opt) <= dnorm(x)) return(x)
   }
 }
 
@@ -664,7 +670,7 @@ system.time(x <- rnormARn(nsim))
 
 ```
 ##    user  system elapsed 
-##    0.11    0.00    0.10
+##    0.14    0.00    0.14
 ```
 
 Evaluamos la eficiencia:
@@ -704,6 +710,8 @@ curve(dnorm, add = TRUE)
 
 Podemos observar que la distribución de los valores generados es la que cabría esperar de una muestra de tamaño `nsim` de la distribución objetivo (lo que nos ayudaría a confirmar que el algoritmo está bien implementado, al ser un método exacto de simulación).
 
+:::
+
 
 ### Elección de la densidad auxiliar
 
@@ -715,9 +723,8 @@ y, finalmente, elegir el mejor valor $\theta_{0}$ del parámetro, en el sentido 
 $$c_{\theta_{0}}=\min_{\theta\in\Theta}\max_{x}\frac{f(x) }{g_{\theta}(x)}.$$
 
 
-\BeginKnitrBlock{example}\iffalse{-91-115-105-109-117-108-97-99-105-243-110-32-100-101-32-108-97-32-110-111-114-109-97-108-32-109-101-100-105-97-110-116-101-32-108-97-32-100-111-98-108-101-32-101-120-112-111-110-101-110-99-105-97-108-44-32-99-111-110-116-105-110-117-97-99-105-243-110-93-}\fi{}
-<span class="example" id="exm:dnorm-ddexp-arb"><strong>(\#exm:dnorm-ddexp-arb)  \iffalse (simulación de la normal mediante la doble exponencial, continuación) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example #dnorm-ddexp-arb name="simulación de la normal mediante la doble exponencial continuación"}
+<br>
 
 Continuando con el Ejemplo \@ref(exm:dnorm-ddexp-ar) anterior sobre la simulación de una normal estándar mediante el método de aceptación-rechazo, en lugar de fijar la densidad auxiliar a una doble exponencial con $\lambda=1$, consideraremos el caso general de $\lambda>0$:
 $$g_{\lambda}(x)  = \frac{\lambda}{2}e^{-\lambda\left| x \right|} \text{, } x\in\mathbb{R}.$$
@@ -793,6 +800,8 @@ c.opt2
 ## [1] 1.315489
 ```
 
+:::
+
 
 ### Ejemplo: inferencia bayesiana {#bayes-ar}
 
@@ -833,9 +842,8 @@ El algoritmo sería el siguiente:
     
 Aunque, como se muestra en el siguiente ejercicio, esta elección de densidad auxiliar puede ser muy poco adecuada, siendo preferible en la práctica emplear un método adaptativo que construya la densidad auxiliar de forma automática (Sección \@ref(ars)).  
 
-\BeginKnitrBlock{exercise}\iffalse{-91-83-105-109-117-108-97-99-105-243-110-32-100-101-32-108-97-32-100-105-115-116-114-105-98-117-99-105-243-110-32-97-32-112-111-115-116-101-114-105-111-114-105-32-97-32-112-97-114-116-105-114-32-100-101-32-108-97-32-100-105-115-116-114-105-98-117-99-105-243-110-32-97-32-112-114-105-111-114-105-93-}\fi{}
-<span class="exercise" id="exr:post-pri-ar"><strong>(\#exr:post-pri-ar)  \iffalse (Simulación de la distribución a posteriori a partir de la distribución a priori) \fi{} </strong></span>
-\EndKnitrBlock{exercise}
+::: {.exercise #post-pri-ar name="Simulación de la distribución a posteriori a partir de la distribución a priori"}
+<br>
 
 Para la estimación Bayes de la media de una normal se suele utilizar
 como distribución a priori una Cauchy.
@@ -989,6 +997,9 @@ a)  Generar una muestra i.i.d. $X_{i}\sim N(\theta_{0},1)$ de tamaño
 
 b)  Repetir el apartado anterior con $n=100$.
 
+:::
+
+
 
 ## Modificaciones del método de aceptación-rechazo {#modAR}
 
@@ -998,14 +1009,14 @@ En el tiempo de computación del algoritmo de aceptación-rechazo influye:
 
 * La dificultad de simular con la densidad auxiliar.
 
-* El tiempo necesario para hacer la comparación en el paso 4.
+* El tiempo necesario para hacer la comparación en el paso 3.
 
 En ciertos casos el tiempo de computación necesario para evaluar $f(x)$ puede ser alto.
 Para evitar evaluaciones de la densidad se puede emplear una función "squeeze" que aproxime la densidad por abajo (una envolvente inferior):
 $$s(x)\leq f(x) \text{, }\forall x\in \mathbb{R}.$$
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-77-97-114-115-97-103-108-105-97-44-32-49-57-55-55-93-}\fi{}
-<span class="conjecture" id="cnj:marsaglia"><strong>(\#cnj:marsaglia)  \iffalse (Marsaglia, 1977) \fi{} </strong></span><br>
+::: {.conjecture #marsaglia name="Marsaglia 1977"}
+<br>
 
 1.  Generar $U \sim \mathcal{U}(0, 1)$ y $T\sim g$.
 
@@ -1018,7 +1029,7 @@ $$s(x)\leq f(x) \text{, }\forall x\in \mathbb{R}.$$
     
     2.b.  en caso contrario volver al paso 1.
 
-\EndKnitrBlock{conjecture}
+:::
 
 \begin{figure}[!htb]
 
@@ -1073,8 +1084,8 @@ Tenemos entonces que:
 $$s_n(x)\leq f(x) \leq G_n(x)=c\cdot g_n(x)$$
 donde $g_n(x)$ es una mixtura discreta de distribuciones tipo exponencial truncadas (las tasas pueden ser negativas), que se puede simular fácilmente combinando el método de composición (Sección \@ref(composicion)) con el método de inversión.
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-71-105-108-107-115-44-32-49-57-57-50-93-}\fi{}
-<span class="conjecture" id="cnj:gilks"><strong>(\#cnj:gilks)  \iffalse (Gilks, 1992) \fi{} </strong></span><br>
+::: {.conjecture #gilks name="Gilks 1992"}
+<br>
 
 1.  Inicializar $n$ y $s_n$.
 
@@ -1094,7 +1105,7 @@ donde $g_n(x)$ es una mixtura discreta de distribuciones tipo exponencial trunca
 
 4.  Volver al paso 2.
 
-\EndKnitrBlock{conjecture}
+:::
 
 Gilks y Wild (1992) propusieron una ligera modificación empleando tangentes para construir la cota superior, de esta forma se obtiene un método más eficiente pero requiere especificar la derivada de la densidad objetivo (ver Figura \@ref(fig:squeeze)).
 
@@ -1119,9 +1130,8 @@ También se puede extender al caso multivariante y considerar transformaciones a
 Ver por ejemplo el paquete [`rust`](https://paulnorthrop.github.io/rust/index.html).
 
 
-\BeginKnitrBlock{example}\iffalse{-91-115-105-109-117-108-97-99-105-243-110-32-100-101-32-108-97-32-100-105-115-116-114-105-98-117-99-105-243-110-32-100-101-32-67-97-117-99-104-121-32-109-101-100-105-97-110-116-101-32-99-111-99-105-101-110-116-101-32-100-101-32-117-110-105-102-111-114-109-101-115-93-}\fi{}
-<span class="example" id="exm:cauchy-rou"><strong>(\#exm:cauchy-rou)  \iffalse (simulación de la distribución de Cauchy mediante cociente de uniformes) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example #cauchy-rou name="simulación de la distribución de Cauchy mediante cociente de uniformes"}
+<br>
 
 Si consideramos la distribución de Cauchy:
 $$f(x) = \frac{1}{\pi (1 + x^2)} \text{, } x\in \mathbb{R},$$
@@ -1159,7 +1169,7 @@ simres::rcauchy.rou
 ##     attr(x, "ngen") <- ngen
 ##     return(x)
 ## }
-## <bytecode: 0x00000000219f7be0>
+## <bytecode: 0x000000003409b238>
 ## <environment: namespace:simres>
 ```
 
@@ -1195,36 +1205,31 @@ cat("\nProporción de rechazos = ", 1-nsim/ngen,"\n")}
 ## Proporción de rechazos =  0.2157478
 ```
 
+:::
 
 
 ## Método de composición (o de simulación condicional) {#composicion}
 
-En ocasiones la densidad de interés se puede expresar como una
-mixtura discreta de densidades:
+En ocasiones la densidad de interés se puede expresar como una mixtura discreta de densidades:
 $$f(x)=\sum_{j=1}^{k}p_{j}f_{j}(x)$$
-con $\sum_{j=1}^{k}p_j=1$, $p_j\geq 0$ y $f_j$ densidades 
-(sería también válido para funciones de distribución o variables aleatorias,
-incluyendo el caso discreto).
+con $\sum_{j=1}^{k}p_j=1$, $p_j\geq 0$ y $f_j$ densidades (sería también válido para funciones de distribución, incluyendo el caso discreto).
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-115-105-109-117-108-97-99-105-243-110-32-100-101-32-117-110-97-32-109-105-120-116-117-114-97-32-100-105-115-99-114-101-116-97-93-}\fi{}
-<span class="conjecture" id="cnj:mixtura-discreta"><strong>(\#cnj:mixtura-discreta)  \iffalse (simulación de una mixtura discreta) \fi{} </strong></span><br>
+::: {.conjecture #mixtura-discreta name="simulación de una mixtura discreta"}
+<br>
 
 1. Generar $J$ con distribución $P\left( J=j \right) = p_j$.
 
 2. Generar $X\sim f_J$.
 
-\EndKnitrBlock{conjecture}
+:::
 
-\BeginKnitrBlock{example}\iffalse{-91-100-105-115-116-114-105-98-117-99-105-243-110-32-100-111-98-108-101-32-101-120-112-111-110-101-110-99-105-97-108-93-}\fi{}
-<span class="example" id="exm:dexp-mix"><strong>(\#exm:dexp-mix)  \iffalse (distribución doble exponencial) \fi{} </strong></span>
-\EndKnitrBlock{example}
+::: {.example #dexp-mix name="distribución doble exponencial"}
+<br>
 
 A partir de la densidad de la distribución doble exponencial:
-$$f(x) =\frac{\lambda }{2}e^{-\lambda \left\vert x\right\vert }%
-\text{, }\forall x\in \mathbb{R},$$
+$$f(x) =\frac{\lambda }{2}e^{-\lambda \left\vert x\right\vert } \text{, }\forall x\in \mathbb{R},$$
 se deduce que:
-$$f(x) =\frac{1}{2}f_{1}(x) +\frac{1}{2}f_{2}\left(
-x\right)$$
+$$f(x) = \frac{1}{2}f_{1}(x) + \frac{1}{2}f_{2}(x)$$
 siendo:
 $$f_{1}(x) = \left\{ 
 \begin{array}{ll}
@@ -1241,13 +1246,16 @@ f_{2}(x) = \left\{
 
 El algoritmo resultante sería el siguiente (empleando dos números pseudoaleatorios uniformes, el primero para seleccionar el índice y el segundo para generar un valor de la correspondiente componente mediante el método de inversión):
 
-1. Generar $U,V\sim \mathcal{U}(0, 1)$.
+1. Generar $U,V \sim \mathcal{U}(0, 1)$.
 
-2. Si $U<0.5$ devolver $X=-\ln \left( 1-V\right)/\lambda$.
+2. Si $U<0.5$ devolver $X= -\ln( 1-V )/\lambda$.
 
-3. En caso contrario devolver $X=\ln(V)/\lambda$.
+3. En caso contrario devolver $X= \ln(V)/\lambda$.
 
 Este método está implementado en la función [`rdexp()`](https://rubenfcasal.github.io/simres/reference/ddexp.html) del paquete [`simres`](https://rubenfcasal.github.io/simres) (fichero [*ddexp.R*](R/ddexp.R)).
+
+:::
+
 
 Observaciones:
 
@@ -1266,14 +1274,15 @@ Simular a partir de una estimación de este tipo es lo que se conoce como *boots
 En el caso de una mixtura continua tendríamos:
 $$f(x)=\int g(x|y)h(y)dy$$
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-115-105-109-117-108-97-99-105-243-110-32-100-101-32-117-110-97-32-109-105-120-116-117-114-97-32-99-111-110-116-105-110-117-97-93-}\fi{}
-<span class="conjecture" id="cnj:mixtura-continua"><strong>(\#cnj:mixtura-continua)  \iffalse (simulación de una mixtura continua) \fi{} </strong></span><br>
+::: {.conjecture #mixtura-continua name="simulación de una mixtura continua"}
+<br>
 
 1. Generar $Y\sim h$.
 
 2. Generar $X\sim g(\cdot |Y)$.
 
-\EndKnitrBlock{conjecture}
+:::
+
 Este algoritmo es muy empleado en Inferencia Bayesiana y en la simulación de algunas variables discretas (como la Binomial Negativa, denominada también distribución Gamma-Poisson, o la distribución Beta-Binomial; ver Sección \@ref(notables-disc)),
 ya que el resultado sería válido cambiando las funciones de densidad $f$ y $g$ por funciones de masa de probabilidad.
 
@@ -1297,8 +1306,8 @@ $U \sim \mathcal{U}( 0, 1 )$, las variables
 $\sqrt{2E} \cos 2\pi U$ y $\sqrt{2E}\operatorname{sen} 2\pi U$ son
 $\mathcal{N}( 0, 1 )$ independientes.
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-100-101-32-66-111-120-45-77-252-108-108-101-114-44-32-49-57-53-56-93-}\fi{}
-<span class="conjecture" id="cnj:box-muller"><strong>(\#cnj:box-muller)  \iffalse (de Box-Müller, 1958) \fi{} </strong></span><br>
+::: {.conjecture #box-muller name="de Box-Müller 1958"}
+<br>
 
 1. Generar $U,V\sim \mathcal{U}(0, 1)$.
 
@@ -1306,7 +1315,7 @@ $\mathcal{N}( 0, 1 )$ independientes.
 
 3. Devolver $X_1=W_1\cos W_2$, $X_2=W_1\operatorname{sen}W_2$.
 
-\EndKnitrBlock{conjecture}
+:::
 
 Podemos hacer que la función `rnorm()` de R emplee este algoritmo estableciendo el parámetro `normal.kind` a `"Box-Muller"` en una llamada previa a `set.seed()` o `RNGkind()`.
 
@@ -1327,8 +1336,8 @@ También se podrían emplear resultado conocidos relacionados con esta distribuc
 $$U_{(k)} \sim \mathcal{Beta}(k,n+1-k).$$
 El resultado es el algoritmo de Fox (1963), que podría ser adecuado para simular esta distribución cuando $a, b \in \mathbb{N}$ y son valores pequeños.
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-100-101-32-70-111-120-44-32-49-57-54-51-93-}\fi{}
-<span class="conjecture" id="cnj:fox"><strong>(\#cnj:fox)  \iffalse (de Fox, 1963) \fi{} </strong></span><br>
+::: {.conjecture #fox name="de Fox 1963"}
+<br>
   
 1. Generar $U_1, U_2, \ldots, U_{a+b-1} \sim \mathcal{U}(0, 1)$.
 
@@ -1336,7 +1345,7 @@ El resultado es el algoritmo de Fox (1963), que podría ser adecuado para simula
 
 3. Devolver $X=U_{(a)}$.
 
-\EndKnitrBlock{conjecture}
+:::
 
 Es obvio que este algoritmo puede resultar muy lento si alguno de los dos parámetros es elevado (pues habrá que simular muchas uniformes para conseguir un valor simulado de la beta). 
 Además, en función de cuál de los dos parámetros, $a$ ó $b$, sea mayor, resultará más eficiente, en el paso 2, comenzar a ordenar por el mayor, luego el segundo mayor, y así sucesivamente, o hacerlo empezando por el menor. 
@@ -1345,8 +1354,8 @@ En cualquier caso, es obvio que no es necesario ordenar todos los valores $U_{i}
 Un método válido aunque $a$ ó $b$ no sean enteros es el dado por el
 algoritmo de Jöhnk (1964).
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-100-101-32-74-246-104-110-107-44-32-49-57-54-52-93-}\fi{}
-<span class="conjecture" id="cnj:johnk"><strong>(\#cnj:johnk)  \iffalse (de Jöhnk, 1964) \fi{} </strong></span><br>
+::: {.conjecture #johnk name="de Jöhnk 1964"}
+<br>
   
 1. Generar $U_1, U_2\sim \mathcal{U}(0, 1)$.
     
@@ -1356,15 +1365,15 @@ algoritmo de Jöhnk (1964).
 
     en caso contrario volver al paso 1.
 
-\EndKnitrBlock{conjecture}
+:::
 
 El método resulta extremadamente ineficiente para $a$ ó $b$ mayores que 1. 
 Esto es debido a que la condición $S\leq1$ del paso 3 puede tardar muchísimo en verificarse. 
 Por este motivo, el algoritmo de Jöhnk sólo es recomendable para $a<1$ y $b<1$. 
 Como remedio a esto puede usarse el algoritmo de Cheng (1978) que es algo más complicado de implementar^[R implementa este algoritmo en el fichero fuente [rbeta.c](https://svn.r-project.org/R/trunk/src/nmath/rbeta.c).] pero mucho más eficiente.
 
-\BeginKnitrBlock{conjecture}\iffalse{-91-100-101-32-67-104-101-110-103-44-32-49-57-55-56-93-}\fi{}
-<span class="conjecture" id="cnj:cheng"><strong>(\#cnj:cheng)  \iffalse (de Cheng, 1978) \fi{} </strong></span><br>
+::: {.conjecture #cheng name="de Cheng 1978"}
+<br>
   
 Inicialización:
 
@@ -1384,5 +1393,5 @@ Simulación:
 
     en caso contrario volver al paso 1.
 
-\EndKnitrBlock{conjecture}
+:::
 

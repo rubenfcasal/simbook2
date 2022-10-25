@@ -127,7 +127,7 @@
 \theoremstyle{break}
 \theoremheaderfont{\normalfont\bfseries}
 \theorembodyfont{\normalfont}
-\theorempreskip{\smallskipamount}
+\theorempreskip{\bigskipamount}
 \theorempostskip{\smallskipamount}
 \theoremprework{\bigskip\hrule\leavevmode}
 \theoremseparator{\smallskip}
@@ -141,12 +141,10 @@
 \newtheorem{proposition}{Proposición}[chapter]
 \newtheorem{definition}{Definición}[chapter]
 \newtheorem{hypothesis}{Hipótesis}[chapter]
-\theoremprework{\bigskip\leavevmode}
-\theorempostwork{\vspace*{-\bigskipamount}\vspace*{-\medskipamount}}
-\newtheorem{example}{Ejemplo}[chapter]
-\theoremprework{\bigskip\leavevmode}
-\theorempostwork{\vspace*{-\bigskipamount}\vspace*{-\medskipamount}}
 \newtheorem{exercise}{Ejercicio}[chapter]
+%\theoremprework{\bigskip\leavevmode}
+%\theorempostwork{\vspace*{-\bigskipamount}\vspace*{-\medskipamount}}
+\newtheorem{example}{Ejemplo}[chapter]
 \theoremstyle{nonumberplain}
 \theoremheaderfont{\normalfont\itshape}
 \theoremseparator{:}
@@ -180,7 +178,7 @@
 
 \title{Simulación Estadística}
 \author{Rubén Fernández Casal (\href{mailto:ruben.fcasal@udc.es}{\nolinkurl{ruben.fcasal@udc.es}}), Ricardo Cao (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}})}
-\date{Edición: Agosto de 2022. Impresión: 2022-09-30}
+\date{Edición: Agosto de 2022. Impresión: 2022-10-26}
 
 \begin{document}
 \maketitle
@@ -340,7 +338,14 @@ Distribución del número de sobres para completar la colección
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-3-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/distr-ealbum-1} 
+
+}
+
+\caption{Aproximación por simulación de la distribución del número de sobres para completar la colección.}\label{fig:distr-ealbum}
+\end{figure}
 
 Aproximación por simulación del número medio de sobres para completar la colección:
 
@@ -391,7 +396,14 @@ Número mínimo de sobres para asegurar de que se completa la colección con una
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-6-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/distr-ealbum2-1} 
+
+}
+
+\caption{Aproximaciones por simulación de la distribución del número de sobres para completar la colección, de su valor esperado (línea vertical continua) y del cuantil 0.95 (línea vertical discontinua).}\label{fig:distr-ealbum2}
+\end{figure}
 
 Por supuesto, la distribución del gasto necesario para completar la colección es esta misma reescalada.
 
@@ -401,7 +413,14 @@ Por supuesto, la distribución del gasto necesario para completar la colección 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-7-1} \end{center}
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{01-Introduccion_files/figure-latex/mc-plot-ealbum-1} 
+
+}
+
+\caption{Gráficos exploratorios de las simulaciones del gasto para completar la colección obtenidos con la función `simres::mc.plot()`.}\label{fig:mc-plot-ealbum}
+\end{figure}
 
 Aproximación del gasto medio:
 
@@ -925,10 +944,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.01    0.00    0.02 
+##       0       0       0 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.12    0.00    0.13
+##    0.11    0.00    0.11
 \end{verbatim}
 
 Hay diversos paquetes que implementan herramientas similares, por ejemplo:
@@ -958,7 +977,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## inner: 0 sec elapsed
+## inner: 0.02 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -968,7 +987,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## middle: 0 sec elapsed
+## middle: 0.02 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -978,7 +997,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## outer: 0.12 sec elapsed
+## outer: 0.1 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -1000,8 +1019,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ## 'data.frame':    10 obs. of  3 variables:
-##  $ tic: num  4.53 4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54
-##  $ toc: num  4.53 4.53 4.53 4.53 4.53 4.54 4.54 4.54 4.54 4.54
+##  $ tic: num  4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.15 4.15
+##  $ toc: num  4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.15 4.15 4.15
 ##  $ msg: chr  "1" "2" "3" "4" ...
 \end{verbatim}
 
@@ -1044,8 +1063,7 @@ Después de ejecutar el código, llamando a \texttt{Rprof(NULL)} se desactiva el
 \section{Ejercicios}\label{ejercicios}}
 
 \begin{exercise}
-\protect\hypertarget{exr:simpi}{}{\label{exr:simpi} }
-\end{exercise}
+\protect\hypertarget{exr:simpi}{}\label{exr:simpi}
 
 Sea \((X,Y)\) es un vector aleatorio con distribución uniforme en el
 cuadrado \([-1,1]\times\lbrack-1,1]\) de área 4.
@@ -1061,13 +1079,13 @@ cuadrado \([-1,1]\times\lbrack-1,1]\) de área 4.
   \(P\left( X^2 +Y^2 \leq 1 \right)\).
 \end{enumerate}
 
+\end{exercise}
+
 Ver solución en Sección \ref{sol-simpi}.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{exercise}[Experimento de Bernoulli]
-\protect\hypertarget{exr:bernoulli}{}{\label{exr:bernoulli} \iffalse (Experimento de Bernoulli) \fi{} }
-\end{exercise}
+\protect\hypertarget{exr:bernoulli}{}\label{exr:bernoulli}
+
 Consideramos el experimento de Bernoulli consistente en el
 lanzamiento de una moneda.
 
@@ -1087,35 +1105,37 @@ lanzamiento de una moneda.
   función \texttt{cumsum}).
 \end{enumerate}
 
+\end{exercise}
+
 Ver solución en Sección \ref{sol-bernoulli}.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{exercise}[Simulación de un circuito]
-\protect\hypertarget{exr:circuito}{}{\label{exr:circuito} \iffalse (Simulación de un circuito) \fi{} }
+\protect\hypertarget{exr:circuito}{}\label{exr:circuito}
+
+Simular el paso de corriente a través del circuito mostrado en la Figura \ref{fig:circuito2}, donde se muestran las probabilidades de que pase corriente por cada uno de los interruptores, que se suponen variables aleatorias de Bernoulli independientes.
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.5\linewidth]{images/circuito2} 
+
+}
+
+\caption{Esquema de un circuito eléctrico con interruptores aleatorios.}\label{fig:circuito2}
+\end{figure}
+
 \end{exercise}
-Simular el paso de corriente a través del siguiente circuito, donde
-figuran las probabilidades de que pase corriente por cada uno de los
-interruptores:
-
-\begin{center}\includegraphics[width=0.5\linewidth]{images/circuito2} \end{center}
-
-Considerar que cada interruptor es una variable aleatoria de Bernoulli independiente
-para simular 1000 valores de cada una de ellas.
 
 \begin{remark}
-\iffalse{} {Nota: } \fi{}R maneja internamente los valores lógicos como 1 (\texttt{TRUE}) y 0 (\texttt{FALSE}).
+R maneja internamente los valores lógicos como 1 (\texttt{TRUE}) y 0 (\texttt{FALSE}).
 Recíprocamente, cualquier número puede ser tratado como lógico (al estilo de C).
 El entero 0 es equivalente a \texttt{FALSE} y cualquier entero distinto de 0 a \texttt{TRUE}.
 \end{remark}
 
 Ver solución en Sección \ref{sol-circuito}.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{exercise}[El problema del Caballero de Méré]
-\protect\hypertarget{exr:mere}{}{\label{exr:mere} \iffalse (El problema del Caballero de Méré) \fi{} }
-\end{exercise}
+\protect\hypertarget{exr:mere}{}\label{exr:mere}
+
 En 1651, el Caballero de Méré le planteó a Pascal una pregunta
 relacionada con las apuestas y los juegos de azar: ¿es ventajoso
 apostar a que en cuatro lanzamientos de un dado se obtiene al menos
@@ -1138,16 +1158,16 @@ del Cálculo de Probabilidades.
   \(1-(5/6)^{n}\).
 \end{enumerate}
 
+\end{exercise}
+
 Ver solución en Sección \ref{sol-mere}.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{exercise}[variación del problema del coleccionista (cadena de Markov)]
-\protect\hypertarget{exr:album}{}{\label{exr:album} \iffalse (variación del problema del coleccionista (cadena de Markov)) \fi{} }
-\end{exercise}
+\protect\hypertarget{exr:album}{}\label{exr:album}
 
 Continuando con el ejemplo de la Sección \ref{ealbum}
 (álbum con \(n = 75\) cromos y sobres con \(m = 6\)). A partir de \(nsim=2000\) simulaciones de coleccionistas de cromos, aproximar por simulación la evolución del proceso de compra de un coleccionista (número de cromos distintos dependiendo de los sobres comprados).
+\end{exercise}
 
 Ver solución en Sección \ref{sol-album}.
 
@@ -1194,7 +1214,7 @@ Este método está implementado\footnote{Aunque de forma no muy eficiente. Para 
 ##         c = c, m = m)), envir = globalenv())
 ##     return(u)
 ## }
-## <bytecode: 0x00000000108e3660>
+## <bytecode: 0x00000000130aed68>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -1216,8 +1236,9 @@ A pesar de su simplicidad, una adecuada elección de los parámetros permite obt
 Durante los primeros años, el procedimiento habitual consistía en escoger \(m\) de forma que se pudiera realizar eficientemente la operación del módulo, aprovechando la arquitectura del ordenador (por ejemplo \(m = 2^{31}\) si se emplean enteros con signo de 32 bits).
 Posteriormente se seleccionaban \(c\) y \(a\) de forma que el período \(p\) fuese lo más largo posible (o suficientemente largo), empleando los resultados mostrados a continuación.
 
-\begin{theorem}[Hull y Dobell, 1962]
-\protect\hypertarget{thm:hull-dobell}{}{\label{thm:hull-dobell} \iffalse (Hull y Dobell, 1962) \fi{} }
+\begin{theorem}[Hull y Dobell 1962]
+\protect\hypertarget{thm:hull-dobell}{}\label{thm:hull-dobell}
+
 Un generador congruencial tiene período máximo (\(p=m\)) si y solo si:
 
 \begin{enumerate}
@@ -1231,6 +1252,7 @@ Un generador congruencial tiene período máximo (\(p=m\)) si y solo si:
   Si \(m\) es múltiplo de \(4\), entonces \(a-1\) también lo ha de
   ser (i.e.~\(m \equiv 0 \bmod 4\Rightarrow a \equiv 1 \bmod 4\)).
 \end{enumerate}
+
 \end{theorem}
 
 Algunas consecuencias:
@@ -1243,7 +1265,7 @@ Algunas consecuencias:
 \end{itemize}
 
 \begin{theorem}
-\protect\hypertarget{thm:unnamed-chunk-3}{}{\label{thm:unnamed-chunk-3} }
+
 Un generador multiplicativo tiene período máximo (\(p=m-1\)) si:
 
 \begin{enumerate}
@@ -1254,6 +1276,7 @@ Un generador multiplicativo tiene período máximo (\(p=m-1\)) si:
   \(a\) es una raiz primitiva de \(m\) (i.e.~el menor entero \(q\) tal
   que \(a^{q}=1 \bmod m\) es \(q=m-1\)).
 \end{enumerate}
+
 \end{theorem}
 
 Además de preocuparse de la longitud del ciclo, las secuencias generadas deben aparentar muestras i.i.d. \(\mathcal{U}(0,1)\).
@@ -1318,8 +1341,7 @@ Miller, 1988, estudiaron que parámetros son adecuados para \(m=2^{31}-1\)).
 \end{itemize}
 
 \begin{example}
-\protect\hypertarget{exm:congru512}{}{\label{exm:congru512} }
-\end{example}
+\protect\hypertarget{exm:congru512}{}\label{exm:congru512}
 
 Consideramos el generador congruencial, de ciclo máximo, definido por:
 \[\begin{aligned}
@@ -1410,6 +1432,8 @@ u_{n+1}  & =\frac{x_{n+1}}{512},\ n=0,1,\dots\nonumber
 ## [1] 0.402
 \end{verbatim}
 \end{enumerate}
+
+\end{example}
 
 \hypertarget{ext-cong}{%
 \section{Extensiones}\label{ext-cong}}
@@ -1525,8 +1549,8 @@ Sin embargo, los métodos clásicos pueden no ser muy adecuados para evaluar gen
 La recomendación sería emplear baterías de contrastes recientes, como las descritas en la Subsección \ref{baterias}.
 
 Hay que destacar algunas diferencias entre el uso de este tipo de métodos en inferencia y en simulación.
-Por ejemplo, si empleamos un constrate de hipótesis del modo habitual, desconfiamos del generador si la muestra (secuencia) no se ajusta a la distribución teórica (\(p\)-valor \(\leq \alpha\)).
-En simulación, además, también se sospecha si se ajusta demasiado bien a la distribución teórica (\(p\)-valor \(\geq1-\alpha\)), lo que indicaría que no reproduce adecuadamente la variabilidad.
+Por ejemplo, si empleamos un constrate de hipótesis del modo habitual, desconfiamos del generador si la muestra (secuencia) no se ajusta a la distribución teórica (p-valor \(\leq \alpha\)).
+En simulación, además, también se sospecha si se ajusta demasiado bien a la distribución teórica (p-valor \(\geq1-\alpha\)), lo que indicaría que no reproduce adecuadamente la variabilidad.
 
 Uno de los contrastes más conocidos es el test chi-cuadrado de bondad de ajuste (\texttt{chisq.test} para el caso discreto).
 Aunque si la variable de interés es continua, habría que discretizarla (con la correspondiente perdida de información).
@@ -1580,13 +1604,12 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 ##         p.value = PVAL, method = METHOD, data.name = DNAME), 
 ##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x000000002e95d430>
+## <bytecode: 0x0000000013691fb0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
-\begin{example}[análisis de un generador congruencial, continuación]
-\protect\hypertarget{exm:congru512b}{}{\label{exm:congru512b} \iffalse (análisis de un generador congruencial, continuación) \fi{} }
-\end{example}
+\begin{example}[análisis de un generador congruencial continuación]
+\protect\hypertarget{exm:congru512b}{}\label{exm:congru512b}
 
 Continuando con el generador congruencial del Ejemplo \ref{exm:congru512}:
 
@@ -1642,7 +1665,7 @@ Al aplicar el test chi-cuadrado obtendríamos:
 
 Alternativamente, por ejemplo si solo se pretende aplicar el contraste, se podría emplear la función \texttt{simres::freq.test()} (fichero \href{R/test.R}{\emph{test.R}}) para este caso particular (ver Sección \ref{freq-test}).
 
-Como se muestra en la Figura \ref{fig:chisq-test-unif} el histograma de la secuencia generada es muy plano (comparado con lo que cabría esperar de una muestra de tamaño 500 de una uniforme), y consecuentemente el \(p\)-valor del contraste chi-cuadrado es prácticamente 1, lo que indicaría que este generador no reproduce adecuadamente la variabilidad de una distribución uniforme.
+Como se muestra en la Figura \ref{fig:chisq-test-unif} el histograma de la secuencia generada es muy plano (comparado con lo que cabría esperar de una muestra de tamaño 500 de una uniforme), y consecuentemente el p-valor del contraste chi-cuadrado es prácticamente 1, lo que indicaría que este generador no reproduce adecuadamente la variabilidad de una distribución uniforme.
 
 Otro contraste de bondad de ajuste muy conocido es el test de Kolmogorov-Smirnov, implementado en \texttt{ks.test} (ver Sección \ref{ks-test}).
 Este contraste de hipótesis compara la función de distribución bajo la hipótesis nula con la función de distribución empírica (ver Sección \ref{empdistr}), representadas en la Figura \ref{fig:empdistrunif}:
@@ -1716,6 +1739,8 @@ Adicionalmente podríamos estudiar la aleatoriedad de los valores generados (ver
 \caption{Gráfico de dispersión retardado de los valores generados.}\label{fig:plot-ret}
 \end{figure}
 
+Si se observa algún tipo de patrón indicaría dependencia (se podría considerar como una versión descriptiva del denominado ``Parking lot test''), ver Ejemplo \ref{exm:ret-gen}.
+
 También podemos analizar las autocorrelaciones (las correlaciones de \((u_{i},u_{i+k})\), con \(k=1,\ldots,K\)):
 
 \begin{Shaded}
@@ -1749,6 +1774,8 @@ Por ejemplo, para contrastar si las diez primeras autocorrelaciones son nulas po
 ## X-squared = 22.533, df = 10, p-value = 0.01261
 \end{verbatim}
 
+\end{example}
+
 \hypertarget{repeticiuxf3n-de-contrastes}{%
 \subsection{Repetición de contrastes}\label{repeticiuxf3n-de-contrastes}}
 
@@ -1765,7 +1792,7 @@ En simulación tiene mucho más sentido realizar un gran número de pruebas:
   bajo \(H_0\) (se podría realizar un nuevo contraste de bondad
   de ajuste).
 \item
-  Los \(p\)-valores obtenidos deberían ajustarse a una
+  Los p-valores obtenidos deberían ajustarse a una
   \(\mathcal{U}\left(0,1\right)\) (se podría realizar también un
   contraste de bondad de ajuste).
 \end{itemize}
@@ -1774,8 +1801,7 @@ Este procedimiento es también el habitual para validar un método de
 contraste de hipótesis por simulación (ver Sección \ref{contrastes}).
 
 \begin{example}
-\protect\hypertarget{exm:rep-test-randu}{}{\label{exm:rep-test-randu} }
-\end{example}
+\protect\hypertarget{exm:rep-test-randu}{}\label{exm:rep-test-randu}
 
 Continuando con el generador congruencial RANDU, podemos pensar en estudiar la uniformidad de los valores generados empleando repetidamente el test chi-cuadrado:
 
@@ -1823,7 +1849,7 @@ Por ejemplo, podemos comparar la proporción de rechazos observados con los que 
 Las proporciones de rechazo obtenidas deberían comportarse como una aproximación por simulación de los niveles teóricos.
 En este caso no se observa nada extraño, por lo que no habría motivos para sospechar de la uniformidad de los valores generados (aparentemente no hay problemas con la uniformidad de este generador).
 
-Adicionalmente, si queremos estudiar la proporción de rechazos (el \emph{tamaño del contraste}) para los posibles valores de \(\alpha\), podemos emplear la distribución empírica del \(p\)-valor (proporción de veces que resultó menor que un determinado valor):
+Adicionalmente, si queremos estudiar la proporción de rechazos (el \emph{tamaño del contraste}) para los posibles valores de \(\alpha\), podemos emplear la distribución empírica del p-valor (proporción de veces que resultó menor que un determinado valor):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1885,8 +1911,8 @@ Además de la comparación gráfica, podríamos emplear un test de bondad de aju
 
 En este caso la distribución observada del estadístico es la que cabría esperar de una muestra de este tamaño de la distribución teórica, por tanto, según este criterio, aparentemente no habría problemas con la uniformidad de este generador (hay que recordar que estamos utilizando contrastes de hipótesis como herramienta para ver si hay algún problema con el generador, no tiene mucho sentido hablar de aceptar o rechazar una hipótesis).
 
-En lugar de estudiar la distribución del estadístico de contraste siempre podemos analizar la distribución del \(p\)-valor.
-Mientras que la distribución teórica del estadístico depende del contraste y puede ser complicada, la del \(p\)-valor es siempre una uniforme.
+En lugar de estudiar la distribución del estadístico de contraste siempre podemos analizar la distribución del p-valor.
+Mientras que la distribución teórica del estadístico depende del contraste y puede ser complicada, la del p-valor es siempre una uniforme.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1902,7 +1928,7 @@ Mientras que la distribución teórica del estadístico depende del contraste y 
 
 }
 
-\caption{Distribución del $p$-valor del constraste.}\label{fig:rep-test-pval}
+\caption{Distribución del p-valor del constraste.}\label{fig:rep-test-pval}
 \end{figure}
 
 \begin{Shaded}
@@ -1932,19 +1958,19 @@ Alternativamente podríamos emplear la función \href{https://rubenfcasal.github
 \FunctionTok{set.rng}\NormalTok{(}\DecValTok{543210}\NormalTok{, }\StringTok{"lcg"}\NormalTok{, }\AttributeTok{a =} \DecValTok{2}\SpecialCharTok{\^{}}\DecValTok{16} \SpecialCharTok{+} \DecValTok{3}\NormalTok{, }\AttributeTok{c =} \DecValTok{0}\NormalTok{, }\AttributeTok{m =} \DecValTok{2}\SpecialCharTok{\^{}}\DecValTok{31}\NormalTok{)}
 \CommentTok{\# res \textless{}{-} rephtest(n = 30, test = chisq.cont.test, rand.gen = rng,}
 \CommentTok{\#          distribution = "unif", output = FALSE, nestpar = 0)}
-\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{rephtest}\NormalTok{(}\AttributeTok{n =} \DecValTok{30}\NormalTok{, }\AttributeTok{test =}\NormalTok{ freq.test, }\AttributeTok{rand.gen =}\NormalTok{ rng)}
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{rephtest}\NormalTok{(}\AttributeTok{n =} \DecValTok{30}\NormalTok{, }\AttributeTok{test =}\NormalTok{ freq.test, }\AttributeTok{rand.gen =}\NormalTok{ rng, }\AttributeTok{nclass =} \DecValTok{6}\NormalTok{)}
 \FunctionTok{str}\NormalTok{(res)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## List of 2
-##  $ statistics: num [1:1000] 0.2 0.6 6.2 0 1.4 0.8 0.8 7.2 2.6 0.6 ...
-##  $ p.values  : num [1:1000] 0.905 0.741 0.045 1 0.497 ...
+##  $ statistics: num [1:1000] 5.2 6.8 12.4 0.8 5.6 7.6 6.4 9.6 5.2 3.2 ...
+##  $ p.values  : num [1:1000] 0.392 0.2359 0.0297 0.977 0.3471 ...
 ##  - attr(*, "class")= chr "rhtest"
 ##  - attr(*, "method")= chr "Chi-squared test for given probabilities"
 ##  - attr(*, "names.stat")= chr "X-squared"
-##  - attr(*, "parameter")= Named num 2
+##  - attr(*, "parameter")= Named num 5
 ##   ..- attr(*, "names")= chr "df"
 \end{verbatim}
 
@@ -1957,20 +1983,32 @@ Alternativamente podríamos emplear la función \href{https://rubenfcasal.github
 \begin{verbatim}
 ## Proportion of rejections:
 ##    1%    5%   10%   25%   50% 
-## 0.010 0.053 0.112 0.210 0.626
+## 0.013 0.054 0.096 0.255 0.544
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(res)}
+\NormalTok{old.par }\OtherTok{\textless{}{-}} \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(res, }\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/unnamed-chunk-14-1} \end{center}
+\begin{figure}[!htb]
 
-\begin{center}\includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/unnamed-chunk-14-2} \end{center}
+{\centering \includegraphics[width=0.9\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/rephtest-1} 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/unnamed-chunk-14-3} \end{center}
+}
+
+\caption{Distribución de los p-valores y proporción de rechazos.}\label{fig:rephtest}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(old.par)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{example}
 
 \hypertarget{baterias}{%
 \subsection{Baterías de contrastes}\label{baterias}}
@@ -2011,12 +2049,10 @@ Si el objetivo es únicamente obtener resultados estadísticos (como en nuestro 
 \section{Ejercicios}\label{ejercicios-1}}
 
 \begin{exercise}[Método de los cuadrados medios]
-\protect\hypertarget{exr:RANDVN}{}{\label{exr:RANDVN} \iffalse (Método de los cuadrados medios) \fi{} }
-\end{exercise}
-Uno de los primeros generadores utilizados fue el denominado método de los
-cuadrados medios propuesto por Von Neumann (1946). Con este
-procedimiento se generan números pseudoaleatorios de 4 dígitos de la
-siguiente forma:
+\protect\hypertarget{exr:RANDVN}{}\label{exr:RANDVN}
+
+Uno de los primeros generadores utilizados fue el denominado método de los cuadrados medios propuesto por Von Neumann (1946).
+Con este procedimiento se generan números pseudoaleatorios de 4 dígitos de la siguiente forma:
 
 \begin{enumerate}
 \def\labelenumi{\roman{enumi}.}
@@ -2034,6 +2070,10 @@ Para obtener los \(k\) (número par) dígitos centrales de \(x_{i}^2\)
 se puede utilizar que:
 \[x_{i+1}=\left\lfloor \left(  x_{i}^2-\left\lfloor \dfrac{x_{i}^2}{10^{(2k-\frac{k}2)}}\right\rfloor 10^{(2k-\frac{k}2)}\right)
 /10^{\frac{k}2}\right\rfloor\]
+
+Estudiar las características de este generador a partir de una secuencia de 500 valores.
+Emplear únicamente métodos gráficos.
+\end{exercise}
 
 Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver también \texttt{simres::rng()}; fichero \href{R/rng.R}{\emph{rng.R}}):
 
@@ -2059,18 +2099,16 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 ##         envir = globalenv())
 ##     return(u)
 ## }
-## <bytecode: 0x00000000211e02d8>
+## <bytecode: 0x0000000032f4cf30>
 ## <environment: namespace:simres>
 \end{verbatim}
 
-Estudiar las características del generador de cuadrados medios a partir de una secuencia de 500 valores.
-Emplear únicamente métodos gráficos.
-
 \begin{exercise}
-\protect\hypertarget{exr:parkmiller}{}{\label{exr:parkmiller} }
-\end{exercise}
+\protect\hypertarget{exr:parkmiller}{}\label{exr:parkmiller}
+
 Considerando el generador congruencial multiplicativo de parámetros \(a=7^{5}=16807\), \(c=0\) y \(m=2^{31}-1\) (\emph{minimal standar} de Park y Miller, 1988).
 ¿Se observan los mismos problemas que con el algoritmo RANDU al considerar las tripletas \((x_{k},x_{k+1},x_{k+2})\)?
+\end{exercise}
 
 \hypertarget{resultados}{%
 \chapter{Análisis de resultados de simulación}\label{resultados}}
@@ -2087,8 +2125,8 @@ Al final del capítulo se incluye una breve introducción a los problemas de est
 Supongamos que estamos interesados en aproximar la media teórica \(\mu = E\left( X\right)\) a partir de una secuencia i.i.d. \(X_{1}\), \(X_{2}\), \(\ldots\), \(X_{n}\) obtenida mediante simulación, utilizando para ello la media muestral \(\bar{X}_{n}\).
 Una justificación teórica de la validez de esta aproximación es \emph{la ley (débil\footnote{\emph{La ley fuerte} establece la convergencia casi segura.}) de los grandes números}:
 
-\begin{theorem}[Ley débil de los grandes números; Khintchine, 1928]
-\protect\hypertarget{thm:khinchine}{}{\label{thm:khinchine} \iffalse (Ley débil de los grandes números; Khintchine, 1928) \fi{} }
+\begin{theorem}[Ley débil de los grandes números; Khintchine 1928]
+\protect\hypertarget{thm:khinchine}{}\label{thm:khinchine}
 Si \(X_{1}\), \(X_{2}\), \(\ldots\) es una secuencia de variables aleatorias independientes e idénticamente distribuidas con media finita \(E\left( X_{i}\right) =\mu\) (i.e.~\(E\left( \left\vert X_{i} \right\vert \right) < \infty\)) entonces \(\overline{X}_{n}=\left( X_{1}+\ldots +X_{n}\right) /n\)
 converge en probabilidad a \(\mu\): \[\overline{X}_{n}\ \overset{p}{ \longrightarrow }\ \mu\]
 Es decir, para cualquier \(\varepsilon >0\):
@@ -2097,8 +2135,7 @@ Es decir, para cualquier \(\varepsilon >0\):
 \end{theorem}
 
 \begin{example}[Aproximación de una probabilidad]
-\protect\hypertarget{exm:unnamed-chunk-2}{}{\label{exm:unnamed-chunk-2} \iffalse (Aproximación de una probabilidad) \fi{} }
-\end{example}
+
 Simulamos una variable aleatoria \(X\) con distribución de Bernoulli de parámetro \(p=0.5\):
 
 \begin{Shaded}
@@ -2142,6 +2179,8 @@ Podemos generar un gráfico con la evolución de la aproximación:
 
 \caption{Aproximación de la proporción en función del número de generaciones.}\label{fig:proporcion}
 \end{figure}
+
+\end{example}
 
 \hypertarget{detecciuxf3n-de-problemas-de-convergencia}{%
 \subsection{Detección de problemas de convergencia}\label{detecciuxf3n-de-problemas-de-convergencia}}
@@ -2203,8 +2242,9 @@ es la cuasi-varianza muestral\footnote{Esto sería también válido para el caso
 Los valores obtenidos servirían como medidas básicas de la precisión de la aproximación, aunque su principal aplicación es la construcción de intervalos de confianza.
 Si se endurecen las suposiciones de la ley débil de los grandes números (Teorema \ref{thm:khinchine}), exigiendo la existencia de varianza finita (\(E\left( X_{i}^2 \right) < \infty\)), se dispone de un resultado más preciso sobre las variaciones de la aproximación por simulación en torno al límite teórico.
 
-\begin{theorem}[central del límite, CLT]
-\protect\hypertarget{thm:tcl}{}{\label{thm:tcl} \iffalse (central del límite, CLT) \fi{} }
+\begin{theorem}[central del límite CLT]
+\protect\hypertarget{thm:tcl}{}\label{thm:tcl}
+
 Si \(X_{1}\), \(X_{2}\), \(\ldots\) es una secuencia de variables aleatorias independientes e idénticamente distribuidas con \(E\left( X_{i}\right) =\mu\) y
 \(Var\left( X_{i}\right) = \sigma ^{2}<\infty\), entonces la media muestral estandarizada converge en distribución a una normal estándar:
 \[Z_{n}=\frac{\overline{X}_{n}-\mu }{\frac{\sigma }{\sqrt{n}}}
@@ -2224,8 +2264,8 @@ Además, la convergencia puede considerarse lenta, en el sentido de que, por eje
 Pero una ventaja es que este error no depende del número de dimensiones (en el caso multidimensional puede ser mucho más rápida que otras alternativas numéricas; ver Apéndice \ref{int-num}).
 
 \begin{example}[Aproximación de la media de una distribución normal]
-\protect\hypertarget{exm:unnamed-chunk-5}{}{\label{exm:unnamed-chunk-5} \iffalse (Aproximación de la media de una distribución normal) \fi{} }
-\end{example}
+
+Como ejemplo simulamos valores de una normal estándar:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2290,6 +2330,7 @@ Podemos añadir también los correspondientes intervalos de confianza al gráfic
 \end{figure}
 
 Podemos generar este gráfico empleando la función \href{https://rubenfcasal.github.io/simres/reference/mc.plot.html}{\texttt{conv.plot()}} (o \href{https://rubenfcasal.github.io/simres/reference/mc.plot.html}{\texttt{mc.plot()}}) del paquete \href{https://rubenfcasal.github.io/simres}{\texttt{simres}} (fichero \href{R/mc.plot.R}{\emph{mc.plot.R}}).
+\end{example}
 
 \hypertarget{num-gen}{%
 \section{Determinación del número de generaciones}\label{num-gen}}
@@ -2338,12 +2379,13 @@ Sin embargo, la estimación de la precisión se complica:
 \[Var\left( \overline{X}\right) =\frac{1}{n^{2}}\left( 
 \sum_{i=1}^{n}Var\left( X_{i} \right) + 2\sum_{i<j}Cov\left( X_{i},X_{j}\right) \right).\]
 
-\begin{example}[aproximación de una proporción bajo dependencia, cadena de Markov]
-\protect\hypertarget{exm:mmc}{}{\label{exm:mmc} \iffalse (aproximación de una proporción bajo dependencia, cadena de Markov) \fi{} }
-\end{example}
+\begin{example}[aproximación de una proporción bajo dependencia cadena de Markov]
+\protect\hypertarget{exm:mmc}{}\label{exm:mmc}
+
 Supongamos que en A Coruña llueve de media uno de cada tres días al año,
 y que la probabilidad de que un día llueva solo depende de lo que ocurrió el día anterior,
 siendo 0.94 si el día anterior llovió y 0.03 si no.
+
 Podemos generar valores de la variable indicadora de día lluvioso con el siguiente código:
 
 \begin{Shaded}
@@ -2598,7 +2640,9 @@ La idea sería considerar las medias de las series como una muestra independient
 ## [1] 0.02403491
 \end{verbatim}
 
-Trataremos este tipo de problemas en la diagnosis de algoritmos Monte Carlo de Cadenas de Markov (MCMC, Capítulo XX).
+\end{example}
+
+Trataremos este tipo de problemas en la diagnosis de algoritmos Monte Carlo de Cadenas de Markov (MCMC, Capítulo 10).
 Aparecen también en la simulación dinámica (por eventos o cuantos).
 
 \hypertarget{periodo-de-calentamiento}{%
@@ -2636,16 +2680,14 @@ Como ejemplo comparamos la simulación del Ejemplo \ref{exm:mmc} con la obtenida
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{03-Analisis_resultados_files/figure-latex/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{03-Analisis_resultados_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 En estos casos puede ser recomendable ignorar los primeros valores generados (por ejemplo los primeros 2000) y recalcular los
 estadísticos deseados.
 
 También trataremos este tipo de problemas en la diagnosis de algoritmos MCMC.
 
-\begin{example}[simulación de un proceso autorregresivo, serie de tiempo]
-\protect\hypertarget{exm:unnamed-chunk-15}{}{\label{exm:unnamed-chunk-15} \iffalse (simulación de un proceso autorregresivo, serie de tiempo) \fi{} }
-\end{example}
+\begin{example}[simulación de un proceso autorregresivo serie de tiempo]
 
 \[X_t = \mu + \rho * (X_{t-1} - \mu) + \varepsilon_t\]
 Podemos tener en cuenta que en este caso la varianza es:
@@ -2727,10 +2769,12 @@ y eliminamos el periodo de calentamiento:
 \end{Highlighting}
 \end{Shaded}
 
+\end{example}
+
 Para simular una serie de tiempo en R se puede emplear la función \texttt{arima.sim} del paquete base \texttt{stats}.
 En este caso el periodo de calentamiento se establece mediante el parámetro \texttt{n.start} (que se fija automáticamente a un valor adecuado).
 
-Por ejemplo, podemos generar este serie autoregressiva con:
+Por ejemplo, podemos generar este serie autoregresiva con:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2782,7 +2826,7 @@ El recíproco también es cierto, si \(U \sim \mathcal{U}(0, 1)\) entonces:
 A partir de este resultado se deduce el siguiente algoritmo genérico para simular una variable continua con función de distribución \(F\) invertible:
 
 \begin{conjecture}[Método de inversión]
-\protect\hypertarget{cnj:inversion}{}{\label{cnj:inversion} \iffalse (Método de inversión) \fi{} }
+\protect\hypertarget{cnj:inversion}{}\label{cnj:inversion}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2791,11 +2835,11 @@ A partir de este resultado se deduce el siguiente algoritmo genérico para simul
 \item
   Devolver \(X = F^{-1}\left( U \right)\).
 \end{enumerate}
+
 \end{conjecture}
 
 \begin{example}[simulación de una distribución exponencial]
-\protect\hypertarget{exm:exp-inv}{}{\label{exm:exp-inv} \iffalse (simulación de una distribución exponencial) \fi{} }
-\end{example}
+\protect\hypertarget{exm:exp-inv}{}\label{exm:exp-inv}
 
 La distribución exponencial \(\exp \left( \lambda \right)\) de parámetro \(\lambda>0\)
 tiene como función de densidad \(f(x) =\lambda e^{-\lambda x}\), si \(x\geq 0\),
@@ -2838,8 +2882,8 @@ El código para implementar este algoritmo en R podría ser el siguiente:
 \NormalTok{lambda }\OtherTok{\textless{}{-}} \DecValTok{2}
 \NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{5}
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{U }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(nsim)}
-\NormalTok{X }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\FunctionTok{log}\NormalTok{(U)}\SpecialCharTok{/}\NormalTok{lambda }\CommentTok{\# {-}log(1{-}U)/lambda}
+\NormalTok{u }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(nsim)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\FunctionTok{log}\NormalTok{(u)}\SpecialCharTok{/}\NormalTok{lambda }\CommentTok{\# {-}log(1{-}u)/lambda}
 
 \NormalTok{tiempo }\OtherTok{\textless{}{-}} \FunctionTok{proc.time}\NormalTok{() }\SpecialCharTok{{-}}\NormalTok{ tini}
 \NormalTok{tiempo}
@@ -2848,12 +2892,12 @@ El código para implementar este algoritmo en R podría ser el siguiente:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.01
+##    0.01    0.00    0.02
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{hist}\NormalTok{(X, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }
+\FunctionTok{hist}\NormalTok{(x, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }
         \AttributeTok{main =} \StringTok{""}\NormalTok{, }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{2.5}\NormalTok{))}
 \FunctionTok{curve}\NormalTok{(}\FunctionTok{dexp}\NormalTok{(x, lambda), }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
@@ -2869,6 +2913,7 @@ El código para implementar este algoritmo en R podría ser el siguiente:
 \end{figure}
 
 Como se observa en la Figura \ref{fig:exp-inv-plot} se trata de un método exacto (si está bien implementado) y la distribución de los valores generados se aproxima a la distribución teórica como cabría esperar con una muestra de ese tamaño.
+\end{example}
 
 \hypertarget{algunas-distribuciones-que-pueden-simularse-por-el-muxe9todo-de-inversiuxf3n}{%
 \subsection{Algunas distribuciones que pueden simularse por el método de inversión}\label{algunas-distribuciones-que-pueden-simularse-por-el-muxe9todo-de-inversiuxf3n}}
@@ -2897,8 +2942,7 @@ Weibull (\(\lambda,\alpha>0\)) & \(\alpha\lambda^{\alpha}x^{\alpha-1}e^{-\left( 
 \end{longtable}
 
 \begin{exercise}[distribución doble exponencial]
-\protect\hypertarget{exr:ddexp}{}{\label{exr:ddexp} \iffalse (distribución doble exponencial) \fi{} }
-\end{exercise}
+\protect\hypertarget{exr:ddexp}{}\label{exr:ddexp}
 
 La distribución doble exponencial\footnote{Esta distribución también se puede generar fácilmente simulando una distribución exponencial y asignando un signo positivo o negativo con equiprobabilidad (ver Ejemplo \ref{exm:dexp-mix}) y función \href{https://rubenfcasal.github.io/simres/reference/ddexp.html}{\texttt{simres::rdexp()}} (fichero \href{R/ddexp.R}{\emph{ddexp.R}}).} (o distribución de Laplace) de
 parámetro \(\lambda\) tiene función de densidad:
@@ -2930,11 +2974,11 @@ y función de distribución:
 \NormalTok{rdexp }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{lambda =} \DecValTok{1}\NormalTok{)\{}
 \CommentTok{\# Simulación por inversión}
 \CommentTok{\# Doble exponencial}
-\NormalTok{  U }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-  \ControlFlowTok{if}\NormalTok{ (U}\SpecialCharTok{\textless{}}\FloatTok{0.5}\NormalTok{) \{}
-    \FunctionTok{return}\NormalTok{(}\FunctionTok{log}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{U)}\SpecialCharTok{/}\NormalTok{lambda)}
+\NormalTok{  u }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+  \ControlFlowTok{if}\NormalTok{ (u}\SpecialCharTok{\textless{}}\FloatTok{0.5}\NormalTok{) \{}
+    \FunctionTok{return}\NormalTok{(}\FunctionTok{log}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{u)}\SpecialCharTok{/}\NormalTok{lambda)}
 \NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
-    \FunctionTok{return}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{log}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{U))}\SpecialCharTok{/}\NormalTok{lambda)}
+    \FunctionTok{return}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{log}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{u))}\SpecialCharTok{/}\NormalTok{lambda)}
 \NormalTok{  \}}
 \NormalTok{\}}
 
@@ -2960,7 +3004,7 @@ y función de distribución:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.04    0.00    0.05
+##    0.04    0.00    0.04
 \end{verbatim}
 \item
   Representar el histograma y compararlo con la densidad teórica.
@@ -2984,6 +3028,8 @@ y función de distribución:
 
   Como se trata de un método exacto de simulación, si está bien implementado, la distribución de los valores generados debería comportarse como una muestra genuina de la distribución objetivo.
 \end{enumerate}
+
+\end{exercise}
 
 \hypertarget{ventajas-e-inconvenientes}{%
 \subsection{Ventajas e inconvenientes}\label{ventajas-e-inconvenientes}}
@@ -3025,7 +3071,7 @@ y \(-g\left( u\right)\) si \(u\in[\frac12,1-10^{-20}]\). Para \(u\notin [10^{-20
 \(2\cdot10^{-20}\)) la aproximación no es recomendable.
 
 \begin{conjecture}[de Odeh y Evans]
-\protect\hypertarget{cnj:Odeh-Evans}{}{\label{cnj:Odeh-Evans} \iffalse (de Odeh y Evans) \fi{} }
+\protect\hypertarget{cnj:Odeh-Evans}{}\label{cnj:Odeh-Evans}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3039,6 +3085,7 @@ y \(-g\left( u\right)\) si \(u\in[\frac12,1-10^{-20}]\). Para \(u\notin [10^{-20
 \item
   Devolver \(X\).
 \end{enumerate}
+
 \end{conjecture}
 
 En manuales de funciones matemáticas, como \href{https://www.math.ubc.ca/~cbm/aands/frameindex.htm}{Abramowitz y Stegun (1964)},
@@ -3072,35 +3119,39 @@ De esta forma la primera componente tendrá la distribución deseada (Figura \re
 A_{f}} \\
 = \int_{a}^{b}f(x) dx \]
 
-El resultado anterior es también válido para una cuasi-densidad \(f^{\ast}\) (no depende de la constante normalizadora).
-El resultado general sería en siguiente:
+El resultado anterior es también válido para una cuasi-densidad \(f^{\ast}\) (no depende de la constante normalizadora):
 
 \begin{itemize}
+\tightlist
 \item
-  Si \(X\) es una variable aleatoria con función de densidad \(f\)
-  y \(U \sim \mathcal{U}(0, 1)\) entonces
-  \[\left( X,c\cdot U\cdot f(x) \right) \sim \mathcal{U}\left(
-  A_{cf}\right)\]
-  siendo
-  \(A_{cf}=\left\{ \left( x, y \right) \in \mathbb{R}^{2} : 0 \leq y \leq cf\left( x \right) \right\}\).
-\item
-  Recíprocamente si \(\left( X,Y\right) \sim \mathcal{U}\left(A_{cf}\right)\) entonces\footnote{Emplearemos también \(X\sim f\) para indicar que \(X\) es una variable aleatoria con función de densidad \(f\).} \(X\sim f\).
+  Si \(\left( X,Y\right) \sim \mathcal{U}\left(A_{f^{\ast}}\right)\) entonces\footnote{Emplearemos también \(X\sim f\) para indicar que \(X\) es una variable aleatoria con función de densidad \(f\).} \(X\sim f\).
 \end{itemize}
 
-Para generar valores de una variable aleatoria bidimensional con distribución uniforme
-en \(A_{f}\) (o en \(A_{f^{\ast}}\)), se emplea el resultado anterior para
-generar valores en \(A_{cg} \supset A_{f}\), siendo \(g\) una densidad auxiliar
-(preferiblemente fácil de simular y similar a \(f\)).
+Para simular una distribución uniforme en el hipografo \(A_{f}\) (o en \(A_{f^{\ast}}\)), lo que se hace es utilizar una variable aleatoria auxiliar \(T\) con función de densidad \(g\), similar a \(f\) y fácil de simular, y una constante \(c > 0\) verificando:
+\[f(x) \leq c\cdot g(x) \text{, }\forall x\in \mathbb{R}.\]
+Podemos generar valores en \(A_{cg} \supset A_{f}\) empleando el resultado:
+
+\begin{itemize}
+\tightlist
+\item
+  Si \(T\) es una variable aleatoria con función de densidad \(g\)
+  y \(U \sim \mathcal{U}(0, 1)\) entonces
+  \[\left( T,c\cdot U\cdot g(x) \right) \sim \mathcal{U}\left(
+  A_{cg}\right)\]
+  siendo
+  \(A_{cg}=\left\{ \left( x, y \right) \in \mathbb{R}^{2} : 0 \leq y \leq cg\left( x \right) \right\}\).
+\end{itemize}
+
 Teniendo en cuenta además que:
 
 \begin{itemize}
 \tightlist
 \item
-  Si \(\left( X,Y\right) \sim \mathcal{U}\left( A\right)\) y
-  \(B \subset A\Rightarrow \left. \left( X,Y\right) \right\vert _{B} \sim \mathcal{U}\left(B\right)\)
+  Si \(\left( T,Y\right) \sim \mathcal{U}\left( A\right)\) y
+  \(B \subset A\Rightarrow \left. \left( T,Y\right) \right\vert _{B} \sim \mathcal{U}\left(B\right)\).
 \end{itemize}
 
-Por tanto, si \(\left( T, Y \right)\) sigue una distribución uniforme en \(A_{cg}\), aceptando los valores de \(\left( T, Y\right)\) que pertenezcan a \(A_{f}\) (o a \(A_{f^{\ast}}\)) se obtendrán generaciones con distribución uniforme sobre \(A_{f}\) (o \(A_{f^{\ast}}\)) y la densidad de la primera componente \(T\) será \(f\).
+Entonces, si \(\left( T, Y \right)\) sigue una distribución uniforme en \(A_{cg}\), aceptando los valores de \(\left( T, Y\right)\) que pertenezcan a \(A_{f}\) (o a \(A_{f^{\ast}}\)) se obtendrán generaciones con distribución uniforme sobre \(A_{f}\) (o \(A_{f^{\ast}}\)) y la densidad de la primera componente será \(f\).
 
 \hypertarget{algoritmo}{%
 \subsection{Algoritmo}\label{algoritmo}}
@@ -3112,8 +3163,8 @@ existe una constante \(c>0\) tal que:
 \text{, }\forall x\in \mathbb{R},\]
 (de donde se deduce que el soporte de \(g\) debe contener el de \(f\)).
 
-\begin{conjecture}[Método de aceptación-rechazo; Von Neuman, 1951]
-\protect\hypertarget{cnj:aceptacion-rechazo}{}{\label{cnj:aceptacion-rechazo} \iffalse (Método de aceptación-rechazo; Von Neuman, 1951) \fi{} }
+\begin{conjecture}[Método de aceptación-rechazo; Von Neuman 1951]
+\protect\hypertarget{cnj:aceptacion-rechazo}{}\label{cnj:aceptacion-rechazo}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3127,6 +3178,7 @@ existe una constante \(c>0\) tal que:
 
   en caso contrario volver al paso 1.
 \end{enumerate}
+
 \end{conjecture}
 
 \hypertarget{densidades-acotadas-en-un-intervalo-cerrado}{%
@@ -3156,17 +3208,19 @@ Así pues, el algoritmo quedaría como sigue:
   en caso contrario volver al paso 1.
 \end{enumerate}
 
-\textbf{Nota}: no confundir \(M\) con \(c = M \left( b - a \right)\).
+\begin{remark}
+No confundir \(M\) con \(c = M \left( b - a \right)\).
+\end{remark}
 
 \begin{example}[simulación de distribución beta a partir de la uniforme]
-\protect\hypertarget{exm:dbeta-dunif-ar}{}{\label{exm:dbeta-dunif-ar} \iffalse (simulación de distribución beta a partir de la uniforme) \fi{} }
-\end{example}
+\protect\hypertarget{exm:dbeta-dunif-ar}{}\label{exm:dbeta-dunif-ar}
 
 Para simular una variable con función de densidad \(\mathcal{Beta}(\alpha, \beta)\):
 \[f(x)=\frac{\Gamma (\alpha + \beta )}{\Gamma (\alpha )\Gamma (\beta )}
 x^{\alpha -1}(1-x)^{\beta -1}\text{ si }0 \leq x \leq 1,\]
 (siguiendo la notación de la función \texttt{dbeta(x,\ shape1,\ shape2)} de \texttt{R}), podemos considerar como distribución auxiliar una \(\mathcal{U}(0,1)\),
 con \(g(x) = 1\) si \(0 \leq x \leq 1\).
+\end{example}
 
 Esta distribución está acotada y es unimodal, si \(\alpha\) y \(\beta\) son mayores\footnote{Si \(\alpha\) o \(\beta\) son iguales a 1 puede simularse fácilmente por el método de inversión y si alguno es menor que 1 esta densidad no está acotada.} que 1, y su moda es \(\frac{\alpha - 1} {\alpha + \beta - 2}\), por lo que:
 \[c = M = \max_{0 \leq x \leq 1}f(x) = f\left( \frac{\alpha - 1} {\alpha + \beta - 2} \right).\]
@@ -3180,9 +3234,9 @@ Por ejemplo, considerando \(\alpha = 2\) y \(\beta = 4\), si comparamos la densi
 \NormalTok{s1 }\OtherTok{\textless{}{-}} \DecValTok{2}
 \NormalTok{s2 }\OtherTok{\textless{}{-}} \DecValTok{4}
 \FunctionTok{curve}\NormalTok{(}\FunctionTok{dbeta}\NormalTok{(x, s1, s2), }\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\FloatTok{1.1}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
-\NormalTok{c }\OtherTok{\textless{}{-}} \FunctionTok{dbeta}\NormalTok{((s1 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{(s1 }\SpecialCharTok{+}\NormalTok{ s2 }\SpecialCharTok{{-}} \DecValTok{2}\NormalTok{), s1, s2)}
-\CommentTok{\# abline(h = c, lty = 2)}
-\FunctionTok{segments}\NormalTok{(}\DecValTok{0}\NormalTok{, c, }\DecValTok{1}\NormalTok{, c, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{dbeta}\NormalTok{((s1 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{(s1 }\SpecialCharTok{+}\NormalTok{ s2 }\SpecialCharTok{{-}} \DecValTok{2}\NormalTok{), s1, s2)}
+\CommentTok{\# abline(h = m, lty = 2)}
+\FunctionTok{segments}\NormalTok{(}\DecValTok{0}\NormalTok{, m, }\DecValTok{1}\NormalTok{, m, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \DecValTok{1}\NormalTok{, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{)}
@@ -3207,12 +3261,12 @@ El siguiente código implementa el método de aceptación-rechazo para simular v
 \NormalTok{rbeta2 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{s1 =} \DecValTok{2}\NormalTok{, }\AttributeTok{s2 =} \DecValTok{2}\NormalTok{) \{}
   \CommentTok{\# Simulación por aceptación{-}rechazo}
   \CommentTok{\# Beta a partir de uniforme}
-\NormalTok{  c }\OtherTok{\textless{}{-}} \FunctionTok{dbeta}\NormalTok{((s1 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{(s1 }\SpecialCharTok{+}\NormalTok{ s2 }\SpecialCharTok{{-}} \DecValTok{2}\NormalTok{), s1, s2)}
+\NormalTok{  m }\OtherTok{\textless{}{-}} \FunctionTok{dbeta}\NormalTok{((s1 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{(s1 }\SpecialCharTok{+}\NormalTok{ s2 }\SpecialCharTok{{-}} \DecValTok{2}\NormalTok{), s1, s2)}
   \ControlFlowTok{while}\NormalTok{ (}\ConstantTok{TRUE}\NormalTok{) \{}
-\NormalTok{    U }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{    X }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{    u }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{    x }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \NormalTok{    ngen }\OtherTok{\textless{}\textless{}{-}}\NormalTok{ ngen}\SpecialCharTok{+}\DecValTok{1}
-    \ControlFlowTok{if}\NormalTok{ (c}\SpecialCharTok{*}\NormalTok{U }\SpecialCharTok{\textless{}=} \FunctionTok{dbeta}\NormalTok{(X, s1, s2)) }\FunctionTok{return}\NormalTok{(X)}
+    \ControlFlowTok{if}\NormalTok{ (m}\SpecialCharTok{*}\NormalTok{u }\SpecialCharTok{\textless{}=} \FunctionTok{dbeta}\NormalTok{(x, s1, s2)) }\FunctionTok{return}\NormalTok{(x)}
 \NormalTok{  \}}
 \NormalTok{\}}
 
@@ -3238,7 +3292,7 @@ Empleando estas funciones podemos generar una muestra de \(10^3\) observaciones 
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.05    0.00    0.04
+##    0.03    0.00    0.03
 \end{verbatim}
 
 Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):
@@ -3278,11 +3332,12 @@ Finalmente podemos representar la distribución de los valores generados y compa
 Al ser un método exacto de simulación (si está bien implementado), la distribución de los valores generados debería comportarse como una muestra genuina de la distribución objetivo.
 
 \begin{exercise}
-\protect\hypertarget{exr:dacotada-ar}{}{\label{exr:dacotada-ar} }
-\end{exercise}
+\protect\hypertarget{exr:dacotada-ar}{}\label{exr:dacotada-ar}
+
 Dar un algoritmo para simular la función de densidad dada por
 \(f\left(x\right) = \frac{1}{16} \left( 3x^{2}+2x+2 \right)\) si
 \(0 \le x \le 2\), cero en otro caso. Estudiar su eficiencia.
+\end{exercise}
 
 \hypertarget{eficiencia-del-algoritmo}{%
 \subsection{Eficiencia del algoritmo}\label{eficiencia-del-algoritmo}}
@@ -3299,7 +3354,7 @@ Una vez fijada la densidad \(g\), el valor óptimo será:
 \[c_{\text{opt}}=\max_{\{x : g(x) > 0\}} \frac{f(x)}{g(x)}.\]
 
 \begin{remark}
-\iffalse{} {Nota: } \fi{}Hay que tener en cuenta que la cota óptima es el número medio de iteraciones \(c\) solo si conocemos las constantes normalizadoras.
+Hay que tener en cuenta que la cota óptima es el número medio de iteraciones \(c\) solo si conocemos las constantes normalizadoras.
 Si solo se conoce la cuasidensidad \(f^{\ast}\) de la distribución objetivo (o de la auxiliar), la correspondiente cota óptima:
 \[\tilde{c} = \max_{\{x : g(x) > 0\}} \frac{f^{\ast}(x)}{g(x)}\]
 asumirá la constante desconocida, aunque siempre podemos aproximar por simulación el verdadero valor de \(c\) y a partir de él la constante normalizadora (ver Ejercicio \ref{exr:post-pri-ar}).
@@ -3309,8 +3364,7 @@ y por tanto \(k= \tilde{c}/c\).
 \end{remark}
 
 \begin{example}[simulación de la normal a partir de la doble exponencial]
-\protect\hypertarget{exm:dnorm-ddexp-ar}{}{\label{exm:dnorm-ddexp-ar} \iffalse (simulación de la normal a partir de la doble exponencial) \fi{} }
-\end{example}
+\protect\hypertarget{exm:dnorm-ddexp-ar}{}\label{exm:dnorm-ddexp-ar}
 
 Se trata de simular la distribución normal estándar, con función de densidad:
 \[f(x)  =\frac{1}{\sqrt{2\pi}}e^{-\frac{x^{2}}{2}} \text{, } x\in\mathbb{R}\text{, }\]
@@ -3396,11 +3450,11 @@ Teniendo en cuenta los resultados anteriores, podríamos emplear el siguiente c�
 \NormalTok{  c.opt }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{pi)}
 \NormalTok{  lambda.opt }\OtherTok{\textless{}{-}} \DecValTok{1}
   \ControlFlowTok{while}\NormalTok{ (}\ConstantTok{TRUE}\NormalTok{) \{}
-\NormalTok{    U }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{    X }\OtherTok{\textless{}{-}} \FunctionTok{rdexp}\NormalTok{(lambda.opt) }\CommentTok{\# rdexpn(1, lambda.opt)}
+\NormalTok{    u }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{    x }\OtherTok{\textless{}{-}} \FunctionTok{rdexp}\NormalTok{(lambda.opt) }\CommentTok{\# rdexpn(1, lambda.opt)}
 \NormalTok{    ngen }\OtherTok{\textless{}\textless{}{-}}\NormalTok{ ngen }\SpecialCharTok{+} \DecValTok{1} \CommentTok{\# Comentar esta línea para uso normal}
-    \CommentTok{\# if (U*exp((X\^{}2+1)*0.5{-}abs(X)) \textless{}= 1) return(X)}
-    \ControlFlowTok{if}\NormalTok{ (c.opt }\SpecialCharTok{*}\NormalTok{ U }\SpecialCharTok{*} \FunctionTok{ddexp}\NormalTok{(X, lambda.opt) }\SpecialCharTok{\textless{}=} \FunctionTok{dnorm}\NormalTok{(X)) }\FunctionTok{return}\NormalTok{(X)}
+    \CommentTok{\# if (u*exp((x\^{}2+1)*0.5{-}abs(x)) \textless{}= 1) return(x)}
+    \ControlFlowTok{if}\NormalTok{ (c.opt }\SpecialCharTok{*}\NormalTok{ u }\SpecialCharTok{*} \FunctionTok{ddexp}\NormalTok{(x, lambda.opt) }\SpecialCharTok{\textless{}=} \FunctionTok{dnorm}\NormalTok{(x)) }\FunctionTok{return}\NormalTok{(x)}
 \NormalTok{  \}}
 \NormalTok{\}}
 
@@ -3426,7 +3480,7 @@ Generamos una muestra de \(10^4\) observaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.11    0.00    0.10
+##    0.14    0.00    0.14
 \end{verbatim}
 
 Evaluamos la eficiencia:
@@ -3467,6 +3521,7 @@ Finalmente comparamos la distribución de los valores generados con la densidad 
 \end{figure}
 
 Podemos observar que la distribución de los valores generados es la que cabría esperar de una muestra de tamaño \texttt{nsim} de la distribución objetivo (lo que nos ayudaría a confirmar que el algoritmo está bien implementado, al ser un método exacto de simulación).
+\end{example}
 
 \hypertarget{elecciuxf3n-de-la-densidad-auxiliar}{%
 \subsection{Elección de la densidad auxiliar}\label{elecciuxf3n-de-la-densidad-auxiliar}}
@@ -3478,9 +3533,8 @@ encontrar el valor de \(c\) óptimo para cada densidad de esa familia:
 y, finalmente, elegir el mejor valor \(\theta_{0}\) del parámetro, en el sentido de ofrecer el menor posible \(c_{\theta}\):
 \[c_{\theta_{0}}=\min_{\theta\in\Theta}\max_{x}\frac{f(x) }{g_{\theta}(x)}.\]
 
-\begin{example}[simulación de la normal mediante la doble exponencial, continuación]
-\protect\hypertarget{exm:dnorm-ddexp-arb}{}{\label{exm:dnorm-ddexp-arb} \iffalse (simulación de la normal mediante la doble exponencial, continuación) \fi{} }
-\end{example}
+\begin{example}[simulación de la normal mediante la doble exponencial continuación]
+\protect\hypertarget{exm:dnorm-ddexp-arb}{}\label{exm:dnorm-ddexp-arb}
 
 Continuando con el Ejemplo \ref{exm:dnorm-ddexp-ar} anterior sobre la simulación de una normal estándar mediante el método de aceptación-rechazo, en lugar de fijar la densidad auxiliar a una doble exponencial con \(\lambda=1\), consideraremos el caso general de \(\lambda>0\):
 \[g_{\lambda}(x)  = \frac{\lambda}{2}e^{-\lambda\left| x \right|} \text{, } x\in\mathbb{R}.\]
@@ -3560,6 +3614,8 @@ Alternativamente también podríamos aproximar simultáneamente el parámetro ó
 ## [1] 1.315489
 \end{verbatim}
 
+\end{example}
+
 \hypertarget{bayes-ar}{%
 \subsection{Ejemplo: inferencia bayesiana}\label{bayes-ar}}
 
@@ -3610,8 +3666,7 @@ El algoritmo sería el siguiente:
 Aunque, como se muestra en el siguiente ejercicio, esta elección de densidad auxiliar puede ser muy poco adecuada, siendo preferible en la práctica emplear un método adaptativo que construya la densidad auxiliar de forma automática (Sección \ref{ars}).
 
 \begin{exercise}[Simulación de la distribución a posteriori a partir de la distribución a priori]
-\protect\hypertarget{exr:post-pri-ar}{}{\label{exr:post-pri-ar} \iffalse (Simulación de la distribución a posteriori a partir de la distribución a priori) \fi{} }
-\end{exercise}
+\protect\hypertarget{exr:post-pri-ar}{}\label{exr:post-pri-ar}
 
 Para la estimación Bayes de la media de una normal se suele utilizar
 como distribución a priori una Cauchy.
@@ -3779,6 +3834,8 @@ como distribución a priori una Cauchy.
   Repetir el apartado anterior con \(n=100\).
 \end{enumerate}
 
+\end{exercise}
+
 \hypertarget{modAR}{%
 \section{Modificaciones del método de aceptación-rechazo}\label{modAR}}
 
@@ -3790,15 +3847,15 @@ En el tiempo de computación del algoritmo de aceptación-rechazo influye:
 \item
   La dificultad de simular con la densidad auxiliar.
 \item
-  El tiempo necesario para hacer la comparación en el paso 4.
+  El tiempo necesario para hacer la comparación en el paso 3.
 \end{itemize}
 
 En ciertos casos el tiempo de computación necesario para evaluar \(f(x)\) puede ser alto.
 Para evitar evaluaciones de la densidad se puede emplear una función ``squeeze'' que aproxime la densidad por abajo (una envolvente inferior):
 \[s(x)\leq f(x) \text{, }\forall x\in \mathbb{R}.\]
 
-\begin{conjecture}[Marsaglia, 1977]
-\protect\hypertarget{cnj:marsaglia}{}{\label{cnj:marsaglia} \iffalse (Marsaglia, 1977) \fi{} }
+\begin{conjecture}[Marsaglia 1977]
+\protect\hypertarget{cnj:marsaglia}{}\label{cnj:marsaglia}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3814,6 +3871,7 @@ Para evitar evaluaciones de la densidad se puede emplear una función ``squeeze'
 
   2.b. en caso contrario volver al paso 1.
 \end{enumerate}
+
 \end{conjecture}
 
 \begin{figure}[!htb]
@@ -3875,8 +3933,8 @@ Tenemos entonces que:
 \[s_n(x)\leq f(x) \leq G_n(x)=c\cdot g_n(x)\]
 donde \(g_n(x)\) es una mixtura discreta de distribuciones tipo exponencial truncadas (las tasas pueden ser negativas), que se puede simular fácilmente combinando el método de composición (Sección \ref{composicion}) con el método de inversión.
 
-\begin{conjecture}[Gilks, 1992]
-\protect\hypertarget{cnj:gilks}{}{\label{cnj:gilks} \iffalse (Gilks, 1992) \fi{} }
+\begin{conjecture}[Gilks 1992]
+\protect\hypertarget{cnj:gilks}{}\label{cnj:gilks}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3899,6 +3957,7 @@ donde \(g_n(x)\) es una mixtura discreta de distribuciones tipo exponencial trun
 \item
   Volver al paso 2.
 \end{enumerate}
+
 \end{conjecture}
 
 Gilks y Wild (1992) propusieron una ligera modificación empleando tangentes para construir la cota superior, de esta forma se obtiene un método más eficiente pero requiere especificar la derivada de la densidad objetivo (ver Figura \ref{fig:squeeze}).
@@ -3925,8 +3984,7 @@ También se puede extender al caso multivariante y considerar transformaciones a
 Ver por ejemplo el paquete \href{https://paulnorthrop.github.io/rust/index.html}{\texttt{rust}}.
 
 \begin{example}[simulación de la distribución de Cauchy mediante cociente de uniformes]
-\protect\hypertarget{exm:cauchy-rou}{}{\label{exm:cauchy-rou} \iffalse (simulación de la distribución de Cauchy mediante cociente de uniformes) \fi{} }
-\end{example}
+\protect\hypertarget{exm:cauchy-rou}{}\label{exm:cauchy-rou}
 
 Si consideramos la distribución de Cauchy:
 \[f(x) = \frac{1}{\pi (1 + x^2)} \text{, } x\in \mathbb{R},\]
@@ -3964,7 +4022,7 @@ El correspondiente algoritmo está implementado en la función \href{https://rub
 ##     attr(x, "ngen") <- ngen
 ##     return(x)
 ## }
-## <bytecode: 0x00000000219f7be0>
+## <bytecode: 0x000000003409b238>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4004,18 +4062,17 @@ El correspondiente algoritmo está implementado en la función \href{https://rub
 ## Proporción de rechazos =  0.2157478
 \end{verbatim}
 
+\end{example}
+
 \hypertarget{composicion}{%
 \section{Método de composición (o de simulación condicional)}\label{composicion}}
 
-En ocasiones la densidad de interés se puede expresar como una
-mixtura discreta de densidades:
+En ocasiones la densidad de interés se puede expresar como una mixtura discreta de densidades:
 \[f(x)=\sum_{j=1}^{k}p_{j}f_{j}(x)\]
-con \(\sum_{j=1}^{k}p_j=1\), \(p_j\geq 0\) y \(f_j\) densidades
-(sería también válido para funciones de distribución o variables aleatorias,
-incluyendo el caso discreto).
+con \(\sum_{j=1}^{k}p_j=1\), \(p_j\geq 0\) y \(f_j\) densidades (sería también válido para funciones de distribución, incluyendo el caso discreto).
 
 \begin{conjecture}[simulación de una mixtura discreta]
-\protect\hypertarget{cnj:mixtura-discreta}{}{\label{cnj:mixtura-discreta} \iffalse (simulación de una mixtura discreta) \fi{} }
+\protect\hypertarget{cnj:mixtura-discreta}{}\label{cnj:mixtura-discreta}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -4024,18 +4081,16 @@ incluyendo el caso discreto).
 \item
   Generar \(X\sim f_J\).
 \end{enumerate}
+
 \end{conjecture}
 
 \begin{example}[distribución doble exponencial]
-\protect\hypertarget{exm:dexp-mix}{}{\label{exm:dexp-mix} \iffalse (distribución doble exponencial) \fi{} }
-\end{example}
+\protect\hypertarget{exm:dexp-mix}{}\label{exm:dexp-mix}
 
 A partir de la densidad de la distribución doble exponencial:
-\[f(x) =\frac{\lambda }{2}e^{-\lambda \left\vert x\right\vert }%
-\text{, }\forall x\in \mathbb{R},\]
+\[f(x) =\frac{\lambda }{2}e^{-\lambda \left\vert x\right\vert } \text{, }\forall x\in \mathbb{R},\]
 se deduce que:
-\[f(x) =\frac{1}{2}f_{1}(x) +\frac{1}{2}f_{2}\left(
-x\right)\]
+\[f(x) = \frac{1}{2}f_{1}(x) + \frac{1}{2}f_{2}(x)\]
 siendo:
 \[f_{1}(x) = \left\{ 
 \begin{array}{ll}
@@ -4055,14 +4110,15 @@ El algoritmo resultante sería el siguiente (empleando dos números pseudoaleato
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Generar \(U,V\sim \mathcal{U}(0, 1)\).
+  Generar \(U,V \sim \mathcal{U}(0, 1)\).
 \item
-  Si \(U<0.5\) devolver \(X=-\ln \left( 1-V\right)/\lambda\).
+  Si \(U<0.5\) devolver \(X= -\ln( 1-V )/\lambda\).
 \item
-  En caso contrario devolver \(X=\ln(V)/\lambda\).
+  En caso contrario devolver \(X= \ln(V)/\lambda\).
 \end{enumerate}
 
 Este método está implementado en la función \href{https://rubenfcasal.github.io/simres/reference/ddexp.html}{\texttt{rdexp()}} del paquete \href{https://rubenfcasal.github.io/simres}{\texttt{simres}} (fichero \href{R/ddexp.R}{\emph{ddexp.R}}).
+\end{example}
 
 Observaciones:
 
@@ -4084,7 +4140,7 @@ En el caso de una mixtura continua tendríamos:
 \[f(x)=\int g(x|y)h(y)dy\]
 
 \begin{conjecture}[simulación de una mixtura continua]
-\protect\hypertarget{cnj:mixtura-continua}{}{\label{cnj:mixtura-continua} \iffalse (simulación de una mixtura continua) \fi{} }
+\protect\hypertarget{cnj:mixtura-continua}{}\label{cnj:mixtura-continua}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -4093,6 +4149,7 @@ En el caso de una mixtura continua tendríamos:
 \item
   Generar \(X\sim g(\cdot |Y)\).
 \end{enumerate}
+
 \end{conjecture}
 
 Este algoritmo es muy empleado en Inferencia Bayesiana y en la simulación de algunas variables discretas (como la Binomial Negativa, denominada también distribución Gamma-Poisson, o la distribución Beta-Binomial; ver Sección \ref{notables-disc}),
@@ -4123,8 +4180,8 @@ Se basa en la siguiente propiedad. Dadas dos variables aleatorias independientes
 \(\sqrt{2E} \cos 2\pi U\) y \(\sqrt{2E}\operatorname{sen} 2\pi U\) son
 \(\mathcal{N}( 0, 1 )\) independientes.
 
-\begin{conjecture}[de Box-Müller, 1958]
-\protect\hypertarget{cnj:box-muller}{}{\label{cnj:box-muller} \iffalse (de Box-Müller, 1958) \fi{} }
+\begin{conjecture}[de Box-Müller 1958]
+\protect\hypertarget{cnj:box-muller}{}\label{cnj:box-muller}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -4135,6 +4192,7 @@ Se basa en la siguiente propiedad. Dadas dos variables aleatorias independientes
 \item
   Devolver \(X_1=W_1\cos W_2\), \(X_2=W_1\operatorname{sen}W_2\).
 \end{enumerate}
+
 \end{conjecture}
 
 Podemos hacer que la función \texttt{rnorm()} de R emplee este algoritmo estableciendo el parámetro \texttt{normal.kind} a \texttt{"Box-Muller"} en una llamada previa a \texttt{set.seed()} o \texttt{RNGkind()}.
@@ -4157,8 +4215,8 @@ También se podrían emplear resultado conocidos relacionados con esta distribuc
 \[U_{(k)} \sim \mathcal{Beta}(k,n+1-k).\]
 El resultado es el algoritmo de Fox (1963), que podría ser adecuado para simular esta distribución cuando \(a, b \in \mathbb{N}\) y son valores pequeños.
 
-\begin{conjecture}[de Fox, 1963]
-\protect\hypertarget{cnj:fox}{}{\label{cnj:fox} \iffalse (de Fox, 1963) \fi{} }
+\begin{conjecture}[de Fox 1963]
+\protect\hypertarget{cnj:fox}{}\label{cnj:fox}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -4169,6 +4227,7 @@ El resultado es el algoritmo de Fox (1963), que podría ser adecuado para simula
 \item
   Devolver \(X=U_{(a)}\).
 \end{enumerate}
+
 \end{conjecture}
 
 Es obvio que este algoritmo puede resultar muy lento si alguno de los dos parámetros es elevado (pues habrá que simular muchas uniformes para conseguir un valor simulado de la beta).
@@ -4178,8 +4237,8 @@ En cualquier caso, es obvio que no es necesario ordenar todos los valores \(U_{i
 Un método válido aunque \(a\) ó \(b\) no sean enteros es el dado por el
 algoritmo de Jöhnk (1964).
 
-\begin{conjecture}[de Jöhnk, 1964]
-\protect\hypertarget{cnj:johnk}{}{\label{cnj:johnk} \iffalse (de Jöhnk, 1964) \fi{} }
+\begin{conjecture}[de Jöhnk 1964]
+\protect\hypertarget{cnj:johnk}{}\label{cnj:johnk}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -4192,6 +4251,7 @@ algoritmo de Jöhnk (1964).
 
   en caso contrario volver al paso 1.
 \end{enumerate}
+
 \end{conjecture}
 
 El método resulta extremadamente ineficiente para \(a\) ó \(b\) mayores que 1.
@@ -4199,8 +4259,8 @@ Esto es debido a que la condición \(S\leq1\) del paso 3 puede tardar muchísimo
 Por este motivo, el algoritmo de Jöhnk sólo es recomendable para \(a<1\) y \(b<1\).
 Como remedio a esto puede usarse el algoritmo de Cheng (1978) que es algo más complicado de implementar\footnote{R implementa este algoritmo en el fichero fuente \href{https://svn.r-project.org/R/trunk/src/nmath/rbeta.c}{rbeta.c}.} pero mucho más eficiente.
 
-\begin{conjecture}[de Cheng, 1978]
-\protect\hypertarget{cnj:cheng}{}{\label{cnj:cheng} \iffalse (de Cheng, 1978) \fi{} }
+\begin{conjecture}[de Cheng 1978]
+\protect\hypertarget{cnj:cheng}{}\label{cnj:cheng}
 
 Inicialización:
 
@@ -4227,6 +4287,7 @@ Simulación:
 
   en caso contrario volver al paso 1.
 \end{enumerate}
+
 \end{conjecture}
 
 \hypertarget{referencias}{%
@@ -4695,7 +4756,7 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 ##         p.value = PVAL, method = METHOD, data.name = DNAME), 
 ##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x00000000307d6d20>
+## <bytecode: 0x0000000013a8b988>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -6373,7 +6434,7 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 ##         envir = globalenv())
 ##     return(u)
 ## }
-## <bytecode: 0x0000000020bcf678>
+## <bytecode: 0x000000002e361758>
 ## <environment: namespace:simres>
 \end{verbatim}
 

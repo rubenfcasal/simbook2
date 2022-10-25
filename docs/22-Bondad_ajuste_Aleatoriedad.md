@@ -315,7 +315,7 @@ simres::chisq.cont.test
 ##         p.value = PVAL, method = METHOD, data.name = DNAME), 
 ##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x00000000307d6d20>
+## <bytecode: 0x0000000013a8b988>
 ## <environment: namespace:simres>
 ```
 

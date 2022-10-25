@@ -514,7 +514,7 @@ simres::rvng
 ##         envir = globalenv())
 ##     return(u)
 ## }
-## <bytecode: 0x0000000020bcf678>
+## <bytecode: 0x000000002e361758>
 ## <environment: namespace:simres>
 ```
 

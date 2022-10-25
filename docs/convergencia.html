@@ -304,48 +304,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> Convergencia</h2>
 <p>Supongamos que estamos interesados en aproximar la media teórica <span class="math inline">\(\mu = E\left( X\right)\)</span> a partir de una secuencia i.i.d. <span class="math inline">\(X_{1}\)</span>, <span class="math inline">\(X_{2}\)</span>, <span class="math inline">\(\ldots\)</span>, <span class="math inline">\(X_{n}\)</span> obtenida mediante simulación, utilizando para ello la media muestral <span class="math inline">\(\bar{X}_{n}\)</span>.
 Una justificación teórica de la validez de esta aproximación es <em>la ley (débil<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>) de los grandes números</em>:</p>
-
 <div class="theorem">
-<p><span id="thm:khinchine" class="theorem"><strong>Teorema 3.1  (Ley débil de los grandes números; Khintchine, 1928)  </strong></span><br>
+<p><span id="thm:khinchine" class="theorem"><strong>Teorema 3.1  (Ley débil de los grandes números; Khintchine 1928) </strong></span><br>
 Si <span class="math inline">\(X_{1}\)</span>, <span class="math inline">\(X_{2}\)</span>, <span class="math inline">\(\ldots\)</span> es una secuencia de variables aleatorias independientes e idénticamente distribuidas con media finita <span class="math inline">\(E\left( X_{i}\right) =\mu\)</span> (i.e. <span class="math inline">\(E\left( \left\vert X_{i} \right\vert \right) &lt; \infty\)</span>) entonces <span class="math inline">\(\overline{X}_{n}=\left( X_{1}+\ldots +X_{n}\right) /n\)</span>
 converge en probabilidad a <span class="math inline">\(\mu\)</span>: <span class="math display">\[\overline{X}_{n}\ \overset{p}{ \longrightarrow }\ \mu\]</span>
 Es decir, para cualquier <span class="math inline">\(\varepsilon &gt;0\)</span>:
 <span class="math display">\[\lim\limits_{n\rightarrow \infty }P\left( \left\vert \overline{X}_{n}-\mu
 \right\vert &lt;\varepsilon \right) = 1.\]</span></p>
 </div>
-
 <div class="example">
-<span id="exm:unnamed-chunk-2" class="example"><strong>Ejemplo 3.1  (Aproximación de una probabilidad)  </strong></span>
-</div>
+<p><span id="exm:unlabeled-div-3" class="example"><strong>Ejemplo 3.1  (Aproximación de una probabilidad) </strong></span><br></p>
 <p>Simulamos una variable aleatoria <span class="math inline">\(X\)</span> con distribución de Bernoulli de parámetro <span class="math inline">\(p=0.5\)</span>:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="convergencia.html#cb92-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb92-2"><a href="convergencia.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb92-3"><a href="convergencia.html#cb92-3" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co"># nsim &lt;- 100</span></span>
-<span id="cb92-4"><a href="convergencia.html#cb92-4" aria-hidden="true" tabindex="-1"></a>rx <span class="ot">&lt;-</span> <span class="fu">runif</span>(nsim) <span class="sc">&lt;</span> p <span class="co"># rbinom(nsim, size = 1, prob = p)</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="convergencia.html#cb93-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb93-2"><a href="convergencia.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb93-3"><a href="convergencia.html#cb93-3" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co"># nsim &lt;- 100</span></span>
+<span id="cb93-4"><a href="convergencia.html#cb93-4" aria-hidden="true" tabindex="-1"></a>rx <span class="ot">&lt;-</span> <span class="fu">runif</span>(nsim) <span class="sc">&lt;</span> p <span class="co"># rbinom(nsim, size = 1, prob = p)</span></span></code></pre></div>
 <p>La aproximación por simulación de <span class="math inline">\(E(X) = p\)</span> será:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="convergencia.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(rx) </span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="convergencia.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(rx) </span></code></pre></div>
 <pre><code>## [1] 0.5047</code></pre>
 <p>Podemos generar un gráfico con la evolución de la aproximación:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="convergencia.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cumsum</span>(rx)<span class="sc">/</span><span class="dv">1</span><span class="sc">:</span>nsim, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Número de generaciones&quot;</span>, </span>
-<span id="cb95-2"><a href="convergencia.html#cb95-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Proporción muestral&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb95-3"><a href="convergencia.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">mean</span>(rx), <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb95-4"><a href="convergencia.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="co"># valor teórico</span></span>
-<span id="cb95-5"><a href="convergencia.html#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> p) </span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="convergencia.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cumsum</span>(rx)<span class="sc">/</span><span class="dv">1</span><span class="sc">:</span>nsim, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Número de generaciones&quot;</span>, </span>
+<span id="cb96-2"><a href="convergencia.html#cb96-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Proporción muestral&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb96-3"><a href="convergencia.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">mean</span>(rx), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb96-4"><a href="convergencia.html#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="co"># valor teórico</span></span>
+<span id="cb96-5"><a href="convergencia.html#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> p) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:proporcion"></span>
 <img src="03-Analisis_resultados_files/figure-html/proporcion-1.png" alt="Aproximación de la proporción en función del número de generaciones." width="70%" />
 <p class="caption">
 Figura 3.1: Aproximación de la proporción en función del número de generaciones.
 </p>
 </div>
+</div>
 <div id="detección-de-problemas-de-convergencia" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Detección de problemas de convergencia</h3>
 <p>En la ley débil se requiere como condición suficiente que <span class="math inline">\(E\left( \left\vert X_{i} \right\vert \right) &lt; \infty\)</span>, en caso contrario la media muestral puede no converger a una constante.
 Un ejemplo conocido es la distribución de Cauchy:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="convergencia.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb96-2"><a href="convergencia.html#cb96-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb96-3"><a href="convergencia.html#cb96-3" aria-hidden="true" tabindex="-1"></a>rx <span class="ot">&lt;-</span> <span class="fu">rcauchy</span>(nsim) <span class="co"># rx &lt;- rt(nsim, df = 2)</span></span>
-<span id="cb96-4"><a href="convergencia.html#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cumsum</span>(rx)<span class="sc">/</span><span class="dv">1</span><span class="sc">:</span>nsim, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
-<span id="cb96-5"><a href="convergencia.html#cb96-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Número de generaciones&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Media muestral&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="convergencia.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb97-2"><a href="convergencia.html#cb97-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb97-3"><a href="convergencia.html#cb97-3" aria-hidden="true" tabindex="-1"></a>rx <span class="ot">&lt;-</span> <span class="fu">rcauchy</span>(nsim) <span class="co"># rx &lt;- rt(nsim, df = 2)</span></span>
+<span id="cb97-4"><a href="convergencia.html#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cumsum</span>(rx)<span class="sc">/</span><span class="dv">1</span><span class="sc">:</span>nsim, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
+<span id="cb97-5"><a href="convergencia.html#cb97-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Número de generaciones&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Media muestral&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:cauchy"></span>
 <img src="03-Analisis_resultados_files/figure-html/cauchy-1.png" alt="Evolución de la media muestral de una distribución de Cauchy en función del número de generaciones." width="70%" />
 <p class="caption">
@@ -355,7 +353,7 @@ Figura 3.2: Evolución de la media muestral de una distribución de Cauchy en fu
 <p>Como conclusión, para detectar problemas de convergencia es especialmente recomendable representar la evolución de la aproximación de la característica de interés (sobre el número de generaciones),
 además de realizar otros análisis descriptivos de las simulaciones.
 Por ejemplo, en este caso podemos observar los valores que producen estos saltos mediante un gráfico de cajas:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="convergencia.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(rx)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="convergencia.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(rx)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:cauchy-box"></span>
 <img src="03-Analisis_resultados_files/figure-html/cauchy-box-1.png" alt="Gráfico de cajas de 10000 generaciones de una distribución de Cauchy." width="70%" />
 <p class="caption">
@@ -375,14 +373,13 @@ donde:
 es la cuasi-varianza muestral<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>.</p>
 <p>Los valores obtenidos servirían como medidas básicas de la precisión de la aproximación, aunque su principal aplicación es la construcción de intervalos de confianza.
 Si se endurecen las suposiciones de la ley débil de los grandes números (Teorema <a href="convergencia.html#thm:khinchine">3.1</a>), exigiendo la existencia de varianza finita (<span class="math inline">\(E\left( X_{i}^2 \right) &lt; \infty\)</span>), se dispone de un resultado más preciso sobre las variaciones de la aproximación por simulación en torno al límite teórico.</p>
-
 <div class="theorem">
-<span id="thm:tcl" class="theorem"><strong>Teorema 3.2  (central del límite, CLT)  </strong></span><br>
-Si <span class="math inline">\(X_{1}\)</span>, <span class="math inline">\(X_{2}\)</span>, <span class="math inline">\(\ldots\)</span> es una secuencia de variables aleatorias independientes e idénticamente distribuidas con <span class="math inline">\(E\left( X_{i}\right) =\mu\)</span> y
+<p><span id="thm:tcl" class="theorem"><strong>Teorema 3.2  (central del límite CLT) </strong></span><br></p>
+<p>Si <span class="math inline">\(X_{1}\)</span>, <span class="math inline">\(X_{2}\)</span>, <span class="math inline">\(\ldots\)</span> es una secuencia de variables aleatorias independientes e idénticamente distribuidas con <span class="math inline">\(E\left( X_{i}\right) =\mu\)</span> y
 <span class="math inline">\(Var\left( X_{i}\right) = \sigma ^{2}&lt;\infty\)</span>, entonces la media muestral estandarizada converge en distribución a una normal estándar:
 <span class="math display">\[Z_{n}=\frac{\overline{X}_{n}-\mu }{\frac{\sigma }{\sqrt{n}}}
 \overset{d}{ \longrightarrow } N(0,1).\]</span>
-Es decir, <span class="math inline">\(\lim\limits_{n\rightarrow \infty }F_{Z_{n}}(z)=\Phi (z)\)</span>.
+Es decir, <span class="math inline">\(\lim\limits_{n\rightarrow \infty }F_{Z_{n}}(z)=\Phi (z)\)</span>.</p>
 </div>
 <p>Por tanto, un intervalo de confianza asintótico para <span class="math inline">\(\mu\)</span> es:
 <span class="math display">\[IC_{1-\alpha }(\mu ) = \left( \overline{X}_{n}
@@ -392,34 +389,33 @@ Es decir, <span class="math inline">\(\lim\limits_{n\rightarrow \infty }F_{Z_{n}
 <p>El CLT es un resultado asintótico. En la práctica la convergencia es aleatoria, ya que depende de la muestra simulada (las generaciones pseudoaleatorias).
 Además, la convergencia puede considerarse lenta, en el sentido de que, por ejemplo, para doblar la precisión (disminuir el error a la mitad), necesitaríamos un número de generaciones cuatro veces mayor (Ver Sección <a href="num-gen.html#num-gen">3.2</a>).
 Pero una ventaja es que este error no depende del número de dimensiones (en el caso multidimensional puede ser mucho más rápida que otras alternativas numéricas; ver Apéndice <a href="int-num.html#int-num">C</a>).</p>
-
 <div class="example">
-<span id="exm:unnamed-chunk-5" class="example"><strong>Ejemplo 3.2  (Aproximación de la media de una distribución normal)  </strong></span>
-</div>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="convergencia.html#cb98-1" aria-hidden="true" tabindex="-1"></a>xsd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb98-2"><a href="convergencia.html#cb98-2" aria-hidden="true" tabindex="-1"></a>xmed <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb98-3"><a href="convergencia.html#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb98-4"><a href="convergencia.html#cb98-4" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb98-5"><a href="convergencia.html#cb98-5" aria-hidden="true" tabindex="-1"></a>rx <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nsim, xmed, xsd)</span></code></pre></div>
+<p><span id="exm:unlabeled-div-4" class="example"><strong>Ejemplo 3.2  (Aproximación de la media de una distribución normal) </strong></span><br></p>
+<p>Como ejemplo simulamos valores de una normal estándar:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="convergencia.html#cb99-1" aria-hidden="true" tabindex="-1"></a>xsd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb99-2"><a href="convergencia.html#cb99-2" aria-hidden="true" tabindex="-1"></a>xmed <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb99-3"><a href="convergencia.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb99-4"><a href="convergencia.html#cb99-4" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb99-5"><a href="convergencia.html#cb99-5" aria-hidden="true" tabindex="-1"></a>rx <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(nsim, xmed, xsd)</span></code></pre></div>
 <p>La aproximación por simulación de la media será:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="convergencia.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(rx)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="convergencia.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(rx)</span></code></pre></div>
 <pre><code>## [1] -0.01164814</code></pre>
 <p>Como medida de la precisión de la aproximación podemos utilizar el error máximo:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="convergencia.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">sd</span>(rx)<span class="sc">/</span><span class="fu">sqrt</span>(nsim)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="convergencia.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">sd</span>(rx)<span class="sc">/</span><span class="fu">sqrt</span>(nsim)</span></code></pre></div>
 <pre><code>## [1] 0.06545382</code></pre>
 <p>(es habitual emplear 2 en lugar de 1.96,
 lo que se correspondería con <span class="math inline">\(1 - \alpha = 0.9545\)</span> en el caso de normalidad).
 Podemos añadir también los correspondientes intervalos de confianza al gráfico de convergencia:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="convergencia.html#cb103-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>nsim</span>
-<span id="cb103-2"><a href="convergencia.html#cb103-2" aria-hidden="true" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(rx)<span class="sc">/</span>n</span>
-<span id="cb103-3"><a href="convergencia.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (cumsum(rx^2) - n*est^2)/(n-1) # Cuasi-varianzas muestrales</span></span>
-<span id="cb103-4"><a href="convergencia.html#cb103-4" aria-hidden="true" tabindex="-1"></a>esterr <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((<span class="fu">cumsum</span>(rx<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>n <span class="sc">-</span> est<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(n<span class="dv">-1</span>)) <span class="co"># Errores estándar de la media</span></span>
-<span id="cb103-5"><a href="convergencia.html#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(est, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Número de generaciones&quot;</span>, </span>
-<span id="cb103-6"><a href="convergencia.html#cb103-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Media y rango de error&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb103-7"><a href="convergencia.html#cb103-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> est[nsim], <span class="at">lty=</span><span class="dv">2</span>)</span>
-<span id="cb103-8"><a href="convergencia.html#cb103-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(est <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>esterr, <span class="at">lty=</span><span class="dv">3</span>)</span>
-<span id="cb103-9"><a href="convergencia.html#cb103-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(est <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>esterr, <span class="at">lty=</span><span class="dv">3</span>)</span>
-<span id="cb103-10"><a href="convergencia.html#cb103-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> xmed)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="convergencia.html#cb104-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>nsim</span>
+<span id="cb104-2"><a href="convergencia.html#cb104-2" aria-hidden="true" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(rx)<span class="sc">/</span>n</span>
+<span id="cb104-3"><a href="convergencia.html#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (cumsum(rx^2) - n*est^2)/(n-1) # Cuasi-varianzas muestrales</span></span>
+<span id="cb104-4"><a href="convergencia.html#cb104-4" aria-hidden="true" tabindex="-1"></a>esterr <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((<span class="fu">cumsum</span>(rx<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>n <span class="sc">-</span> est<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(n<span class="dv">-1</span>)) <span class="co"># Errores estándar de la media</span></span>
+<span id="cb104-5"><a href="convergencia.html#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(est, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Número de generaciones&quot;</span>, </span>
+<span id="cb104-6"><a href="convergencia.html#cb104-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Media y rango de error&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb104-7"><a href="convergencia.html#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> est[nsim], <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb104-8"><a href="convergencia.html#cb104-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(est <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>esterr, <span class="at">lty=</span><span class="dv">3</span>)</span>
+<span id="cb104-9"><a href="convergencia.html#cb104-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(est <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>esterr, <span class="at">lty=</span><span class="dv">3</span>)</span>
+<span id="cb104-10"><a href="convergencia.html#cb104-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> xmed)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:conv-esterr"></span>
 <img src="03-Analisis_resultados_files/figure-html/conv-esterr-1.png" alt="Gráfico de convergencia incluyendo el error de la aproximación." width="70%" />
 <p class="caption">
@@ -427,6 +423,7 @@ Figura 3.4: Gráfico de convergencia incluyendo el error de la aproximación.
 </p>
 </div>
 <p>Podemos generar este gráfico empleando la función <a href="https://rubenfcasal.github.io/simres/reference/mc.plot.html"><code>conv.plot()</code></a> (o <a href="https://rubenfcasal.github.io/simres/reference/mc.plot.html"><code>mc.plot()</code></a>) del paquete <a href="https://rubenfcasal.github.io/simres"><code>simres</code></a> (fichero <a href="R/mc.plot.R"><em>mc.plot.R</em></a>).</p>
+</div>
 </div>
 </div>
 <div class="footnotes">

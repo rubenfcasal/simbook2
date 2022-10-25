@@ -312,11 +312,11 @@ Se distingue entre tres tipos de secuencias:</p>
 <div id="números-aleatorios-puros" class="section level3" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> Números aleatorios puros</h3>
 <p>Normalmente son obtenidos por procesos físicos (loterías, ruletas, ruidos…) y, hasta hace una décadas, se almacenaban en <em>tablas de dígitos aleatorios</em>.
-Por ejemplo, en 1955 la Corporación RAND publicó el libro <a href="https://www.rand.org/pubs/monograph_reports/MR1418.html"><em>A Million Random Digits with 100,000 Normal Deviates</em></a> que contenía números aleatorios generados mediante una ruleta electrónica conectada a una computadora (ver Figura <a href="tipos-de-números-aleatorios.html#fig:randbook">1.1</a>).</p>
+Por ejemplo, en 1955 la Corporación RAND publicó el libro <a href="https://www.rand.org/pubs/monograph_reports/MR1418.html"><em>A Million Random Digits with 100,000 Normal Deviates</em></a> que contenía números aleatorios generados mediante una ruleta electrónica conectada a una computadora (ver Figura <a href="tipos-de-números-aleatorios.html#fig:randbook">1.4</a>).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:randbook"></span>
 <img src="images/RAND.png" alt="Líneas 10580-10594, columnas 21-40, del libro *A Million Random Digits with 100,000 Normal Deviates*." width="30%" />
 <p class="caption">
-Figura 1.1: Líneas 10580-10594, columnas 21-40, del libro <em>A Million Random Digits with 100,000 Normal Deviates</em>.
+Figura 1.4: Líneas 10580-10594, columnas 21-40, del libro <em>A Million Random Digits with 100,000 Normal Deviates</em>.
 </p>
 </div>
 <!-- 
@@ -357,7 +357,7 @@ Pendiente
 *números cuasi-aleatorios*: ... (se podría pensar que son una única generación de una variable aleatoria)?
 -->
 <p>Algunos problemas, como la integración numérica (en el Capítulo <a href="#monte-carlo"><strong>??</strong></a> se tratarán métodos de integración Monte Carlo), no dependen realmente de la aleatoriedad de la secuencia. Para evitar generaciones poco probables, se puede recurrir a secuencias cuasi-aleatorias, también denominadas <em>sucesiones de baja discrepancia</em> (hablaríamos entonces de métodos cuasi-Monte Carlo). La idea sería que la proporción de valores en una región cualquiera sea siempre aproximadamente proporcional a la medida de la región (como sucedería en media con la distribución uniforme, aunque no necesariamente para una realización concreta).</p>
-<p>Por ejemplo, el paquete <a href="https://CRAN.R-project.org/package=randtoolbox"><code>randtoolbox</code></a> de R implementa métodos para la generación de secuencias cuasi-aleatorias (ver Figura <a href="tipos-de-números-aleatorios.html#fig:randtoolbox">1.2</a>).</p>
+<p>Por ejemplo, el paquete <a href="https://CRAN.R-project.org/package=randtoolbox"><code>randtoolbox</code></a> de R implementa métodos para la generación de secuencias cuasi-aleatorias (ver Figura <a href="tipos-de-números-aleatorios.html#fig:randtoolbox">1.5</a>).</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tipos-de-números-aleatorios.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randtoolbox)</span>
 <span id="cb15-2"><a href="tipos-de-números-aleatorios.html#cb15-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
 <span id="cb15-3"><a href="tipos-de-números-aleatorios.html#cb15-3" aria-hidden="true" tabindex="-1"></a>par.old <span class="ot">&lt;-</span> <span class="fu">par</span>( <span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
@@ -367,7 +367,7 @@ Pendiente
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:randtoolbox"></span>
 <img src="01-Introduccion_files/figure-html/randtoolbox-1.png" alt="Secuencias cuasi-aleatorias bidimensionales obtenidas con los métodos de Halton (izquierda), Sobol (centro) y Torus (derecha)." width="100%" />
 <p class="caption">
-Figura 1.2: Secuencias cuasi-aleatorias bidimensionales obtenidas con los métodos de Halton (izquierda), Sobol (centro) y Torus (derecha).
+Figura 1.5: Secuencias cuasi-aleatorias bidimensionales obtenidas con los métodos de Halton (izquierda), Sobol (centro) y Torus (derecha).
 </p>
 </div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="tipos-de-números-aleatorios.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(par.old)</span></code></pre></div>

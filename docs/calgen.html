@@ -313,8 +313,8 @@ En el Apéndice <a href="gof-aleat.html#gof-aleat">B</a> se describen algunos de
 Sin embargo, los métodos clásicos pueden no ser muy adecuados para evaluar generadores de números pseudoaleatorios (ver L’Ecuyer y Simard, 2007).
 La recomendación sería emplear baterías de contrastes recientes, como las descritas en la Subsección <a href="calgen.html#baterias">2.3.2</a>.</p>
 <p>Hay que destacar algunas diferencias entre el uso de este tipo de métodos en inferencia y en simulación.
-Por ejemplo, si empleamos un constrate de hipótesis del modo habitual, desconfiamos del generador si la muestra (secuencia) no se ajusta a la distribución teórica (<span class="math inline">\(p\)</span>-valor <span class="math inline">\(\leq \alpha\)</span>).
-En simulación, además, también se sospecha si se ajusta demasiado bien a la distribución teórica (<span class="math inline">\(p\)</span>-valor <span class="math inline">\(\geq1-\alpha\)</span>), lo que indicaría que no reproduce adecuadamente la variabilidad.</p>
+Por ejemplo, si empleamos un constrate de hipótesis del modo habitual, desconfiamos del generador si la muestra (secuencia) no se ajusta a la distribución teórica (p-valor <span class="math inline">\(\leq \alpha\)</span>).
+En simulación, además, también se sospecha si se ajusta demasiado bien a la distribución teórica (p-valor <span class="math inline">\(\geq1-\alpha\)</span>), lo que indicaría que no reproduce adecuadamente la variabilidad.</p>
 <p>Uno de los contrastes más conocidos es el test chi-cuadrado de bondad de ajuste (<code>chisq.test</code> para el caso discreto).
 Aunque si la variable de interés es continua, habría que discretizarla (con la correspondiente perdida de información).
 Por ejemplo, se podría emplear la función <code>simres::chisq.cont.test()</code> (fichero <a href="R/test.R"><em>test.R</em></a>), que imita a las incluidas en R:</p>
@@ -360,12 +360,10 @@ Por ejemplo, se podría emplear la función <code>simres::chisq.cont.test()</cod
 ##         p.value = PVAL, method = METHOD, data.name = DNAME), 
 ##         RESULTS), class = &quot;htest&quot;)
 ## }
-## &lt;bytecode: 0x000000001210ddd8&gt;
+## &lt;bytecode: 0x000000001597e908&gt;
 ## &lt;environment: namespace:simres&gt;</code></pre>
-
 <div class="example">
-<span id="exm:congru512b" class="example"><strong>Ejemplo 2.2  (análisis de un generador congruencial, continuación)  </strong></span>
-</div>
+<p><span id="exm:congru512b" class="example"><strong>Ejemplo 2.2  (análisis de un generador congruencial continuación) </strong></span><br></p>
 <p>Continuando con el generador congruencial del Ejemplo <a href="gen-cong.html#exm:congru512">2.1</a>:</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="calgen.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.rng</span>(<span class="dv">321</span>, <span class="st">&quot;lcg&quot;</span>, <span class="at">a =</span> <span class="dv">5</span>, <span class="at">c =</span> <span class="dv">1</span>, <span class="at">m =</span> <span class="dv">512</span>)  <span class="co"># Establecer semilla y parámetros</span></span>
 <span id="cb63-2"><a href="calgen.html#cb63-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">500</span></span>
@@ -399,7 +397,7 @@ Figura 2.3: Gráfico resultante de aplicar la función <code>chisq.cont.test()</
 ## data:  u
 ## X-squared = 0.12, df = 9, p-value = 1</code></pre>
 <p>Alternativamente, por ejemplo si solo se pretende aplicar el contraste, se podría emplear la función <code>simres::freq.test()</code> (fichero <a href="R/test.R"><em>test.R</em></a>) para este caso particular (ver Sección <a href="contrastes-específicos-para-generadores-aleatorios.html#freq-test">B.3.1</a>).</p>
-<p>Como se muestra en la Figura <a href="calgen.html#fig:chisq-test-unif">2.3</a> el histograma de la secuencia generada es muy plano (comparado con lo que cabría esperar de una muestra de tamaño 500 de una uniforme), y consecuentemente el <span class="math inline">\(p\)</span>-valor del contraste chi-cuadrado es prácticamente 1, lo que indicaría que este generador no reproduce adecuadamente la variabilidad de una distribución uniforme.</p>
+<p>Como se muestra en la Figura <a href="calgen.html#fig:chisq-test-unif">2.3</a> el histograma de la secuencia generada es muy plano (comparado con lo que cabría esperar de una muestra de tamaño 500 de una uniforme), y consecuentemente el p-valor del contraste chi-cuadrado es prácticamente 1, lo que indicaría que este generador no reproduce adecuadamente la variabilidad de una distribución uniforme.</p>
 <p>Otro contraste de bondad de ajuste muy conocido es el test de Kolmogorov-Smirnov, implementado en <code>ks.test</code> (ver Sección <a href="gof.html#ks-test">B.1.5</a>).
 Este contraste de hipótesis compara la función de distribución bajo la hipótesis nula con la función de distribución empírica (ver Sección <a href="gof.html#empdistr">B.1.2</a>), representadas en la Figura <a href="calgen.html#fig:empdistrunif">2.4</a>:</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="calgen.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
@@ -436,6 +434,7 @@ Figura 2.5: Gráfico secuencial de los valores generados.
 Figura 2.6: Gráfico de dispersión retardado de los valores generados.
 </p>
 </div>
+<p>Si se observa algún tipo de patrón indicaría dependencia (se podría considerar como una versión descriptiva del denominado “Parking lot test”), ver Ejemplo <a href="#exm:ret-gen"><strong>??</strong></a>.</p>
 <p>También podemos analizar las autocorrelaciones (las correlaciones de <span class="math inline">\((u_{i},u_{i+k})\)</span>, con <span class="math inline">\(k=1,\ldots,K\)</span>):</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="calgen.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(u)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:plot-acf"></span>
@@ -451,6 +450,7 @@ Figura 2.7: Autocorrelaciones de los valores generados.
 ## 
 ## data:  u
 ## X-squared = 22.533, df = 10, p-value = 0.01261</code></pre>
+</div>
 <div id="repetición-de-contrastes" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Repetición de contrastes</h3>
 <p>Los contrastes se plantean habitualmente desde el punto de vista de la inferencia estadística: se realiza una prueba sobre la única muestra disponible.
@@ -462,16 +462,14 @@ En simulación tiene mucho más sentido realizar un gran número de pruebas:</p>
 <li><p>La distribución del estadístico debería ajustarse a la teórica
 bajo <span class="math inline">\(H_0\)</span> (se podría realizar un nuevo contraste de bondad
 de ajuste).</p></li>
-<li><p>Los <span class="math inline">\(p\)</span>-valores obtenidos deberían ajustarse a una
+<li><p>Los p-valores obtenidos deberían ajustarse a una
 <span class="math inline">\(\mathcal{U}\left(0,1\right)\)</span> (se podría realizar también un
 contraste de bondad de ajuste).</p></li>
 </ul>
 <p>Este procedimiento es también el habitual para validar un método de
 contraste de hipótesis por simulación (ver Sección <a href="#contrastes"><strong>??</strong></a>).</p>
-
 <div class="example">
-<span id="exm:rep-test-randu" class="example"><strong>Ejemplo 2.3  </strong></span>
-</div>
+<p><span id="exm:rep-test-randu" class="example"><strong>Ejemplo 2.3  </strong></span><br></p>
 <p>Continuando con el generador congruencial RANDU, podemos pensar en estudiar la uniformidad de los valores generados empleando repetidamente el test chi-cuadrado:</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="calgen.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores iniciales</span></span>
 <span id="cb75-2"><a href="calgen.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.rng</span>(<span class="dv">543210</span>, <span class="st">&quot;lcg&quot;</span>, <span class="at">a =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">16</span> <span class="sc">+</span> <span class="dv">3</span>, <span class="at">c =</span> <span class="dv">0</span>, <span class="at">m =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">31</span>)  <span class="co"># Establecer semilla y parámetros</span></span>
@@ -502,7 +500,7 @@ contraste de hipótesis por simulación (ver Sección <a href="#contrastes"><str
 ## Proporción de rechazos al 10% = 0.112</code></pre>
 <p>Las proporciones de rechazo obtenidas deberían comportarse como una aproximación por simulación de los niveles teóricos.
 En este caso no se observa nada extraño, por lo que no habría motivos para sospechar de la uniformidad de los valores generados (aparentemente no hay problemas con la uniformidad de este generador).</p>
-<p>Adicionalmente, si queremos estudiar la proporción de rechazos (el <em>tamaño del contraste</em>) para los posibles valores de <span class="math inline">\(\alpha\)</span>, podemos emplear la distribución empírica del <span class="math inline">\(p\)</span>-valor (proporción de veces que resultó menor que un determinado valor):</p>
+<p>Adicionalmente, si queremos estudiar la proporción de rechazos (el <em>tamaño del contraste</em>) para los posibles valores de <span class="math inline">\(\alpha\)</span>, podemos emplear la distribución empírica del p-valor (proporción de veces que resultó menor que un determinado valor):</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="calgen.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribución empírica</span></span>
 <span id="cb78-2"><a href="calgen.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ecdf</span>(pvalor), <span class="at">do.points =</span> <span class="cn">FALSE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, </span>
 <span id="cb78-3"><a href="calgen.html#cb78-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;Nivel de significación&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Proporción de rechazos&#39;</span>)</span>
@@ -539,15 +537,15 @@ Figura 2.9: Distribución del estadístico del constraste.
 ## D = 0.023499, p-value = 0.6388
 ## alternative hypothesis: two-sided</code></pre>
 <p>En este caso la distribución observada del estadístico es la que cabría esperar de una muestra de este tamaño de la distribución teórica, por tanto, según este criterio, aparentemente no habría problemas con la uniformidad de este generador (hay que recordar que estamos utilizando contrastes de hipótesis como herramienta para ver si hay algún problema con el generador, no tiene mucho sentido hablar de aceptar o rechazar una hipótesis).</p>
-<p>En lugar de estudiar la distribución del estadístico de contraste siempre podemos analizar la distribución del <span class="math inline">\(p\)</span>-valor.
-Mientras que la distribución teórica del estadístico depende del contraste y puede ser complicada, la del <span class="math inline">\(p\)</span>-valor es siempre una uniforme.</p>
+<p>En lugar de estudiar la distribución del estadístico de contraste siempre podemos analizar la distribución del p-valor.
+Mientras que la distribución teórica del estadístico depende del contraste y puede ser complicada, la del p-valor es siempre una uniforme.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="calgen.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma</span></span>
 <span id="cb82-2"><a href="calgen.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalor, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb82-3"><a href="calgen.html#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">1</span>) <span class="co"># curve(dunif(x,0,1), add=TRUE)</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:rep-test-pval"></span>
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/rep-test-pval-1.png" alt="Distribución del $p$-valor del constraste." width="70%" />
+<img src="02-Generacion_numeros_aleatorios_files/figure-html/rep-test-pval-1.png" alt="Distribución del p-valor del constraste." width="70%" />
 <p class="caption">
-Figura 2.10: Distribución del <span class="math inline">\(p\)</span>-valor del constraste.
+Figura 2.10: Distribución del p-valor del constraste.
 </p>
 </div>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="calgen.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test chi-cuadrado</span></span>
@@ -565,22 +563,30 @@ Figura 2.10: Distribución del <span class="math inline">\(p\)</span>-valor del 
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="calgen.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.rng</span>(<span class="dv">543210</span>, <span class="st">&quot;lcg&quot;</span>, <span class="at">a =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">16</span> <span class="sc">+</span> <span class="dv">3</span>, <span class="at">c =</span> <span class="dv">0</span>, <span class="at">m =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">31</span>)</span>
 <span id="cb85-2"><a href="calgen.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="co"># res &lt;- rephtest(n = 30, test = chisq.cont.test, rand.gen = rng,</span></span>
 <span id="cb85-3"><a href="calgen.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="co">#          distribution = &quot;unif&quot;, output = FALSE, nestpar = 0)</span></span>
-<span id="cb85-4"><a href="calgen.html#cb85-4" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">rephtest</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">test =</span> freq.test, <span class="at">rand.gen =</span> rng)</span>
+<span id="cb85-4"><a href="calgen.html#cb85-4" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">rephtest</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">test =</span> freq.test, <span class="at">rand.gen =</span> rng, <span class="at">nclass =</span> <span class="dv">6</span>)</span>
 <span id="cb85-5"><a href="calgen.html#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(res)</span></code></pre></div>
 <pre><code>## List of 2
-##  $ statistics: num [1:1000] 0.2 0.6 6.2 0 1.4 0.8 0.8 7.2 2.6 0.6 ...
-##  $ p.values  : num [1:1000] 0.905 0.741 0.045 1 0.497 ...
+##  $ statistics: num [1:1000] 5.2 6.8 12.4 0.8 5.6 7.6 6.4 9.6 5.2 3.2 ...
+##  $ p.values  : num [1:1000] 0.392 0.2359 0.0297 0.977 0.3471 ...
 ##  - attr(*, &quot;class&quot;)= chr &quot;rhtest&quot;
 ##  - attr(*, &quot;method&quot;)= chr &quot;Chi-squared test for given probabilities&quot;
 ##  - attr(*, &quot;names.stat&quot;)= chr &quot;X-squared&quot;
-##  - attr(*, &quot;parameter&quot;)= Named num 2
+##  - attr(*, &quot;parameter&quot;)= Named num 5
 ##   ..- attr(*, &quot;names&quot;)= chr &quot;df&quot;</code></pre>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="calgen.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code></pre></div>
 <pre><code>## Proportion of rejections:
 ##    1%    5%   10%   25%   50% 
-## 0.010 0.053 0.112 0.210 0.626</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="calgen.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div>
-<p><img src="02-Generacion_numeros_aleatorios_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /><img src="02-Generacion_numeros_aleatorios_files/figure-html/unnamed-chunk-14-2.png" width="70%" style="display: block; margin: auto;" /><img src="02-Generacion_numeros_aleatorios_files/figure-html/unnamed-chunk-14-3.png" width="70%" style="display: block; margin: auto;" /></p>
+## 0.013 0.054 0.096 0.255 0.544</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="calgen.html#cb89-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb89-2"><a href="calgen.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rephtest"></span>
+<img src="02-Generacion_numeros_aleatorios_files/figure-html/rephtest-1.png" alt="Distribución de los p-valores y proporción de rechazos." width="90%" />
+<p class="caption">
+Figura 2.11: Distribución de los p-valores y proporción de rechazos.
+</p>
+</div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="calgen.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
+</div>
 </div>
 <div id="baterias" class="section level3" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Baterías de contrastes</h3>

@@ -302,14 +302,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ejercicios-1" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Ejercicios</h2>
-
 <div class="exercise">
-<span id="exr:RANDVN" class="exercise"><strong>Ejercicio 2.1  (Método de los cuadrados medios)  </strong></span>
-</div>
-<p>Uno de los primeros generadores utilizados fue el denominado método de los
-cuadrados medios propuesto por Von Neumann (1946). Con este
-procedimiento se generan números pseudoaleatorios de 4 dígitos de la
-siguiente forma:</p>
+<p><span id="exr:RANDVN" class="exercise"><strong>Ejercicio 2.1  (Método de los cuadrados medios) </strong></span><br></p>
+<p>Uno de los primeros generadores utilizados fue el denominado método de los cuadrados medios propuesto por Von Neumann (1946).
+Con este procedimiento se generan números pseudoaleatorios de 4 dígitos de la siguiente forma:</p>
 <ol style="list-style-type: lower-roman">
 <li><p>Se escoge un número de cuatro dígitos <span class="math inline">\(x_0\)</span> (semilla).</p></li>
 <li><p>Se eleva al cuadrado (<span class="math inline">\(x_0^2\)</span>) y se toman los cuatro dígitos centrales (<span class="math inline">\(x_1\)</span>).</p></li>
@@ -320,8 +316,11 @@ siguiente forma:</p>
 se puede utilizar que:
 <span class="math display">\[x_{i+1}=\left\lfloor \left(  x_{i}^2-\left\lfloor \dfrac{x_{i}^2}{10^{(2k-\frac{k}2)}}\right\rfloor 10^{(2k-\frac{k}2)}\right)
 /10^{\frac{k}2}\right\rfloor\]</span></p>
+<p>Estudiar las características de este generador a partir de una secuencia de 500 valores.
+Emplear únicamente métodos gráficos.</p>
+</div>
 <p>Este algoritmo está implementado en la función <code>simres::rvng()</code> (ver también <code>simres::rng()</code>; fichero <a href="R/rng.R"><em>rng.R</em></a>):</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="ejercicios-1.html#cb90-1" aria-hidden="true" tabindex="-1"></a>simres<span class="sc">::</span>rvng</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="ejercicios-1.html#cb91-1" aria-hidden="true" tabindex="-1"></a>simres<span class="sc">::</span>rvng</span></code></pre></div>
 <pre><code>## function (n, seed = as.numeric(Sys.time()), k = 4) 
 ## {
 ##     seed &lt;- seed%%10^k
@@ -337,20 +336,17 @@ se puede utilizar que:
 ##         envir = globalenv())
 ##     return(u)
 ## }
-## &lt;bytecode: 0x00000000317f9008&gt;
+## &lt;bytecode: 0x00000000325572c8&gt;
 ## &lt;environment: namespace:simres&gt;</code></pre>
-<p>Estudiar las características del generador de cuadrados medios a partir de una secuencia de 500 valores.
-Emplear únicamente métodos gráficos.</p>
-
 <div class="exercise">
-<span id="exr:parkmiller" class="exercise"><strong>Ejercicio 2.2  </strong></span>
-</div>
+<p><span id="exr:parkmiller" class="exercise"><strong>Ejercicio 2.2  </strong></span><br></p>
 <p>Considerando el generador congruencial multiplicativo de parámetros <span class="math inline">\(a=7^{5}=16807\)</span>, <span class="math inline">\(c=0\)</span> y <span class="math inline">\(m=2^{31}-1\)</span> (<em>minimal standar</em> de Park y Miller, 1988).
 ¿Se observan los mismos problemas que con el algoritmo RANDU al considerar las tripletas <span class="math inline">\((x_{k},x_{k+1},x_{k+2})\)</span>?</p>
+</div>
 
 <!-- 
 ---
-title: 'Análisis de resultados de simulación'
+title: "Análisis de resultados de simulación"
 author: "Simulación Estadística (UDC)"
 date: "Máster en Técnicas Estadísticas"
 output: 
