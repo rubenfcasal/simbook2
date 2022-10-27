@@ -178,7 +178,7 @@
 
 \title{Simulación Estadística}
 \author{Rubén Fernández Casal (\href{mailto:ruben.fcasal@udc.es}{\nolinkurl{ruben.fcasal@udc.es}}), Ricardo Cao (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}})}
-\date{Edición: Agosto de 2022. Impresión: 2022-10-26}
+\date{Edición: Agosto de 2022. Impresión: 2022-10-27}
 
 \begin{document}
 \maketitle
@@ -944,10 +944,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##       0       0       0 
+##    0.01    0.00    0.01 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.11    0.00    0.11
+##    0.12    0.00    0.12
 \end{verbatim}
 
 Hay diversos paquetes que implementan herramientas similares, por ejemplo:
@@ -977,7 +977,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## inner: 0.02 sec elapsed
+## inner: 0.01 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -987,7 +987,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## middle: 0.02 sec elapsed
+## middle: 0.01 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -997,7 +997,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## outer: 0.1 sec elapsed
+## outer: 0.09 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -1019,8 +1019,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ## 'data.frame':    10 obs. of  3 variables:
-##  $ tic: num  4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.15 4.15
-##  $ toc: num  4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.15 4.15 4.15
+##  $ tic: num  5.04 5.04 5.04 5.04 5.04 5.06 5.06 5.06 5.06 5.06
+##  $ toc: num  5.04 5.04 5.04 5.04 5.06 5.06 5.06 5.06 5.06 5.06
 ##  $ msg: chr  "1" "2" "3" "4" ...
 \end{verbatim}
 
@@ -1036,7 +1036,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   0.000   0.000   0.001   0.000   0.010
+##   0.000   0.000   0.000   0.002   0.000   0.020
 \end{verbatim}
   \end{itemize}
 \item
@@ -1202,19 +1202,22 @@ Este método está implementado\footnote{Aunque de forma no muy eficiente. Para 
 \end{Shaded}
 
 \begin{verbatim}
-## function (n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 
-##     1) 
-## {
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         seed <- (a * seed + c)%%m
-##         u[i] <- seed/m
-##     }
-##     assign(".rng", list(seed = seed, type = "lcg", parameters = list(a = a, 
-##         c = c, m = m)), envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 1) {
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     seed <- (a * seed + c) %% m
+##     u[i] <- seed/m # (seed + 1)/(m + 1)
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "lcg",
+##           parameters = list(a = a, c = c, m = m)), envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "lcg", parameters = list(a = a, c = c, m = m))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rlcg(n, seed, parameters$a, parameters$c, parameters$m))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x00000000130aed68>
+## <bytecode: 0x000000002dab29a0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -1563,48 +1566,50 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 \end{Shaded}
 
 \begin{verbatim}
-## function (x, distribution = "norm", nclass = floor(length(x)/5), 
-##     output = TRUE, nestpar = 0, ...) 
-## {
-##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##     tol <- sqrt(.Machine$double.eps)
-##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##     if (output) {
-##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
-##             border = "grey50")
-##         d.distrib <- eval(parse(text = paste("d", distribution, 
-##             sep = "")))
-##         curve(d.distrib(x, ...), add = TRUE)
-##     }
-##     else {
-##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##     }
-##     O <- xhist$counts
-##     E <- length(x)/nclass
-##     DNAME <- deparse(substitute(x))
-##     METHOD <- "Pearson's Chi-squared test"
-##     STATISTIC <- sum((O - E)^2/E)
-##     names(STATISTIC) <- "X-squared"
-##     PARAMETER <- nclass - nestpar - 1
-##     names(PARAMETER) <- "df"
-##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##     classes <- format(xbreaks)
-##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
-##         "]", sep = "")
-##     RESULTS <- list(classes = classes, observed = O, expected = E, 
-##         residuals = (O - E)/sqrt(E))
-##     if (output) {
-##         cat("\nPearson's Chi-squared test table\n")
-##         print(as.data.frame(RESULTS))
-##     }
-##     if (any(E < 5)) 
-##         warning("Chi-squared approximation may be incorrect")
-##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
-##         p.value = PVAL, method = METHOD, data.name = DNAME), 
-##         RESULTS), class = "htest")
+## function(x, distribution = "norm", nclass = floor(length(x)/5),
+##                             output = TRUE, nestpar = 0, ...) {
+##   # Función distribución
+##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##   # Puntos de corte
+##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##   tol <- sqrt(.Machine$double.eps)
+##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##   # Gráficos y frecuencias
+##   if (output) {
+##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
+##                   lty = 2, border = "grey50")
+##     # Función densidad
+##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
+##     curve(d.distrib(x, ...), add = TRUE)
+##   } else {
+##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##   }
+##   # Cálculo estadístico y p-valor
+##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
+##   E <- length(x)/nclass
+##   DNAME <- deparse(substitute(x))
+##   METHOD <- "Pearson's Chi-squared test"
+##   STATISTIC <- sum((O - E)^2/E)
+##   names(STATISTIC) <- "X-squared"
+##   PARAMETER <- nclass - nestpar - 1
+##   names(PARAMETER) <- "df"
+##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##   # Preparar resultados
+##   classes <- format(xbreaks)
+##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
+##                    sep = "")
+##   RESULTS <- list(classes = classes, observed = O, expected = E,
+##                   residuals = (O - E)/sqrt(E))
+##   if (output) {
+##     cat("\nPearson's Chi-squared test table\n")
+##     print(as.data.frame(RESULTS))
+##   }
+##   if (any(E < 5))
+##     warning("Chi-squared approximation may be incorrect")
+##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
+##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x0000000013691fb0>
+## <bytecode: 0x0000000015ee3508>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2084,22 +2089,26 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 \end{Shaded}
 
 \begin{verbatim}
-## function (n, seed = as.numeric(Sys.time()), k = 4) 
-## {
-##     seed <- seed%%10^k
-##     aux <- 10^(2 * k - k/2)
-##     aux2 <- 10^(k/2)
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         z <- seed^2
-##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
-##         u[i] <- seed/10^k
-##     }
-##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
-##         envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), k = 4) {
+##   seed <- seed %% 10^k
+##   aux <- 10^(2*k-k/2)
+##   aux2 <- 10^(k/2)
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     z <- seed^2
+##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
+##     u[i] <- seed/10^k
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
+##       envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rvng(n, seed, parameters$k))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x0000000032f4cf30>
+## <bytecode: 0x00000000327292e8>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2800,8 +2809,8 @@ Como comentarios finales, podríamos añadir que:
   En muchos casos (por ejemplo, cuando la generación de múltiples secuencias de simulación supone un coste computacional importante), puede ser preferible emplear un método de remuestreo para aproximar la precisión de la aproximación (ver Sección \ref{bootstrap}).
 \end{itemize}
 
-\hypertarget{sim-con}{%
-\chapter{Simulación de variables continuas}\label{sim-con}}
+\hypertarget{continuas}{%
+\chapter{Simulación de variables continuas}\label{continuas}}
 
 En este capítulo se expondrán métodos generales para simular distribuciones continuas: el método de inversión (siguiente sección), los basados en aceptación-rechazo (secciones \ref{AR} y \ref{modAR}) y el método de composición (Sección \ref{composicion}).
 En todos los casos como punto de partida es necesario disponer de un método de generación de números pseudoaleatorios uniformes en \((0,1)\).
@@ -2892,7 +2901,7 @@ El código para implementar este algoritmo en R podría ser el siguiente:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.01    0.00    0.02
+##    0.03    0.00    0.04
 \end{verbatim}
 
 \begin{Shaded}
@@ -3004,7 +3013,7 @@ y función de distribución:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.04    0.00    0.04
+##    0.03    0.02    0.04
 \end{verbatim}
 \item
   Representar el histograma y compararlo con la densidad teórica.
@@ -3480,7 +3489,7 @@ Generamos una muestra de \(10^4\) observaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.14    0.00    0.14
+##    0.09    0.00    0.09
 \end{verbatim}
 
 Evaluamos la eficiencia:
@@ -3996,7 +4005,7 @@ C_{f^{\ast}} & = \left\{ (u, v) \in \mathbb{R}^{2} : 0 <u \leq \frac{1}{\sqrt{1 
 \end{aligned}\]
 dando como resultando que \(C_{f^{\ast}}\) es el semicírculo de radio uno, y podemos generar valores con distribución uniforme en esta región a partir de \(\mathcal{U}\left([0,1]\times[-1,1] \right)\).
 
-El correspondiente algoritmo está implementado en la función \href{https://rubenfcasal.github.io/simres/reference/rcauchy.rou.html}{\texttt{rcauchy.rou()}} del paquete \href{https://rubenfcasal.github.io/simres}{\texttt{simres}} (fichero \href{R/ar.R}{\emph{ar.R}})::
+El correspondiente algoritmo está implementado en la función \href{https://rubenfcasal.github.io/simres/reference/rcauchy.rou.html}{\texttt{rcauchy.rou()}} del paquete \href{https://rubenfcasal.github.io/simres}{\texttt{simres}} (fichero \href{R/ar.R}{\emph{ar.R}}):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4005,24 +4014,25 @@ El correspondiente algoritmo está implementado en la función \href{https://rub
 \end{Shaded}
 
 \begin{verbatim}
-## function (n) 
-## {
-##     ngen <- n
-##     u <- runif(n, 0, 1)
-##     v <- runif(n, -1, 1)
-##     x <- v/u
-##     ind <- u^2 + v^2 > 1
-##     while (le <- sum(ind)) {
-##         ngen <- ngen + le
-##         u <- runif(le, 0, 1)
-##         v <- runif(le, -1, 1)
-##         x[ind] <- v/u
-##         ind[ind] <- u^2 + v^2 > 1
-##     }
-##     attr(x, "ngen") <- ngen
-##     return(x)
+## function(n) {
+##   # Cauchy mediante cociente de uniformes
+##   ngen <- n
+##   u <- runif(n, 0, 1)
+##   v <- runif(n, -1, 1)
+##   x <- v/u
+##   ind <- u^2 + v^2 > 1 # TRUE si no verifica condición
+##   # Volver a generar si no verifica condición
+##   while (le <- sum(ind)){ # mientras le = sum(ind) > 0
+##     ngen <- ngen + le
+##     u <- runif(le, 0, 1)
+##     v <- runif(le, -1, 1)
+##     x[ind] <- v/u
+##     ind[ind] <- u^2 + v^2 > 1 # TRUE si no verifica condición
+##   }
+##   attr(x, "ngen") <- ngen
+##   return(x)
 ## }
-## <bytecode: 0x000000003409b238>
+## <bytecode: 0x00000000340e96a8>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4289,6 +4299,946 @@ Simulación:
 \end{enumerate}
 
 \end{conjecture}
+
+\hypertarget{discretas}{%
+\chapter{Simulación de variables discretas}\label{discretas}}
+
+Se trata de simular una variable aleatoria discreta \(X\) con función de masa de
+probabilidad:
+\[\begin{array}{l|ccccc}
+ x_{i}  &  x_{1}  &  x_{2}  &  \cdots   &  x_{n}  &  \cdots   \\ \hline
+ P\left( X=x_{i}\right)   &  p_{1}  &  p_{2}  &  \cdots   &  p_{n}  &  
+\cdots  
+\end{array}\]
+
+Considerando como partida una \(\mathcal{U}\left( 0,1\right)\), la
+idea general consiste en asociar a cada posible valor \(x_{i}\) de \(X\)
+un subintervalo de \(\left( 0,1\right)\) de longitud igual a la correspondiente
+probabilidad.
+Por ejemplo, como ya se mostró en capítulos anteriores, es habitual emplear
+código de la forma:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(nsim) }\SpecialCharTok{\textless{}}\NormalTok{ p}
+\end{Highlighting}
+\end{Shaded}
+
+para simular una distribución \(Bernoulli(p)\).
+
+Para generar variables discretas con dominio finito en R,
+si no se dispone de un algoritmo específico más eficiente,
+es recomendable emplear:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sample}\NormalTok{(valores, nsim, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, prob)}
+\end{Highlighting}
+\end{Shaded}
+
+Esta función del paquete base implementa eficientemente el método ``alias''
+que describiremos más adelante en la Sección \ref{alias}.
+
+\hypertarget{transcuant}{%
+\section{Método de la transformación cuantil}\label{transcuant}}
+
+Este método es una adaptación del método de inversión (válido para el caso continuo) a distribuciones discretas, por lo que también se denomina \emph{método de inversión generalizado}.
+En este caso, la función de distribución es:
+\[F\left( x\right)  =\sum_{x_{j}\leq x}p_{j},\]
+y la distribución de la variable aleatoria \(F\left( X\right)\) no es uniforme (es una variable aleatoria discreta que toma los valores \(F\left( x_{i} \right)\) con probabilidad \(p_{i}\), \(i=1,2,\ldots\)).
+Sin embargo, se puede generalizar el método de inversión a situaciones en las que \(F\) no es invertible considerando la función cuantil.
+
+Se define la función cuantil o inversa generalizada de una función de distribución \(F\) como:
+\[Q\left( u\right) =\inf \left\{ x\in \mathbb{R}:F\left( x\right) \geq
+u\right\} ,\ \forall u\in \left( 0,1\right).\]
+Si \(F\) es invertible \(Q=F^{-1}\).
+
+\begin{theorem}[de inversión generalizada]
+\protect\hypertarget{thm:invgen}{}\label{thm:invgen}
+
+Si \(U\sim \mathcal{U}\left( 0,1\right)\), la variable aleatoria \(Q\left( U\right)\) tiene función de distribución \(F\).
+\end{theorem}
+
+\begin{proof}
+Bastaría ver que:
+\[Q\left( u\right) \leq x \Longleftrightarrow u\leq F(x).\]
+
+Como \(F\) es monótona y por la definición de \(Q\):
+\[Q\left( u\right) \leq x \Rightarrow u \leq F(Q\left( u\right)) \leq F(x).\]
+Por otro lado como \(Q\) también es monótona:
+\[u \leq F(x) \Rightarrow Q\left( u\right) \leq Q(F(x)) \leq x\]
+\end{proof}
+
+A partir de este resultado se deduce el siguiente algoritmo general para simular una distribución de probabilidad discreta.
+
+\begin{conjecture}[de transformación cuantil]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(U\sim \mathcal{U}\left( 0,1\right)\).
+\item
+  Devolver \(X=Q\left( U\right)\).
+\end{enumerate}
+
+\end{conjecture}
+
+El principal problema es el cálculo de \(Q\left( U\right)\).
+En este caso, suponiendo por comodidad que los valores que toma la variable están ordenados (\(x_{1}<x_{2}<\cdots\)), la función cuantil será:
+\[\begin{array}{ll}
+Q\left( U\right) &=\inf \left\{ x_{j}:\sum_{i=1}^{j}p_{i}\geq U\right\} \\
+&=x_{k}\text{, tal que }\sum_{i=1}^{k-1}p_{i}<U\leq \sum_{i=1}^{k}p_{i}
+\end{array}\]
+
+Para encontrar este valor se puede emplear el siguiente algoritmo:
+
+\begin{conjecture}[de transformación cuantil con búsqueda secuencial]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(U\sim \mathcal{U}\left( 0,1\right)\).
+\item
+  Hacer \(I=1\) y \(S=p_{1}\).
+\item
+  Mientras \(U>S\) hacer \(I=I+1\) y \(S=S+p_{I}\)
+\item
+  Devolver \(X=x_{I}\).
+\end{enumerate}
+
+\end{conjecture}
+
+Este algoritmo no es muy eficiente, especialmente si el número de posibles valores de la variable es grande.
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.8\linewidth]{images/cuantil-sim} 
+
+}
+
+\caption{Ilustración de la simulación de una distribución discreta mediante transformación cuantil (con búsqueda secuencial).}\label{fig:cuantil-movie}
+\end{figure}
+
+\begin{remark}
+El algoritmo anterior es válido independientemente de que los valores que toma la variable estén ordenados.
+\end{remark}
+
+Si la variable toma un número finito de valores, se podría implementar en R de la siguiente forma:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rpmf0 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{prob =} \DecValTok{1}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(x), }\AttributeTok{n =} \DecValTok{1000}\NormalTok{) \{}
+\NormalTok{  X }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(n)}
+\NormalTok{  U }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(n)}
+  \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n) \{}
+\NormalTok{    i }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{    Fx }\OtherTok{\textless{}{-}}\NormalTok{ prob[}\DecValTok{1}\NormalTok{]}
+    \ControlFlowTok{while}\NormalTok{ (Fx }\SpecialCharTok{\textless{}}\NormalTok{ U[j]) \{}
+\NormalTok{      i }\OtherTok{\textless{}{-}}\NormalTok{ i }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{      Fx }\OtherTok{\textless{}{-}}\NormalTok{ Fx }\SpecialCharTok{+}\NormalTok{ prob[i]}
+\NormalTok{    \}}
+\NormalTok{    X[j] }\OtherTok{\textless{}{-}}\NormalTok{ x[i]}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{(X)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Adicionalmente, para disminuir ligeramente el tiempo de computación, se pueden almacenar las probabilidades acumuladas en una tabla.
+Este algoritmo está implementado en la función \href{https://rubenfcasal.github.io/simres/reference/rpmf.html}{\texttt{rpmf()}} del paquete \href{https://rubenfcasal.github.io/simres}{\texttt{simres}} (fichero \href{R/rpmf.R}{\emph{rpmf.R}}), que ademas devuelve el número de comparaciones en un atributo \texttt{ncomp}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(simres)}
+\NormalTok{rpmf}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function(x, prob = 1/length(x), n = 1000, as.factor = FALSE) {
+##   # Numero de comparaciones
+##   ncomp <- 0
+##   # Inicializar FD
+##   Fx <- cumsum(prob)
+##   # Simular
+##   X <- numeric(n)
+##   U <- runif(n)
+##   for(j in 1:n) {
+##     i <- 1
+##     while (Fx[i] < U[j]) i <- i + 1
+##     X[j] <- x[i]
+##     ncomp <- ncomp + i
+##   }
+##   if(as.factor) X <- factor(X, levels = x)
+##   attr(X, "ncomp") <- ncomp
+##   return(X)
+## }
+## <bytecode: 0x0000000015fdc9b0>
+## <environment: namespace:simres>
+\end{verbatim}
+
+\begin{example}[Simulación de una binomial mediante el método de la transformación cuantil]
+\protect\hypertarget{exm:binom-cuant}{}\label{exm:binom-cuant}
+
+Empleamos la rutina anterior para para generar una muestra de \(nsim=10^{5}\) observaciones de una variable \(\mathcal{B}(10,0.5)\) y obtenemos el tiempo de CPU empleado:
+
+Calcular también la
+media muestral (compararla con la teórica \(np\)) y el número
+medio de comparaciones para generar cada observación.
+
+Empleamos la rutina anterior para generar las simulaciones:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{10}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FloatTok{0.5}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{5}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\NormalTok{n}
+\NormalTok{pmf }\OtherTok{\textless{}{-}} \FunctionTok{dbinom}\NormalTok{(x, n, p)}
+\FunctionTok{system.time}\NormalTok{( rx }\OtherTok{\textless{}{-}} \FunctionTok{rpmf}\NormalTok{(x, pmf, nsim) )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##    0.04    0.00    0.05
+\end{verbatim}
+
+A partir de ellas podríamos aproximar el valor esperado:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(rx)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.99697
+\end{verbatim}
+
+aunque en este caso el valor teórico es conocido \(np\) = 5.
+
+Calculamos el número medio de comparaciones para generar cada observación:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ncomp }\OtherTok{\textless{}{-}} \FunctionTok{attr}\NormalTok{(rx, }\StringTok{"ncomp"}\NormalTok{)}
+\NormalTok{ncomp}\SpecialCharTok{/}\NormalTok{nsim}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.99697
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Se verá más adelante que el valor teórico es sum((1:length(x))*pmf)}
+\end{Highlighting}
+\end{Shaded}
+
+Representamos la aproximación por simulación de la función de masa de probabilidad y la comparamos con la teórica:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(rx)}\SpecialCharTok{/}\NormalTok{nsim}
+\CommentTok{\# res \textless{}{-} table(factor(rx, levels = x))/nsim}
+\FunctionTok{plot}\NormalTok{(res, }\AttributeTok{ylab =} \StringTok{"frecuencia relativa"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"valor"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(x, pmf, }\AttributeTok{pch =} \DecValTok{4}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)  }\CommentTok{\# Comparación teórica}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{05-Metodos_generales_discretas_files/figure-latex/comprfmp-1} 
+
+}
+
+\caption{Comparación de las frecuencias relativas de los valores generados, mediante el método de la transformación cuantil, con las probabilidades teóricas.}\label{fig:comprfmp}
+\end{figure}
+
+También podríamos realizar comparaciones numéricas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(res)}
+\FunctionTok{names}\NormalTok{(res) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"psim"}\NormalTok{)}
+\NormalTok{res}\SpecialCharTok{$}\NormalTok{pteor }\OtherTok{\textless{}{-}}\NormalTok{ pmf}
+\FunctionTok{print}\NormalTok{(res, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     x    psim   pteor
+## 1   0 0.00100 0.00098
+## 2   1 0.00981 0.00977
+## 3   2 0.04457 0.04395
+## 4   3 0.11865 0.11719
+## 5   4 0.20377 0.20508
+## 6   5 0.24477 0.24609
+## 7   6 0.20593 0.20508
+## 8   7 0.11631 0.11719
+## 9   8 0.04415 0.04395
+## 10  9 0.01021 0.00977
+## 11 10 0.00083 0.00098
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Máximo error absoluto }
+\FunctionTok{max}\NormalTok{(}\FunctionTok{abs}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{psim }\SpecialCharTok{{-}}\NormalTok{ res}\SpecialCharTok{$}\NormalTok{pteor))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0014625
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Máximo error porcentual absoluto}
+\DecValTok{100}\SpecialCharTok{*}\FunctionTok{max}\NormalTok{(}\FunctionTok{abs}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{psim }\SpecialCharTok{{-}}\NormalTok{ res}\SpecialCharTok{$}\NormalTok{pteor) }\SpecialCharTok{/}\NormalTok{ res}\SpecialCharTok{$}\NormalTok{pteor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 15.008
+\end{verbatim}
+
+\end{example}
+
+\begin{remark}
+Puede ocurrir que no todos los valores sean generados en la simulación.
+En el código anterior si \texttt{length(x)\ \textgreater{}\ length(psim)}, la sentencia \texttt{res\$pteor\ \textless{}-\ pmf} generará un error.
+Una posible solución sería trabajar con factores (llamar a la función \texttt{rpmf()} con \texttt{as.factor\ =\ TRUE} o emplear \texttt{res\ \textless{}-\ table(factor(rx,\ levels\ =\ x))/nsim}).
+\end{remark}
+
+\hypertarget{eficiencia-del-algoritmo-1}{%
+\subsection{Eficiencia del algoritmo}\label{eficiencia-del-algoritmo-1}}
+
+Si consideramos la variable aleatoria \(\mathcal{I}\) correspondiente a las etiquetas, su función de masa de probabilidad sería:
+\[\begin{array}{l|ccccc}
+i & 1 & 2 & \cdots & n & \cdots \\ \hline
+P\left( \mathcal{I}=i\right) & p_{1} & p_{2} & \cdots & p_{n} & \cdots 
+\end{array}\]
+y el número de comparaciones en el paso 3 sería un valor aleatorio de esta variable.
+Una medida de la eficiencia del algoritmo de la transformación cuantil es
+el número medio de comparaciones:
+\[E\left( \mathcal{I}\right) =\sum_i ip_{i}.\]
+Realmente, cuando la variable toma un número finito de valores:
+\(x_{1}\), \(x_{2}\), \(\ldots\), \(x_{n}\), no sería necesario hacer
+la última comprobación \(U>\sum_{i=1}^{n}p_{i}=1\) y se
+generaría directamente \(x_{n}\), por lo que el
+número medio de comparaciones sería:
+\[\sum_{i=1}^{n-1}ip_{i}+\left( n-1\right)  p_{n}.\]
+
+Para disminuir el número esperado de comparaciones podemos
+reordenar los valores \(x_{i}\) de forma que las probabilidades
+correspondientes sean decrecientes. Esto equivale a considerar
+un etiquetado \(l\) de forma que:
+\[p_{l\left( 1\right) }\geq p_{l\left( 2\right) }\geq \cdots \geq p_{l\left(
+n\right) }\geq \cdots\]
+
+\begin{example}[Simulación de una binomial, continuación]
+\protect\hypertarget{exm:binom-cuantb}{}\label{exm:binom-cuantb}
+
+Podemos repetir la simulación del Ejemplo \ref{exm:binom-cuant} anterior ordenando previamente las probabilidades en orden decreciente y también empleando la función \texttt{sample()} de R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{tini }\OtherTok{\textless{}{-}} \FunctionTok{proc.time}\NormalTok{()}
+\CommentTok{\# Ordenar}
+\NormalTok{ind }\OtherTok{\textless{}{-}} \FunctionTok{order}\NormalTok{(pmf, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\# Generar}
+\NormalTok{rx }\OtherTok{\textless{}{-}} \FunctionTok{rpmf}\NormalTok{(x[ind], pmf[ind], nsim)}
+\CommentTok{\# Tiempo de CPU}
+\NormalTok{tiempo }\OtherTok{\textless{}{-}} \FunctionTok{proc.time}\NormalTok{() }\SpecialCharTok{{-}}\NormalTok{ tini}
+\NormalTok{tiempo}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##    0.04    0.00    0.05
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Número de comparaciones}
+\NormalTok{ncomp }\OtherTok{\textless{}{-}} \FunctionTok{attr}\NormalTok{(rx, }\StringTok{"ncomp"}\NormalTok{)}
+\NormalTok{ncomp}\SpecialCharTok{/}\NormalTok{nsim}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.08369
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{((}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(x))}\SpecialCharTok{*}\NormalTok{pmf[ind]) }\CommentTok{\# Valor teórico}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.083984
+\end{verbatim}
+
+Como ya se comentó, en R se recomienda emplear la función \texttt{sample()}
+(implementa eficientemente el método de Alias descrito en la Sección \ref{alias}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{system.time}\NormalTok{( rx }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(x, nsim, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ pmf) )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##       0       0       0
+\end{verbatim}
+
+\end{example}
+
+\hypertarget{muxe9todo-de-la-tabla-guuxeda}{%
+\section{Método de la tabla guía}\label{muxe9todo-de-la-tabla-guuxeda}}
+
+También conocido como método de búsqueda indexada (\emph{Indexed Search}), la idea consiste en construir \(m\) subintervalos equiespaciados en \([0,1]\) de la forma:
+\[I_{j}=\left[ u_{j},u_{j+1}\right) =\left[ \frac{j-1}{m},\frac{j}{m}\right) 
+\text{ para }j=1,2,\ldots ,m\]
+y utilizarlos como punto de partida para la búsqueda.
+En una tabla guía se almacenan los indices de los cuantiles correspondientes a los extremos inferiores de los intervalos:
+\[g_{j}=Q_{\mathcal{I}}(u_{j})=\inf \left\{ i:F_{i}\geq u_{j}=\frac{j-1}{m}\right\}\]
+
+El punto de partida para un valor \(U\) será \(g_{j_{0}}\) con:
+\[j_{0}=\left\lfloor mU\right\rfloor +1\]
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.8\linewidth]{images/tabla-sim} 
+
+}
+
+\caption{Ilustración de la simulación de una distribución discreta mediante tabla guía.}\label{fig:tabla-movie}
+\end{figure}
+
+En este caso, puede verse que una cota del número medio de comparaciones es:
+\[E\left( N\right) \leq 1+\frac{n}{m}\]
+
+\begin{conjecture}[de simulación mediante tabla guía; Chen y Asau, 1974]
+
+Inicialización:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Hacer \(F_{1}=p_{1}\).
+\item
+  Desde \(i=2\) hasta \(n\) hacer \(F_{i}=F_{i-1}+p_{i}\).
+\end{enumerate}
+
+Cálculo de la tabla guía:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Hacer \(g_{1}=1\) e \(i=1\).
+\item
+  Desde \(j=2\) hasta \(m\) hacer
+
+  2.a Mientras \((j-1)/m>F_{i}\) hacer \(i=i+1\).
+
+  2.b \(g_{j}=i\)
+\end{enumerate}
+
+Simulación mediante tabla guía:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(U\sim \mathcal{U}\left( 0,1\right)\).
+\item
+  Hacer \(j=\left\lfloor mU\right\rfloor +1\).
+\item
+  Hacer \(i=g_{j}\).
+\item
+  Mientras \(U>F_{i}\) hacer \(i=i+1\).
+\item
+  Devolver \(X=x_{i}\).
+\end{enumerate}
+
+\end{conjecture}
+
+Este algoritmo está implementado en la función \href{https://rubenfcasal.github.io/simres/reference/rpmf.table.html}{\texttt{simres::rpmf.table()}} (fichero \href{R/rpmf.R}{\emph{rpmf.R}}) y devuelve también el número de comparaciones en un atributo \texttt{ncomp}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rpmf.table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function(x, prob = 1/length(x), m, n = 1000, as.factor = FALSE) {
+##   # Inicializar tabla y FD
+##   Fx <- cumsum(prob)
+##   g <- rep(1,m)
+##   i <- 1
+##   for(j in 2:m) {
+##     while (Fx[i] < (j-1)/m) i <- i + 1
+##     g[j] <- i
+##   }
+##   ncomp <- i - 1
+##   # Generar valores
+##   X <- numeric(n)
+##   U <- runif(n)
+##   for(j in 1:n) {
+##     i <- i0 <- g[floor(U[j] * m) + 1]
+##     while (Fx[i] < U[j]) i <- i + 1
+##     ncomp <- ncomp + i - i0
+##     X[j] <- x[i]
+##   }
+##   if(as.factor) X <- factor(X, levels = x)
+##   attr(X, "ncomp") <- ncomp
+##   return(X)
+## }
+## <bytecode: 0x000000002eaeccb0>
+## <environment: namespace:simres>
+\end{verbatim}
+
+\begin{example}[Simulación de una binomial mediante tabla guía]
+\protect\hypertarget{exm:binom-tabla}{}\label{exm:binom-tabla}
+
+Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando esta rutina con \(m=n-1\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{system.time}\NormalTok{( rx }\OtherTok{\textless{}{-}} \FunctionTok{rpmf.table}\NormalTok{(x, pmf, n}\DecValTok{{-}1}\NormalTok{, nsim) )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##    0.03    0.00    0.04
+\end{verbatim}
+
+Número medio de comparaciones:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ncomp }\OtherTok{\textless{}{-}} \FunctionTok{attr}\NormalTok{(rx, }\StringTok{"ncomp"}\NormalTok{)}
+\NormalTok{ncomp}\SpecialCharTok{/}\NormalTok{nsim}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.55951
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{((}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(x))}\SpecialCharTok{*}\NormalTok{pmf) }\CommentTok{\# Numero esperado con búsqueda secuencial}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+Análisis de los resultados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(rx)}\SpecialCharTok{/}\NormalTok{nsim}
+\FunctionTok{plot}\NormalTok{(res, }\AttributeTok{ylab =} \StringTok{"frecuencia relativa"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"valores"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(x, pmf, }\AttributeTok{pch =} \DecValTok{4}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)  }\CommentTok{\# Comparación teórica}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{05-Metodos_generales_discretas_files/figure-latex/comptabla-1} 
+
+}
+
+\caption{Comparación de las frecuencias relativas de los valores generados, mediante el método de la tabla guía, con las probabilidades teóricas.}\label{fig:comptabla}
+\end{figure}
+
+\end{example}
+
+\hypertarget{alias}{%
+\section{Método de Alias}\label{alias}}
+
+Se basa en representar la distribución de \(X\) como una mixtura
+(uniforme) de variables dicotómicas (Walker, 1977):
+\[Q^{(i)}=\left\{ 
+\begin{array}{ll}
+x_{i} & \text{con prob. } q_{i} \\ 
+x_{a_{i}} & \text{con prob. } 1-q_{i}
+\end{array}
+\ \right.\]
+
+Hay varias formas de construir las tablas de probabilidades \(q_i\) y de alias \(a_i\).
+Se suele emplear el denominado algoritmo ``Robin Hood'' de inicialización (Kronmal y Peterson, 1979).
+La idea es ``tomar prestada'' parte de la probabilidad de los valores más probables (ricos) para asignársela a los valores menos probables (pobres), recordando el valor de donde procede (almacenando el índice en \(a_i\)).
+
+\begin{conjecture}["Robin Hood" de inicialización; Kronmal y Peterson, 1979]
+\protect\hypertarget{cnj:robin-hood}{}\label{cnj:robin-hood}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Desde \(i=1\) hasta \(n\) hacer \(q_{i}=np_{i}\).
+\item
+  Establecer \(L=\left\{ l:q_{l}<1\right\}\) y
+  \(H=\left\{ h:q_{h}\geq 1\right\}\).
+\item
+  Si \(L\) ó \(H\) vacios terminar.
+\item
+  Seleccionar \(l\in L\) y \(h\in H\).
+\item
+  Hacer \(a_{l}=h\).
+\item
+  Eliminar \(l\) de \(L\).
+\item
+  Hacer \(q_{h}=q_{h}-\left( 1-q_{l}\right)\).
+\item
+  Si \(q_{h}<1\) mover \(h\) de \(H\) a \(L\).
+\item
+  Ir al paso 3.
+\end{enumerate}
+
+\end{conjecture}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{05-Metodos_generales_discretas_files/figure-latex/unnamed-chunk-15-1} 
+
+}
+
+\caption{Pasos del algoritmo de inicialización del método Alias.}\label{fig:unnamed-chunk-15}
+\end{figure}
+
+El algoritmo para generar las simulaciones es el estándar del método de composición:
+
+\begin{conjecture}[método alias de simulación; Walker, 1977]
+\protect\hypertarget{cnj:walker}{}\label{cnj:walker}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(U,V\sim \mathcal{U}\left( 0,1\right)\).
+\item
+  Hacer \(i=\left\lfloor nU\right\rfloor +1\).
+\item
+  Si \(V<q_{i}\) devolver \(X=x_{i}\).
+\item
+  En caso contrario devolver \(X=x_{a_{i}}\).
+\end{enumerate}
+
+\end{conjecture}
+
+Este algoritmo es muy eficiente y es el empleado en la función \texttt{sample()} de R\footnote{R implementa este algoritmo en el fichero fuente \href{https://svn.r-project.org/R/trunk/src/main/random.c}{random.c} (para muestreo probabilístico con reemplazamiento, función C \texttt{walker\_ProbSampleReplace()}), aunque el paso 2 del algoritmo de simulación empleado por defecto cambió ligeramente a partir de la versión 3.6.0 para evitar posibles problemas de redondeo (ver Sección \ref{oprrng}).}.
+
+Este método también está implementado en la función \href{https://rubenfcasal.github.io/simres/reference/rpmf.alias.html}{\texttt{simres::rpmf.alias()}} (fichero \href{R/rpmf.R}{\emph{rpmf.R}}), empleando código R menos eficiente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rpmf.alias}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function(x, prob = 1/length(x), n = 1000, as.factor = FALSE) {
+##   # Inicializar tablas
+##   a <- numeric(length(x))
+##   q <- prob*length(x)
+##   low <- q < 1
+##   high <- which(!low)
+##   low <- which(low)
+##   while (length(high) && length(low)) {
+##     l <- low[1]
+##     h <- high[1]
+##     a[l] <- h
+##     q[h] <- q[h] - (1 - q[l])
+##     if (q[h] < 1) {
+##       high <- high[-1]
+##       low[1] <- h
+##     } else low <- low[-1]
+##   } # while
+##   # Generar valores
+##   V <- runif(n)
+##   i <- floor(runif(n)*length(x)) + 1
+##   X <- x[ ifelse( V < q[i], i, a[i]) ]
+##   if(as.factor) X <- factor(X, levels = x)
+##   return(X)
+## }
+## <bytecode: 0x00000000327c7260>
+## <environment: namespace:simres>
+\end{verbatim}
+
+\begin{example}[Simulación de una binomial mediante en método de Alias]
+\protect\hypertarget{exm:binom-alias}{}\label{exm:binom-alias}
+
+Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando esta rutina.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{system.time}\NormalTok{( rx }\OtherTok{\textless{}{-}} \FunctionTok{rpmf.alias}\NormalTok{(x, pmf, nsim) )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##    0.02    0.00    0.02
+\end{verbatim}
+
+Análisis de los resultados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(rx)}\SpecialCharTok{/}\NormalTok{nsim}
+\FunctionTok{plot}\NormalTok{(res, }\AttributeTok{ylab =} \StringTok{"frecuencia relativa"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"valores"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(x, pmf, }\AttributeTok{pch =} \DecValTok{4}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)  }\CommentTok{\# Comparación teórica}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{05-Metodos_generales_discretas_files/figure-latex/compalias-1} 
+
+}
+
+\caption{Comparación de las frecuencias relativas de los valores generados, mediante el método de alias, con las probabilidades teóricas.}\label{fig:compalias}
+\end{figure}
+
+\end{example}
+
+\hypertarget{simulaciuxf3n-de-una-variable-discreta-con-dominio-infinito}{%
+\section{Simulación de una variable discreta con dominio infinito}\label{simulaciuxf3n-de-una-variable-discreta-con-dominio-infinito}}
+
+Los métodos anteriores están pensados para variables que toman un número finito de valores.
+Si la variable discreta tiene dominio infinito no se podrían almacenar las probabilidades acumuladas, aunque en algunos casos podrían calcularse de forma recursiva.
+
+\begin{example}[distribución de Poisson]
+
+Una variable \(X\) con distribución de Poisson de parámetro \(\lambda\),
+toma los valores \(x_{1}=0\), \(x_{2}=1\), \(\ldots\) con probabilidades:
+\[p_{j}=P\left( X=x_{j}\right)  =P\left( X=j-1\right)  =\frac{e^{-\lambda
+}\lambda^{j-1}}{\left( j-1\right)  !}\text{, }j=1,2,\ldots\]
+En este caso, como:
+\[P\left( X=j\right)  =\frac{e^{-\lambda}\lambda^{j}}{j!}
+=\frac{\lambda}{j}\frac{e^{-\lambda}\lambda^{j-1}}{\left( j-1\right)  !}
+=\frac{\lambda}{j}P\left( X=j-1\right),\]
+el algoritmo de inversión con búsqueda secuencial sería:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(U\sim \mathcal{U}\left( 0,1\right)\).
+\item
+  Hacer \(I=0\), \(p=e^{-\lambda}\) y \(S=p\).
+\item
+  Mientras \(U>S\) hacer \(I=I+1\), \(p=\frac{\lambda}{I}p\) y \(S=S+p\).
+\item
+  Devolver \(X=I\).
+\end{enumerate}
+
+\end{example}
+
+Hay modificaciones de los algoritmos anteriores, por ejemplo el de tabla guía con búsqueda secuencial en la cola de la distribución, para variables con dominio infinito.
+
+Como alternativa, siempre se puede pensar en truncar la distribución,
+eliminando los valores muy poco probables (teniendo en cuenta el número de generaciones que se pretenden realizar),
+aunque la distribución de las simulaciones será aproximada.
+
+\hypertarget{cuxe1lculo-directo-de-la-funciuxf3n-cuantil}{%
+\section{Cálculo directo de la función cuantil}\label{cuxe1lculo-directo-de-la-funciuxf3n-cuantil}}
+
+En ocasiones el método de la transformación cuantil puede acelerarse computacionalmente porque, mediante cálculos directos, es posible encontrar el valor de la función cuantil en cualquier \(U\), evitando el bucle de búsqueda.
+Normalmente se realiza mediante truncamiento de una distribución continua.
+
+\begin{example}[distribución uniforme discreta]
+
+La función de masa de probabilidad de una distribución uniforme discreta
+en \(\{1,2,\ldots,n\}\) viene dada por
+\[p_{j}=\frac{1}{n}\text{, para }j=1,2,\ldots n.\]
+
+Pueden generarse valores de esta distribución de forma muy eficiente
+truncando la distribución uniforme:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(U\sim \mathcal{U}\left( 0,1\right)\).
+\item
+  Devolver \(X=\left\lfloor nU\right\rfloor + 1\).
+\end{enumerate}
+
+\end{example}
+
+\begin{example}[distribución geométrica]
+
+La función de masa de probabilidad de una distribución geométrica es:
+\[P\left( X=j\right)  =P\left( I=j+1\right)  =p\left( 1-p\right)^{j}\text{,
+}j=0,1,\ldots\]
+
+Si se considera como variable aleatoria continua auxiliar una
+exponencial, con función de distribución
+\(G\left( x\right) = 1-e^{-\lambda x}\) si \(x\geq0\),
+se tiene que:
+\[\begin{aligned}
+G\left( i\right) - G\left( i-1\right)   
+& = 1-e^{-\lambda i}-\left(1-e^{-\lambda\left( i-1\right) }\right)  
+= e^{-\lambda\left( i-1\right)}-e^{-\lambda i}\\
+& = e^{-\lambda\left( i-1\right)  }\left( 1-e^{-\lambda}\right)  
+= \left( 1-e^{-\lambda}\right)  \left( e^{-\lambda}\right)^{i-1} \\
+& = p\left(1-p\right)^{i-1},
+\end{aligned}\]
+tomando \(p=1-e^{-\lambda}\).
+De donde se obtendría el algoritmo:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\item
+  Hacer \(\lambda=-\ln\left( 1-p\right)\).
+\item
+  Generar \(U\sim \mathcal{U}\left( 0,1\right)\).
+\item
+  Hacer \(T=-\frac{\ln U}{\lambda}\).
+\item
+  Devolver \(X=\left\lfloor T\right\rfloor\).
+\end{enumerate}
+
+\end{example}
+
+\hypertarget{otros-muxe9todos}{%
+\section{Otros métodos}\label{otros-muxe9todos}}
+
+Muchos de los métodos descritos en el Capítulo \ref{continuas} para variables continuas son directamente aplicables al caso discreto:
+
+\begin{itemize}
+\item
+  Aceptación-Rechazo (Sección \ref{AR}): En principio habría que considerar una variable auxiliar discreta con el mismo soporte, pero también hay modificaciones para variables auxiliares continuas.
+\item
+  Método de composición (Sección \ref{composicion}): es uno de los más empleados, por ejemplo en el método de Alias (Sección \ref{alias}) y para simular la distribución binomial negativa (Sección \ref{notables-disc}).
+\end{itemize}
+
+Hay otros métodos que tratan de reducir el número medio de comparaciones de la búsqueda secuencial, por ejemplo los árboles (binarios) de Huffman (e.g.~Cao, 2002, Sección 4.2).
+Estos métodos son muy poco eficientes para simular variables discretas pero pueden resultar de utilidad para diseñar experimentos de simulación más complejos (la idea es la misma, preocuparse principalmente por los sucesos más probables).
+
+\hypertarget{notables-disc}{%
+\section{Métodos específicos para generación de distribuciones notables}\label{notables-disc}}
+
+Los comentarios al principio de la Sección \ref{notables-cont} para el caso de variables continuas serían válidos también para distribuciones notables discretas.
+
+Entre los distintos métodos disponibles para la generación de las distribuciones discretas más conocidas podríamos destacar el de la distribución binomial negativa mediante el método de composición (Sección \ref{composicion}).
+
+La distribución binomial negativa, \(BN(r, p)\), puede interpretarse como el número de fracasos antes del \(r\)-ésimo éxito\footnote{La distribución binomial negativa es una generalización de la geométrica y, debido a su reproductividad en el parámetro \(r\), podría simularse como suma de \(r\) variables geométricas. Sin embargo, este algoritmo puede ser muy costoso en tiempo de computación si \(r\) es elevado.} y su función de masa de probabilidad es
+\[P(X = i) = \binom{i+r-1}i p^r (1-p)^i \text{, para }i=0,1,\ldots\]
+
+A partir de la propiedad
+\[X|_{Y} \sim \text{Pois}\left(  Y\right)  \text{, }Y \sim \operatorname{Gamma} \left( r, \frac{p}{1-p}\right)  \Rightarrow X \sim BN(r, p)\]
+se puede deducir el siguiente método específico de simulación.
+
+\begin{conjecture}[distribución binomial negativa]
+\protect\hypertarget{cnj:bin-neg}{}\label{cnj:bin-neg}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Simular \(L \sim \operatorname{Gamma}\left( r, \frac{p}{1-p} \right)\).
+\item
+  Simular \(X \sim Pois \left( L\right)\).
+\item
+  Devolver \(X\).
+\end{enumerate}
+
+\end{conjecture}
+
+Por este motivo se denominada también a esta distribución \emph{Gamma-Poisson}. Empleando una aproximación similar podríamos generar otras distribuciones, como la \emph{Beta-Binomial}, empleadas habitualmente en inferencia bayesiana.
+
+\hypertarget{ejercicios-discretas}{%
+\section{Ejercicios}\label{ejercicios-discretas}}
+
+\begin{exercise}[Simulación de una distribución mixta mediante el método de inversión generalizado]
+\protect\hypertarget{exr:mixta-cuantil}{}\label{exr:mixta-cuantil}
+
+Consideramos la variable aleatoria con función de distribución dada por:
+\[F(x)=\left\{
+\begin{array}
+[c]{cl}0 & \mbox{si $x<0$}\\
+\frac{x}{2}+\frac{1}{10} & \mbox{si $x\in[0,\frac{1}{5})$}\\
+x+\frac{1}{10} & \mbox{si $x\in[\frac{1}{5},\frac{9}{10}]$}\\
+1 & \mbox{en otro caso}
+\end{array}
+\right.\]
+
+Esta función está implementada en el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fdistr }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\FunctionTok{ifelse}\NormalTok{(x }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+    \FunctionTok{ifelse}\NormalTok{(x }\SpecialCharTok{\textless{}} \DecValTok{1}\SpecialCharTok{/}\DecValTok{5}\NormalTok{, x}\SpecialCharTok{/}\DecValTok{2} \SpecialCharTok{+} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{,}
+        \FunctionTok{ifelse}\NormalTok{(x }\SpecialCharTok{\textless{}=} \DecValTok{9}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, x }\SpecialCharTok{+} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{) ) )}
+\NormalTok{\}}
+\CommentTok{\# Empleando ifelse la función es vectorial (y podemos emplear curve...)}
+\FunctionTok{curve}\NormalTok{(fdistr, }\AttributeTok{from =} \SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\AttributeTok{to =} \FloatTok{1.1}\NormalTok{, }\AttributeTok{type =} \StringTok{\textquotesingle{}s\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{main =} \StringTok{\textquotesingle{}Función de distribución\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# Discontinuidades en 0 y 1/5}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{2}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{10}\NormalTok{), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{05-Metodos_generales_discretas_files/figure-latex/unnamed-chunk-18-1} \end{center}
+
+\textbf{Nota}: Esta variable toma los valores 0 y 1/5 con probabilidad 1/10.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Diseñar un algoritmo basado en el método de inversión generalizado
+  para generar observaciones de esta variable.
+\item
+  Implementar el algoritmo en una función que permita generar \(nsim\)
+  valores de esta variable.
+\end{enumerate}
+
+\end{exercise}
+
+Ver solución en Sección \ref{sol-mixta-cuantil}.
+
+\begin{exercise}[distribución hipergeométrica]
+\protect\hypertarget{exr:hipergeom}{}\label{exr:hipergeom}
+
+Se pretende simular \(nsim=10^{4}\) observaciones de una variable
+hipergeométrica (\texttt{dhyper(x,\ m,\ n,\ k)}) de parámetros \(m=\) el número
+de grupo multiplicado por 10, \(n=100-m\) y \(k=20\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Comprobar que el rango de posibles valores de esta variable es
+  \texttt{max(0,\ k-n):min(m,\ k)}. Generar los valores empleando el método
+  de la transformación cuantil usando búsqueda secuencial. Obtener
+  el tiempo de CPU empleado. Aproximar por simulación la función
+  de masa de probabilidad, representarla gráficamente y compararla
+  con la teórica. Calcular también la media muestral (compararla
+  con la teórica \(km/(m+n)\)) y el número medio de comparaciones
+  para generar cada observación.
+\item
+  Repetir el apartado anterior: ordenando previamente las
+  probabilidades en orden decreciente, empleando la
+  función \texttt{sample} de R, mediante una tabla guía (con
+  \(k-1\) subintervalos) y usando el método de Alias.
+\end{enumerate}
+
+\end{exercise}
 
 \hypertarget{referencias}{%
 \chapter*{Referencias}\label{referencias}}
@@ -4715,48 +5665,50 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 \end{Shaded}
 
 \begin{verbatim}
-## function (x, distribution = "norm", nclass = floor(length(x)/5), 
-##     output = TRUE, nestpar = 0, ...) 
-## {
-##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##     tol <- sqrt(.Machine$double.eps)
-##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##     if (output) {
-##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
-##             border = "grey50")
-##         d.distrib <- eval(parse(text = paste("d", distribution, 
-##             sep = "")))
-##         curve(d.distrib(x, ...), add = TRUE)
-##     }
-##     else {
-##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##     }
-##     O <- xhist$counts
-##     E <- length(x)/nclass
-##     DNAME <- deparse(substitute(x))
-##     METHOD <- "Pearson's Chi-squared test"
-##     STATISTIC <- sum((O - E)^2/E)
-##     names(STATISTIC) <- "X-squared"
-##     PARAMETER <- nclass - nestpar - 1
-##     names(PARAMETER) <- "df"
-##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##     classes <- format(xbreaks)
-##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
-##         "]", sep = "")
-##     RESULTS <- list(classes = classes, observed = O, expected = E, 
-##         residuals = (O - E)/sqrt(E))
-##     if (output) {
-##         cat("\nPearson's Chi-squared test table\n")
-##         print(as.data.frame(RESULTS))
-##     }
-##     if (any(E < 5)) 
-##         warning("Chi-squared approximation may be incorrect")
-##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
-##         p.value = PVAL, method = METHOD, data.name = DNAME), 
-##         RESULTS), class = "htest")
+## function(x, distribution = "norm", nclass = floor(length(x)/5),
+##                             output = TRUE, nestpar = 0, ...) {
+##   # Función distribución
+##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##   # Puntos de corte
+##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##   tol <- sqrt(.Machine$double.eps)
+##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##   # Gráficos y frecuencias
+##   if (output) {
+##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
+##                   lty = 2, border = "grey50")
+##     # Función densidad
+##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
+##     curve(d.distrib(x, ...), add = TRUE)
+##   } else {
+##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##   }
+##   # Cálculo estadístico y p-valor
+##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
+##   E <- length(x)/nclass
+##   DNAME <- deparse(substitute(x))
+##   METHOD <- "Pearson's Chi-squared test"
+##   STATISTIC <- sum((O - E)^2/E)
+##   names(STATISTIC) <- "X-squared"
+##   PARAMETER <- nclass - nestpar - 1
+##   names(PARAMETER) <- "df"
+##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##   # Preparar resultados
+##   classes <- format(xbreaks)
+##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
+##                    sep = "")
+##   RESULTS <- list(classes = classes, observed = O, expected = E,
+##                   residuals = (O - E)/sqrt(E))
+##   if (output) {
+##     cat("\nPearson's Chi-squared test table\n")
+##     print(as.data.frame(RESULTS))
+##   }
+##   if (any(E < 5))
+##     warning("Chi-squared approximation may be incorrect")
+##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
+##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x0000000013a8b988>
+## <bytecode: 0x000000002dcde2a8>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -6133,7 +7085,7 @@ Considerar que cada interruptor es una variable aleatoria de Bernoulli independi
 para simular 1000 valores de cada una de ellas.
 
 \begin{remark}
-\iffalse{} {Nota: } \fi{}R maneja internamente los valores lógicos como 1 (\texttt{TRUE}) y 0 (\texttt{FALSE}).
+R maneja internamente los valores lógicos como 1 (\texttt{TRUE}) y 0 (\texttt{FALSE}).
 Recíprocamente, cualquier número puede ser tratado como lógico (al estilo de C).
 El entero 0 es equivalente a \texttt{FALSE} y cualquier entero distinto de 0 a \texttt{TRUE}.
 \end{remark}
@@ -6366,7 +7318,7 @@ Ejemplo, aproximación de los límites (y mediana) para el número de cromos en 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 Representar las realizaciones del proceso y los intervalos de predicción puntuales:
 
@@ -6378,7 +7330,7 @@ Representar las realizaciones del proceso y los intervalos de predicción puntua
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-16-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 \hypertarget{capuxedtulo-2-generaciuxf3n-de-nuxfameros-pseudoaleatorios}{%
 \section{\texorpdfstring{Capítulo 2 \href{gen-pseudo.html}{Generación de números pseudoaleatorios}}{Capítulo 2 Generación de números pseudoaleatorios}}\label{capuxedtulo-2-generaciuxf3n-de-nuxfameros-pseudoaleatorios}}
@@ -6419,22 +7371,26 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 \end{Shaded}
 
 \begin{verbatim}
-## function (n, seed = as.numeric(Sys.time()), k = 4) 
-## {
-##     seed <- seed%%10^k
-##     aux <- 10^(2 * k - k/2)
-##     aux2 <- 10^(k/2)
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         z <- seed^2
-##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
-##         u[i] <- seed/10^k
-##     }
-##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
-##         envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), k = 4) {
+##   seed <- seed %% 10^k
+##   aux <- 10^(2*k-k/2)
+##   aux2 <- 10^(k/2)
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     z <- seed^2
+##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
+##     u[i] <- seed/10^k
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
+##       envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rvng(n, seed, parameters$k))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x000000002e361758>
+## <bytecode: 0x000000002e1fb780>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -6442,6 +7398,140 @@ Estudiar las características del generador de cuadrados medios a partir de una 
 Emplear únicamente métodos gráficos.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{capuxedtulo-5-simulaciuxf3n-de-variables-discretas}{%
+\section{\texorpdfstring{Capítulo 5 \href{discretas.html}{Simulación de variables discretas}}{Capítulo 5 Simulación de variables discretas}}\label{capuxedtulo-5-simulaciuxf3n-de-variables-discretas}}
+
+\hypertarget{sol-mixta-cuantil}{%
+\subsection{\texorpdfstring{Ejercicio \href{ejercicios-discretas.html\#exr:mixta-cuantil}{5.1}}{Ejercicio 5.1}}\label{sol-mixta-cuantil}}
+
+Enunciado \ref{exr:mixta-cuantil} (Simulación de una distribución mixta mediante el método de inversión generalizado):
+
+Consideramos la variable aleatoria con función de distribución dada por:
+\[F(x)=\left\{
+\begin{array}
+[c]{cl}0 & \mbox{si $x<0$}\\
+\frac{x}{2}+\frac{1}{10} & \mbox{si $x\in[0,\frac{1}{5})$}\\
+x+\frac{1}{10} & \mbox{si $x\in[\frac{1}{5},\frac{9}{10}]$}\\
+1 & \mbox{en otro caso}
+\end{array}
+\right.\]
+
+Esta función está implementada en el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fdistr }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\FunctionTok{ifelse}\NormalTok{(x }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+    \FunctionTok{ifelse}\NormalTok{(x }\SpecialCharTok{\textless{}} \DecValTok{1}\SpecialCharTok{/}\DecValTok{5}\NormalTok{, x}\SpecialCharTok{/}\DecValTok{2} \SpecialCharTok{+} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{,}
+        \FunctionTok{ifelse}\NormalTok{(x }\SpecialCharTok{\textless{}=} \DecValTok{9}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, x }\SpecialCharTok{+} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{) ) )}
+\NormalTok{\}}
+\CommentTok{\# Empleando ifelse la función es vectorial (y podemos emplear curve...)}
+\FunctionTok{curve}\NormalTok{(fdistr, }\AttributeTok{from =} \SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\AttributeTok{to =} \FloatTok{1.1}\NormalTok{, }\AttributeTok{type =} \StringTok{\textquotesingle{}s\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{main =} \StringTok{\textquotesingle{}Función de distribución\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# Discontinuidades en 0 y 1/5}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{2}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{10}\NormalTok{), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-17-1} \end{center}
+
+\textbf{Nota}: Esta variable toma los valores 0 y 1/5 con probabilidad 1/10.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Diseñar un algoritmo basado en el método de inversión generalizado
+  para generar observaciones de esta variable.
+\item
+  Implementar el algoritmo en una función que permita generar \(nsim\)
+  valores de esta variable.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  El algoritmo general es siempre el mismo. Empleando la función cuantil:
+  \[Q\left( u\right) = \inf \left\{ x\in \mathbb{R}:F\left( x\right) 
+  \geq u\right\},\]
+  el algoritmo sería:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    Generar \(U\sim \mathcal{U}\left( 0,1\right)\)
+  \item
+    Devolver \(X=Q\left( U\right)\)
+  \end{enumerate}
+
+  En este caso concreto:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    Generar \(U\sim \mathcal{U}\left( 0,1\right)\)
+  \item
+    Si \(U < \frac{1}{10}\) devolver \(X = 0\)
+  \item
+    Si \(U < \frac{2}{10}\) devolver \(X = 2(U - \frac{1}{10})\)
+  \item
+    Si \(U < \frac{3}{10}\) devolver \(X = \frac{2}{10}\)
+  \item
+    En caso contrario devolver \(X = U - \frac{1}{10}\)
+  \end{enumerate}
+\item
+  El algoritmo de simulación se puede implementar a partir de la función cuantil
+  (vectorial):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Función cuantil:}
+\NormalTok{fquant }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(u) }
+  \FunctionTok{ifelse}\NormalTok{(u }\SpecialCharTok{\textless{}} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+         \FunctionTok{ifelse}\NormalTok{(u }\SpecialCharTok{\textless{}} \DecValTok{2}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{2}\SpecialCharTok{*}\NormalTok{(u }\SpecialCharTok{{-}} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{),}
+                \FunctionTok{ifelse}\NormalTok{(u }\SpecialCharTok{\textless{}} \DecValTok{3}\SpecialCharTok{/}\DecValTok{10}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{5}\NormalTok{, u }\SpecialCharTok{{-}} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{) ) )}
+\CommentTok{\# Función para generar nsim valores:}
+\NormalTok{rx }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(nsim) }\FunctionTok{fquant}\NormalTok{(}\FunctionTok{runif}\NormalTok{(nsim))}
+\end{Highlighting}
+\end{Shaded}
+
+  Ejemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{4}
+\FunctionTok{system.time}\NormalTok{(simx }\OtherTok{\textless{}{-}} \FunctionTok{rx}\NormalTok{(nsim))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##       0       0       0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(simx, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-19-1} \end{center}
+
+  En este caso como no es una variable absolutamente continua mejor emplear
+  la función de distribución para compararla con la teórica:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(simx)(x), }\AttributeTok{from=} \SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\AttributeTok{to =} \FloatTok{1.1}\NormalTok{, }\AttributeTok{type =} \StringTok{"s"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{fdistr}\NormalTok{(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-20-1} \end{center}
+\end{enumerate}
 
   \bibliography{book.bib,packages.bib}
 

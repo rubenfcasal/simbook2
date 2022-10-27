@@ -80,10 +80,10 @@ chisq.cont.test <- function(x, distribution = "norm", nclass = floor(length(x)/5
 #'
 #' Performs the chi-squared goodness-of-fit test for the particular case
 #' of an uniform distribution in the unit interval
-#' (by grouping data into *bins*, `x = floor(nclass*u) + 1`,
-#' and calling [`chisq.test`]`(x)`).
+#' (by grouping data into *bins*, `y = floor(nclass*x) + 1`,
+#' and calling [`chisq.test`]`(y)`).
 #' Used for testing random number generators.
-#' @param u numeric vector containing the observed values
+#' @param x numeric vector containing the observed values
 #' (or the pseudorandom numbers).
 #' @param nclass number of bins (to partition the unit interval).
 #' @return A list with class `"htest"` returned by [`chisq.test()`].
@@ -99,12 +99,12 @@ chisq.cont.test <- function(x, distribution = "norm", nclass = floor(length(x)/5
 #' plot(res$observed)
 #' abline(h = res$expected[1], lty = 2)
 #' @export
-freq.test <- function(u, nclass = floor(length(u)/10)){
-  x <- floor(nclass*u) + 1
+freq.test <- function(x, nclass = floor(length(x)/10)){
+  y <- floor(nclass*x) + 1
   # Test chi-cuadrado
-  f <- table(factor(x, levels = seq_len(nclass)))
+  f <- table(factor(y, levels = seq_len(nclass)))
   result <- chisq.test(f)
-  result$data.name <- deparse(substitute(u))
+  result$data.name <- deparse(substitute(x))
   result
 }
 
@@ -135,15 +135,16 @@ freq.test <- function(u, nclass = floor(length(u)/10)){
 #' plot(res)
 #' @seealso [`chisq.cont.test`] [`freq.test`]
 #' @export
-rephtest <- function(n = 30, nsim = 1000, test = chisq.cont.test,
+rephtest <- function(n = 30, nsim = 1000, test,
                       rand.gen = runif, ...){
 # n = 30; nsim = 1000; test = chisq.cont.test; rand.gen = runif
 # distribution = "unif"; nclass = 100; output = FALSE; nestpar = 0
 # min = 0; max = 1
-  if (!length(arguments <- list(...)))
-    if (test == chisq.cont.test)
-      arguments <- list(distribution = "unif", output = FALSE, nestpar = 0,
-                        min = 0, max = 1)
+  # if (!length(arguments <- list(...)))
+  #   if (test == chisq.cont.test)
+  #     arguments <- list(distribution = "unif", output = FALSE, nestpar = 0,
+  #                       min = 0, max = 1)
+  arguments <- list(...)
   # Resultados
   estadistico <- numeric(nsim)
   pvalor <- numeric(nsim)

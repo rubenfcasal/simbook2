@@ -23,7 +23,7 @@ Empregar entorno algoritmo
 Empregar exemplos en lugar de exercicios
 -->
 
-# Simulación de variables continuas {#sim-con}
+# Simulación de variables continuas {#continuas}
 
 ```{r , child = '_global_options.Rmd'}
 ```
@@ -995,7 +995,7 @@ C_{f^{\ast}} & = \left\{ (u, v) \in \mathbb{R}^{2} : 0 <u \leq \frac{1}{\sqrt{1 
 dando como resultando que $C_{f^{\ast}}$ es el semicírculo de radio uno, y podemos generar valores con distribución uniforme en esta región a partir de $\mathcal{U}\left([0,1]\times[-1,1] \right)$.
 
 
-El correspondiente algoritmo está implementado en la función  `r cite_fsimres("rcauchy.rou")` del paquete `r cite_simres()` (fichero [*ar.R*](R/ar.R))::
+El correspondiente algoritmo está implementado en la función  `r cite_fsimres("rcauchy.rou")` del paquete `r cite_simres()` (fichero [*ar.R*](R/ar.R)):
 
 ```{r rcauchy-rou, fig.cap="Distribución de los valores generados mediante el método de cociente de uniformes."}
 simres::rcauchy.rou

@@ -39,4 +39,23 @@
 \contentsline {conjecture}{{Algoritmo}{4.{9}}{de Fox 1963}}{77}{conjecture.4.9}%
 \contentsline {conjecture}{{Algoritmo}{4.{10}}{de Jöhnk 1964}}{77}{conjecture.4.10}%
 \contentsline {conjecture}{{Algoritmo}{4.{11}}{de Cheng 1978}}{77}{conjecture.4.11}%
-\contentsline {remark}{{Nota}{4}{}}{114}{remark.4}%
+\contentsline {theorem}{{Teorema}{5.{1}}{de inversión generalizada}}{79}{theorem.5.1}%
+\contentsline {proof}{{Demostración}{1}{}}{80}{proof.1}%
+\contentsline {conjecture}{{Algoritmo}{5.{1}}{de transformación cuantil}}{80}{conjecture.5.1}%
+\contentsline {conjecture}{{Algoritmo}{5.{2}}{de transformación cuantil con búsqueda secuencial}}{80}{conjecture.5.2}%
+\contentsline {remark}{{Nota}{4}{}}{80}{remark.4}%
+\contentsline {example}{{Ejemplo}{5.{1}}{Simulación de una binomial mediante el método de la transformación cuantil}}{82}{example.5.1}%
+\contentsline {remark}{{Nota}{5}{}}{83}{remark.5}%
+\contentsline {example}{{Ejemplo}{5.{2}}{Simulación de una binomial, continuación}}{84}{example.5.2}%
+\contentsline {conjecture}{{Algoritmo}{5.{3}}{de simulación mediante tabla guía; Chen y Asau, 1974}}{85}{conjecture.5.3}%
+\contentsline {example}{{Ejemplo}{5.{3}}{Simulación de una binomial mediante tabla guía}}{86}{example.5.3}%
+\contentsline {conjecture}{{Algoritmo}{5.{4}}{"Robin Hood" de inicialización; Kronmal y Peterson, 1979}}{87}{conjecture.5.4}%
+\contentsline {conjecture}{{Algoritmo}{5.{5}}{método alias de simulación; Walker, 1977}}{88}{conjecture.5.5}%
+\contentsline {example}{{Ejemplo}{5.{4}}{Simulación de una binomial mediante en método de Alias}}{89}{example.5.4}%
+\contentsline {example}{{Ejemplo}{5.{5}}{distribución de Poisson}}{89}{example.5.5}%
+\contentsline {example}{{Ejemplo}{5.{6}}{distribución uniforme discreta}}{90}{example.5.6}%
+\contentsline {example}{{Ejemplo}{5.{7}}{distribución geométrica}}{91}{example.5.7}%
+\contentsline {conjecture}{{Algoritmo}{5.{6}}{distribución binomial negativa}}{92}{conjecture.5.6}%
+\contentsline {exercise}{{Ejercicio}{5.{1}}{Simulación de una distribución mixta mediante el método de inversión generalizado}}{92}{exercise.5.1}%
+\contentsline {exercise}{{Ejercicio}{5.{2}}{distribución hipergeométrica}}{93}{exercise.5.2}%
+\contentsline {remark}{{Nota}{6}{}}{130}{remark.6}%

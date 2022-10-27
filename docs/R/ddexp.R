@@ -55,9 +55,9 @@ ddexp <- function(x, rate = 1){
 #' @rdname ddexp
 #' @export
 # Distribucion doble exponencial
-pdexp <- function(x, rate = 1){
-  sgn <- 1 - 2 * (x < 0)
-  0.5 * (1 + sgn * stats::pexp(abs(x), rate = rate))
+pdexp <- function(q, rate = 1){
+  sgn <- 1 - 2 * (q < 0)
+  0.5 * (1 + sgn * stats::pexp(abs(q), rate = rate))
 }
 
 # ------------------------

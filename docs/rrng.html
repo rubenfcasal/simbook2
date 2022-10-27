@@ -32,7 +32,7 @@
   
 <link rel="prev" href="tipos-de-números-aleatorios.html"/>
 <link rel="next" href="ejercicios.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="observaciones.html"><a href="observaciones.html"><i class="fa fa-check"></i><b>3.4</b> Observaciones</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="sim-con.html"><a href="sim-con.html"><i class="fa fa-check"></i><b>4</b> Simulación de variables continuas</a>
+<li class="chapter" data-level="4" data-path="continuas.html"><a href="continuas.html"><i class="fa fa-check"></i><b>4</b> Simulación de variables continuas</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="inversion.html"><a href="inversion.html"><i class="fa fa-check"></i><b>4.1</b> Método de inversión</a>
 <ul>
@@ -211,6 +211,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="notables-cont.html"><a href="notables-cont.html#método-de-box-müller"><i class="fa fa-check"></i><b>4.5.1</b> Método de Box-Müller</a></li>
 <li class="chapter" data-level="4.5.2" data-path="notables-cont.html"><a href="notables-cont.html#simulación-de-la-distribución-beta"><i class="fa fa-check"></i><b>4.5.2</b> Simulación de la distribución beta</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="discretas.html"><a href="discretas.html"><i class="fa fa-check"></i><b>5</b> Simulación de variables discretas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="transcuant.html"><a href="transcuant.html"><i class="fa fa-check"></i><b>5.1</b> Método de la transformación cuantil</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="transcuant.html"><a href="transcuant.html#eficiencia-del-algoritmo-1"><i class="fa fa-check"></i><b>5.1.1</b> Eficiencia del algoritmo</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="método-de-la-tabla-guía.html"><a href="método-de-la-tabla-guía.html"><i class="fa fa-check"></i><b>5.2</b> Método de la tabla guía</a></li>
+<li class="chapter" data-level="5.3" data-path="alias.html"><a href="alias.html"><i class="fa fa-check"></i><b>5.3</b> Método de Alias</a></li>
+<li class="chapter" data-level="5.4" data-path="simulación-de-una-variable-discreta-con-dominio-infinito.html"><a href="simulación-de-una-variable-discreta-con-dominio-infinito.html"><i class="fa fa-check"></i><b>5.4</b> Simulación de una variable discreta con dominio infinito</a></li>
+<li class="chapter" data-level="5.5" data-path="cálculo-directo-de-la-función-cuantil.html"><a href="cálculo-directo-de-la-función-cuantil.html"><i class="fa fa-check"></i><b>5.5</b> Cálculo directo de la función cuantil</a></li>
+<li class="chapter" data-level="5.6" data-path="otros-métodos.html"><a href="otros-métodos.html"><i class="fa fa-check"></i><b>5.6</b> Otros métodos</a></li>
+<li class="chapter" data-level="5.7" data-path="notables-disc.html"><a href="notables-disc.html"><i class="fa fa-check"></i><b>5.7</b> Métodos específicos para generación de distribuciones notables</a></li>
+<li class="chapter" data-level="5.8" data-path="ejercicios-discretas.html"><a href="ejercicios-discretas.html"><i class="fa fa-check"></i><b>5.8</b> Ejercicios</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
@@ -279,6 +293,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="D.2.1" data-path="capítulo-2-generación-de-números-pseudoaleatorios.html"><a href="capítulo-2-generación-de-números-pseudoaleatorios.html#sol-RANDVN"><i class="fa fa-check"></i><b>D.2.1</b> Ejercicio <span>2.1</span></a></li>
 </ul></li>
+<li class="chapter" data-level="D.3" data-path="capítulo-5-simulación-de-variables-discretas.html"><a href="capítulo-5-simulación-de-variables-discretas.html"><i class="fa fa-check"></i><b>D.3</b> Capítulo 5 <span>Simulación de variables discretas</span></a>
+<ul>
+<li class="chapter" data-level="D.3.1" data-path="capítulo-5-simulación-de-variables-discretas.html"><a href="capítulo-5-simulación-de-variables-discretas.html#sol-mixta-cuantil"><i class="fa fa-check"></i><b>D.3.1</b> Ejercicio <span>5.1</span></a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -310,7 +328,7 @@ Entre las herramientas implementadas en el paquete base de R podemos destacar:</
 <li><p><code>RNGkind()</code>: selecciona el generador.</p></li>
 <li><p><code>rdistribución(n,...):</code> genera valores aleatorios de la correspondiente distribución.
 Por ejemplo, <code>runif(n, min = 0, max = 1)</code>, generaría <code>n</code> valores de una uniforme. Se puede acceder al listado completo de las funciones disponibles en el paquete <code>stats</code> mediante el comando <code>?distributions</code>.</p></li>
-<li><p><code>sample()</code>: genera muestras aleatorias de variables discretas y permutaciones (se tratará en el Capítulo <a href="#discretas"><strong>??</strong></a>).</p></li>
+<li><p><code>sample()</code>: genera muestras aleatorias de variables discretas y permutaciones (se tratará en el Capítulo <a href="discretas.html#discretas">5</a>).</p></li>
 <li><p><code>simulate()</code>: genera realizaciones de la respuesta de un modelo ajustado.</p></li>
 </ul>
 <p>Además están disponibles otros paquetes que implementan distribuciones adicionales (ver <a href="https://cran.r-project.org/view=Distributions">CRAN Task View: Probability Distributions</a>).
@@ -437,18 +455,18 @@ Ejemplo:</p>
 <span id="cb23-4"><a href="rrng.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">CPUtimeprint</span>()</span></code></pre></div>
 <pre><code>## Tiempo última operación:
 ##    user  system elapsed 
-##    0.09    0.02    0.11 
+##    0.06    0.00    0.06 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.09    0.02    0.11</code></pre>
+##    0.06    0.00    0.06</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="rrng.html#cb25-1" aria-hidden="true" tabindex="-1"></a>result2 <span class="ot">&lt;-</span> <span class="fu">funtest</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">3</span>)</span>
 <span id="cb25-2"><a href="rrng.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">CPUtimeprint</span>()</span></code></pre></div>
 <pre><code>## Tiempo última operación:
 ##    user  system elapsed 
-##    0.00    0.01    0.01 
+##    0.02    0.00    0.02 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.09    0.03    0.12</code></pre>
+##    0.08    0.00    0.08</code></pre>
 <p>Hay diversos paquetes que implementan herramientas similares, por ejemplo:</p>
 <ul>
 <li><p>El paquete <code>tictoc</code>:</p>
@@ -468,7 +486,7 @@ Ejemplo:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="rrng.html#cb29-1" aria-hidden="true" tabindex="-1"></a>   <span class="fu">toc</span>() <span class="co"># middle</span></span></code></pre></div>
 <pre><code>## middle: 0 sec elapsed</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="rrng.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>() <span class="co"># outer</span></span></code></pre></div>
-<pre><code>## outer: 0.11 sec elapsed</code></pre>
+<pre><code>## outer: 0.07 sec elapsed</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="rrng.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Timing in a loop and analyzing the results later using tic.log().</span></span>
 <span id="cb33-2"><a href="rrng.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tic.clearlog</span>()</span>
 <span id="cb33-3"><a href="rrng.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
@@ -482,8 +500,8 @@ Ejemplo:</p>
 <span id="cb33-11"><a href="rrng.html#cb33-11" aria-hidden="true" tabindex="-1"></a>log.times <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, <span class="fu">tic.log</span>(<span class="at">format =</span> <span class="cn">FALSE</span>))</span>
 <span id="cb33-12"><a href="rrng.html#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(log.times)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    10 obs. of  3 variables:
-##  $ tic: num  5.75 5.75 5.75 5.75 5.75 5.75 5.75 5.76 5.76 5.76
-##  $ toc: num  5.75 5.75 5.75 5.75 5.75 5.75 5.76 5.76 5.76 5.76
+##  $ tic: num  3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34
+##  $ toc: num  3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34
 ##  $ msg: chr  &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="rrng.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic.clearlog</span>()</span>
 <span id="cb35-2"><a href="rrng.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -491,7 +509,7 @@ Ejemplo:</p>
 <span id="cb35-4"><a href="rrng.html#cb35-4" aria-hidden="true" tabindex="-1"></a>log.times<span class="sc">$</span>timings <span class="ot">&lt;-</span> <span class="fu">with</span>(log.times, toc <span class="sc">-</span> tic)</span>
 <span id="cb35-5"><a href="rrng.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(log.times<span class="sc">$</span>timings)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   0.000   0.000   0.001   0.000   0.010</code></pre></li>
+##       0       0       0       0       0       0</code></pre></li>
 </ul></li>
 <li><p>La función <a href="https://rubenfcasal.github.io/simres/reference/cpu.time.html"><code>cpu.time()</code></a> del paquete <code>simres</code>:</p>
 <ul>

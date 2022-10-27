@@ -13,7 +13,7 @@
 #--------------------------------------------------------------------
 #' @rdname simres-internals
 #' @keywords internal
-#' @export
+# @export
 .cpu.time.ini <- function() {
     time.ini <- structure(rep(0, 5), .Names = c("user.self", "sys.self", "elapsed",
         "user.child", "sys.child"), class = "proc_time")# proc.time()

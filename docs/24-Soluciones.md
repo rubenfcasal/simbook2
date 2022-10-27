@@ -1,5 +1,9 @@
-<!-- 
+# Soluciones ejercicios {#soluciones}
 
+
+
+
+<!-- 
 ---
 title: "Soluciones a algunos ejercicios"
 author: "Simulación Estadística (UDC)"
@@ -21,11 +25,6 @@ bookdown::preview_chapter("24-Soluciones.Rmd")
 knitr::purl("24-Soluciones.Rmd", documentation = 2)
 knitr::spin("24-Soluciones.R",knit = FALSE)
 -->
-
-# Soluciones ejercicios {#soluciones}
-
-
-
 
 A continuación se muestran soluciones de algunos de los ejercicios no resueltos en el texto.
 
@@ -236,11 +235,11 @@ interruptores:
 Considerar que cada interruptor es una variable aleatoria de Bernoulli independiente
 para simular 1000 valores de cada una de ellas.
     
-\BeginKnitrBlock{remark}
-\iffalse{} <span class="remark"><em>Nota: </em></span>  \fi{}R maneja internamente los valores lógicos como 1 (`TRUE`) y 0 (`FALSE`).
+::: {.remark}
+R maneja internamente los valores lógicos como 1 (`TRUE`) y 0 (`FALSE`).
 Recíprocamente, cualquier número puede ser tratado como lógico (al estilo de C).
 El entero 0 es equivalente a `FALSE` y cualquier entero distinto de 0 a `TRUE`.
-\EndKnitrBlock{remark}
+:::
 
 ---
 
@@ -450,7 +449,7 @@ abline(v = limits[, 20], lty = 2)
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 Representar las realizaciones del proceso y los intervalos de predicción puntuales:
 
@@ -463,7 +462,7 @@ matlines(1:max_len, t(limits), lty = c(2, 1, 2), col = 1)
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-16-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 
 ## Capítulo 2 [Generación de números pseudoaleatorios](gen-pseudo.html)
@@ -499,22 +498,26 @@ simres::rvng
 ```
 
 ```
-## function (n, seed = as.numeric(Sys.time()), k = 4) 
-## {
-##     seed <- seed%%10^k
-##     aux <- 10^(2 * k - k/2)
-##     aux2 <- 10^(k/2)
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         z <- seed^2
-##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
-##         u[i] <- seed/10^k
-##     }
-##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
-##         envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), k = 4) {
+##   seed <- seed %% 10^k
+##   aux <- 10^(2*k-k/2)
+##   aux2 <- 10^(k/2)
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     z <- seed^2
+##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
+##     u[i] <- seed/10^k
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
+##       envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rvng(n, seed, parameters$k))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x000000002e361758>
+## <bytecode: 0x000000002e1fb780>
 ## <environment: namespace:simres>
 ```
 
@@ -523,4 +526,120 @@ Emplear únicamente métodos gráficos.
 
 ---
 
+
+## Capítulo 5 [Simulación de variables discretas](discretas.html)
+
+### Ejercicio [5.1](ejercicios-discretas.html#exr:mixta-cuantil) {#sol-mixta-cuantil}
+
+Enunciado \@ref(exr:mixta-cuantil) (Simulación de una distribución mixta mediante el método de inversión generalizado):
+
+Consideramos la variable aleatoria con función de distribución dada por: 
+$$F(x)=\left\{
+\begin{array}
+[c]{cl}0 & \mbox{si $x<0$}\\
+\frac{x}{2}+\frac{1}{10} & \mbox{si $x\in[0,\frac{1}{5})$}\\
+x+\frac{1}{10} & \mbox{si $x\in[\frac{1}{5},\frac{9}{10}]$}\\
+1 & \mbox{en otro caso}
+\end{array}
+\right.$$
+
+Esta función está implementada en el siguiente código:
+
+```r
+fdistr <- function(x) {
+ifelse(x < 0, 0,
+    ifelse(x < 1/5, x/2 + 1/10,
+        ifelse(x <= 9/10, x + 1/10, 1) ) )
+}
+# Empleando ifelse la función es vectorial (y podemos emplear curve...)
+curve(fdistr, from = -0.1, to = 1.1, type = 's', 
+      main = 'Función de distribución')
+# Discontinuidades en 0 y 1/5
+abline(h = c(1/10, 2/10, 3/10), lty = 2) 
+```
+
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-17-1} \end{center}
+
+**Nota**: Esta variable toma los valores 0 y 1/5 con probabilidad 1/10.
+
+a)  Diseñar un algoritmo basado en el método de inversión generalizado 
+    para generar observaciones de esta variable.
+     
+b)  Implementar el algoritmo en una función que permita generar $nsim$ 
+    valores de esta variable.
+
+---
+
+a)  El algoritmo general es siempre el mismo. Empleando la función cuantil:
+    $$Q\left( u\right) = \inf \left\{ x\in \mathbb{R}:F\left( x\right) 
+    \geq u\right\},$$
+    el algoritmo sería:
+    
+    1. Generar $U\sim \mathcal{U}\left( 0,1\right)$
+    
+    2. Devolver $X=Q\left( U\right)$
+    
+    En este caso concreto:
+    
+    1. Generar $U\sim \mathcal{U}\left( 0,1\right)$
+    
+    2. Si $U < \frac{1}{10}$ devolver $X = 0$
+    
+    3. Si $U < \frac{2}{10}$ devolver $X = 2(U - \frac{1}{10})$
+    
+    4. Si $U < \frac{3}{10}$ devolver $X = \frac{2}{10}$
+    
+    5. En caso contrario devolver $X = U - \frac{1}{10}$
+
+       
+b)  El algoritmo de simulación se puede implementar a partir de la función cuantil
+    (vectorial):   
+
+    
+    ```r
+    # Función cuantil:
+    fquant <- function(u) 
+      ifelse(u < 1/10, 0,
+             ifelse(u < 2/10, 2*(u - 1/10),
+                    ifelse(u < 3/10, 1/5, u - 1/10) ) )
+    # Función para generar nsim valores:
+    rx <- function(nsim) fquant(runif(nsim))
+    ```
+
+    Ejemplo:
+    
+    
+    ```r
+    set.seed(1)
+    nsim <- 10^4
+    system.time(simx <- rx(nsim))
+    ```
+    
+    ```
+    ##    user  system elapsed 
+    ##       0       0       0
+    ```
+    
+    ```r
+    hist(simx, breaks = "FD", freq = FALSE)
+    ```
+    
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-19-1} \end{center}
+    
+    En este caso como no es una variable absolutamente continua mejor emplear 
+    la función de distribución para compararla con la teórica:
+    
+    
+    ```r
+    curve(ecdf(simx)(x), from= -0.1, to = 1.1, type = "s")
+    curve(fdistr(x), type = "s", lty = 2, add = TRUE)
+    ```
+    
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-20-1} \end{center}
 

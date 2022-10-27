@@ -1,11 +1,9 @@
-# PENDIENTE:
-#  -
-
+# pkgdown::build_site()
 
 #' simres: Simulation and resampling techniques
 #'
 #' Functions and datasets used in the books:
-#' * [Simulacion Estadistica](https://rubenfcasal.github.io/simbook)
+#' * [Simulacion Estadistica](https://rubenfcasal.github.io/simbook2)
 #' * [Tecnicas de Remuestreo](https://rubenfcasal.github.io/book_remuestreo)
 #'
 #' For more information visit <https://rubenfcasal.github.io/simres.html>.
@@ -16,45 +14,34 @@
 #' @import graphics
 #' @import stats
 #' @importFrom utils flush.console
-#' @importFrom grDevices dev.interactive devAskNewPage
+#' @importFrom grDevices dev.interactive devAskNewPage dev.flush dev.hold
 #' @references
-#' Cao R. y Fernández-Casal R. (2021). *[Técnicas de Remuestreo](https://rubenfcasal.github.io/book_remuestreo)*,  ([github](https://github.com/rubenfcasal/book_remuestreo)).
+#' Cao R., Fernández-Casal R. (2021). *[Técnicas de Remuestreo](https://rubenfcasal.github.io/book_remuestreo)*,  ([github](https://github.com/rubenfcasal/book_remuestreo)).
 #'
-#' Fernández-Casal R. y Cao R. (2022). *[Simulación Estadística](https://rubenfcasal.github.io/simbook)*, ([github](https://github.com/rubenfcasal/simbook)).
+#' Fernández-Casal R., Cao R. (2022). *[Simulación Estadística](https://rubenfcasal.github.io/simbook2)*, segunda edición, ([github](https://github.com/rubenfcasal/simbook2)).
 #'
 NULL
-
 
 
 
 if(getRversion() >= "2.15.1")
     utils::globalVariables(c(".rng"))
 
-# #' UDC WoS Core Collection 2015 data
-# #'
-# #' The data set consists of 856 registros vinculados a la UDC por el campo Organización-Nombre preferido
-# #' (Organization-Enhaced: OG = Universidade da Coruna)
-# #' de los siguientes índices de la Web of Science Core Collection:
-# #' \itemize{
-# #'   \item{Science Citation Index Expanded (SCI-EXPANDED).}
-# #'   \item{Social Sciences Citation Index (SSCI).}
-# #'   \item{Arts & Humanities Citation Index (A&HCI).}
-# #' }
-# #' correspondientes al año 2015.
-# #' @name wosdf
-# #' @docType data
-# #' @format A data frame with 856 observations on the following 62 variables:
-# #' \describe{
-# #'   \item{UT}{Access number.}
-# #'   \item{PM}{Pub Med ID.}
-# #' }
-# #' @source Thomson Reuters' Web of Science: \cr
-# #' \url{http://www.webofknowledge.com}.
-# #' @keywords datasets
-# # @examples
-# # str(wosdf)
-# NULL
 
+#' Microorganism lifetimes
+#'
+#' Lifespan of a sample of a particular population of microorganisms.
+#' @name lifetimes
+#' @docType data
+#' @format A vector with 15 observations of the time to death event.
+#' @source Unknown.
+#' @keywords datasets
+#' @examples
+#' hist(lifetimes)
+NULL
+# lifetimes <- c(0.143, 0.182, 0.256, 0.26, 0.27, 0.437, 0.509, 0.611, 0.712,
+#    1.04, 1.09, 1.15, 1.46, 1.88, 2.08)
+# usethis::use_data(lifetimes)
 
 
 #--------------------------------------------------------------------

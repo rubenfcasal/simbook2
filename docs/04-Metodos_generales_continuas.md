@@ -23,7 +23,7 @@ Empregar entorno algoritmo
 Empregar exemplos en lugar de exercicios
 -->
 
-# Simulación de variables continuas {#sim-con}
+# Simulación de variables continuas {#continuas}
 
 
 
@@ -109,7 +109,7 @@ tiempo
 
 ```
 ##    user  system elapsed 
-##    0.01    0.00    0.02
+##    0.03    0.00    0.04
 ```
 
 ```r
@@ -207,7 +207,7 @@ b)  Generar $10^{4}$ valores de la distribución doble exponencial de
     
     ```
     ##    user  system elapsed 
-    ##    0.04    0.00    0.04
+    ##    0.03    0.02    0.04
     ```
 
 
@@ -670,7 +670,7 @@ system.time(x <- rnormARn(nsim))
 
 ```
 ##    user  system elapsed 
-##    0.14    0.00    0.14
+##    0.09    0.00    0.09
 ```
 
 Evaluamos la eficiencia:
@@ -1144,7 +1144,7 @@ C_{f^{\ast}} & = \left\{ (u, v) \in \mathbb{R}^{2} : 0 <u \leq \frac{1}{\sqrt{1 
 dando como resultando que $C_{f^{\ast}}$ es el semicírculo de radio uno, y podemos generar valores con distribución uniforme en esta región a partir de $\mathcal{U}\left([0,1]\times[-1,1] \right)$.
 
 
-El correspondiente algoritmo está implementado en la función  [`rcauchy.rou()`](https://rubenfcasal.github.io/simres/reference/rcauchy.rou.html) del paquete [`simres`](https://rubenfcasal.github.io/simres) (fichero [*ar.R*](R/ar.R))::
+El correspondiente algoritmo está implementado en la función  [`rcauchy.rou()`](https://rubenfcasal.github.io/simres/reference/rcauchy.rou.html) del paquete [`simres`](https://rubenfcasal.github.io/simres) (fichero [*ar.R*](R/ar.R)):
 
 
 ```r
@@ -1152,24 +1152,25 @@ simres::rcauchy.rou
 ```
 
 ```
-## function (n) 
-## {
-##     ngen <- n
-##     u <- runif(n, 0, 1)
-##     v <- runif(n, -1, 1)
-##     x <- v/u
-##     ind <- u^2 + v^2 > 1
-##     while (le <- sum(ind)) {
-##         ngen <- ngen + le
-##         u <- runif(le, 0, 1)
-##         v <- runif(le, -1, 1)
-##         x[ind] <- v/u
-##         ind[ind] <- u^2 + v^2 > 1
-##     }
-##     attr(x, "ngen") <- ngen
-##     return(x)
+## function(n) {
+##   # Cauchy mediante cociente de uniformes
+##   ngen <- n
+##   u <- runif(n, 0, 1)
+##   v <- runif(n, -1, 1)
+##   x <- v/u
+##   ind <- u^2 + v^2 > 1 # TRUE si no verifica condición
+##   # Volver a generar si no verifica condición
+##   while (le <- sum(ind)){ # mientras le = sum(ind) > 0
+##     ngen <- ngen + le
+##     u <- runif(le, 0, 1)
+##     v <- runif(le, -1, 1)
+##     x[ind] <- v/u
+##     ind[ind] <- u^2 + v^2 > 1 # TRUE si no verifica condición
+##   }
+##   attr(x, "ngen") <- ngen
+##   return(x)
 ## }
-## <bytecode: 0x000000003409b238>
+## <bytecode: 0x00000000340e96a8>
 ## <environment: namespace:simres>
 ```
 

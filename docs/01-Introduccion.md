@@ -698,10 +698,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##       0       0       0 
+##    0.01    0.00    0.01 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.11    0.00    0.11
+##    0.12    0.00    0.12
 ```
 
 
@@ -728,7 +728,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## inner: 0.02 sec elapsed
+    ## inner: 0.01 sec elapsed
     ```
     
     ```r
@@ -736,7 +736,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## middle: 0.02 sec elapsed
+    ## middle: 0.01 sec elapsed
     ```
     
     ```r
@@ -744,7 +744,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## outer: 0.1 sec elapsed
+    ## outer: 0.09 sec elapsed
     ```
     
     ```r
@@ -764,8 +764,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ## 'data.frame':	10 obs. of  3 variables:
-    ##  $ tic: num  4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.15 4.15
-    ##  $ toc: num  4.14 4.14 4.14 4.14 4.14 4.14 4.14 4.15 4.15 4.15
+    ##  $ tic: num  5.04 5.04 5.04 5.04 5.04 5.06 5.06 5.06 5.06 5.06
+    ##  $ toc: num  5.04 5.04 5.04 5.04 5.06 5.06 5.06 5.06 5.06 5.06
     ##  $ msg: chr  "1" "2" "3" "4" ...
     ```
     
@@ -779,7 +779,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##   0.000   0.000   0.000   0.001   0.000   0.010
+    ##   0.000   0.000   0.000   0.002   0.000   0.020
     ```
 
 * La función [`cpu.time()`](https://rubenfcasal.github.io/simres/reference/cpu.time.html) del paquete `simres`:
