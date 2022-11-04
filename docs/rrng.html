@@ -226,6 +226,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="notables-disc.html"><a href="notables-disc.html"><i class="fa fa-check"></i><b>5.7</b> Métodos específicos para generación de distribuciones notables</a></li>
 <li class="chapter" data-level="5.8" data-path="ejercicios-discretas.html"><a href="ejercicios-discretas.html"><i class="fa fa-check"></i><b>5.8</b> Ejercicios</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="multivariante.html"><a href="multivariante.html"><i class="fa fa-check"></i><b>6</b> Simulación de distribuciones multivariantes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="simulación-de-componentes-independientes.html"><a href="simulación-de-componentes-independientes.html"><i class="fa fa-check"></i><b>6.1</b> Simulación de componentes independientes</a></li>
+<li class="chapter" data-level="6.2" data-path="el-método-de-aceptaciónrechazo.html"><a href="el-método-de-aceptaciónrechazo.html"><i class="fa fa-check"></i><b>6.2</b> El método de aceptación/rechazo</a></li>
+<li class="chapter" data-level="6.3" data-path="fact-cov.html"><a href="fact-cov.html"><i class="fa fa-check"></i><b>6.3</b> Factorización de la matriz de covarianzas</a></li>
+<li class="chapter" data-level="6.4" data-path="distrcond.html"><a href="distrcond.html"><i class="fa fa-check"></i><b>6.4</b> Método de las distribuciones condicionadas</a></li>
+<li class="chapter" data-level="6.5" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html"><i class="fa fa-check"></i><b>6.5</b> Simulación condicional e incondicional</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#condnormal"><i class="fa fa-check"></i><b>6.5.1</b> Simulación condicional de una normal multivariante</a></li>
+<li class="chapter" data-level="6.5.2" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#simulación-condicional-a-partir-de-un-modelo-ajustado"><i class="fa fa-check"></i><b>6.5.2</b> Simulación condicional a partir de un modelo ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html"><i class="fa fa-check"></i><b>6.6</b> Simulación basada en cópulas</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#cópulas-arquimedianas"><i class="fa fa-check"></i><b>6.6.1</b> Cópulas Arquimedianas</a></li>
+<li class="chapter" data-level="6.6.2" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#simulación"><i class="fa fa-check"></i><b>6.6.2</b> Simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="mult-discr.html"><a href="mult-discr.html"><i class="fa fa-check"></i><b>6.7</b> Simulación de distribuciones multivariantes discretas</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="mult-discr.html"><a href="mult-discr.html#simulación-de-una-variable-discreta-bidimensional"><i class="fa fa-check"></i><b>6.7.1</b> Simulación de una variable discreta bidimensional</a></li>
+<li class="chapter" data-level="6.7.2" data-path="mult-discr.html"><a href="mult-discr.html#simconting"><i class="fa fa-check"></i><b>6.7.2</b> Simulación de tablas de contingencia</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
 <li class="chapter" data-level="" data-path="bibliografía-complementaria.html"><a href="bibliografía-complementaria.html"><i class="fa fa-check"></i>Bibliografía complementaria</a>
@@ -455,18 +477,18 @@ Ejemplo:</p>
 <span id="cb23-4"><a href="rrng.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">CPUtimeprint</span>()</span></code></pre></div>
 <pre><code>## Tiempo última operación:
 ##    user  system elapsed 
-##    0.06    0.00    0.06 
+##    0.25    0.02    0.27 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.06    0.00    0.06</code></pre>
+##    0.25    0.02    0.27</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="rrng.html#cb25-1" aria-hidden="true" tabindex="-1"></a>result2 <span class="ot">&lt;-</span> <span class="fu">funtest</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">3</span>)</span>
 <span id="cb25-2"><a href="rrng.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">CPUtimeprint</span>()</span></code></pre></div>
 <pre><code>## Tiempo última operación:
 ##    user  system elapsed 
-##    0.02    0.00    0.02 
+##    0.01    0.00    0.02 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.08    0.00    0.08</code></pre>
+##    0.26    0.02    0.29</code></pre>
 <p>Hay diversos paquetes que implementan herramientas similares, por ejemplo:</p>
 <ul>
 <li><p>El paquete <code>tictoc</code>:</p>
@@ -486,7 +508,7 @@ Ejemplo:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="rrng.html#cb29-1" aria-hidden="true" tabindex="-1"></a>   <span class="fu">toc</span>() <span class="co"># middle</span></span></code></pre></div>
 <pre><code>## middle: 0 sec elapsed</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="rrng.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>() <span class="co"># outer</span></span></code></pre></div>
-<pre><code>## outer: 0.07 sec elapsed</code></pre>
+<pre><code>## outer: 0.09 sec elapsed</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="rrng.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Timing in a loop and analyzing the results later using tic.log().</span></span>
 <span id="cb33-2"><a href="rrng.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tic.clearlog</span>()</span>
 <span id="cb33-3"><a href="rrng.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
@@ -500,8 +522,8 @@ Ejemplo:</p>
 <span id="cb33-11"><a href="rrng.html#cb33-11" aria-hidden="true" tabindex="-1"></a>log.times <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, <span class="fu">tic.log</span>(<span class="at">format =</span> <span class="cn">FALSE</span>))</span>
 <span id="cb33-12"><a href="rrng.html#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(log.times)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    10 obs. of  3 variables:
-##  $ tic: num  3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34
-##  $ toc: num  3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34 3.34
+##  $ tic: num  6.35 6.35 6.35 6.35 6.35 6.37 6.37 6.37 6.37 6.37
+##  $ toc: num  6.35 6.35 6.35 6.35 6.37 6.37 6.37 6.37 6.37 6.37
 ##  $ msg: chr  &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="rrng.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic.clearlog</span>()</span>
 <span id="cb35-2"><a href="rrng.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -509,7 +531,7 @@ Ejemplo:</p>
 <span id="cb35-4"><a href="rrng.html#cb35-4" aria-hidden="true" tabindex="-1"></a>log.times<span class="sc">$</span>timings <span class="ot">&lt;-</span> <span class="fu">with</span>(log.times, toc <span class="sc">-</span> tic)</span>
 <span id="cb35-5"><a href="rrng.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(log.times<span class="sc">$</span>timings)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##       0       0       0       0       0       0</code></pre></li>
+##   0.000   0.000   0.000   0.002   0.000   0.020</code></pre></li>
 </ul></li>
 <li><p>La función <a href="https://rubenfcasal.github.io/simres/reference/cpu.time.html"><code>cpu.time()</code></a> del paquete <code>simres</code>:</p>
 <ul>

@@ -226,6 +226,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="notables-disc.html"><a href="notables-disc.html"><i class="fa fa-check"></i><b>5.7</b> Métodos específicos para generación de distribuciones notables</a></li>
 <li class="chapter" data-level="5.8" data-path="ejercicios-discretas.html"><a href="ejercicios-discretas.html"><i class="fa fa-check"></i><b>5.8</b> Ejercicios</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="multivariante.html"><a href="multivariante.html"><i class="fa fa-check"></i><b>6</b> Simulación de distribuciones multivariantes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="simulación-de-componentes-independientes.html"><a href="simulación-de-componentes-independientes.html"><i class="fa fa-check"></i><b>6.1</b> Simulación de componentes independientes</a></li>
+<li class="chapter" data-level="6.2" data-path="el-método-de-aceptaciónrechazo.html"><a href="el-método-de-aceptaciónrechazo.html"><i class="fa fa-check"></i><b>6.2</b> El método de aceptación/rechazo</a></li>
+<li class="chapter" data-level="6.3" data-path="fact-cov.html"><a href="fact-cov.html"><i class="fa fa-check"></i><b>6.3</b> Factorización de la matriz de covarianzas</a></li>
+<li class="chapter" data-level="6.4" data-path="distrcond.html"><a href="distrcond.html"><i class="fa fa-check"></i><b>6.4</b> Método de las distribuciones condicionadas</a></li>
+<li class="chapter" data-level="6.5" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html"><i class="fa fa-check"></i><b>6.5</b> Simulación condicional e incondicional</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#condnormal"><i class="fa fa-check"></i><b>6.5.1</b> Simulación condicional de una normal multivariante</a></li>
+<li class="chapter" data-level="6.5.2" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#simulación-condicional-a-partir-de-un-modelo-ajustado"><i class="fa fa-check"></i><b>6.5.2</b> Simulación condicional a partir de un modelo ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html"><i class="fa fa-check"></i><b>6.6</b> Simulación basada en cópulas</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#cópulas-arquimedianas"><i class="fa fa-check"></i><b>6.6.1</b> Cópulas Arquimedianas</a></li>
+<li class="chapter" data-level="6.6.2" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#simulación"><i class="fa fa-check"></i><b>6.6.2</b> Simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="mult-discr.html"><a href="mult-discr.html"><i class="fa fa-check"></i><b>6.7</b> Simulación de distribuciones multivariantes discretas</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="mult-discr.html"><a href="mult-discr.html#simulación-de-una-variable-discreta-bidimensional"><i class="fa fa-check"></i><b>6.7.1</b> Simulación de una variable discreta bidimensional</a></li>
+<li class="chapter" data-level="6.7.2" data-path="mult-discr.html"><a href="mult-discr.html#simconting"><i class="fa fa-check"></i><b>6.7.2</b> Simulación de tablas de contingencia</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
 <li class="chapter" data-level="" data-path="bibliografía-complementaria.html"><a href="bibliografía-complementaria.html"><i class="fa fa-check"></i>Bibliografía complementaria</a>
@@ -459,7 +481,7 @@ Figura 4.5: Densidad objetivo beta (línea continua) y densidad auxiliar unifome
 <span id="cb140-3"><a href="AR.html#cb140-3" aria-hidden="true" tabindex="-1"></a>ngen <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb140-4"><a href="AR.html#cb140-4" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(x <span class="ot">&lt;-</span> <span class="fu">rbeta2n</span>(nsim, s1, s2))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.01    0.02    0.03</code></pre>
+##    0.01    0.00    0.02</code></pre>
 <p>Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):</p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="AR.html#cb142-1" aria-hidden="true" tabindex="-1"></a>{<span class="fu">cat</span>(<span class="st">&quot;Número de generaciones = &quot;</span>, ngen)</span>
 <span id="cb142-2"><a href="AR.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Número medio de generaciones = &quot;</span>, ngen<span class="sc">/</span>nsim)</span>
@@ -550,13 +572,13 @@ Figura 4.7: Densidad objetivo (normal estándar, línea continua) y densidad aux
 ## $objective
 ## [1] 1.315489</code></pre>
 <p>Vemos que la aproximación numérica coincide con el valor óptimo real <span class="math inline">\(c_{\text{opt}} \approx\)</span> 1.3154892 (que se alcanza en <span class="math inline">\(x = \pm 1\)</span>).</p>
-<p>Para establecer la condición de aceptación o rechazo se puede tener en cuenta que:
+<p>Para establecer la condición de aceptación o rechazo es recomendable emplear
+<span class="math inline">\(c\cdot U\cdot g\left( T\right) \leq f\left( T\right)\)</span>.
+Aunque, en este caso concreto, se puede tener en cuenta que:
 <span class="math display">\[c\cdot U\cdot\frac{g\left( T\right)  }{f\left( T\right)  }=\sqrt{\frac
 {2e}{\pi}}U\sqrt{\frac{\pi}{2}}\exp\left( \frac{T^{2}}{2}-\left\vert
 T\right\vert \right)  =U\cdot\exp\left( \frac{T^{2}}{2}-\left\vert
-T\right\vert +\frac{1}{2}\right),\]</span>
-aunque en general puede ser recomendable emplear
-<span class="math inline">\(c\cdot U\cdot g\left( T\right) \leq f\left( T\right)\)</span>.</p>
+T\right\vert +\frac{1}{2}\right).\]</span></p>
 <p>Teniendo en cuenta los resultados anteriores, podríamos emplear el siguiente código para generar los valores de la densidad objetivo:</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="AR.html#cb148-1" aria-hidden="true" tabindex="-1"></a>ngen <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb148-2"><a href="AR.html#cb148-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -586,7 +608,7 @@ aunque en general puede ser recomendable emplear
 <span id="cb149-3"><a href="AR.html#cb149-3" aria-hidden="true" tabindex="-1"></a>ngen <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb149-4"><a href="AR.html#cb149-4" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(x <span class="ot">&lt;-</span> <span class="fu">rnormARn</span>(nsim))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.09    0.02    0.11</code></pre>
+##    0.09    0.00    0.10</code></pre>
 <p>Evaluamos la eficiencia:</p>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="AR.html#cb151-1" aria-hidden="true" tabindex="-1"></a>{<span class="fu">cat</span>(<span class="st">&quot;Número de generaciones = &quot;</span>, ngen)</span>
 <span id="cb151-2"><a href="AR.html#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Número medio de generaciones = &quot;</span>, ngen<span class="sc">/</span>nsim)</span>
@@ -684,12 +706,12 @@ siendo <span class="math inline">\(L(\mathbf{x}|\theta)\)</span> la función de 
 Es decir:
 <span class="math display">\[\pi(\theta | \mathbf{x})\propto L(\mathbf{x}| \theta)\pi(\theta).\]</span></p>
 <p>Como esta distribución cambia al variar la muestra observada, puede resultar difícil encontrar una densidad auxiliar adecuada para simular valores de la densidad a posteriori <span class="math inline">\(\pi(\theta|\mathbf{x})\)</span>.
-Por ejemplo, podríamos pensar en emplear la densidad a priori <span class="math inline">\(\pi(\theta)\)</span> como densidad auxiliar.
+Por ejemplo, podríamos emplear la densidad a priori <span class="math inline">\(\pi(\theta)\)</span> como densidad auxiliar.
 Teniendo en cuenta que:</p>
 <ul>
 <li><p><span class="math inline">\(\pi(\theta |\mathbf{x})/\pi(\theta)\propto L(\mathbf{x}|\theta)\)</span></p></li>
 <li><p><span class="math inline">\(L(\mathbf{x}|\theta)\leq \tilde{c}=L(\mathbf{x}|\hat{\theta})\)</span> siendo
-<span class="math inline">\(\hat{\theta}\)</span> el estimador MV de <span class="math inline">\(\theta\)</span>.</p></li>
+<span class="math inline">\(\hat{\theta}\)</span> el estimador máximo verosímil de <span class="math inline">\(\theta\)</span>.</p></li>
 </ul>
 <p>El algoritmo sería el siguiente:</p>
 <ol style="list-style-type: decimal">
@@ -701,6 +723,11 @@ Teniendo en cuenta que:</p>
 <p>Aunque, como se muestra en el siguiente ejercicio, esta elección de densidad auxiliar puede ser muy poco adecuada, siendo preferible en la práctica emplear un método adaptativo que construya la densidad auxiliar de forma automática (Sección <a href="modAR.html#ars">4.3.1</a>).</p>
 <div class="exercise">
 <p><span id="exr:post-pri-ar" class="exercise"><strong>Ejercicio 4.3  (Simulación de la distribución a posteriori a partir de la distribución a priori) </strong></span><br></p>
+<!-- 
+Basado en el Ejercicio 2.23 de Robert y Casella, 2009 
+Cambiar a ejemplo y apartado b) a ejercicio $n = 100$, $\theta_{0}=3$
+Comentar resultados (intervalos de probabilidad a posteriori) y eficiencia del método
+-->
 <p>Para la estimación Bayes de la media de una normal se suele utilizar
 como distribución a priori una Cauchy.</p>
 <ol style="list-style-type: lower-alpha">

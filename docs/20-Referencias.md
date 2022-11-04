@@ -40,7 +40,7 @@ Evans, M. y Swartz, T. (2000). *Approximating integrals via Monte Carlo and dete
 Gentle, J.E. (1998). *Random number generation and Monte Carlo methods*. Springer-Verlag.
 
 Hyndman, R.J. y Athanasopoulos, G. (2018). *Forecasting: principles and practice*. OTexts. 
-Disponible online: [2nd edition (forecast)](https://otexts.com/fpp2), [3rd edition (fable)](https://otexts.com/fpp3).
+Disponible online: [2nd edition (forecast)](https://otexts.com/fpp2), [third edition (fable)](https://otexts.com/fpp3).
 
 Hofert, M. (2018). *Elements of Copula Modeling with R*, Springer.
 
@@ -56,10 +56,9 @@ Liu, J.S. (2004). *Monte Carlo strategies in scientific computing*. Springer.
 
 Moeschlin, O., Grycko, E., Pohl, C. y Steinert, F. (1998). *Experimental stochastics*. Springer-Verlag.
 
-Nelsen, R.B. (2006). *An introduction to copulas*, 2ª ed., Springer.
+Nelsen, R.B. (2006). *An introduction to copulas*, second edition, Springer.
 
 Nelson, R. (1995). *Probability, stochastic processes, and queueing theory: the mathematics of computer performance modelling*. Springer-Verlag.
-
 
 Pardo, L. y Valdés, T. (1987). *Simulación. Aplicaciones prácticas a la empresa*. Díaz de Santos.
 
@@ -74,6 +73,8 @@ Demirhan, H. y Bitirim, N. (2016). [CryptRndTest: an R package for testing the c
 Downham, D.Y. (1970). Algorithm AS 29: The runs up and down test. *Journal of the Royal Statistical Society*. Series C (Applied Statistics), 19(2), 190-192.
 
 Gilks, W.R. y Wild, P. (1992). Adaptive rejection sampling for Gibbs sampling. *Journal of the Royal Statistical Society*. Series C (Applied Statistics), 41(2), 337-348.
+
+Hall, S.W. (1994). Analysis of defectivity of semiconductor wafers by contingency table, *Proceedings of the Institute of Environmental Sciences*, **1**, 177-183.
 
 Kinderman, A.J. y Monahan, J.F. (1977). Computer generation of random variables using the ratio of uniform deviates. *ACM Transactions on Mathematical Software (TOMS)*, 3(3), 257-260.
 

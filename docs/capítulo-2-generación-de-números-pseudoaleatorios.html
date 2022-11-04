@@ -226,6 +226,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="notables-disc.html"><a href="notables-disc.html"><i class="fa fa-check"></i><b>5.7</b> Métodos específicos para generación de distribuciones notables</a></li>
 <li class="chapter" data-level="5.8" data-path="ejercicios-discretas.html"><a href="ejercicios-discretas.html"><i class="fa fa-check"></i><b>5.8</b> Ejercicios</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="multivariante.html"><a href="multivariante.html"><i class="fa fa-check"></i><b>6</b> Simulación de distribuciones multivariantes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="simulación-de-componentes-independientes.html"><a href="simulación-de-componentes-independientes.html"><i class="fa fa-check"></i><b>6.1</b> Simulación de componentes independientes</a></li>
+<li class="chapter" data-level="6.2" data-path="el-método-de-aceptaciónrechazo.html"><a href="el-método-de-aceptaciónrechazo.html"><i class="fa fa-check"></i><b>6.2</b> El método de aceptación/rechazo</a></li>
+<li class="chapter" data-level="6.3" data-path="fact-cov.html"><a href="fact-cov.html"><i class="fa fa-check"></i><b>6.3</b> Factorización de la matriz de covarianzas</a></li>
+<li class="chapter" data-level="6.4" data-path="distrcond.html"><a href="distrcond.html"><i class="fa fa-check"></i><b>6.4</b> Método de las distribuciones condicionadas</a></li>
+<li class="chapter" data-level="6.5" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html"><i class="fa fa-check"></i><b>6.5</b> Simulación condicional e incondicional</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#condnormal"><i class="fa fa-check"></i><b>6.5.1</b> Simulación condicional de una normal multivariante</a></li>
+<li class="chapter" data-level="6.5.2" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#simulación-condicional-a-partir-de-un-modelo-ajustado"><i class="fa fa-check"></i><b>6.5.2</b> Simulación condicional a partir de un modelo ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html"><i class="fa fa-check"></i><b>6.6</b> Simulación basada en cópulas</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#cópulas-arquimedianas"><i class="fa fa-check"></i><b>6.6.1</b> Cópulas Arquimedianas</a></li>
+<li class="chapter" data-level="6.6.2" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#simulación"><i class="fa fa-check"></i><b>6.6.2</b> Simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="mult-discr.html"><a href="mult-discr.html"><i class="fa fa-check"></i><b>6.7</b> Simulación de distribuciones multivariantes discretas</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="mult-discr.html"><a href="mult-discr.html#simulación-de-una-variable-discreta-bidimensional"><i class="fa fa-check"></i><b>6.7.1</b> Simulación de una variable discreta bidimensional</a></li>
+<li class="chapter" data-level="6.7.2" data-path="mult-discr.html"><a href="mult-discr.html#simconting"><i class="fa fa-check"></i><b>6.7.2</b> Simulación de tablas de contingencia</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
 <li class="chapter" data-level="" data-path="bibliografía-complementaria.html"><a href="bibliografía-complementaria.html"><i class="fa fa-check"></i>Bibliografía complementaria</a>
@@ -318,9 +340,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="capítulo-2-generación-de-números-pseudoaleatorios" class="section level2" number="9.2">
+<div id="capítulo-2-generación-de-números-pseudoaleatorios" class="section level2" number="10.2">
 <h2><span class="header-section-number">D.2</span> Capítulo 2 <a href="gen-pseudo.html">Generación de números pseudoaleatorios</a></h2>
-<div id="sol-RANDVN" class="section level3" number="9.2.1">
+<div id="sol-RANDVN" class="section level3" number="10.2.1">
 <h3><span class="header-section-number">D.2.1</span> Ejercicio <a href="ejercicios.html#exr:RANDVN">2.1</a></h3>
 <p>Enunciado <a href="ejercicios-1.html#exr:RANDVN">2.1</a>:</p>
 <p>Uno de los primeros generadores utilizados fue el denominado método de los
@@ -338,7 +360,7 @@ se puede utilizar que:
 <span class="math display">\[x_{i+1}=\left\lfloor \left(  x_{i}^2-\left\lfloor \dfrac{x_{i}^2}{10^{(2k-\frac{k}2)}}\right\rfloor 10^{(2k-\frac{k}2)}\right)
 /10^{\frac{k}2}\right\rfloor\]</span></p>
 <p>Este algoritmo está implementado en la función <code>simres::rvng()</code> (ver también <code>simres::rng()</code>; fichero <a href="R/rng.R"><em>rng.R</em></a>):</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="capítulo-2-generación-de-números-pseudoaleatorios.html#cb326-1" aria-hidden="true" tabindex="-1"></a>simres<span class="sc">::</span>rvng</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="capítulo-2-generación-de-números-pseudoaleatorios.html#cb430-1" aria-hidden="true" tabindex="-1"></a>simres<span class="sc">::</span>rvng</span></code></pre></div>
 <pre><code>## function(n, seed = as.numeric(Sys.time()), k = 4) {
 ##   seed &lt;- seed %% 10^k
 ##   aux &lt;- 10^(2*k-k/2)
@@ -358,7 +380,7 @@ se puede utilizar que:
 ##   # Devolver valores
 ##   return(u)
 ## }
-## &lt;bytecode: 0x000000002efec488&gt;
+## &lt;bytecode: 0x0000000040db71c0&gt;
 ## &lt;environment: namespace:simres&gt;</code></pre>
 <p>Estudiar las características del generador de cuadrados medios a partir de una secuencia de 500 valores.
 Emplear únicamente métodos gráficos.</p>

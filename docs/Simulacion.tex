@@ -178,7 +178,7 @@
 
 \title{Simulación Estadística}
 \author{Rubén Fernández Casal (\href{mailto:ruben.fcasal@udc.es}{\nolinkurl{ruben.fcasal@udc.es}}), Ricardo Cao (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}})}
-\date{Edición: Agosto de 2022. Impresión: 2022-10-27}
+\date{Edición: Agosto de 2022. Impresión: 2022-11-04}
 
 \begin{document}
 \maketitle
@@ -928,10 +928,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.11    0.00    0.11 
+##    0.25    0.01    0.28 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.11    0.00    0.11
+##    0.25    0.01    0.28
 \end{verbatim}
 
 \begin{Shaded}
@@ -944,10 +944,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.01    0.00    0.01 
+##       0       0       0 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.12    0.00    0.12
+##    0.25    0.01    0.28
 \end{verbatim}
 
 Hay diversos paquetes que implementan herramientas similares, por ejemplo:
@@ -977,7 +977,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## inner: 0.01 sec elapsed
+## inner: 0 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -987,7 +987,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## middle: 0.01 sec elapsed
+## middle: 0 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -997,7 +997,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## outer: 0.09 sec elapsed
+## outer: 0.25 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -1019,8 +1019,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ## 'data.frame':    10 obs. of  3 variables:
-##  $ tic: num  5.04 5.04 5.04 5.04 5.04 5.06 5.06 5.06 5.06 5.06
-##  $ toc: num  5.04 5.04 5.04 5.04 5.06 5.06 5.06 5.06 5.06 5.06
+##  $ tic: num  5.45 5.45 5.45 5.45 5.46 5.46 5.46 5.46 5.46 5.46
+##  $ toc: num  5.45 5.45 5.45 5.46 5.46 5.46 5.46 5.46 5.46 5.46
 ##  $ msg: chr  "1" "2" "3" "4" ...
 \end{verbatim}
 
@@ -1036,7 +1036,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   0.000   0.000   0.002   0.000   0.020
+##   0.000   0.000   0.000   0.001   0.000   0.010
 \end{verbatim}
   \end{itemize}
 \item
@@ -1217,7 +1217,7 @@ Este método está implementado\footnote{Aunque de forma no muy eficiente. Para 
 ##   # Devolver valores
 ##   return(u)
 ## }
-## <bytecode: 0x000000002dab29a0>
+## <bytecode: 0x00000000403017c0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -1609,7 +1609,7 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 ##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
 ##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x0000000015ee3508>
+## <bytecode: 0x000000003dd75458>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2108,7 +2108,7 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 ##   # Devolver valores
 ##   return(u)
 ## }
-## <bytecode: 0x00000000327292e8>
+## <bytecode: 0x0000000023b92b58>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2901,7 +2901,7 @@ El código para implementar este algoritmo en R podría ser el siguiente:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.03    0.00    0.04
+##    0.02    0.00    0.02
 \end{verbatim}
 
 \begin{Shaded}
@@ -3013,7 +3013,7 @@ y función de distribución:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.03    0.02    0.04
+##    0.01    0.02    0.03
 \end{verbatim}
 \item
   Representar el histograma y compararlo con la densidad teórica.
@@ -3439,13 +3439,13 @@ Alternativamente, en lugar de obtener la cota óptima de modo analítico, podrí
 
 Vemos que la aproximación numérica coincide con el valor óptimo real \(c_{\text{opt}} \approx\) 1.3154892 (que se alcanza en \(x = \pm 1\)).
 
-Para establecer la condición de aceptación o rechazo se puede tener en cuenta que:
+Para establecer la condición de aceptación o rechazo es recomendable emplear
+\(c\cdot U\cdot g\left( T\right) \leq f\left( T\right)\).
+Aunque, en este caso concreto, se puede tener en cuenta que:
 \[c\cdot U\cdot\frac{g\left( T\right)  }{f\left( T\right)  }=\sqrt{\frac
 {2e}{\pi}}U\sqrt{\frac{\pi}{2}}\exp\left( \frac{T^{2}}{2}-\left\vert
 T\right\vert \right)  =U\cdot\exp\left( \frac{T^{2}}{2}-\left\vert
-T\right\vert +\frac{1}{2}\right),\]
-aunque en general puede ser recomendable emplear
-\(c\cdot U\cdot g\left( T\right) \leq f\left( T\right)\).
+T\right\vert +\frac{1}{2}\right).\]
 
 Teniendo en cuenta los resultados anteriores, podríamos emplear el siguiente código para generar los valores de la densidad objetivo:
 
@@ -3647,7 +3647,7 @@ Es decir:
 \[\pi(\theta | \mathbf{x})\propto L(\mathbf{x}| \theta)\pi(\theta).\]
 
 Como esta distribución cambia al variar la muestra observada, puede resultar difícil encontrar una densidad auxiliar adecuada para simular valores de la densidad a posteriori \(\pi(\theta|\mathbf{x})\).
-Por ejemplo, podríamos pensar en emplear la densidad a priori \(\pi(\theta)\) como densidad auxiliar.
+Por ejemplo, podríamos emplear la densidad a priori \(\pi(\theta)\) como densidad auxiliar.
 Teniendo en cuenta que:
 
 \begin{itemize}
@@ -3655,7 +3655,7 @@ Teniendo en cuenta que:
   \(\pi(\theta |\mathbf{x})/\pi(\theta)\propto L(\mathbf{x}|\theta)\)
 \item
   \(L(\mathbf{x}|\theta)\leq \tilde{c}=L(\mathbf{x}|\hat{\theta})\) siendo
-  \(\hat{\theta}\) el estimador MV de \(\theta\).
+  \(\hat{\theta}\) el estimador máximo verosímil de \(\theta\).
 \end{itemize}
 
 El algoritmo sería el siguiente:
@@ -4032,7 +4032,7 @@ El correspondiente algoritmo está implementado en la función \href{https://rub
 ##   attr(x, "ngen") <- ngen
 ##   return(x)
 ## }
-## <bytecode: 0x00000000340e96a8>
+## <bytecode: 0x00000000419af510>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4473,7 +4473,7 @@ Este algoritmo está implementado en la función \href{https://rubenfcasal.githu
 ##   attr(X, "ncomp") <- ncomp
 ##   return(X)
 ## }
-## <bytecode: 0x0000000015fdc9b0>
+## <bytecode: 0x0000000042245940>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4502,7 +4502,7 @@ Empleamos la rutina anterior para generar las simulaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.04    0.00    0.05
+##    0.06    0.00    0.06
 \end{verbatim}
 
 A partir de ellas podríamos aproximar el valor esperado:
@@ -4661,7 +4661,7 @@ Podemos repetir la simulación del Ejemplo \ref{exm:binom-cuant} anterior ordena
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.04    0.00    0.05
+##    0.03    0.00    0.03
 \end{verbatim}
 
 \begin{Shaded}
@@ -4803,7 +4803,7 @@ Este algoritmo está implementado en la función \href{https://rubenfcasal.githu
 ##   attr(X, "ncomp") <- ncomp
 ##   return(X)
 ## }
-## <bytecode: 0x000000002eaeccb0>
+## <bytecode: 0x000000004008fd70>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4821,7 +4821,7 @@ Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando es
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.03    0.00    0.04
+##    0.01    0.00    0.01
 \end{verbatim}
 
 Número medio de comparaciones:
@@ -4975,7 +4975,7 @@ Este método también está implementado en la función \href{https://rubenfcasa
 ##   if(as.factor) X <- factor(X, levels = x)
 ##   return(X)
 ## }
-## <bytecode: 0x00000000327c7260>
+## <bytecode: 0x0000000039eabbb0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4993,7 +4993,7 @@ Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando es
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.02
+##    0.02    0.00    0.01
 \end{verbatim}
 
 Análisis de los resultados:
@@ -5240,6 +5240,1772 @@ de grupo multiplicado por 10, \(n=100-m\) y \(k=20\).
 
 \end{exercise}
 
+\hypertarget{multivariante}{%
+\chapter{Simulación de distribuciones multivariantes}\label{multivariante}}
+
+La simulación de vectores aleatorios \(\mathbf{X} =\left( X_1,X_2,\ldots,X_d\right)\) que sigan cierta distribución dada no es tarea siempre sencilla.
+En general, no resulta una extensión inmediata del caso unidimensional, aunque muchos de los algoritmos descritos en los temas anteriores (como el de aceptación-rechazo o el de composición) son válidos para distribuciones multivariantes.
+En este caso sin embargo, puede ser mucho más difícil cumplir los requerimientos (e.g.~encontrar una densidad auxiliar adecuada) y los algoritmos obtenidos pueden ser computacionalmente poco eficientes (especialmente si el número de dimensiones es grande).
+
+En las primeras secciones de este capítulo supondremos que se pretende simular una variable aleatoria multidimensional continua \(\mathbf{X}\) con función de densidad conjunta \(f\left( x_1, x_2, \ldots , x_d\right)\) (aunque muchos resultados serán válidos para variables discretas multidimensionales, simplemente cambiando funciones de densidad por las correspondientes de masa de probabilidad).
+En la Sección \ref{mult-discr} se tratará brevemente la simulación de vectores aleatorios discretos y de tablas de contingencia, centrándose en el caso bidimensional.
+
+\hypertarget{simulaciuxf3n-de-componentes-independientes}{%
+\section{Simulación de componentes independientes}\label{simulaciuxf3n-de-componentes-independientes}}
+
+Si las componentes son independientes y \(f_i\) son las correspondientes densidades marginales, bastará con generar \(X_i \sim f_i\).
+Las dificultades aparecerán cuando se quiera simular componentes con una determinada estructura de dependencia.
+
+\begin{example}[simulación de normales independientes]
+\protect\hypertarget{exm:normind}{}\label{exm:normind}
+
+Si \(\boldsymbol\mu =\left( \mu_1,\mu_2,\ldots,\mu_d\right)^t\) es un vector (de medias) y
+\(\Sigma\) es una matriz \(d \times d\) definida positiva (de varianzas-covarianzas), el vector aleatorio \(\mathbf{X}\) sigue una distribución normal multivariante con esos parámetros,
+\(\mathbf{X} \sim \mathcal{N}_d\left( \boldsymbol\mu,\Sigma \right)\),
+si su función de densidad es de la forma:
+\[f(\mathbf x) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}
+\exp \left( -\frac{1}{2} ( \mathbf x - \boldsymbol \mu)^t \Sigma^{-1} (\mathbf x - \boldsymbol \mu)
+\right),\]
+donde \(| \Sigma |\) es el determinante de \(\Sigma\).
+
+Si la matriz de covarianzas es diagonal \(\Sigma=diag\left( \sigma_1^2,\sigma_2^2,\ldots,\sigma_d^2\right)\),
+entonces las componentes \(X_i \sim \mathcal{N}\left( \mu_i,\sigma_i^2\right)\)
+son independientes y podemos simular el vector aleatorio de forma trivial, por ejemplo mediante el siguiente algoritmo:
+\end{example}
+
+\begin{conjecture}[de simulación de normales independientes]
+\protect\hypertarget{cnj:mnorm-indep}{}\label{cnj:mnorm-indep}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Simular \(Z_1, Z_2, \ldots, Z_d \sim \mathcal{N} \left( 0, 1 \right)\) independientes.
+\item
+  Para \(i = 1, 2, \ldots, d\) hacer \(X_i = \mu_i + \sigma_i Z_i\).
+\end{enumerate}
+
+\end{conjecture}
+
+Las funciones implementadas en el paquete base de R permiten simular fácilmente en el caso independiente ya que admiten vectores como parámetros.
+Por ejemplo en el caso bidimensional con \(X_1 \sim \mathcal{N}\left( 0, 1\right)\) y \(X_2 \sim \mathcal{N}\left( -1, 0.5^2 \right)\):
+
+
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f1 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{dnorm}\NormalTok{(x)}
+\NormalTok{f2 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{dnorm}\NormalTok{(x, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(f1, }\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{f2}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)), }\AttributeTok{ylab =} \StringTok{"fdp"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(f2, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/normind-plot-1} 
+
+}
+
+\caption{Densidades marginales de las componentes del Ejemplo \ref{exm:normind}.}\label{fig:normind-plot}
+\end{figure}
+
+Para simular una generación bastaría con:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{rnorm}\NormalTok{(}\DecValTok{2}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.6264538 -0.9081783
+\end{verbatim}
+
+y para simular \texttt{nsim}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{5}
+\NormalTok{rx }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{nsim, }\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.5}\NormalTok{)), }\AttributeTok{nrow =}\NormalTok{ nsim, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(rx) }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"X"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(rx))}
+\NormalTok{rx}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              X1         X2
+## [1,] -0.6264538 -0.9081783
+## [2,] -0.8356286 -0.2023596
+## [3,]  0.3295078 -1.4102342
+## [4,]  0.4874291 -0.6308376
+## [5,]  0.5757814 -1.1526942
+\end{verbatim}
+
+\hypertarget{el-muxe9todo-de-aceptaciuxf3nrechazo}{%
+\section{El método de aceptación/rechazo}\label{el-muxe9todo-de-aceptaciuxf3nrechazo}}
+
+El algoritmo de aceptación-rechazo es el mismo que el del caso univariante descrito en la Sección \ref{AR}, la única diferencia es que las densidades son multidimensionales.
+Supongamos que la densidad objetivo \(f\) y la densidad
+auxiliar \(g\) verifican:
+\[f\left( x_1,x_2,\ldots,x_d\right) \leq c\cdot g\left( x_1,x_2,\ldots,x_d\right) 
+\text{, }\forall \mathbf{x} = \left( x_1,x_2,\ldots,x_d\right)\in \mathbb{R}^d\text{.}\]
+para una constante \(c>0\).
+El algoritmo sería:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(U\sim \mathcal{U}\left( 0,1\right)\).
+\item
+  Generar \(\mathbf{T} = \left( T_1,T_2,\ldots,T_d\right) \sim g\).
+\item
+  Si \(c\cdot U\cdot g\left( T_1,T_2,\ldots,T_d\right) \leq f\left( T_1,T_2,\ldots,T_d\right)\)
+  devolver \(\mathbf{X}=\mathbf{T}\).
+
+  En caso contrario volver al paso 1.
+\end{enumerate}
+
+Por ejemplo, de forma análoga al caso unidimensional, en el caso de una densidad
+acotada en un hipercubo (intervalo cerrado multidimensional) siempre podríamos considerar
+una uniforme como densidad auxiliar.
+
+\begin{example}[distribución bidimensional acotada]
+\protect\hypertarget{exm:ar-bidim}{}\label{exm:ar-bidim}
+
+Supongamos que estamos interesados en generar valores de una variable aleatoria bidimensional
+\(\left( X,Y\right)\) con función de densidad:
+\[f(x,y)=\left\{ 
+\begin{array}{cl}
+\frac{3}{16}\left( 2-\left( x^2+y^2\right) \right)  & \text{si }x\in
+\lbrack -1,1]\text{ e }y\in \lbrack -1,1] \\ 
+0 & \text{en otro caso}
+\end{array}
+\right.\]
+
+Podríamos considerar como densidad auxiliar la uniforme en \(\left[ -1,1\right] \times\left[ -1,1\right]\):
+
+\[g\left( x, y \right)  =\left\{
+\begin{array}{ll}
+\frac{1}{4} & \text{si }x\in \lbrack -1,1]\text{ e }y\in \lbrack -1,1] \\
+0 &  \text{en otro caso}
+\end{array}\right.\]
+
+Como \(f(x, y) \leq M = f(0,0) = \frac38\), tomando \(c=\frac{M}{g(x,y)} = \frac32\)
+tendríamos que \(f(x,y) \leq cg(x,y) = M\) y el algoritmo sería:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(U \sim \mathcal{U}\left( 0, 1\right)\).
+\item
+  Generar \(T_1, T_2 \sim \mathcal{U}\left( -1, 1 \right)\).
+\item
+  Si \(M \cdot U\leq f\left( T_1, T_2 \right)\)
+  devolver \(\mathbf{X} = \left( T_1, T_2 \right)\).
+\item
+  En caso contrario volver al paso 1.
+\end{enumerate}
+
+En este caso, la condición de aceptación del paso 3 simplificada sería:
+\(U \leq 1 - \left( T_1^2 + T_2^2 \right) / 2\).
+\end{example}
+
+\begin{exercise}[distribución bidimensional acotada]
+\protect\hypertarget{exr:ar-bidim-r}{}\label{exr:ar-bidim-r}
+
+Escribir una función que implemente el algoritmo del ejemplo anterior, emplearla para generar 1000 observaciones y representar gráficamente su distribución (puede resultar de interés la función \texttt{sm::sm.density()} o las herramientas del paquete \texttt{ks}).
+\end{exercise}
+
+\begin{example}[distribución uniforme en la esfera]
+\protect\hypertarget{exm:ar-esfera}{}\label{exm:ar-esfera}
+
+Supongamos que el objetivo es simular puntos uniformemente distribuidos sobre la ``esfera'' unitaria \(d\)-dimensional (ver Figura \ref{fig:simpiplot}):
+\[C_d=\left\{  \left( x_1, x_2, \ldots, x_d \right) \in \mathbb{R}^d
+: x_1^2 + x_2^2 + \cdots + x_d^2 \leq1 \right\}.\]
+
+Denotando por \(V_d\left( 1\right)\), el ``volumen'' (la medida) de la
+esfera \(d\)-dimensional de radio \(1\) (en general, la de radio \(r\)
+verifica \(V_d\left( r\right) =r^{d}V_d\left( 1\right)\)), se tiene:
+\[f\left( x_1,x_2,\ldots,x_d\right)  =\left\{
+\begin{array}{ll}
+\frac{1}{V_d\left( 1\right)  } & \text{si } \left( x_1, x_2, \ldots
+,x_d\right)  \in C_d\\
+0 & \text{si } \left( x_1,x_2,\ldots,x_d\right)  \notin C_d
+\end{array} \right.\]
+
+Para simular valores en \(\mathbb{R}^{d}\), con densidad \(f\),
+podemos utilizar como distribución auxiliar una
+\(\mathcal{U}\left( \left[ -1,1\right] \times\left[ -1,1\right] \times\overset{\text{d}}{\cdots}\times\left[ -1,1\right] \right) = \mathcal{U}\left( \left[ -1,1\right]^{d}\right)\), dada por:
+\[g\left( x_1,x_2,\ldots,x_d\right)  =\left\{
+\begin{array}{ll}
+\frac{1}{2^{d}} & \text{si } x_i\in\left[  -1,1\right], \text{ para todo }
+i=1,2,\ldots,d\\
+0 &  \text{en otro caso}
+\end{array}\right.\]
+
+La constante \(c\) óptima para la utilización del método de
+aceptación/rechazo es:
+\[c=\max_{\{\mathbf{x}:g\left( \mathbf{x}\right) > 0\}}
+\frac{f\left( \mathbf{x}\right)  }{g\left( \mathbf{x}\right)  }
+=\frac{\frac{1}{V_d\left( 1\right)  }}{\frac{1}{2^{d}}}
+=\frac{2^{d}}{V_d\left( 1\right)}\]
+y la condición de aceptación \(cUg\left( \mathbf{T}\right) \leq f\left( \mathbf{T}\right)\) se convierte en:
+\[\frac{2^{d}}{V_d\left( 1\right)  }U\frac{1}{2^{d}}1_{\left[  -1,1\right]
+^{d}}\left( \mathbf{T}\right)  \leq\frac{1}{V_d\left( 1\right)
+}1_{C_d}\left( \mathbf{T}\right),\]
+o, lo que es lo mismo, \(U1_{\left[ -1,1\right]^{d}}\left( \mathbf {T}\right) \leq1_{C_d}\left( \mathbf{T}\right)\).
+Dado que el número aleatorio \(U\) está en el intervalo \((0,1)\) y que las funciones
+indicadoras valen \(0\) ó \(1\), esta condición equivale a que \(1_{\left[ -1,1\right] ^{d}}\left( \mathbf{T}\right) =1_{C_d}\left( \mathbf{T}\right)\), es decir, a que
+\(\mathbf{T}\in C_d\), por tanto, a que se verifique:
+\[T_1^2+T_2^2+\cdots+T_d^2\leq1.\]
+
+Por otra parte, la simulación de \(T \sim \mathcal{U}\left( \left[ -1,1\right] ^{d}\right)\) puede hacerse trivialmente mediante
+\(T_i \sim \mathcal{U}\left( -1, 1 \right)\)
+para cada \(i=1,2,\ldots,d\), ya que las
+componentes son independientes. Como el valor de \(U\) es superfluo en
+este caso, el algoritmo queda:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Simular \(V_1,V_2,\ldots,V_d \sim \mathcal{U}\left( 0,1\right)\) independientes.
+\item
+  Para \(i = 1, 2, \ldots, d\) hacer \(T_i = 2V_i - 1\).
+\item
+  Si \(T_1^2 + T_2^2 + \cdots + T_d^2 > 1\) entonces volver al paso 1.
+\item
+  Devolver \(\mathbf{X} = \left( T_1, T_2, \ldots, T_d \right)^t\).
+\end{enumerate}
+
+Ver el Ejercicio \ref{exr:simpi} para el caso de \(d=2\).
+
+Usando las fórmulas del ``volumen'' de una ``esfera'' \(d\)-dimensional:
+\[V_d\left( r\right)  =\left\{
+\begin{array}{ll}
+\dfrac{\pi^{d/2}r^{d}}{\left( d/2\right)  !} & \text{si } d \text{ es par}\\
+\dfrac{2^{\left\lfloor \frac{d}{2}\right\rfloor +1}\pi^{\left\lfloor \frac{d}{2}\right\rfloor }r^{d}}{1\cdot3\cdot5\cdots d} & \text{si } d \text{ es impar}
+\end{array}\right.\]
+puede verse que el número medio de iteraciones del algoritmo, dado por la constante
+\(c=\frac{2^{d}}{V_d\left(1 \right)}\), puede llegar a ser enormemente grande.
+Así, si \(d=2\) se tiene \(c=1.27\), si \(d=3\) se tiene \(c=1.91\), si \(d=4\) entonces \(c=3.24\) y para
+\(d=10\) resulta \(c=401.5\) que es un valor que hace que el algoritmo sea
+tremendamente lento en dimensión \(10\).
+Esto está relacionado con la \emph{maldición de la dimensionalidad} (curse of dimensionality), a medida que aumenta el número de dimensiones el volumen de la ``frontera'' crece exponencialmente (ver p.e. Fernández-Casal et al, 2021, \href{https://rubenfcasal.github.io/aprendizaje_estadistico/dimen-curse.html}{Sección 1.4}).
+\end{example}
+
+\hypertarget{fact-cov}{%
+\section{Factorización de la matriz de covarianzas}\label{fact-cov}}
+
+Teniendo en cuenta que si \(Cov(\mathbf{X})= I\), entonces:
+\[Cov(A\mathbf{X}) = AA^t.\]
+La idea de este tipo de métodos es simular datos independientes y transformarlos linealmente de modo que el resultado tenga la covarianza deseada \(\Sigma = AA^t\).
+
+Este método se emplea principalmente para la simulación de una
+normal multivariante, aunque también es válido para muchas otras
+distribuciones como la \(t\)-multivariante.
+
+En el caso de normalidad, el resultado general es el siguiente.
+
+\begin{proposition}
+Si \(\mathbf{X} \sim \mathcal{N}_d\left( \boldsymbol\mu,\Sigma \right)\) y \(A\) es una matriz \(p\times d\), de
+rango máximo, con \(p\leq d\), entonces:
+\[A\mathbf{X} \sim \mathcal{N}_{p}\left(A\boldsymbol\mu,A\Sigma A^t\right).\]
+\end{proposition}
+
+Partiendo de \(\mathbf{Z} \sim \mathcal{N}_d\left( \mathbf{0},I_d\right)\), se podrían considerar distintas factorizaciones de la matriz de covarianzas:
+
+\begin{itemize}
+\tightlist
+\item
+  Factorización espectral:
+  \(\Sigma=H\Lambda H^t =H\Lambda^{1/2}(H\Lambda^{1/2})^t\),
+  donde \(H\) es una matriz ortogonal (i.e.~\(H^{-1}=H^{t}\)), cuyas columnas son los autovectores de la matriz \(\Sigma\), y \(\Lambda\) es una matriz diagonal, cuya diagonal esta formada por los correspondientes autovalores (positivos). De donde se deduce que:
+\end{itemize}
+
+\[\mathbf{X} =\boldsymbol\mu + H\Lambda^{1/2}\mathbf{Z} \sim \mathcal{N}_d\left( \boldsymbol\mu,\Sigma \right).\]
+
+\begin{itemize}
+\tightlist
+\item
+  Factorización de Cholesky: \(\Sigma=LL^t\), donde \(L\) es una matriz triangular inferior (fácilmente invertible), por lo que:
+  \[\mathbf{X} =\boldsymbol\mu + L\mathbf{Z} 
+  \sim \mathcal{N}_d\left( \boldsymbol\mu,\Sigma \right).\]
+\end{itemize}
+
+Desde el punto de vista de la eficiencia computacional la factorización de Cholesky sería la preferible. Pero en ocasiones, para evitar problemas numéricos (por ejemplo, en el caso de matrices definidas positivas, i.e.~con autovalores nulos) puede ser más adecuado emplear la factorización espectral.
+En el primer caso el algoritmo sería el siguiente:
+
+\begin{conjecture}[de simulación de una normal multivariante]
+\protect\hypertarget{cnj:mnorm-fact}{}\label{cnj:mnorm-fact}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Obtener la factorización de Cholesky \(\Sigma=LL^t\).
+\item
+  Simular \(\mathbf{Z} =\left( Z_1,Z_2,\ldots,Z_d\right)\)
+  i.i.d. \(\mathcal{N}\left( 0,1\right)\).
+\item
+  Hacer \(\mathbf{X} = \boldsymbol\mu + L\mathbf{Z}\).
+\item
+  Repetir los pasos 2 y 3 las veces necesarias.
+\end{enumerate}
+
+\end{conjecture}
+
+\textbf{Nota}: Hay que tener en cuenta el resultado del algoritmo empleado
+para la factorización de Cholesky. Por ejemplo si se obtiene \(\Sigma=U^tU\),
+hará que emplear \(L=U^t.\)
+
+\begin{example}[simulación de datos funcionales o temporales]
+\protect\hypertarget{exm:funcional}{}\label{exm:funcional}
+
+Supongamos que el objetivo es generar una muestra de tamaño \texttt{nsim} de la variable funcional:
+\[X(t)=\sin\left(  2\pi t\right)  +\varepsilon\left(  t\right)\]
+con \(0\leq t \leq1\) y \(Cov(\varepsilon\left( t_1 \right) , \varepsilon\left( t_2 \right) ) = e^{-\left\Vert t_1-t_2 \right\Vert }\),
+considerando 100 puntos de discretización (se puede pensar también que es un proceso temporal).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{20}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{t }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{length =}\NormalTok{ n)}
+\CommentTok{\# Media}
+\NormalTok{mu }\OtherTok{\textless{}{-}} \FunctionTok{sin}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{pi}\SpecialCharTok{*}\NormalTok{t)}
+\CommentTok{\# Covarianzas}
+\NormalTok{t.dist }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(}\FunctionTok{dist}\NormalTok{(t))}
+\NormalTok{x.cov }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{t.dist)}
+\end{Highlighting}
+\end{Shaded}
+
+Para la factorización de la matriz de covarianzas emplearemos la función \texttt{chol}
+del paquete base de R (si las dimensiones fueran muy grandes podría ser preferible emplear
+otros paquetes, e.g.~\texttt{spam::chol.spam}), pero al devolver la matriz triangular superior
+habrá que transponer el resultado:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{U }\OtherTok{\textless{}{-}} \FunctionTok{chol}\NormalTok{(x.cov)}
+\NormalTok{L }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(U)}
+\end{Highlighting}
+\end{Shaded}
+
+Si queremos simular una realización:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(mu }\SpecialCharTok{+}\NormalTok{ L }\SpecialCharTok{\%*\%} \FunctionTok{rnorm}\NormalTok{(n))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         [,1]
+## 1 -0.6264538
+## 2 -0.5307633
+## 3 -0.5797968
+## 4 -0.2844357
+## 5 -0.1711797
+## 6 -0.2220796
+\end{verbatim}
+
+y para simular \texttt{nsim}:
+
+
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(nsim }\SpecialCharTok{*}\NormalTok{ n), }\AttributeTok{nrow =}\NormalTok{ n)}
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ mu }\SpecialCharTok{+}\NormalTok{ L }\SpecialCharTok{\%*\%}\NormalTok{ z}
+
+\FunctionTok{matplot}\NormalTok{(t, x, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{, }\FloatTok{3.5}\NormalTok{))}
+\FunctionTok{lines}\NormalTok{(t, mu, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/funcional-plot-1} 
+
+}
+
+\caption{Realizaciones del proceso funcional del Ejemplo \ref{exm:funcional}, obtenidas a partir de la factorización de Cholesky.}\label{fig:funcional-plot}
+\end{figure}
+
+Alternativamente se podría emplear, por ejemplo, la funcion \texttt{mvrnorm}
+del paquete \texttt{MASS} que emplea la factorización espectral (\texttt{eigen}) (y que tiene en cuenta una tolerancia relativa para correguir autovalores negativos próximos a cero):
+
+
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(MASS)}
+\NormalTok{mvrnorm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function (n = 1, mu, Sigma, tol = 1e-06, empirical = FALSE, EISPACK = FALSE) 
+## {
+##     p <- length(mu)
+##     if (!all(dim(Sigma) == c(p, p))) 
+##         stop("incompatible arguments")
+##     if (EISPACK) 
+##         stop("'EISPACK' is no longer supported by R", domain = NA)
+##     eS <- eigen(Sigma, symmetric = TRUE)
+##     ev <- eS$values
+##     if (!all(ev >= -tol * abs(ev[1L]))) 
+##         stop("'Sigma' is not positive definite")
+##     X <- matrix(rnorm(p * n), n)
+##     if (empirical) {
+##         X <- scale(X, TRUE, FALSE)
+##         X <- X %*% svd(X, nu = 0)$v
+##         X <- scale(X, FALSE, TRUE)
+##     }
+##     X <- drop(mu) + eS$vectors %*% diag(sqrt(pmax(ev, 0)), p) %*% 
+##         t(X)
+##     nm <- names(mu)
+##     if (is.null(nm) && !is.null(dn <- dimnames(Sigma))) 
+##         nm <- dn[[1L]]
+##     dimnames(X) <- list(nm, NULL)
+##     if (n == 1) 
+##         drop(X)
+##     else t(X)
+## }
+## <bytecode: 0x000000003c9f3b90>
+## <environment: namespace:MASS>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{mvrnorm}\NormalTok{(nsim, mu, x.cov)}
+
+\FunctionTok{matplot}\NormalTok{(t, }\FunctionTok{t}\NormalTok{(x), }\AttributeTok{type =} \StringTok{"l"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(t, mu, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/funcional-plot2-1} 
+
+}
+
+\caption{Realizaciones del proceso funcional del Ejemplo \ref{exm:funcional}, obtenidas empleando la función \texttt{MASS::mvrnorm}.}\label{fig:funcional-plot2}
+\end{figure}
+
+\end{example}
+
+Otros métodos para variables continuas relacionados con la factorización de la matriz de covarianzas son el método FFT (transformada rápida de Fourier; e.g.~Davies y Harte, 1987) o el \emph{Circular embedding} (Dietrich and Newsam, 1997), que realmente son el mismo.
+
+\hypertarget{distrcond}{%
+\section{Método de las distribuciones condicionadas}\label{distrcond}}
+
+Teniendo en cuenta que:
+\[f\left( x_1,x_2,\ldots,x_d\right)  =f_1\left( x_1\right)  \cdot
+f_2\left( x_2|x_1\right)  \cdots f_d\left( x_d|x_1,x_2,\ldots,x_{d-1}\right),\]
+donde las densidades condicionales pueden obtenerse a partir de las
+correspondientes marginales:
+\[f_i\left( x_i|x_1,x_2,\ldots,x_{i-1}\right)  =\frac{f_{1,\ldots
+,i}\left( x_1,x_2,\ldots,x_i\right)  }{f_{1,\ldots,i-1}\left(
+x_1,x_2,\ldots,x_{i-1}\right)},\]
+
+se obtiene el siguiente algoritmo general:
+
+\begin{conjecture}[de simulación mediante distribuciones condicionadas]
+\protect\hypertarget{cnj:mult-distrcond}{}\label{cnj:mult-distrcond}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(X_1 \sim f_1\).
+\item
+  Desde \(i=2\) hasta \(d\) generar
+  \(X_i \sim f_i\left( \cdot|X_1,X_2,\ldots,X_{i-1}\right)\).
+\item
+  Devolver \(\mathbf{X} =\left( X_1,X_2,\ldots,X_d\right)\).
+\end{enumerate}
+
+\end{conjecture}
+
+\textbf{Nota}: En las simulaciones unidimensionales se puede tener en cuenta que
+\(f_i\left( x_i|x_1,x_2,\ldots,x_{i-1}\right) \propto f_{1,\ldots,i}\left( x_1,x_2,\ldots,x_i\right)\).
+
+\begin{example}[distribución uniforme en el círculo unitario]
+
+Se trata de la distribución bidimensional continua con densidad
+constante en el círculo:
+\[C = \left\{ \left( x_1, x_2 \right)  \in \mathbb{R}^2 : x_1^2 + x_2^2 \leq 1 \right\}.\]
+
+Su función de densidad viene dada por:
+\[f\left( x_1,x_2\right)  =\left\{
+\begin{array}{ll}
+\frac{1}{\pi} & \text{si } \left( x_1,x_2\right)  \in C\\
+0 & \text{si } \left( x_1,x_2\right)  \notin C
+\end{array}\right.\]
+
+La densidad marginal de la primera variable resulta:
+\[f_1\left( x_1\right)  =\int_{-\sqrt{1-x_1^2}}^{+\sqrt{1-x_1^2}}\frac{1}{\pi}dx_2
+=\frac{2\sqrt{1-x_1^2}}{\pi}
+\text{ si }x_1\in\left[-1,1\right],\]
+es decir:
+\[f_1\left( x_1\right)  =\left\{
+\begin{array}{ll}
+\frac{2}{\pi}\sqrt{1-x_1^2} & \text{si } x_1\in\left[  -1,1\right]  \\
+0 & \text{si } x_1\notin\left[ -1,1\right]  
+\end{array}\right.\]
+
+Además:
+\[f_2\left( x_2|x_1\right) = \frac{f\left( x_1,x_2\right)  }{f_1\left( x_1\right)} = \frac{\frac{1}{\pi}}{\frac{2\sqrt{1-x_1^2}}{\pi}}=\frac{1}{2\sqrt{1-x_1^2}}\text{, si }x_2\in\left[
+-\sqrt{1-x_1^2},\sqrt{1-x_1^2}\right]\]
+valiendo cero en otro caso.
+Se tiene entonces que:
+\[X_2|X_1 \sim \mathcal{U}\left(  -\sqrt{1-X_1^2},\sqrt{1-X_1^2}\right),\]
+siempre que \(X_1\in\left[ -1,1\right]\).
+
+Finalmente, el algoritmo resulta:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Simular \(X_1\) con densidad \(f_1\left( x_1\right) =\frac{2}{\pi}\sqrt{1-x_1^2}1_{\{|x_1|\leq1\}}\).
+\item
+  Simular \(X_2\) con densidad \(\mathcal{U}\left( -\sqrt{1-X_1^2},\sqrt{1-X_1^2}\right)\).
+\item
+  Devolver \(\mathbf{X}=\left( X_1,X_2\right) ^t\).
+\end{enumerate}
+
+Para el paso 1 puede utilizarse, por ejemplo, el método de
+aceptación/rechazo, pues se trata de una densidad acotada definida en un
+intervalo acotado.
+\end{example}
+
+\begin{example}[distribución normal bidimensional]
+
+En el caso de una distribución normal bidimensional:
+\[\mathbf{X} = \begin{pmatrix}
+ X_1 \\
+ X_2
+\end{pmatrix}  
+\sim \mathcal{N} \left( \begin{pmatrix}
+ \mu_1 \\
+ \mu_2
+\end{pmatrix} , 
+\begin{pmatrix}
+ \sigma^2_1 &  \sigma_1 \sigma_2 \rho \\
+ \sigma_1 \sigma_2 \rho &  \sigma^2_2
+\end{pmatrix} \right)\]
+
+tendríamos que:
+
+\[\begin{aligned}
+f(x_1,x_2) &= \frac{1}{2 \pi \sigma_1 \sigma_2 \sqrt{1-\rho^2}} \\
+&\exp \left( -\frac{1}{2 (1-\rho^2)} \left( \frac{(x_1 - \mu_1)^2}{\sigma_1^2} + \frac{(x_2 - \mu_2)^2}{\sigma_2^2} - \frac{2 \rho (x_1 - \mu_1) (x_2 - \mu_2)}{ \sigma_1 \sigma_2} \right)
+\right)
+\end{aligned}\]
+
+de donde se deduce (ver e.g.~Cao, 2002, p.88; o ecuaciones \eqref{eq:mediacond} y \eqref{eq:varcond} en la Sección \ref{condnormal}) que:
+
+\[f_1( x_1 ) = \frac{1}{\sigma_1\sqrt{2\pi}}
+\exp\left( -\frac{(x_1 - \mu_1)^{2}}{2\sigma_1^{2}}\right)\]
+
+\[\begin{aligned}
+f_2\left( x_2|x_1\right)  &= \frac{f\left( x_1,x_2\right)  }{f_1\left( x_1\right)} \\ &= \frac{1}{\sigma_2\sqrt{2\pi (1-\rho^2)}}
+\exp\left( -\frac{\left(x_2 - \mu_2 - \frac{\sigma_2}{\sigma_1}\rho( x_1 - \mu_1)\right)^{2}}{2\sigma_2^2 (1-\rho^2)}\right)
+\end{aligned}\]
+
+Por tanto:
+
+\[\begin{aligned}
+X_1 &\sim \mathcal{N}\left( \mu_1, \sigma_1^2 \right) \\
+X_2 | X_1 &\sim \mathcal{N} \left( \mu_2 + \frac{\sigma_2}{\sigma_1}\rho( X_1 - \mu_1), \sigma_2^2 (1-\rho^2) \right)
+\end{aligned}\]
+
+y el algoritmo sería el siguiente:
+\end{example}
+
+\begin{conjecture}[de simulación de una normal bidimensional]
+\protect\hypertarget{cnj:norm-bidim-cond}{}\label{cnj:norm-bidim-cond}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Simular \(Z_1, Z_2 \sim \mathcal{N}\left( 0, 1 \right)\) independientes.
+\item
+  Hacer \(X_1 = \mu_1 + \sigma_1 Z_1\).
+\item
+  Hacer \(X_2 =\mu_2 + \sigma_2 \rho Z_1 + \sigma_2 \sqrt{1-\rho^2} Z_2\).
+\end{enumerate}
+
+\end{conjecture}
+
+Este algoritmo es el mismo que obtendríamos con la factorización de la matriz de covarianzas ya que \(\Sigma = L L^t\) con:
+\[L = \begin{pmatrix}
+ \sigma^2_1 &  0 \\
+ \sigma_2 \rho &  \sigma_2  \sqrt{1-\rho^2}
+\end{pmatrix}\]
+
+Además, esta aproximación puede generalizarse al caso multidimensional, ver Sección \ref{condnormal}.
+
+\begin{exercise}
+\protect\hypertarget{exr:cond2d}{}\label{exr:cond2d}
+
+Considerando la variable aleatoria bidimensional del Ejemplo \ref{exm:ar-bidim} y teniendo en cuenta que la densidad marginal de la variable \(X\) es:
+\[f_{X}(x)=\left\{ 
+\begin{array}{cl}
+\frac{1}{8}\left( 5-3x^2\right)  & \text{si }x\in \lbrack -1,1] \\ 
+0 & \text{en otro caso}
+\end{array}
+\right.\]
+Describir brevemente un algoritmo para la simulación del vector aleatorio basado en el método de las distribuciones condicionadas (asumir que se dispone de un algoritmo para generar observaciones de las distribuciones unidimensionales de interés).
+\end{exercise}
+
+\hypertarget{simulaciuxf3n-condicional-e-incondicional}{%
+\section{Simulación condicional e incondicional}\label{simulaciuxf3n-condicional-e-incondicional}}
+
+En ocasiones en inferencia estadística interesa la simulación condicional de nuevos valores de forma que se preserven los datos observados, para lo que se suele emplear el algoritmo anterior partiendo de la muestra observada:
+
+\begin{conjecture}[de simulación condicional]
+\protect\hypertarget{cnj:cond-incond}{}\label{cnj:cond-incond}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Obtener la distribución condicional (correspondiente al punto
+  que se quiere simular) dada la muestra y los valores simulados
+  anteriormente.
+\item
+  Simular un valor de la distribución condicional.
+\item
+  Agregar este valor al conjunto de datos y volver al paso 1.
+\end{enumerate}
+
+\end{conjecture}
+
+En el caso de normalidad, en lugar de simular punto a punto,
+podemos obtener fácilmente la distribución condicionada
+para simular los valores de forma conjunta.
+
+\hypertarget{condnormal}{%
+\subsection{Simulación condicional de una normal multivariante}\label{condnormal}}
+
+Si \(\mathbf{X} \sim \mathcal{N}_d\left( \boldsymbol\mu,\Sigma \right)\) es tal que \(\mathbf{X}\), \(\boldsymbol\mu\) y \(\boldsymbol\Sigma\) se particionan de la forma:
+\[\mathbf{X} =
+\begin{pmatrix}
+ \mathbf{X}_1 \\
+ \mathbf{X}_2
+\end{pmatrix},  
+\boldsymbol\mu =
+\begin{pmatrix}
+ \boldsymbol\mu_1 \\
+ \boldsymbol\mu_2
+\end{pmatrix}, 
+\boldsymbol\Sigma =
+\begin{pmatrix}
+ \boldsymbol\Sigma_{11} & \boldsymbol\Sigma_{12} \\
+ \boldsymbol\Sigma_{21} & \boldsymbol\Sigma_{22}
+\end{pmatrix},\]
+suponiendo que \(\mathbf{X}_1\) se corresponde con los valores observados y \(\mathbf{X}_2\) con los que se pretende simular,
+entonces puede verse (e.g.~Ripley, 1987) que la distribución de \(\mathbf{X}_2 | \mathbf{X}_1\) es normal con:
+
+\begin{equation}
+E \left( \mathbf{X}_2 | \mathbf{X}_1 \right) = \boldsymbol\mu_2 + \boldsymbol\Sigma_{21} \boldsymbol\Sigma_{11}^{-1}
+\left(  \mathbf{X}_1 - \boldsymbol\mu_1 \right), 
+\label{eq:mediacond}
+\end{equation}
+
+\begin{equation}
+Cov \left( \mathbf{X}_2 | \mathbf{X}_1 \right) =
+\boldsymbol\Sigma_{22} - \boldsymbol\Sigma_{21} \boldsymbol\Sigma_{11}^{-1} \boldsymbol\Sigma_{12}.
+\label{eq:varcond}
+\end{equation}
+
+\textbf{Nota}: La ecuación \eqref{eq:mediacond} coincide con la expresión de la predicción lineal óptima de \(\mathbf{X}_2\)
+a partir de \(\mathbf{X}_1\) con media y varianzas conocidas (denominado predictor del kriging simple en estadística espacial, y la diagonal de \eqref{eq:varcond} son las correspondientes varianzas kriging).
+
+\begin{example}[simulación condicional de datos funcionales o temporales]
+\protect\hypertarget{exm:funcionalcond}{}\label{exm:funcionalcond}
+
+Continuando con el Ejemplo \ref{exm:funcional} anterior, consideramos los primeros
+valores de una simulación incondicional como los datos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{idata }\OtherTok{\textless{}{-}}\NormalTok{ t }\SpecialCharTok{\textless{}} \FloatTok{0.5}
+\CommentTok{\# idata \textless{}{-} t \textless{} 0.2 | t \textgreater{} 0.8}
+\NormalTok{mu1 }\OtherTok{\textless{}{-}}\NormalTok{ mu[idata]}
+\NormalTok{n1 }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(mu1)}
+\NormalTok{cov.data }\OtherTok{\textless{}{-}}\NormalTok{ x.cov[idata, idata]}
+\NormalTok{U }\OtherTok{\textless{}{-}} \FunctionTok{chol}\NormalTok{(cov.data)}
+\CommentTok{\# Simulación (incondicional):}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{drop}\NormalTok{(mu1 }\SpecialCharTok{+} \FunctionTok{t}\NormalTok{(U) }\SpecialCharTok{\%*\%} \FunctionTok{rnorm}\NormalTok{(n1))}
+\end{Highlighting}
+\end{Shaded}
+
+Para obtener la simulación condicional en los puntos de predicción, calculamos la correspondiente media y matriz de covarianzas condicionadas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu2 }\OtherTok{\textless{}{-}}\NormalTok{ mu[}\SpecialCharTok{!}\NormalTok{idata]}
+\NormalTok{n2 }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(mu2)}
+\NormalTok{cov.pred }\OtherTok{\textless{}{-}}\NormalTok{ x.cov[}\SpecialCharTok{!}\NormalTok{idata, }\SpecialCharTok{!}\NormalTok{idata]}
+\NormalTok{cov.preddat }\OtherTok{\textless{}{-}}\NormalTok{ x.cov[}\SpecialCharTok{!}\NormalTok{idata, idata]}
+\CommentTok{\# Cálculo de los pesos kriging:}
+\NormalTok{cov.data.inv }\OtherTok{\textless{}{-}} \FunctionTok{chol2inv}\NormalTok{(U)}
+\NormalTok{lambda }\OtherTok{\textless{}{-}}\NormalTok{ cov.preddat }\SpecialCharTok{\%*\%}\NormalTok{ cov.data.inv}
+\CommentTok{\# La media serán las predicciones del kriging simple:}
+\NormalTok{kpred }\OtherTok{\textless{}{-}}\NormalTok{ mu2 }\SpecialCharTok{+} \FunctionTok{drop}\NormalTok{(lambda }\SpecialCharTok{\%*\%}\NormalTok{ (data }\SpecialCharTok{{-}}\NormalTok{ mu1))}
+\CommentTok{\# Varianza de la distribución condicional}
+\NormalTok{kcov }\OtherTok{\textless{}{-}}\NormalTok{ cov.pred }\SpecialCharTok{{-}}\NormalTok{  lambda }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(cov.preddat)}
+\CommentTok{\# (La diagonal serán las varianzas kriging). }
+\end{Highlighting}
+\end{Shaded}
+
+Las simulaciones condicionales se obtendrán de forma análoga (Figura \ref{fig:funcional-cond}):
+
+
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(nsim }\SpecialCharTok{*}\NormalTok{ n2), }\AttributeTok{nrow =}\NormalTok{ n2)}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ kpred }\SpecialCharTok{+} \FunctionTok{t}\NormalTok{(}\FunctionTok{chol}\NormalTok{(kcov)) }\SpecialCharTok{\%*\%}\NormalTok{ z}
+\CommentTok{\# Representación gráfica:}
+\FunctionTok{plot}\NormalTok{(t, mu, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"y"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{, }\FloatTok{3.5}\NormalTok{)) }\CommentTok{\# media teórica}
+\FunctionTok{lines}\NormalTok{(t[idata], data) }\CommentTok{\# datos}
+\CommentTok{\# y \textless{}{-} rep(NA, n)}
+\CommentTok{\# y[idata] \textless{}{-} data}
+\CommentTok{\# lines(t, y)}
+\FunctionTok{matplot}\NormalTok{(t[}\SpecialCharTok{!}\NormalTok{idata], y, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\# simulaciones condicionales}
+\FunctionTok{lines}\NormalTok{(t[}\SpecialCharTok{!}\NormalTok{idata], kpred, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{) }\CommentTok{\# media condicional (predicción kriging)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/funcional-cond-1} 
+
+}
+
+\caption{Realizaciones condicionales del proceso funcional del Ejemplo \ref{exm:funcionalcond}.}\label{fig:funcional-cond}
+\end{figure}
+
+\end{example}
+
+\begin{example}[simulación condicional de datos espaciales]
+
+Consideramos un proceso espacial bidimensional normal
+\(Z(\mathbf{s})\equiv Z(x,y)\) de media 0 y covariograma
+exponencial:
+\[Cov(Z(\mathbf{s}_1),Z(\mathbf{s}_2)) 
+= C(\left\Vert \mathbf{s}_1-\mathbf{s}_2\right\Vert )
+= e^{-\left\Vert \mathbf{s}_1-\mathbf{s}_2\right\Vert }.\]
+
+En primer lugar, obtendremos una simulación del proceso en las posiciones
+\(\left\{(0,0),(0,1),(1,0),(1,1)\right\}\) que será considerada posteriormente
+como los datos observados.
+Empleando las herramientas del paquete \texttt{geoR}, resulta muy fácil obtener
+una simulación incondicional en una rejilla en el cuadrado unidad
+mediante la función \texttt{grf}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(geoR)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{4}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{grf}\NormalTok{(n, }\AttributeTok{grid =} \StringTok{"reg"}\NormalTok{, }\AttributeTok{cov.pars =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## grf: generating grid  2  *  2  with  4  points
+## grf: process with  1  covariance structure(s)
+## grf: nugget effect is: tausq= 0 
+## grf: covariance model 1 is: exponential(sigmasq=1, phi=1)
+## grf: decomposition algorithm used is:  cholesky 
+## grf: End of simulation procedure. Number of realizations: 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# names(z)}
+\NormalTok{z}\SpecialCharTok{$}\NormalTok{coords}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      x y
+## [1,] 0 0
+## [2,] 1 0
+## [3,] 0 1
+## [4,] 1 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z}\SpecialCharTok{$}\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.62645381 -0.05969442 -0.98014198  1.09215113
+\end{verbatim}
+
+La \texttt{grf} función emplea por defecto el método de la factorización de la matriz de covarianzas,
+sin embargo, si se desean obtener múltiples realizaciones, en lugar de llamar repetidamente a esta función (lo que implicaría factorizar repetidamente la matriz de covarianzas),
+puede ser preferible emplear un código similar al siguiente (de forma que solo se realiza una vez dicha factorización, y suponiendo además que no es necesario conservar las distintas realizaciones):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Posiciones datos}
+\NormalTok{nx }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{data.s }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{x =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{len =}\NormalTok{ nx[}\DecValTok{1}\NormalTok{]), }\AttributeTok{y =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{len =}\NormalTok{ nx[}\DecValTok{2}\NormalTok{]))}
+\CommentTok{\# plot(data.s, type = "p", pch = 20, asp = 1) \# Representar posiciones}
+
+\CommentTok{\# Matriz de varianzas covarianzas}
+\NormalTok{cov.matrix }\OtherTok{\textless{}{-}} \FunctionTok{varcov.spatial}\NormalTok{(}\AttributeTok{coords=}\NormalTok{data.s, }\AttributeTok{cov.pars=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}\SpecialCharTok{$}\NormalTok{varcov}
+\NormalTok{cov.matrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           [,1]      [,2]      [,3]      [,4]
+## [1,] 1.0000000 0.3678794 0.3678794 0.2431167
+## [2,] 0.3678794 1.0000000 0.2431167 0.3678794
+## [3,] 0.3678794 0.2431167 1.0000000 0.3678794
+## [4,] 0.2431167 0.3678794 0.3678794 1.0000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Simular valores}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{L }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{chol}\NormalTok{(cov.matrix))}
+
+\CommentTok{\# Bucle simulación}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{1} \CommentTok{\# 1000}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim) \{}
+\NormalTok{  y }\OtherTok{\textless{}{-}}\NormalTok{ L }\SpecialCharTok{\%*\%} \FunctionTok{rnorm}\NormalTok{(n)}
+  \CommentTok{\# calcular estadísticos, errores,...}
+\NormalTok{\}}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             [,1]
+## [1,] -0.62645381
+## [2,] -0.05969442
+## [3,] -0.98014198
+## [4,]  1.09215113
+\end{verbatim}
+
+Para generar simulaciones condicionales podemos emplear la función \texttt{krige.conv}.
+Por ejemplo, para generar 4 simulaciones en la rejilla regular \(10\times10\) en el cuadrado unidad \([0,1] \times [0,1]\) condicionadas a los valores generados en el apartado anterior podríamos emplear el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Posiciones simulación condicional}
+\NormalTok{new.nx }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{20}\NormalTok{)}
+\NormalTok{new.x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{len =}\NormalTok{ new.nx[}\DecValTok{1}\NormalTok{])}
+\NormalTok{new.y }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{len =}\NormalTok{ new.nx[}\DecValTok{2}\NormalTok{])}
+\NormalTok{new.s }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{x =}\NormalTok{ new.x, }\AttributeTok{y =}\NormalTok{ new.y)}
+\FunctionTok{plot}\NormalTok{(data.s, }\AttributeTok{type =} \StringTok{"p"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{20}\NormalTok{, }\AttributeTok{asp =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(new.s)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/pos-sp-simcond-1} 
+
+}
+
+\caption{Posiciones espaciales de las simulaciones condicionales (y las de los datos).}\label{fig:pos-sp-simcond}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Simulación condicional}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{nsim.cond }\OtherTok{\textless{}{-}} \DecValTok{4}
+\NormalTok{s.out }\OtherTok{\textless{}{-}} \FunctionTok{output.control}\NormalTok{(}\AttributeTok{n.predictive =}\NormalTok{ nsim.cond)}
+\NormalTok{kc }\OtherTok{\textless{}{-}} \FunctionTok{krige.conv}\NormalTok{(z, }\AttributeTok{loc =}\NormalTok{ new.s, }\AttributeTok{output =}\NormalTok{ s.out,}
+                 \AttributeTok{krige =} \FunctionTok{krige.control}\NormalTok{(}\AttributeTok{type.krige=}\StringTok{"SK"}\NormalTok{, }\AttributeTok{beta =} \DecValTok{0}\NormalTok{, }\AttributeTok{cov.pars =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## krige.conv: results will be returned only for prediction locations inside the borders
+## krige.conv: model with constant mean
+## krige.conv: sampling from the predictive distribution (conditional simulations)
+## krige.conv: Kriging performed using global neighbourhood
+\end{verbatim}
+
+Si las representamos podemos confirmar que los valores en las posiciones \(\left\{(0,0),(0,1),(1,0),(1,1)\right\}\) coinciden con los generados anteriormente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Generar gráficos}
+\NormalTok{par.old }\OtherTok{\textless{}{-}} \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{), }\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\FloatTok{3.5}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), }\AttributeTok{mgp =} \FunctionTok{c}\NormalTok{(}\FloatTok{1.5}\NormalTok{, .}\DecValTok{5}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\NormalTok{zlim }\OtherTok{\textless{}{-}} \FunctionTok{range}\NormalTok{(kc}\SpecialCharTok{$}\NormalTok{simul)     }\CommentTok{\# Escala común}
+\CommentTok{\# La versión actual de geoR::image.kriging() no admite múltiples gráficos en una ventana}
+\CommentTok{\# image(kc, val=kc$simul[,1], main="simul. cond. 1", zlim=zlim)}
+\CommentTok{\# image(kc, val=kc$simul[,2], main="simul. cond. 2", zlim=zlim)}
+\CommentTok{\# image(kc, val=kc$simul[,3], main="simul. cond. 3", zlim=zlim)}
+\CommentTok{\# image(kc, val=kc$simul[,4], main="simul. cond. 4", zlim=zlim)}
+\FunctionTok{dim}\NormalTok{(kc}\SpecialCharTok{$}\NormalTok{simul) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(new.nx, nsim.cond)}
+\FunctionTok{image}\NormalTok{(new.x, new.y, kc}\SpecialCharTok{$}\NormalTok{simul[,,}\DecValTok{1}\NormalTok{], }\AttributeTok{main=}\StringTok{"simul. cond. 1"}\NormalTok{,}
+      \AttributeTok{xlab =} \StringTok{"x"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"y"}\NormalTok{, }\AttributeTok{zlim =}\NormalTok{ zlim)}
+\FunctionTok{image}\NormalTok{(new.x, new.y, kc}\SpecialCharTok{$}\NormalTok{simul[,,}\DecValTok{2}\NormalTok{], }\AttributeTok{main=}\StringTok{"simul. cond. 2"}\NormalTok{,}
+      \AttributeTok{xlab =} \StringTok{"x"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"y"}\NormalTok{, }\AttributeTok{zlim =}\NormalTok{ zlim)}
+\FunctionTok{image}\NormalTok{(new.x, new.y, kc}\SpecialCharTok{$}\NormalTok{simul[,,}\DecValTok{3}\NormalTok{], }\AttributeTok{main=}\StringTok{"simul. cond. 3"}\NormalTok{,}
+      \AttributeTok{xlab =} \StringTok{"x"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"y"}\NormalTok{, }\AttributeTok{zlim =}\NormalTok{ zlim)}
+\FunctionTok{image}\NormalTok{(new.x, new.y, kc}\SpecialCharTok{$}\NormalTok{simul[,,}\DecValTok{4}\NormalTok{], }\AttributeTok{main=}\StringTok{"simul. cond. 4"}\NormalTok{,}
+      \AttributeTok{xlab =} \StringTok{"x"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"y"}\NormalTok{, }\AttributeTok{zlim =}\NormalTok{ zlim)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.9\linewidth]{06-Simulacion_multidimensional_files/figure-latex/unnamed-chunk-10-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(par.old)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{example}
+
+\hypertarget{simulaciuxf3n-condicional-a-partir-de-un-modelo-ajustado}{%
+\subsection{Simulación condicional a partir de un modelo ajustado}\label{simulaciuxf3n-condicional-a-partir-de-un-modelo-ajustado}}
+
+En la práctica normalmente se ajusta un modelo a los datos observados y posteriormente se obtienen las simulaciones condicionadas empleando el modelo ajustado
+(esto también se denomina bootstrap paramétrico condicional).
+
+En R se incluye una función genérica\footnote{Se pueden implementar métodos específicos para cada tipo (clase) de objeto; en este caso para cada tipo de modelo ajustado y podemos mostrar los disponibles mediante el comando \texttt{methods(simulate)}.} \texttt{simulate()} que permite generar respuestas a partir de modelos ajustados (siempre que esté implementado el método correspondiente al tipo de modelo).
+Los métodos para modelos lineales y modelos lineales generalizamos están implementados en el paquete base \texttt{stats}.
+Muchos otros paquetes que proporcionan modelos adicionales, implementan también los correspondientes métodos \texttt{simulate()}.
+Por ejemplo, en el caso de series de tiempo, el paquete \texttt{forecast} permite ajustar distintos tipos de modelos y generar simulaciones a partir de ellos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(forecast)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{window}\NormalTok{(co2, }\DecValTok{1990}\NormalTok{) }\CommentTok{\# datos de co2 desde 1990}
+\FunctionTok{plot}\NormalTok{(data, }\AttributeTok{ylab =} \FunctionTok{expression}\NormalTok{(}\StringTok{"Atmospheric concentration of CO"}\NormalTok{[}\DecValTok{2}\NormalTok{]),}
+     \AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{1990}\NormalTok{, }\DecValTok{2000}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{350}\NormalTok{, }\DecValTok{375}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/unnamed-chunk-11-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Se podrían ajustar distintos tipos de modelos}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{ets}\NormalTok{(data)}
+\CommentTok{\# fit \textless{}{-} auto.arima(data)}
+\end{Highlighting}
+\end{Shaded}
+
+Podemos obtener predicciones (media de la distribución condicional) e intervalos de predicción:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred }\OtherTok{\textless{}{-}} \FunctionTok{forecast}\NormalTok{(fit, }\AttributeTok{h =} \DecValTok{24}\NormalTok{, }\AttributeTok{level =} \DecValTok{95}\NormalTok{)}
+\NormalTok{pred}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Point Forecast    Lo 95    Hi 95
+## Jan 1998       365.1118 364.5342 365.6894
+## Feb 1998       366.1195 365.4572 366.7819
+## Mar 1998       367.0161 366.2786 367.7535
+## Apr 1998       368.2749 367.4693 369.0806
+## May 1998       368.9282 368.0596 369.7968
+## Jun 1998       368.2240 367.2967 369.1513
+## Jul 1998       366.5823 365.5997 367.5649
+## Aug 1998       364.4895 363.4546 365.5244
+## Sep 1998       362.6586 361.5738 363.7434
+## Oct 1998       362.7805 361.6479 363.9130
+## Nov 1998       364.2045 363.0262 365.3829
+## Dec 1998       365.5250 364.3025 366.7476
+## Jan 1999       366.6002 365.3349 367.8654
+## Feb 1999       367.6078 366.3013 368.9144
+## Mar 1999       368.5044 367.1578 369.8510
+## Apr 1999       369.7633 368.3777 371.1488
+## May 1999       370.4165 368.9930 371.8400
+## Jun 1999       369.7124 368.2519 371.1728
+## Jul 1999       368.0706 366.5741 369.5671
+## Aug 1999       365.9778 364.4461 367.5096
+## Sep 1999       364.1469 362.5806 365.7131
+## Oct 1999       364.2688 362.6688 365.8688
+## Nov 1999       365.6929 364.0597 367.3260
+## Dec 1999       367.0134 365.3477 368.6790
+\end{verbatim}
+
+Para análisis adicionales nos puede interesar generar simulaciones (por defecto de la distribución condicional, \texttt{future\ =\ TRUE}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{321}\NormalTok{)}
+\NormalTok{sim.cond }\OtherTok{\textless{}{-}} \FunctionTok{simulate}\NormalTok{(fit, }\DecValTok{24}\NormalTok{)}
+
+\FunctionTok{plot}\NormalTok{(pred)}
+\FunctionTok{lines}\NormalTok{(sim.cond, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/simulate-forecast-1} 
+
+}
+
+\caption{Ejemplo de una serie de tiempo (datos observados de co2 en el observatorio Mauna Loa), predicciones futuras (en azul; media distribución condicional) y simulación condicional (en rojo) obtenidas a partir de un modelo ajustado.}\label{fig:simulate-forecast}
+\end{figure}
+
+Para más detalles ver Hyndman y Athanasopoulos (2018, secciones \href{https://otexts.com/fpp2/prediction-intervals.html}{4.3} y \href{https://otexts.com/fpp2/bootstrap.html}{11.4}).
+
+\hypertarget{simulaciuxf3n-basada-en-cuxf3pulas}{%
+\section{Simulación basada en cópulas}\label{simulaciuxf3n-basada-en-cuxf3pulas}}
+
+Una cópula es una función de distribución multidimensional con distribuciones marginales uniformes (e.g.~Nelsen, 2006; Hofert, 2018).
+Se emplean principalmente para la construcción de distribuciones multivariantes a partir de distribuciones marginales (también en análisis de dependencia y medidas de asociación).
+La idea es que la estructura de dependencia no depende de las distribuciones marginales.
+
+Por simplicidad nos centraremos en el caso bidimensional.
+El teorema central en la teoría de cópulas es el teorema de Sklar (1959), que en este caso es:
+
+\begin{theorem}[de Sklar caso bidimensional]
+\protect\hypertarget{thm:sklar}{}\label{thm:sklar}
+Si \((X,Y)\) es una variable aleatoria bidimensional con función de distribución conjunta \(F(\cdot,\cdot)\) y distribuciones marginales \(F_1(\cdot)\) y \(F_2(\cdot)\) respectivamente, entonces existe una cópula \(C(\cdot,\cdot)\) tal que:
+\[F(x,y)=C\left( F_1(x),F_2(y)\right) ,\quad \forall x,y\in\mathbb{R}.\]
+Además, si \(F_1(\cdot)\) y \(F_2(\cdot)\) son continuas entonces \(C(\cdot,\cdot)\) es única.
+Siendo el recíproco también cierto.
+\end{theorem}
+
+\hypertarget{cuxf3pulas-arquimedianas}{%
+\subsection{Cópulas Arquimedianas}\label{cuxf3pulas-arquimedianas}}
+
+Además de las cópulas Gausianas, es una de las familias de cópulas más utilizadas.
+Son de la forma:
+\[C(x_1,x_2,\dots,x_d)
+=\Psi^{-1}\left( \sum_{i=1}^d\Psi\left( F_i(x_i)\right)\right),\]
+siendo \(\Psi\) su función generadora.
+
+Una condición suficiente para que sea una cópula multidimensional válida es que \(\Psi(1)=0\), \(\lim \limits_{x\ \rightarrow0}\Psi(x)=\infty\), \(\Psi^{\prime}(x)<0\) y \(\Psi^{\prime \prime}(x)>0\).
+
+\textbf{Ejemplos}:
+
+\begin{itemize}
+\item
+  Cópula producto o independiente:
+  \(\Psi(x)=-\ln(x)\),
+  \[F(x,y)=F_1(x)F_2(y).\]
+\item
+  Cópula de Clayton: \(\Psi(x)=\frac{1}{\alpha}\left( x^{-\alpha }-1\right) ;\alpha>0\),
+  \[F(x,y)=(F_1(x)^{-\alpha}+F_2(y)^{-\alpha}-1)^{-1/\alpha}.\]
+\item
+  Cópula de Gumbel:
+  \(\Psi(x)=\left( -\ln(x)\right)^{\alpha};\alpha \geq1\)
+\end{itemize}
+
+\hypertarget{simulaciuxf3n}{%
+\subsection{Simulación}\label{simulaciuxf3n}}
+
+Las cópulas pueden facilitar notablemente la simulación de la distribución conjunta.
+Si \((U,V)\sim C(\cdot,\cdot)\) (marginales uniformes):
+\[\left( F_1^{-1}(U),F_2^{-1}(V)\right)  \sim F(\cdot,\cdot)\]
+
+En la mayoría de los casos se dispone de expresiones explicitas de \(C_{u}(v)\equiv C_2\left( \left. v\right \vert u\right)\) y de su inversa \(C_{u}^{-1}(w)\), por lo que se puede generar \((U,V)\) fácilmente mediante el método secuencial de distribuciones condicionadas descrito en la Sección \ref{distrcond}.
+
+\begin{conjecture}[de simulación bidimensional mediante cópulas]
+\protect\hypertarget{cnj:copula-bidim}{}\label{cnj:copula-bidim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Generar \(U,W\sim \mathcal{U}(0,1)\)
+\item
+  Obtener \(V=C_{U}^{-1}(W)\)
+\item
+  Devolver \(\left( F_1^{-1}(U),F_2^{-1}(V)\right)\)
+\end{enumerate}
+
+\end{conjecture}
+
+\begin{example}[Cópula bidimensional de Clayton]
+\protect\hypertarget{exm:clayton2d}{}\label{exm:clayton2d}
+
+Consideramos una variable aleatoria bidimensional con distribuciones marginales uniformes y distribución bidimensional determinada por la cópula de Clayton.
+
+Teniendo en cuenta que en este caso:
+\[C_{u}^{-1}(w)\equiv\left(  u^{-\alpha}\left(  
+w^{-\frac{\alpha}{\alpha+1}}-1\right) + 1 \right)^{-\frac{1}{\alpha}},\]
+la siguiente función permitiría generar una muestra de tamaño \(n\) de esta distribución:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rcclayton }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(alpha, n) \{}
+\NormalTok{  val }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\FunctionTok{runif}\NormalTok{(n), }\FunctionTok{runif}\NormalTok{(n))}
+\NormalTok{  val[, }\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ (val[, }\DecValTok{1}\NormalTok{]}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{alpha) }\SpecialCharTok{*} 
+\NormalTok{              (val[, }\DecValTok{2}\NormalTok{]}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\NormalTok{(alpha }\SpecialCharTok{+} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\SpecialCharTok{/}\NormalTok{alpha)}
+  \FunctionTok{return}\NormalTok{(val)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Utilizando esta función generamos una muestra de tamaño 10000 y representamos gráficamente los valores obtenidos {[}Figura \ref{fig:cclayton2b-dispersion}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{54321}\NormalTok{)}
+\NormalTok{rcunif }\OtherTok{\textless{}{-}} \FunctionTok{rcclayton}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{10000}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(rcunif, }\AttributeTok{xlab =} \StringTok{"u"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"v"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/cclayton2-dispersion-1} 
+
+}
+
+\caption{Gráfico de dispersión de los valores generados con distribución bidimensional de Clayton.}\label{fig:cclayton2-dispersion}
+\end{figure}
+
+Podemos representar la densidad conjunta (con \texttt{sm::sm.density()}) {[}Figura \ref{fig:cclayton2b-conjunta}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# if(!require(sm)) stop(\textquotesingle{}Required package \textasciigrave{}sm\textasciigrave{} not installed.\textquotesingle{})}
+\NormalTok{sm}\SpecialCharTok{::}\FunctionTok{sm.density}\NormalTok{(rcunif, }\AttributeTok{xlab =} \StringTok{"u"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"v"}\NormalTok{, }\AttributeTok{zlab =} \StringTok{"Density"}\NormalTok{)    }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/cclayton2-conjunta-1} 
+
+}
+
+\caption{Densidad conjunta de los valores generados con distribución bidimensional de Clayton}\label{fig:cclayton2-conjunta}
+\end{figure}
+
+y las distribuciones marginales {[}Figura \ref{fig:cclayton3-marginales}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{par.old }\OtherTok{\textless{}{-}} \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{hist}\NormalTok{(rcunif[,}\DecValTok{1}\NormalTok{], }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"u"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(rcunif[,}\DecValTok{2}\NormalTok{], }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"v"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{06-Simulacion_multidimensional_files/figure-latex/cclayton2-marginales-1} 
+
+}
+
+\caption{Distribuciones marginales de los valores generados con distribución bidimensional de Clayton.}\label{fig:cclayton2-marginales}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(par.old)}
+\end{Highlighting}
+\end{Shaded}
+
+Empleando el paquete \emph{copula} {[}Figuras: \ref{fig:cclayton2b-dispersion}, \ref{fig:cclayton3-dispersion}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(copula)) }\FunctionTok{stop}\NormalTok{(}\StringTok{\textquotesingle{}Required pakage \textasciigrave{}copula\textasciigrave{} not installed.\textquotesingle{}}\NormalTok{)}
+\NormalTok{clayton.cop }\OtherTok{\textless{}{-}} \FunctionTok{claytonCopula}\NormalTok{(}\DecValTok{2}\NormalTok{, }\AttributeTok{dim =} \DecValTok{2}\NormalTok{) }\CommentTok{\# caso bidimensional}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rCopula}\NormalTok{(}\DecValTok{10000}\NormalTok{, clayton.cop)}
+\FunctionTok{plot}\NormalTok{(y, }\AttributeTok{xlab =} \StringTok{"u"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"v"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/cclayton2b-dispersion-1} 
+
+}
+
+\caption{Gráfico de dispersión de los valores generados con distribución bidimensional de Clayton empleando el paquete `copula`.}\label{fig:cclayton2b-dispersion}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clayton.cop }\OtherTok{\textless{}{-}} \FunctionTok{claytonCopula}\NormalTok{(}\DecValTok{2}\NormalTok{, }\AttributeTok{dim =} \DecValTok{3}\NormalTok{) }\CommentTok{\# caso tridimensional}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rCopula}\NormalTok{(}\DecValTok{10000}\NormalTok{, clayton.cop)}
+\CommentTok{\# scatterplot3d::scatterplot3d(y)}
+\NormalTok{plot3D}\SpecialCharTok{:::}\FunctionTok{points3D}\NormalTok{(y[,}\DecValTok{1}\NormalTok{], y[,}\DecValTok{2}\NormalTok{], y[, }\DecValTok{3}\NormalTok{], }\AttributeTok{colvar =} \ConstantTok{NULL}\NormalTok{, }
+                  \AttributeTok{xlab =} \StringTok{"u1"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"u2"}\NormalTok{, }\AttributeTok{zlab =} \StringTok{"u3"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/cclayton3-dispersion-1} 
+
+}
+
+\caption{Gráfico de dispersión de los valores generados con distribución trididimensional de Clayton empleando el paquete `copula`.}\label{fig:cclayton3-dispersion}
+\end{figure}
+
+Por ejemplo, podemos generar una muestra de una variable aleatoria bidimensional con distribuciones marginales exponenciales de parámetros 1 y 2, respectivamente (y distribución bidimensional determinada por la cópula de Clayton), transformando la muestra anterior {[}Figuras: \ref{fig:cclayton-exp-conjunta}, \ref{fig:cclayton-exp-marginales}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rcexp }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\FunctionTok{qexp}\NormalTok{(rcunif[,}\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{), }\FunctionTok{qexp}\NormalTok{(rcunif[,}\DecValTok{2}\NormalTok{], }\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(rcexp, }\AttributeTok{xlab =} \StringTok{"exp1"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"exp2"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-conjunta-1} 
+
+}
+
+\caption{Gráfico de dispersión de los valores generados con distribución exponencial y dependencia definida por la cópula de Clayton.}\label{fig:cclayton-exp-conjunta}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribuciones marginales}
+\NormalTok{par.old }\OtherTok{\textless{}{-}} \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{hist}\NormalTok{(rcexp[,}\DecValTok{1}\NormalTok{], }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"exp1"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dexp}\NormalTok{(x, }\DecValTok{1}\NormalTok{), }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(rcexp[,}\DecValTok{2}\NormalTok{], }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"exp2"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dexp}\NormalTok{(x, }\DecValTok{2}\NormalTok{), }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-marginales-1} 
+
+}
+
+\caption{Distribuciones marginales exponenciales de los valores generados con dependencia definida por la cópula de Clayton.}\label{fig:cclayton-exp-marginales}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(par.old)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{example}
+
+\hypertarget{mult-discr}{%
+\section{Simulación de distribuciones multivariantes discretas}\label{mult-discr}}
+
+En el caso de una distribución \(d\)-dimensional discreta el procedimiento habitual es simular una variable aleatoria discreta unidimensional equivalente.
+Este tipo de procedimientos son conocidos como métodos de etiquetado o codificación y la idea básica consistiría en construir un indice unidimensional equivalente al indice multidimensional, mediante una función de etiquetado
+\(l(\mathbf{i}) = l\left(i_1, i_2, \ldots,i_d \right) \in \mathbb{N}\).
+
+Si la variable discreta multidimensional tiene soporte finito, este tipo de recodificación se puede hacer de forma automática en R cambiando simplemente el indexado\footnote{En R podemos obtener el índice multidimensional empleando la función \texttt{arrayInd(ind,\ .dim,\ ...)}, siendo \texttt{ind} un vector de índices unidimensionales.} (empleando la función \texttt{as.vector()} para cambiar a un indexado unidimensional y posteriormente las funciones \texttt{as.matrix()}, o \texttt{as.array()}, para reconstruir el indexado multidimensional).
+
+Como ejemplo ilustrativo, en el caso bidimensional, podríamos emplear el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xy }\OtherTok{\textless{}{-}} \FunctionTok{outer}\NormalTok{(}\DecValTok{10}\SpecialCharTok{*}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\StringTok{"+"}\NormalTok{)}
+\NormalTok{xy}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   11   12
+## [2,]   21   22
+## [3,]   31   32
+## [4,]   41   42
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{as.vector}\NormalTok{(xy)}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11 21 31 41 12 22 32 42
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xy }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(z, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\NormalTok{xy}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   11   12
+## [2,]   21   22
+## [3,]   31   32
+## [4,]   41   42
+\end{verbatim}
+
+Suponiendo que la primera componente toma \(I\) valores distintos, la función de etiquetado para calcular el índice unidimensional a partir de uno bidimensional sería:
+\[l(i, j) = I(j-1) + i\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nx }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(xy)}
+\NormalTok{l }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(i, j) nx}\SpecialCharTok{*}\NormalTok{(j}\DecValTok{{-}1}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ i}
+\NormalTok{z[}\FunctionTok{l}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 21
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z[}\FunctionTok{l}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32
+\end{verbatim}
+
+Para recuperar el índice bidimensional se emplearía la inversa de la función de etiquetado:
+\[l^{-1}( k )  =\left(  (k -1) \operatorname{mod} I  + 1, \left\lfloor \frac{k - 1}{I}\right\rfloor + 1\right)\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linv }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(k) }\FunctionTok{cbind}\NormalTok{((k }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\%}\NormalTok{ nx }\SpecialCharTok{+} \DecValTok{1}\NormalTok{, }\FunctionTok{floor}\NormalTok{((k }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{nx) }\SpecialCharTok{+} \DecValTok{1}\NormalTok{)}
+\CommentTok{\# Para el caso multidimensional (1d =\textgreater{} md): imd \textless{}{-} arrayInd(i1d, dim(xy))}
+\NormalTok{xy[}\FunctionTok{linv}\NormalTok{(}\DecValTok{2}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 21
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xy[}\FunctionTok{linv}\NormalTok{(}\DecValTok{7}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32
+\end{verbatim}
+
+Realmente lo que ocurre internamente en R es que un objeto \texttt{matrix} o \texttt{array} está almacenado como un vector y admite un indexado multidimensional si está presente un atributo \texttt{dim}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(z) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   11   12
+## [2,]   21   22
+## [3,]   31   32
+## [4,]   41   42
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(z) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## , , 1
+## 
+##      [,1] [,2]
+## [1,]   11   31
+## [2,]   21   41
+## 
+## , , 2
+## 
+##      [,1] [,2]
+## [1,]   12   32
+## [2,]   22   42
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(z) }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11 21 31 41 12 22 32 42
+\end{verbatim}
+
+Si la variable discreta multidimensional no tiene soporte finito, se podrían emplear métodos de codificación más avanzados (ver Cao, 2002, Sección 6.3), aunque no se podría guardar la función de masa de probabilidad en una tabla.
+No obstante, se podría emplear el indexado anterior si todas las componentes menos una (la correspondiente al índice \texttt{j} en el ejemplo anterior) toman un número finito de valores.
+
+\hypertarget{simulaciuxf3n-de-una-variable-discreta-bidimensional}{%
+\subsection{Simulación de una variable discreta bidimensional}\label{simulaciuxf3n-de-una-variable-discreta-bidimensional}}
+
+Consideramos datos recogidos en un estudio de mejora de calidad en una fábrica de semiconductores.
+Se obtuvo una muestra de obleas que se clasificaron dependiendo de si se encontraron partículas en la matriz que producía la oblea y de si la calidad de oblea era buena (para más detalles ver Hall, 1994).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{320}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{36}\NormalTok{)}
+\NormalTok{particulas }\OtherTok{\textless{}{-}} \FunctionTok{gl}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"no"}\NormalTok{, }\StringTok{"si"}\NormalTok{))}
+\NormalTok{calidad }\OtherTok{\textless{}{-}} \FunctionTok{gl}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"buena"}\NormalTok{, }\StringTok{"mala"}\NormalTok{))}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(n, particulas, calidad)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     n particulas calidad
+## 1 320         no   buena
+## 2  14         si   buena
+## 3  80         no    mala
+## 4  36         si    mala
+\end{verbatim}
+
+En lugar de estar en el formato de un conjunto de datos (\texttt{data.frame}) puede que los datos estén en formato de tabla (\texttt{table}, \texttt{matrix}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tabla }\OtherTok{\textless{}{-}} \FunctionTok{xtabs}\NormalTok{(n }\SpecialCharTok{\textasciitilde{}}\NormalTok{ calidad }\SpecialCharTok{+}\NormalTok{ particulas)}
+\NormalTok{tabla}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        particulas
+## calidad  no  si
+##   buena 320  14
+##   mala   80  36
+\end{verbatim}
+
+Lo podemos convertir directamente a \texttt{data.frame}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as.data.frame}\NormalTok{(tabla)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   calidad particulas Freq
+## 1   buena         no  320
+## 2    mala         no   80
+## 3   buena         si   14
+## 4    mala         si   36
+\end{verbatim}
+
+En este caso estimamos\footnote{Como ya se comentó, la simulación empleando un modelo estimado también se denomina bootstrap paramétrico.} las probabilidades a partir de las frecuencias:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{p }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{n}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{n)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     n particulas calidad          p
+## 1 320         no   buena 0.71111111
+## 2  14         si   buena 0.03111111
+## 3  80         no    mala 0.17777778
+## 4  36         si    mala 0.08000000
+\end{verbatim}
+
+En formato tabla:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pij }\OtherTok{\textless{}{-}}\NormalTok{ tabla}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(tabla)}
+\NormalTok{pij}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        particulas
+## calidad         no         si
+##   buena 0.71111111 0.03111111
+##   mala  0.17777778 0.08000000
+\end{verbatim}
+
+Para simular la variable bidimensional consideramos una variable unidimensional de índices:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(df)}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4
+\end{verbatim}
+
+Con probabilidades:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pz }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{p}
+\NormalTok{pz}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.71111111 0.03111111 0.17777778 0.08000000
+\end{verbatim}
+
+Si las probabilidades estuviesen en una matriz, las convertiríamos a un vector con:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as.vector}\NormalTok{(pij)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.71111111 0.17777778 0.03111111 0.08000000
+\end{verbatim}
+
+Si simulamos la variable unidimensional:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{20}
+\NormalTok{rz }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(z, nsim, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ pz)}
+\end{Highlighting}
+\end{Shaded}
+
+Podríamos obtener simulaciones bidimensionales, por ejemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{etiquetas }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(df[}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}particulas\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}calidad\textquotesingle{}}\NormalTok{)])}
+\NormalTok{rxy }\OtherTok{\textless{}{-}}\NormalTok{ etiquetas[rz, ]}
+\FunctionTok{head}\NormalTok{(rxy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      particulas calidad
+## [1,] "no"       "buena"
+## [2,] "no"       "buena"
+## [3,] "no"       "buena"
+## [4,] "si"       "mala" 
+## [5,] "no"       "buena"
+## [6,] "si"       "mala"
+\end{verbatim}
+
+Alternativamente, si queremos trabajar con data.frames:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{etiquetas }\OtherTok{\textless{}{-}}\NormalTok{ df[}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}particulas\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}calidad\textquotesingle{}}\NormalTok{)]}
+\NormalTok{rxy }\OtherTok{\textless{}{-}}\NormalTok{ etiquetas[rz, ]}
+\FunctionTok{head}\NormalTok{(rxy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     particulas calidad
+## 1           no   buena
+## 1.1         no   buena
+## 1.2         no   buena
+## 4           si    mala
+## 1.3         no   buena
+## 4.1         si    mala
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Si se quieren eliminar las etiquetas de las filas:}
+\FunctionTok{row.names}\NormalTok{(rxy) }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\FunctionTok{head}\NormalTok{(rxy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   particulas calidad
+## 1         no   buena
+## 2         no   buena
+## 3         no   buena
+## 4         si    mala
+## 5         no   buena
+## 6         si    mala
+\end{verbatim}
+
+\hypertarget{simconting}{%
+\subsection{Simulación de tablas de contingencia}\label{simconting}}
+
+Podríamos emplear el código anterior para simular tablas de contingencia.
+En estos casos se suele mantener fijo el tamaño de la muestra, igual al total de la tabla\footnote{También se podría fijar una de las distribuciones de frecuencias marginales y simular las correspondientes distribuciones condicionadas.}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(n)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{rz }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(z, nsim, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ pz)}
+\NormalTok{rtable }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(rz) }\CommentTok{\# Tabla de frecuencias unidimensional}
+\FunctionTok{matrix}\NormalTok{(rtable, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\AttributeTok{dimnames =} \FunctionTok{dimnames}\NormalTok{(tabla)) }\CommentTok{\# Tabla de frecuencias bidimensional}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        particulas
+## calidad  no si
+##   buena 321 78
+##   mala   15 36
+\end{verbatim}
+
+Aunque puede ser preferible emplear directamente \texttt{rmultinom()} si se van a generar muchas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ntsim }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{rtablas }\OtherTok{\textless{}{-}} \FunctionTok{rmultinom}\NormalTok{(ntsim, }\FunctionTok{sum}\NormalTok{(n), pz)}
+\NormalTok{rtablas[ , }\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{] }\CommentTok{\# Las cinco primeras simulaciones}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  298  329  323  323  307
+## [2,]   15   21    5   15   15
+## [3,]   92   68   91   77   92
+## [4,]   45   32   31   35   36
+\end{verbatim}
+
+\begin{example}[Distribución del estadístico chi-cuadrado de independencia]
+\protect\hypertarget{exm:chicuadind}{}\label{exm:chicuadind}
+
+En el contraste chi-cuadrado (tradicional) de independencia (ver Sección \ref{chi2test}) se emplea una aproximación continua de la distribución del estadístico bajo la hipótesis nula (la distribución asintótica \(\chi^2\), con una corrección por continuidad en tablas dos por dos):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(tabla)}
+\NormalTok{res}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  tabla
+## X-squared = 60.124, df = 1, p-value = 8.907e-15
+\end{verbatim}
+
+Sin embargo la distribución exacta del estadístico del contraste es discreta y como alternativa la podríamos aproximar mediante simulación.
+
+Para simular bajo independencia podemos estimar las probabilidades a partir de las frecuencias marginales de la tabla de contingencia:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pind }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{rowSums}\NormalTok{(tabla) }\SpecialCharTok{\%o\%} \FunctionTok{colSums}\NormalTok{(tabla))}\SpecialCharTok{/}\NormalTok{(}\FunctionTok{sum}\NormalTok{(tabla)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\FunctionTok{matrix}\NormalTok{(pind, }\AttributeTok{nrow =} \FunctionTok{nrow}\NormalTok{(tabla), }\AttributeTok{dimnames =} \FunctionTok{dimnames}\NormalTok{(tabla))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        particulas
+## calidad        no         si
+##   buena 0.6597531 0.08246914
+##   mala  0.2291358 0.02864198
+\end{verbatim}
+
+Empleando el código anterior podemos generar las simulaciones de las tablas de contingencia (bajo independencia):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ntsim }\OtherTok{\textless{}{-}} \DecValTok{2000}
+\NormalTok{rtablas }\OtherTok{\textless{}{-}} \FunctionTok{rmultinom}\NormalTok{(ntsim, }\FunctionTok{sum}\NormalTok{(n), pind)}
+\NormalTok{rtablas[ , }\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{] }\CommentTok{\# Las cinco primeras simulaciones}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  292  285  309  303  290
+## [2,]   96  105   97   84  113
+## [3,]   48   48   36   49   39
+## [4,]   14   12    8   14    8
+\end{verbatim}
+
+A partir de las cuales podemos aproximar por simulación la distribución exacta del estadístico del contraste chi-cuadrado de independencia:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sim.stat }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(rtablas, }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{chisq.test}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(x, }\AttributeTok{nrow =} \FunctionTok{nrow}\NormalTok{(tabla)))}\SpecialCharTok{$}\NormalTok{statistic)}
+\FunctionTok{hist}\NormalTok{(sim.stat, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{breaks =} \StringTok{\textquotesingle{}FD\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# lines(density(sim.stat))}
+\CommentTok{\# Distribución asintótica (aproximación chi{-}cuadrado)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dchisq}\NormalTok{(x, res}\SpecialCharTok{$}\NormalTok{parameter), }\AttributeTok{col =} \StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{06-Simulacion_multidimensional_files/figure-latex/chi2-plot-1} 
+
+}
+
+\caption{Aproximación Monte Carlo de la distribución del estadístico chi-cuadrado bajo independencia.}\label{fig:chi2-plot}
+\end{figure}
+
+Como se mostrará en la Sección \ref{contrastes}, podríamos aproximar el \(p\)-valor del contraste de independencia a partir de esta aproximación:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{obs.stat }\OtherTok{\textless{}{-}}\NormalTok{ res}\SpecialCharTok{$}\NormalTok{statistic}
+\NormalTok{pvalue.mc }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(sim.stat }\SpecialCharTok{\textgreater{}=}\NormalTok{ obs.stat)}
+\NormalTok{pvalue.mc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+Esto es similar a lo que realiza la función \texttt{chisq.test()} con la opción \texttt{simulate.p.value\ =\ TRUE} (empleando el algoritmo de Patefield, 1981):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(tabla, }\AttributeTok{simulate.p.value =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{B =} \DecValTok{2000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test with simulated p-value (based on 2000
+##  replicates)
+## 
+## data:  tabla
+## X-squared = 62.812, df = NA, p-value = 0.0004998
+\end{verbatim}
+
+\end{example}
+
 \hypertarget{referencias}{%
 \chapter*{Referencias}\label{referencias}}
 \addcontentsline{toc}{chapter}{Referencias}
@@ -5283,7 +7049,7 @@ Evans, M. y Swartz, T. (2000). \emph{Approximating integrals via Monte Carlo and
 Gentle, J.E. (1998). \emph{Random number generation and Monte Carlo methods}. Springer-Verlag.
 
 Hyndman, R.J. y Athanasopoulos, G. (2018). \emph{Forecasting: principles and practice}. OTexts.
-Disponible online: \href{https://otexts.com/fpp2}{2nd edition (forecast)}, \href{https://otexts.com/fpp3}{3rd edition (fable)}.
+Disponible online: \href{https://otexts.com/fpp2}{2nd edition (forecast)}, \href{https://otexts.com/fpp3}{third edition (fable)}.
 
 Hofert, M. (2018). \emph{Elements of Copula Modeling with R}, Springer.
 
@@ -5299,7 +7065,7 @@ Liu, J.S. (2004). \emph{Monte Carlo strategies in scientific computing}. Springe
 
 Moeschlin, O., Grycko, E., Pohl, C. y Steinert, F. (1998). \emph{Experimental stochastics}. Springer-Verlag.
 
-Nelsen, R.B. (2006). \emph{An introduction to copulas}, 2ª ed., Springer.
+Nelsen, R.B. (2006). \emph{An introduction to copulas}, second edition, Springer.
 
 Nelson, R. (1995). \emph{Probability, stochastic processes, and queueing theory: the mathematics of computer performance modelling}. Springer-Verlag.
 
@@ -5317,6 +7083,8 @@ Demirhan, H. y Bitirim, N. (2016). \href{https://journal.r-project.org/archive/2
 Downham, D.Y. (1970). Algorithm AS 29: The runs up and down test. \emph{Journal of the Royal Statistical Society}. Series C (Applied Statistics), 19(2), 190-192.
 
 Gilks, W.R. y Wild, P. (1992). Adaptive rejection sampling for Gibbs sampling. \emph{Journal of the Royal Statistical Society}. Series C (Applied Statistics), 41(2), 337-348.
+
+Hall, S.W. (1994). Analysis of defectivity of semiconductor wafers by contingency table, \emph{Proceedings of the Institute of Environmental Sciences}, \textbf{1}, 177-183.
 
 Kinderman, A.J. y Monahan, J.F. (1977). Computer generation of random variables using the ratio of uniform deviates. \emph{ACM Transactions on Mathematical Software (TOMS)}, 3(3), 257-260.
 
@@ -5622,7 +7390,7 @@ Ejemplo:
 ## X-squared = 9.2, df = 4, p-value = 0.05629
 \end{verbatim}
 
-La distribución exacta del estadístico del contraste es discreta (se podría aproximar por simulación, por ejemplo empleando los parámetros \texttt{simulate.p.value\ =\ TRUE} y \texttt{B\ =\ 2000} de la función \texttt{chisq.test()}; ver también el Ejercicio \ref{exr:chicuadind} de la Sección \ref{simconting} para el caso del contraste chi-cuadrado de independencia).
+La distribución exacta del estadístico del contraste es discreta (se podría aproximar por simulación, por ejemplo empleando los parámetros \texttt{simulate.p.value\ =\ TRUE} y \texttt{B\ =\ 2000} de la función \texttt{chisq.test()}; ver también el Ejemplo \ref{exm:chicuadind} de la Sección \ref{simconting} para el caso del contraste chi-cuadrado de independencia).
 Para que la aproximación continua \(\chi^2\) sea válida:
 
 \begin{itemize}
@@ -5708,7 +7476,7 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 ##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
 ##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x000000002dcde2a8>
+## <bytecode: 0x0000000012e325c8>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -5716,6 +7484,7 @@ Continuando con el ejemplo anterior, podríamos contrastar normalidad mediante:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(simres)}
 \FunctionTok{chisq.cont.test}\NormalTok{(datos, }\AttributeTok{distribution =} \StringTok{"norm"}\NormalTok{, }\AttributeTok{nestpar =} \DecValTok{2}\NormalTok{, }\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(datos), }\AttributeTok{sd=}\FunctionTok{sd}\NormalTok{(datos))}
 \end{Highlighting}
 \end{Shaded}
@@ -5880,7 +7649,8 @@ Típicamente \(Cov(X_{1},X_{2})>0\) por lo que con los métodos
 subestimaciones de las varianzas (IC más estrechos y tendencia a
 rechazar \(H_{0}\) en contrastes).
 
-\textbf{Ejemplo}: datos simulados
+\begin{example}[Datos simulados dependientes]
+\protect\hypertarget{exm:sim-dep}{}\label{exm:sim-dep}
 
 Consideramos un proceso temporal estacionario con dependencia exponencial
 (la dependencia entre las observaciones depende del ``salto'' entre ellas;
@@ -5940,7 +7710,8 @@ Las estimaciones suponiendo independencia serían:
 ## [1] 0.1108155
 \end{verbatim}
 
-En el caso de datos dependientes se produce una clara subestimación de la varianza
+En el caso de datos dependientes se produce una clara subestimación de la varianza.
+\end{example}
 
 \hypertarget{muxe9todos-para-detectar-dependencia}{%
 \subsection{Métodos para detectar dependencia}\label{muxe9todos-para-detectar-dependencia}}
@@ -6002,7 +7773,7 @@ Ejemplo:
 
 \begin{figure}[!htb]
 
-{\centering \includegraphics[width=0.7\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1} 
+{\centering \includegraphics[width=0.9\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1} 
 
 }
 
@@ -6039,7 +7810,7 @@ Este gráfico también podría servir para detectar dependencia temporal:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-13-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6071,7 +7842,7 @@ por un instante)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6083,7 +7854,7 @@ Se puede generalizar al gráfico \(\{(X_{i},X_{i+k}) : i = 1, \ldots, n-k \}\)
 que permite detectar dependencias a \(k\) retardos
 (separadas \(k\) instantes).
 
-\textbf{Ejemplo}
+Ejemplo:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6107,7 +7878,8 @@ del grado de relación lineal (denominado autocorrelación de orden 1).
 ## [1] 0.01344127
 \end{verbatim}
 
-\textbf{Ejemplo}: Calidad de un generador aleatorio
+\begin{example}[Calidad de un generador aleatorio]
+\protect\hypertarget{exm:ret-gen}{}\label{exm:ret-gen}
 
 En el caso de una secuencia muy grande de número pseudoaleatorios (supuestamente independientes), sería muy dificil distinguir un patrón a partir del gráfico anterior. La recomendación en R sería utilizar puntos con color de relleno:
 
@@ -6129,6 +7901,7 @@ En el caso de una secuencia muy grande de número pseudoaleatorios (supuestament
 Si se observa algún tipo de patrón indicaría dependencia (se podría considerar como una versión descriptiva del denominado ``Parking lot test'').
 Se puede generalizar también a \(d\)-uplas \((X_{t+1},X_{t+2},\ldots,X_{t+d})\)
 (ver ejemplo del generador RANDU en Figura \ref{fig:randu} de la Sección \ref{gen-cong}).
+\end{example}
 
 \hypertarget{el-correlograma}{%
 \subsection{El correlograma}\label{el-correlograma}}
@@ -6188,7 +7961,7 @@ Suponiendo normalidad e independencia, asintóticamente:
   (para detectar dependencias significativas).
 \end{itemize}
 
-\textbf{Ejemplo}
+Ejemplo:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6266,7 +8039,7 @@ un punto de corte para dicotomizarlas. Normalmente se toma como punto de corte l
   Comandos R: \texttt{tseries::runs.test(as.factor(x\ \textgreater{}\ median(x)))}
 \end{itemize}
 
-\textbf{Ejemplo}
+Ejemplo:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6321,7 +8094,7 @@ autocorrelaciones son cero:
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{Ejemplo}
+Ejemplo:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7390,7 +9163,7 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 ##   # Devolver valores
 ##   return(u)
 ## }
-## <bytecode: 0x000000002e1fb780>
+## <bytecode: 0x000000004021d338>
 ## <environment: namespace:simres>
 \end{verbatim}
 

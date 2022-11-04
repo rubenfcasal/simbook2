@@ -1,3 +1,8 @@
+# Simulación de variables continuas {#continuas}
+
+
+
+
 <!-- 
 ---
 title: "Simulación de variables continuas"
@@ -21,12 +26,8 @@ knitr::spin("04-Metodos_generales_continuas.R",knit = FALSE)
 PENDENTE:
 Empregar entorno algoritmo
 Empregar exemplos en lugar de exercicios
+  Exemplo inferencia bayesiana
 -->
-
-# Simulación de variables continuas {#continuas}
-
-
-
 
 En este capítulo se expondrán métodos generales para simular distribuciones continuas: el método de inversión (siguiente sección), los basados en aceptación-rechazo (secciones \@ref(AR) y \@ref(modAR)) y el método de composición (Sección \@ref(composicion)). 
 En todos los casos como punto de partida es necesario disponer de un método de generación de números pseudoaleatorios uniformes en $(0,1)$.
@@ -109,7 +110,7 @@ tiempo
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    0.04
+##    0.02    0.00    0.02
 ```
 
 ```r
@@ -207,7 +208,7 @@ b)  Generar $10^{4}$ valores de la distribución doble exponencial de
     
     ```
     ##    user  system elapsed 
-    ##    0.03    0.02    0.04
+    ##    0.01    0.02    0.03
     ```
 
 
@@ -621,13 +622,13 @@ optimize(f = function(x) dnorm(x)/ddexp(x), maximum = TRUE, interval = c(0, 2))
 
 Vemos que la aproximación numérica coincide con el valor óptimo real $c_{\text{opt}} \approx$  1.3154892 (que se alcanza en $x = \pm 1$).
 
-Para establecer la condición de aceptación o rechazo se puede tener en cuenta que:
+Para establecer la condición de aceptación o rechazo es recomendable emplear 
+$c\cdot U\cdot g\left( T\right) \leq f\left( T\right)$.
+Aunque, en este caso concreto, se puede tener en cuenta que:
 $$c\cdot U\cdot\frac{g\left( T\right)  }{f\left( T\right)  }=\sqrt{\frac
 {2e}{\pi}}U\sqrt{\frac{\pi}{2}}\exp\left( \frac{T^{2}}{2}-\left\vert
 T\right\vert \right)  =U\cdot\exp\left( \frac{T^{2}}{2}-\left\vert
-T\right\vert +\frac{1}{2}\right),$$
-aunque en general puede ser recomendable emplear 
-$c\cdot U\cdot g\left( T\right) \leq f\left( T\right)$.
+T\right\vert +\frac{1}{2}\right).$$
 
 Teniendo en cuenta los resultados anteriores, podríamos emplear el siguiente código para generar los valores de la densidad objetivo:
 
@@ -821,13 +822,13 @@ Es decir:
 $$\pi(\theta | \mathbf{x})\propto L(\mathbf{x}| \theta)\pi(\theta).$$
 
 Como esta distribución cambia al variar la muestra observada, puede resultar difícil encontrar una densidad auxiliar adecuada para simular valores de la densidad a posteriori $\pi(\theta|\mathbf{x})$.
-Por ejemplo, podríamos pensar en emplear la densidad a priori $\pi(\theta)$ como densidad auxiliar.
+Por ejemplo, podríamos emplear la densidad a priori $\pi(\theta)$ como densidad auxiliar.
 Teniendo en cuenta que: 
 
 * $\pi(\theta |\mathbf{x})/\pi(\theta)\propto L(\mathbf{x}|\theta)$
 
 * $L(\mathbf{x}|\theta)\leq \tilde{c}=L(\mathbf{x}|\hat{\theta})$ siendo
-  $\hat{\theta}$ el estimador MV de $\theta$.
+  $\hat{\theta}$ el estimador máximo verosímil de $\theta$.
 
 El algoritmo sería el siguiente:
 
@@ -844,6 +845,14 @@ Aunque, como se muestra en el siguiente ejercicio, esta elección de densidad au
 
 ::: {.exercise #post-pri-ar name="Simulación de la distribución a posteriori a partir de la distribución a priori"}
 <br>
+
+
+<!-- 
+Basado en el Ejercicio 2.23 de Robert y Casella, 2009 
+Cambiar a ejemplo y apartado b) a ejercicio $n = 100$, $\theta_{0}=3$
+Comentar resultados (intervalos de probabilidad a posteriori) y eficiencia del método
+-->
+
 
 Para la estimación Bayes de la media de una normal se suele utilizar
 como distribución a priori una Cauchy.
@@ -1170,7 +1179,7 @@ simres::rcauchy.rou
 ##   attr(x, "ngen") <- ngen
 ##   return(x)
 ## }
-## <bytecode: 0x00000000340e96a8>
+## <bytecode: 0x00000000419af510>
 ## <environment: namespace:simres>
 ```
 

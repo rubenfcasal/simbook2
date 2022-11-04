@@ -226,6 +226,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="notables-disc.html"><a href="notables-disc.html"><i class="fa fa-check"></i><b>5.7</b> Métodos específicos para generación de distribuciones notables</a></li>
 <li class="chapter" data-level="5.8" data-path="ejercicios-discretas.html"><a href="ejercicios-discretas.html"><i class="fa fa-check"></i><b>5.8</b> Ejercicios</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="multivariante.html"><a href="multivariante.html"><i class="fa fa-check"></i><b>6</b> Simulación de distribuciones multivariantes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="simulación-de-componentes-independientes.html"><a href="simulación-de-componentes-independientes.html"><i class="fa fa-check"></i><b>6.1</b> Simulación de componentes independientes</a></li>
+<li class="chapter" data-level="6.2" data-path="el-método-de-aceptaciónrechazo.html"><a href="el-método-de-aceptaciónrechazo.html"><i class="fa fa-check"></i><b>6.2</b> El método de aceptación/rechazo</a></li>
+<li class="chapter" data-level="6.3" data-path="fact-cov.html"><a href="fact-cov.html"><i class="fa fa-check"></i><b>6.3</b> Factorización de la matriz de covarianzas</a></li>
+<li class="chapter" data-level="6.4" data-path="distrcond.html"><a href="distrcond.html"><i class="fa fa-check"></i><b>6.4</b> Método de las distribuciones condicionadas</a></li>
+<li class="chapter" data-level="6.5" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html"><i class="fa fa-check"></i><b>6.5</b> Simulación condicional e incondicional</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#condnormal"><i class="fa fa-check"></i><b>6.5.1</b> Simulación condicional de una normal multivariante</a></li>
+<li class="chapter" data-level="6.5.2" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#simulación-condicional-a-partir-de-un-modelo-ajustado"><i class="fa fa-check"></i><b>6.5.2</b> Simulación condicional a partir de un modelo ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html"><i class="fa fa-check"></i><b>6.6</b> Simulación basada en cópulas</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#cópulas-arquimedianas"><i class="fa fa-check"></i><b>6.6.1</b> Cópulas Arquimedianas</a></li>
+<li class="chapter" data-level="6.6.2" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#simulación"><i class="fa fa-check"></i><b>6.6.2</b> Simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="mult-discr.html"><a href="mult-discr.html"><i class="fa fa-check"></i><b>6.7</b> Simulación de distribuciones multivariantes discretas</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="mult-discr.html"><a href="mult-discr.html#simulación-de-una-variable-discreta-bidimensional"><i class="fa fa-check"></i><b>6.7.1</b> Simulación de una variable discreta bidimensional</a></li>
+<li class="chapter" data-level="6.7.2" data-path="mult-discr.html"><a href="mult-discr.html#simconting"><i class="fa fa-check"></i><b>6.7.2</b> Simulación de tablas de contingencia</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
 <li class="chapter" data-level="" data-path="bibliografía-complementaria.html"><a href="bibliografía-complementaria.html"><i class="fa fa-check"></i>Bibliografía complementaria</a>
@@ -318,7 +340,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="diag-aleat" class="section level2" number="7.2">
+<div id="diag-aleat" class="section level2" number="8.2">
 <h2><span class="header-section-number">B.2</span> Diagnosis de la independencia</h2>
 <p>Los métodos “clásicos” de inferencia estadística se basan en
 suponer que las observaciones <span class="math inline">\(X_{1},\ldots,X_{n}\)</span> son una muestra
@@ -349,43 +371,45 @@ pueden no verse muy afectadas).</p></li>
 “clásicos” (basados en independencia) se suelen producir
 subestimaciones de las varianzas (IC más estrechos y tendencia a
 rechazar <span class="math inline">\(H_{0}\)</span> en contrastes).</p>
-<p><strong>Ejemplo</strong>: datos simulados</p>
+<div class="example">
+<p><span id="exm:sim-dep" class="example"><strong>Ejemplo B.1  (Datos simulados dependientes) </strong></span><br></p>
 <p>Consideramos un proceso temporal estacionario con dependencia exponencial
 (la dependencia entre las observaciones depende del “salto” entre ellas;
-ver Ejemplo <a href="#exm:funcional"><strong>??</strong></a> en la Sección <a href="#fact-cov"><strong>??</strong></a>).</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="diag-aleat.html#cb240-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span>          <span class="co"># Nº de observaciones</span></span>
-<span id="cb240-2"><a href="diag-aleat.html#cb240-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> n)</span>
-<span id="cb240-3"><a href="diag-aleat.html#cb240-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)   <span class="co"># Media</span></span>
-<span id="cb240-4"><a href="diag-aleat.html#cb240-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mu &lt;- 0.25 + 0.5*t</span></span>
-<span id="cb240-5"><a href="diag-aleat.html#cb240-5" aria-hidden="true" tabindex="-1"></a><span class="co"># mu &lt;- sin(2*pi*t)</span></span>
-<span id="cb240-6"><a href="diag-aleat.html#cb240-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb240-7"><a href="diag-aleat.html#cb240-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de covarianzas</span></span>
-<span id="cb240-8"><a href="diag-aleat.html#cb240-8" aria-hidden="true" tabindex="-1"></a>t.dist <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(t))</span>
-<span id="cb240-9"><a href="diag-aleat.html#cb240-9" aria-hidden="true" tabindex="-1"></a>t.cov <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>t.dist)</span>
-<span id="cb240-10"><a href="diag-aleat.html#cb240-10" aria-hidden="true" tabindex="-1"></a><span class="co"># str(t.cov)</span></span>
-<span id="cb240-11"><a href="diag-aleat.html#cb240-11" aria-hidden="true" tabindex="-1"></a><span class="co"># num [1:100, 1:100] 1 0.99 0.98 0.97 0.96 ...</span></span>
-<span id="cb240-12"><a href="diag-aleat.html#cb240-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb240-13"><a href="diag-aleat.html#cb240-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulación de las observaciones</span></span>
-<span id="cb240-14"><a href="diag-aleat.html#cb240-14" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb240-15"><a href="diag-aleat.html#cb240-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb240-16"><a href="diag-aleat.html#cb240-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb240-17"><a href="diag-aleat.html#cb240-17" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb240-18"><a href="diag-aleat.html#cb240-18" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> mu <span class="sc">+</span> z <span class="co"># Datos independientes</span></span>
-<span id="cb240-19"><a href="diag-aleat.html#cb240-19" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(<span class="dv">1</span>, mu, t.cov) <span class="co"># Datos dependientes</span></span>
-<span id="cb240-20"><a href="diag-aleat.html#cb240-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb240-21"><a href="diag-aleat.html#cb240-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(t, mu, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>), <span class="at">ylab =</span> <span class="st">&#39;x&#39;</span>)</span>
-<span id="cb240-22"><a href="diag-aleat.html#cb240-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(t, x1, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
-<span id="cb240-23"><a href="diag-aleat.html#cb240-23" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(t, x2, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span>
-<span id="cb240-24"><a href="diag-aleat.html#cb240-24" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Datos independientes&quot;</span>, <span class="st">&quot;Datos dependientes&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+ver Ejemplo <a href="fact-cov.html#exm:funcional">6.4</a> en la Sección <a href="fact-cov.html#fact-cov">6.3</a>).</p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="diag-aleat.html#cb344-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span>          <span class="co"># Nº de observaciones</span></span>
+<span id="cb344-2"><a href="diag-aleat.html#cb344-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> n)</span>
+<span id="cb344-3"><a href="diag-aleat.html#cb344-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)   <span class="co"># Media</span></span>
+<span id="cb344-4"><a href="diag-aleat.html#cb344-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mu &lt;- 0.25 + 0.5*t</span></span>
+<span id="cb344-5"><a href="diag-aleat.html#cb344-5" aria-hidden="true" tabindex="-1"></a><span class="co"># mu &lt;- sin(2*pi*t)</span></span>
+<span id="cb344-6"><a href="diag-aleat.html#cb344-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb344-7"><a href="diag-aleat.html#cb344-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de covarianzas</span></span>
+<span id="cb344-8"><a href="diag-aleat.html#cb344-8" aria-hidden="true" tabindex="-1"></a>t.dist <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(t))</span>
+<span id="cb344-9"><a href="diag-aleat.html#cb344-9" aria-hidden="true" tabindex="-1"></a>t.cov <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span>t.dist)</span>
+<span id="cb344-10"><a href="diag-aleat.html#cb344-10" aria-hidden="true" tabindex="-1"></a><span class="co"># str(t.cov)</span></span>
+<span id="cb344-11"><a href="diag-aleat.html#cb344-11" aria-hidden="true" tabindex="-1"></a><span class="co"># num [1:100, 1:100] 1 0.99 0.98 0.97 0.96 ...</span></span>
+<span id="cb344-12"><a href="diag-aleat.html#cb344-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb344-13"><a href="diag-aleat.html#cb344-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulación de las observaciones</span></span>
+<span id="cb344-14"><a href="diag-aleat.html#cb344-14" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb344-15"><a href="diag-aleat.html#cb344-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb344-16"><a href="diag-aleat.html#cb344-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb344-17"><a href="diag-aleat.html#cb344-17" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb344-18"><a href="diag-aleat.html#cb344-18" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> mu <span class="sc">+</span> z <span class="co"># Datos independientes</span></span>
+<span id="cb344-19"><a href="diag-aleat.html#cb344-19" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(<span class="dv">1</span>, mu, t.cov) <span class="co"># Datos dependientes</span></span>
+<span id="cb344-20"><a href="diag-aleat.html#cb344-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb344-21"><a href="diag-aleat.html#cb344-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(t, mu, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>), <span class="at">ylab =</span> <span class="st">&#39;x&#39;</span>)</span>
+<span id="cb344-22"><a href="diag-aleat.html#cb344-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(t, x1, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb344-23"><a href="diag-aleat.html#cb344-23" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(t, x2, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span>
+<span id="cb344-24"><a href="diag-aleat.html#cb344-24" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Datos independientes&quot;</span>, <span class="st">&quot;Datos dependientes&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>En el caso anterior la varianza es uno con ambos procesos.
 Las estimaciones suponiendo independencia serían:</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="diag-aleat.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x1)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="diag-aleat.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x1)</span></code></pre></div>
 <pre><code>## [1] 0.8067621</code></pre>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="diag-aleat.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x2)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="diag-aleat.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x2)</span></code></pre></div>
 <pre><code>## [1] 0.1108155</code></pre>
-<p>En el caso de datos dependientes se produce una clara subestimación de la varianza</p>
-<div id="métodos-para-detectar-dependencia" class="section level3" number="7.2.1">
+<p>En el caso de datos dependientes se produce una clara subestimación de la varianza.</p>
+</div>
+<div id="métodos-para-detectar-dependencia" class="section level3" number="8.2.1">
 <h3><span class="header-section-number">B.2.1</span> Métodos para detectar dependencia</h3>
 <p>Es de esperar que datos cercanos en el tiempo (o en el espacio)
 sean más parecidos (dependientes) que datos más alejados, hablaríamos entonces de dependencia temporal (espacial o espacio-temporal).</p>
@@ -405,7 +429,7 @@ Entre los métodos para detectar este tipo de dependencia destacaríamos:</p>
 </ul></li>
 </ul>
 </div>
-<div id="gráfico-secuencial" class="section level3" number="7.2.2">
+<div id="gráfico-secuencial" class="section level3" number="8.2.2">
 <h3><span class="header-section-number">B.2.2</span> Gráfico secuencial</h3>
 <p>El gráfico de dispersión <span class="math inline">\(\{(i,X_{i}) : i = 1, \ldots, n \}\)</span> permite detectar la presencia de un efecto temporal (en la tendencia o en la variabilidad).</p>
 <ul>
@@ -416,16 +440,16 @@ Podría indicar la presencia de un “efecto aprendizaje.”</p></li>
 <li><p>Comandos R: <code>plot(as.ts(x))</code></p></li>
 </ul>
 <p>Ejemplo:</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="diag-aleat.html#cb245-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb245-2"><a href="diag-aleat.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(datos, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
-<span id="cb245-3"><a href="diag-aleat.html#cb245-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.ts</span>(datos))</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="diag-aleat.html#cb349-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb349-2"><a href="diag-aleat.html#cb349-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(datos, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
+<span id="cb349-3"><a href="diag-aleat.html#cb349-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.ts</span>(datos))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:grafsec"></span>
-<img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/grafsec-1.png" alt="Ejemplos de gráficos secuenciales." width="70%" />
+<img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/grafsec-1.png" alt="Ejemplos de gráficos secuenciales." width="90%" />
 <p class="caption">
 Figura B.3: Ejemplos de gráficos secuenciales.
 </p>
 </div>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="diag-aleat.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="diag-aleat.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
 <p>Es habitual que este tipo de análisis se realice sobre los residuos
 de un modelo de regresión (e.g. <code>datos &lt;- residuals(modelo)</code>)</p>
 <p>Este gráfico también podría servir para detectar dependencia temporal:</p>
@@ -435,16 +459,16 @@ y viceversa) indicarían una posible dependencia positiva.</p></li>
 <li><p>Valores próximos dispares (valores grandes seguidos de pequeños
 y viceversa) indicarían una posible dependencia negativa.</p></li>
 </ul>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="diag-aleat.html#cb247-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb247-2"><a href="diag-aleat.html#cb247-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;&#39;</span>, <span class="at">main =</span> <span class="st">&#39;Dependencia positiva&#39;</span>)</span>
-<span id="cb247-3"><a href="diag-aleat.html#cb247-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;&#39;</span>, <span class="at">main =</span> <span class="st">&#39;Independencia&#39;</span>)</span>
-<span id="cb247-4"><a href="diag-aleat.html#cb247-4" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> x2 <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb247-5"><a href="diag-aleat.html#cb247-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x3, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;&#39;</span>, <span class="at">main =</span> <span class="st">&#39;Dependencia negativa&#39;</span>)</span></code></pre></div>
-<p><img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="diag-aleat.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="diag-aleat.html#cb351-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb351-2"><a href="diag-aleat.html#cb351-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;&#39;</span>, <span class="at">main =</span> <span class="st">&#39;Dependencia positiva&#39;</span>)</span>
+<span id="cb351-3"><a href="diag-aleat.html#cb351-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;&#39;</span>, <span class="at">main =</span> <span class="st">&#39;Independencia&#39;</span>)</span>
+<span id="cb351-4"><a href="diag-aleat.html#cb351-4" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> x2 <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb351-5"><a href="diag-aleat.html#cb351-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x3, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;&#39;</span>, <span class="at">main =</span> <span class="st">&#39;Dependencia negativa&#39;</span>)</span></code></pre></div>
+<p><img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="diag-aleat.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
 <p>pero suele ser preferible emplear un gráfico de dispersión retardado.</p>
 </div>
-<div id="gráfico-de-dispersion-retardado" class="section level3" number="7.2.3">
+<div id="gráfico-de-dispersion-retardado" class="section level3" number="8.2.3">
 <h3><span class="header-section-number">B.2.3</span> Gráfico de dispersion retardado</h3>
 <p>El gráfico de dispersión <span class="math inline">\(\{(X_{i},X_{i+1}) : i = 1, \ldots, n-1 \}\)</span> permite
 detectar dependencias a un retardo (relaciones entre valores separados
@@ -452,26 +476,27 @@ por un instante)</p>
 <ul>
 <li>Comando R:<code>plot(x[-length(x)], x[-1], xlab = "X_t", ylab = "X_t+1")</code></li>
 </ul>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="diag-aleat.html#cb249-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb249-2"><a href="diag-aleat.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2[<span class="sc">-</span><span class="fu">length</span>(x2)], x2[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab =</span> <span class="st">&quot;X_t&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;X_t+1&quot;</span>, <span class="at">main =</span> <span class="st">&#39;Dependencia positiva&#39;</span>)</span>
-<span id="cb249-3"><a href="diag-aleat.html#cb249-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1[<span class="sc">-</span><span class="fu">length</span>(x1)], x1[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab =</span> <span class="st">&quot;X_t&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;X_t+1&quot;</span>, <span class="at">main =</span> <span class="st">&#39;Independencia&#39;</span>)</span>
-<span id="cb249-4"><a href="diag-aleat.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x3[<span class="sc">-</span><span class="fu">length</span>(x3)], x3[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab =</span> <span class="st">&quot;X_t&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;X_t+1&quot;</span>, <span class="at">main =</span> <span class="st">&#39;Dependencia negativa&#39;</span>)</span></code></pre></div>
-<p><img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="diag-aleat.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="diag-aleat.html#cb353-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb353-2"><a href="diag-aleat.html#cb353-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2[<span class="sc">-</span><span class="fu">length</span>(x2)], x2[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab =</span> <span class="st">&quot;X_t&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;X_t+1&quot;</span>, <span class="at">main =</span> <span class="st">&#39;Dependencia positiva&#39;</span>)</span>
+<span id="cb353-3"><a href="diag-aleat.html#cb353-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1[<span class="sc">-</span><span class="fu">length</span>(x1)], x1[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab =</span> <span class="st">&quot;X_t&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;X_t+1&quot;</span>, <span class="at">main =</span> <span class="st">&#39;Independencia&#39;</span>)</span>
+<span id="cb353-4"><a href="diag-aleat.html#cb353-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x3[<span class="sc">-</span><span class="fu">length</span>(x3)], x3[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab =</span> <span class="st">&quot;X_t&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;X_t+1&quot;</span>, <span class="at">main =</span> <span class="st">&#39;Dependencia negativa&#39;</span>)</span></code></pre></div>
+<p><img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="diag-aleat.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
 <p>Se puede generalizar al gráfico <span class="math inline">\(\{(X_{i},X_{i+k}) : i = 1, \ldots, n-k \}\)</span>
 que permite detectar dependencias a <span class="math inline">\(k\)</span> retardos
 (separadas <span class="math inline">\(k\)</span> instantes).</p>
-<p><strong>Ejemplo</strong></p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="diag-aleat.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico de dispersion retardado</span></span>
-<span id="cb251-2"><a href="diag-aleat.html#cb251-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(datos[<span class="sc">-</span><span class="fu">length</span>(datos)], datos[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab =</span> <span class="st">&quot;X_t&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;X_t+1&quot;</span>)</span></code></pre></div>
+<p>Ejemplo:</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="diag-aleat.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico de dispersion retardado</span></span>
+<span id="cb355-2"><a href="diag-aleat.html#cb355-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(datos[<span class="sc">-</span><span class="fu">length</span>(datos)], datos[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab =</span> <span class="st">&quot;X_t&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;X_t+1&quot;</span>)</span></code></pre></div>
 <p><img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>El correspondiente coeficiente de correlación es una medida numérica
 del grado de relación lineal (denominado autocorrelación de orden 1).</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="diag-aleat.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(datos[<span class="sc">-</span><span class="fu">length</span>(datos)], datos[<span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="diag-aleat.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(datos[<span class="sc">-</span><span class="fu">length</span>(datos)], datos[<span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] 0.01344127</code></pre>
-<p><strong>Ejemplo</strong>: Calidad de un generador aleatorio</p>
+<div class="example">
+<p><span id="exm:ret-gen" class="example"><strong>Ejemplo B.2  (Calidad de un generador aleatorio) </strong></span><br></p>
 <p>En el caso de una secuencia muy grande de número pseudoaleatorios (supuestamente independientes), sería muy dificil distinguir un patrón a partir del gráfico anterior. La recomendación en R sería utilizar puntos con color de relleno:</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="diag-aleat.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(u[<span class="sc">-</span><span class="fu">length</span>(u)], u[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab=</span><span class="st">&quot;U_t&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;U_t+1&quot;</span>, <span class="at">pch=</span><span class="dv">21</span>, <span class="at">bg=</span><span class="st">&quot;white&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="diag-aleat.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(u[<span class="sc">-</span><span class="fu">length</span>(u)], u[<span class="sc">-</span><span class="dv">1</span>], <span class="at">xlab=</span><span class="st">&quot;U_t&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;U_t+1&quot;</span>, <span class="at">pch=</span><span class="dv">21</span>, <span class="at">bg=</span><span class="st">&quot;white&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dispret"></span>
 <img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/dispret-1.png" alt="Ejemplos de gráficos de dispensión retardados de dos secuencias de longitud 10000." width="70%" />
 <p class="caption">
@@ -482,7 +507,8 @@ Figura B.4: Ejemplos de gráficos de dispensión retardados de dos secuencias de
 Se puede generalizar también a <span class="math inline">\(d\)</span>-uplas <span class="math inline">\((X_{t+1},X_{t+2},\ldots,X_{t+d})\)</span>
 (ver ejemplo del generador RANDU en Figura <a href="gen-cong.html#fig:randu">2.1</a> de la Sección <a href="gen-cong.html#gen-cong">2.1</a>).</p>
 </div>
-<div id="el-correlograma" class="section level3" number="7.2.4">
+</div>
+<div id="el-correlograma" class="section level3" number="8.2.4">
 <h3><span class="header-section-number">B.2.4</span> El correlograma</h3>
 <p>Para estudiar si el grado de relación (lineal) entre <span class="math inline">\(X_{i}\)</span> e
 <span class="math inline">\(X_{i+k}\)</span> podemos utilizar el coeficiente de correlación:</p>
@@ -500,12 +526,12 @@ denominada función de autocorrelación simple (fas) o correlograma.</p></li>
 <p>En caso de independencia es de esperar que las autocorrelaciones
 muestrales sean próximas a cero (valores “grandes” indicarían
 dependencia positiva o negativa según el signo).</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="diag-aleat.html#cb255-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb255-2"><a href="diag-aleat.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x1, <span class="at">main =</span> <span class="st">&#39;Independencia&#39;</span>)</span>
-<span id="cb255-3"><a href="diag-aleat.html#cb255-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x2, <span class="at">main =</span> <span class="st">&#39;Dependencia positiva&#39;</span>)</span>
-<span id="cb255-4"><a href="diag-aleat.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x3, <span class="at">main =</span> <span class="st">&#39;Dependencia negativa&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="diag-aleat.html#cb359-1" aria-hidden="true" tabindex="-1"></a>old.par <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb359-2"><a href="diag-aleat.html#cb359-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x1, <span class="at">main =</span> <span class="st">&#39;Independencia&#39;</span>)</span>
+<span id="cb359-3"><a href="diag-aleat.html#cb359-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x2, <span class="at">main =</span> <span class="st">&#39;Dependencia positiva&#39;</span>)</span>
+<span id="cb359-4"><a href="diag-aleat.html#cb359-4" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x3, <span class="at">main =</span> <span class="st">&#39;Dependencia negativa&#39;</span>)</span></code></pre></div>
 <p><img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="diag-aleat.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="diag-aleat.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(old.par)</span></code></pre></div>
 <p>Suponiendo normalidad e independencia, asintóticamente:
 <span class="math display">\[r(k)\underset{aprox.}{\sim}N\left(  \rho(k),\frac{1}{n}\right)\]</span></p>
 <ul>
@@ -517,14 +543,14 @@ de las autocorrelaciones correspondientes a los primeros retardos
 (típicamente <span class="math inline">\(k&lt;n/4\)</span>) y las correspondientes bandas de confianza
 (para detectar dependencias significativas).</p></li>
 </ul>
-<p><strong>Ejemplo</strong></p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="diag-aleat.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(datos)  <span class="co"># correlaciones</span></span></code></pre></div>
+<p>Ejemplo:</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="diag-aleat.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(datos)  <span class="co"># correlaciones</span></span></code></pre></div>
 <p><img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>La función <code>acf</code> también permite estimar el covariograma<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="diag-aleat.html#cb258-1" aria-hidden="true" tabindex="-1"></a>covar <span class="ot">&lt;-</span> <span class="fu">acf</span>(x2, <span class="at">type =</span> <span class="st">&quot;covariance&quot;</span>)</span></code></pre></div>
+<p>La función <code>acf</code> también permite estimar el covariograma<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a>.</p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="diag-aleat.html#cb362-1" aria-hidden="true" tabindex="-1"></a>covar <span class="ot">&lt;-</span> <span class="fu">acf</span>(x2, <span class="at">type =</span> <span class="st">&quot;covariance&quot;</span>)</span></code></pre></div>
 <p><img src="22-Bondad_ajuste_Aleatoriedad_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="test-de-rachas" class="section level3" number="7.2.5">
+<div id="test-de-rachas" class="section level3" number="8.2.5">
 <h3><span class="header-section-number">B.2.5</span> Test de rachas</h3>
 <p>Permite contrastar si el orden de aparición de dos valores de una
 variable dicotómica es aleatorio.
@@ -568,9 +594,9 @@ es significativamente pequeño o grande.</p></li>
 \frac{R-E(R)}{\sqrt{Var(R)}} \right\vert \right)\]</span></p></li>
 <li><p>Comandos R: <code>tseries::runs.test(as.factor(x &gt; median(x)))</code></p></li>
 </ul>
-<p><strong>Ejemplo</strong></p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="diag-aleat.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
-<span id="cb259-2"><a href="diag-aleat.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runs.test</span>(<span class="fu">as.factor</span>(datos <span class="sc">&gt;</span> <span class="fu">median</span>(datos)))</span></code></pre></div>
+<p>Ejemplo:</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="diag-aleat.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
+<span id="cb363-2"><a href="diag-aleat.html#cb363-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runs.test</span>(<span class="fu">as.factor</span>(datos <span class="sc">&gt;</span> <span class="fu">median</span>(datos)))</span></code></pre></div>
 <pre><code>## 
 ##  Runs Test
 ## 
@@ -579,7 +605,7 @@ es significativamente pequeño o grande.</p></li>
 ## alternative hypothesis: two.sided</code></pre>
 <p>Alternativamente, para evitar el cálculo del punto de corte (la mediana), requerido para dicotomizar la variable continua, se podría emplear una modificación de este contraste, el denominado test de rachas ascendentes y descendentes, en el que se generan los valores <span class="math inline">\(+\)</span> y <span class="math inline">\(-\)</span> dependiendo de si el valor de la secuencia es mayor o menor que el anterior (ver e.g. Downham, 1970). Este contraste es más adecuado para generadores aleatorios.</p>
 </div>
-<div id="el-contraste-de-ljung-box" class="section level3" number="7.2.6">
+<div id="el-contraste-de-ljung-box" class="section level3" number="8.2.6">
 <h3><span class="header-section-number">B.2.6</span> El contraste de Ljung-Box</h3>
 <p>Es un test muy utilizado (en series de tiempo) para contrastar la
 hipótesis de independencia.
@@ -600,16 +626,16 @@ _{m}^{2}\text{, si }H_{0}\text{ es cierta.}\]</span></p></li>
 <span class="math display">\[p=P\left(  {\chi_{m}^{2}}\geq Q\right)\]</span></p></li>
 <li><p>Comandos R:</p></li>
 </ul>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="diag-aleat.html#cb261-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Box.test</span>(x, <span class="at">type=</span>Ljung)</span>
-<span id="cb261-2"><a href="diag-aleat.html#cb261-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Box.test</span>(x, lag, <span class="at">type=</span>Ljung)</span></code></pre></div>
-<p><strong>Ejemplo</strong></p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="diag-aleat.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(datos, <span class="at">type=</span><span class="st">&quot;Ljung&quot;</span>) <span class="co"># Contrasta si la primera autocorrelación es nula </span></span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="diag-aleat.html#cb365-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Box.test</span>(x, <span class="at">type=</span>Ljung)</span>
+<span id="cb365-2"><a href="diag-aleat.html#cb365-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Box.test</span>(x, lag, <span class="at">type=</span>Ljung)</span></code></pre></div>
+<p>Ejemplo:</p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="diag-aleat.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(datos, <span class="at">type=</span><span class="st">&quot;Ljung&quot;</span>) <span class="co"># Contrasta si la primera autocorrelación es nula </span></span></code></pre></div>
 <pre><code>## 
 ##  Box-Ljung test
 ## 
 ## data:  datos
 ## X-squared = 0.0078317, df = 1, p-value = 0.9295</code></pre>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="diag-aleat.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(datos, <span class="at">lag=</span><span class="dv">5</span>, <span class="at">type=</span><span class="st">&quot;Ljung&quot;</span>) <span class="co"># Contrasta si las 5 primeras autocorrelaciones son nulas</span></span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="diag-aleat.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(datos, <span class="at">lag=</span><span class="dv">5</span>, <span class="at">type=</span><span class="st">&quot;Ljung&quot;</span>) <span class="co"># Contrasta si las 5 primeras autocorrelaciones son nulas</span></span></code></pre></div>
 <pre><code>## 
 ##  Box-Ljung test
 ## 
@@ -621,8 +647,8 @@ Durbin-Watson implementado en la función <code>dwtest()</code> del paquete <cod
 </div>
 <div class="footnotes">
 <hr />
-<ol start="22">
-<li id="fn22"><p>En algunos campos, como en estadística espacial, en lugar del covariograma se suele emplear el semivariograma <span class="math inline">\(\gamma(k) = C(0) - C(k)\)</span>.<a href="diag-aleat.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<ol start="26">
+<li id="fn26"><p>En algunos campos, como en estadística espacial, en lugar del covariograma se suele emplear el semivariograma <span class="math inline">\(\gamma(k) = C(0) - C(k)\)</span>.<a href="diag-aleat.html#fnref26" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

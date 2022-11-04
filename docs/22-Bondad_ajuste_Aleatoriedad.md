@@ -3,6 +3,26 @@
 
 
 
+<!-- 
+---
+title: "Bondad de Ajuste y Aleatoriedad"
+author: "Simulación Estadística (UDC)"
+date: "Máster en Técnicas Estadísticas"
+output: 
+  bookdown::html_document2:
+    pandoc_args: ["--number-offset", "21,0"]
+    toc: yes 
+    # mathjax: local            # copia local de MathJax, hay que establecer:
+    # self_contained: false     # las dependencias se guardan en ficheros externos 
+  bookdown::pdf_document2:
+    keep_tex: yes
+    toc: yes 
+---
+bookdown::preview_chapter("22-Bondad_ajuste_Aleatoriedad.Rmd") 
+knitr::purl("22-Bondad_ajuste_Aleatoriedad.Rmd", documentation = 2)
+knitr::spin("22-Bondad_ajuste_Aleatoriedad.R",knit = FALSE)
+-->
+
 En los métodos clásicos de inferencia estadística es habitual asumir que los valores observados $X_1,\ldots, X_n$ (o los errores de un modelo) constituyen una muestra aleatoria simple de una variable aleatoria $X$.
 Se están asumiendo por tanto dos hipótesis estructurales: la independencia (aleatoriedad) y la homogeneidad (misma distribución) de las observaciones (o de los errores).
 Adicionalmente, en inferencia paramétrica se supone que la distribución se ajusta a un modelo
@@ -238,7 +258,7 @@ chisq.test(table(x))            # NOT 'chisq.test(x)'!
 ## X-squared = 9.2, df = 4, p-value = 0.05629
 ```
 
-La distribución exacta del estadístico del contraste es discreta (se podría aproximar por simulación, por ejemplo empleando los parámetros `simulate.p.value = TRUE` y `B = 2000` de la función `chisq.test()`; ver también el Ejercicio \@ref(exr:chicuadind) de la Sección \@ref(simconting) para el caso del contraste chi-cuadrado de independencia).
+La distribución exacta del estadístico del contraste es discreta (se podría aproximar por simulación, por ejemplo empleando los parámetros `simulate.p.value = TRUE` y `B = 2000` de la función `chisq.test()`; ver también el Ejemplo \@ref(exm:chicuadind) de la Sección \@ref(simconting) para el caso del contraste chi-cuadrado de independencia).
 Para que la aproximación continua $\chi^2$ sea válida:
 
 -   El tamaño muestral debe ser suficientemente grande (p.e. $n>30$).
@@ -317,7 +337,7 @@ simres::chisq.cont.test
 ##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
 ##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x000000002dcde2a8>
+## <bytecode: 0x0000000012e325c8>
 ## <environment: namespace:simres>
 ```
 
@@ -325,6 +345,7 @@ Continuando con el ejemplo anterior, podríamos contrastar normalidad mediante:
 
 
 ```r
+library(simres)
 chisq.cont.test(datos, distribution = "norm", nestpar = 2, mean=mean(datos), sd=sd(datos))
 ```
 
@@ -475,7 +496,8 @@ Típicamente $Cov(X_{1},X_{2})>0$ por lo que con los métodos
 subestimaciones de las varianzas (IC más estrechos y tendencia a
 rechazar $H_{0}$ en contrastes).
 
-**Ejemplo**: datos simulados
+::: {.example #sim-dep name="Datos simulados dependientes"}
+<br>
 
 Consideramos un proceso temporal estacionario con dependencia exponencial 
 (la dependencia entre las observaciones depende del "salto" entre ellas;
@@ -533,7 +555,9 @@ var(x2)
 ## [1] 0.1108155
 ```
 
-En el caso de datos dependientes se produce una clara subestimación de la varianza
+En el caso de datos dependientes se produce una clara subestimación de la varianza.
+
+:::
 
 ### Métodos para detectar dependencia
 
@@ -581,7 +605,7 @@ plot(as.ts(datos))
 
 \begin{figure}[!htb]
 
-{\centering \includegraphics[width=0.7\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1} 
+{\centering \includegraphics[width=0.9\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1} 
 
 }
 
@@ -614,7 +638,7 @@ plot(x3, type = 'l', ylab = '', main = 'Dependencia negativa')
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-13-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 ```r
 par(old.par)
@@ -640,7 +664,7 @@ plot(x3[-length(x3)], x3[-1], xlab = "X_t", ylab = "X_t+1", main = 'Dependencia 
 
 
 
-\begin{center}\includegraphics[width=0.7\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth]{22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 ```r
 par(old.par)
@@ -650,7 +674,7 @@ Se puede generalizar al gráfico $\{(X_{i},X_{i+k}) : i = 1, \ldots, n-k \}$
 que permite detectar dependencias a $k$ retardos 
 (separadas $k$ instantes).
 
-**Ejemplo**
+Ejemplo:
 
 
 ```r
@@ -675,7 +699,8 @@ cor(datos[-length(datos)], datos[-1])
 ```
 
 
-**Ejemplo**: Calidad de un generador aleatorio
+::: {.example #ret-gen name="Calidad de un generador aleatorio"}
+<br>
 
 En el caso de una secuencia muy grande de número pseudoaleatorios (supuestamente independientes), sería muy dificil distinguir un patrón a partir del gráfico anterior. La recomendación en R sería utilizar puntos con color de relleno:
 
@@ -695,6 +720,9 @@ plot(u[-length(u)], u[-1], xlab="U_t", ylab="U_t+1", pch=21, bg="white")
 Si se observa algún tipo de patrón indicaría dependencia (se podría considerar como una versión descriptiva del denominado “Parking lot test”).
 Se puede generalizar también a $d$-uplas $(X_{t+1},X_{t+2},\ldots,X_{t+d})$ 
 (ver ejemplo del generador RANDU en Figura \@ref(fig:randu) de la Sección \@ref(gen-cong)).
+
+:::
+
 
 ### El correlograma
 
@@ -747,7 +775,7 @@ $$r(k)\underset{aprox.}{\sim}N\left(  \rho(k),\frac{1}{n}\right)$$
     (para detectar dependencias significativas).
 
 
-**Ejemplo**
+Ejemplo:
 
 
 ```r
@@ -824,7 +852,7 @@ un punto de corte para dicotomizarlas. Normalmente se toma como punto de corte l
 -   Comandos R: `tseries::runs.test(as.factor(x > median(x)))`
 
 
-**Ejemplo**
+Ejemplo:
 
 
 ```r
@@ -875,7 +903,7 @@ $$\left\{\begin{array}[c]{l}
 ```
 
 
-**Ejemplo**
+Ejemplo:
 
 
 ```r

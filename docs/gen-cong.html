@@ -226,6 +226,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="notables-disc.html"><a href="notables-disc.html"><i class="fa fa-check"></i><b>5.7</b> Métodos específicos para generación de distribuciones notables</a></li>
 <li class="chapter" data-level="5.8" data-path="ejercicios-discretas.html"><a href="ejercicios-discretas.html"><i class="fa fa-check"></i><b>5.8</b> Ejercicios</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="multivariante.html"><a href="multivariante.html"><i class="fa fa-check"></i><b>6</b> Simulación de distribuciones multivariantes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="simulación-de-componentes-independientes.html"><a href="simulación-de-componentes-independientes.html"><i class="fa fa-check"></i><b>6.1</b> Simulación de componentes independientes</a></li>
+<li class="chapter" data-level="6.2" data-path="el-método-de-aceptaciónrechazo.html"><a href="el-método-de-aceptaciónrechazo.html"><i class="fa fa-check"></i><b>6.2</b> El método de aceptación/rechazo</a></li>
+<li class="chapter" data-level="6.3" data-path="fact-cov.html"><a href="fact-cov.html"><i class="fa fa-check"></i><b>6.3</b> Factorización de la matriz de covarianzas</a></li>
+<li class="chapter" data-level="6.4" data-path="distrcond.html"><a href="distrcond.html"><i class="fa fa-check"></i><b>6.4</b> Método de las distribuciones condicionadas</a></li>
+<li class="chapter" data-level="6.5" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html"><i class="fa fa-check"></i><b>6.5</b> Simulación condicional e incondicional</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#condnormal"><i class="fa fa-check"></i><b>6.5.1</b> Simulación condicional de una normal multivariante</a></li>
+<li class="chapter" data-level="6.5.2" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#simulación-condicional-a-partir-de-un-modelo-ajustado"><i class="fa fa-check"></i><b>6.5.2</b> Simulación condicional a partir de un modelo ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html"><i class="fa fa-check"></i><b>6.6</b> Simulación basada en cópulas</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#cópulas-arquimedianas"><i class="fa fa-check"></i><b>6.6.1</b> Cópulas Arquimedianas</a></li>
+<li class="chapter" data-level="6.6.2" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#simulación"><i class="fa fa-check"></i><b>6.6.2</b> Simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="mult-discr.html"><a href="mult-discr.html"><i class="fa fa-check"></i><b>6.7</b> Simulación de distribuciones multivariantes discretas</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="mult-discr.html"><a href="mult-discr.html#simulación-de-una-variable-discreta-bidimensional"><i class="fa fa-check"></i><b>6.7.1</b> Simulación de una variable discreta bidimensional</a></li>
+<li class="chapter" data-level="6.7.2" data-path="mult-discr.html"><a href="mult-discr.html#simconting"><i class="fa fa-check"></i><b>6.7.2</b> Simulación de tablas de contingencia</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
 <li class="chapter" data-level="" data-path="bibliografía-complementaria.html"><a href="bibliografía-complementaria.html"><i class="fa fa-check"></i>Bibliografía complementaria</a>
@@ -350,7 +372,7 @@ donde <span class="math inline">\(a\)</span> (<em>multiplicador</em>), <span cla
 ##   # Devolver valores
 ##   return(u)
 ## }
-## &lt;bytecode: 0x0000000015db0e28&gt;
+## &lt;bytecode: 0x0000000035e4be20&gt;
 ## &lt;environment: namespace:simres&gt;</code></pre>
 <p>Ejemplos de parámetros:</p>
 <ul>
@@ -397,7 +419,7 @@ Por ejemplo, el conjunto de datos <code>randu</code> contiene 400 tripletas de n
 <span id="cb39-2"><a href="gen-cong.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(u <span class="ot">&lt;-</span> <span class="fu">rlcg</span>(<span class="at">n =</span> <span class="dv">9999</span>, </span>
 <span id="cb39-3"><a href="gen-cong.html#cb39-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">seed =</span> <span class="dv">543210</span>, <span class="at">a =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">16</span> <span class="sc">+</span> <span class="dv">3</span>, <span class="at">c =</span> <span class="dv">0</span>, <span class="at">m =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">31</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.02    0.00    0.02</code></pre>
+##       0       0       0</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="gen-cong.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># xyz &lt;- matrix(u, ncol = 3, byrow = TRUE)</span></span>
 <span id="cb41-2"><a href="gen-cong.html#cb41-2" aria-hidden="true" tabindex="-1"></a>xyz <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">embed</span>(u, <span class="dv">3</span>)</span>
 <span id="cb41-3"><a href="gen-cong.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plot3D)</span>

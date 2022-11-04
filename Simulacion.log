@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.10) (preloaded format=xelatex 2022.10.27)  27 OCT 2022 17:00
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.10) (preloaded format=xelatex 2022.10.27)  4 NOV 2022 13:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1226,10 +1226,6 @@ c file (type pdf)
 File: 02-Generacion_numeros_aleatorios_files/figure-latex/plot-ret-1.pdf Graphi
 c file (type pdf)
 <use 02-Generacion_numeros_aleatorios_files/figure-latex/plot-ret-1.pdf>
-
-LaTeX Warning: Reference `exm:ret-gen' on page 29 undefined on input line 1747.
-
-
 [29]
 File: 02-Generacion_numeros_aleatorios_files/figure-latex/plot-acf-1.pdf Graphi
 c file (type pdf)
@@ -1423,60 +1419,163 @@ Graphic file (type pdf)
 <use 05-Metodos_generales_discretas_files/figure-latex/unnamed-chunk-18-1.pdf>
 [92] [93] [94
 
-] [95] [96]
-Apéndice A.
-[97
+]
+Capítulo 6.
+[95]
+File: 06-Simulacion_multidimensional_files/figure-latex/normind-plot-1.pdf Grap
+hic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/normind-plot-1.pdf>
+[96] [97]
+Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
+input line 5512.
+[98] [99]
+File: 06-Simulacion_multidimensional_files/figure-latex/funcional-plot-1.pdf Gr
+aphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/funcional-plot-1.pdf>
+[100]
+File: 06-Simulacion_multidimensional_files/figure-latex/funcional-plot2-1.pdf G
+raphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/funcional-plot2-1.pdf>
+[101] [102] [103] [104]
+File: 06-Simulacion_multidimensional_files/figure-latex/funcional-cond-1.pdf Gr
+aphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/funcional-cond-1.pdf>
+[105] [106]
+File: 06-Simulacion_multidimensional_files/figure-latex/pos-sp-simcond-1.pdf Gr
+aphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/pos-sp-simcond-1.pdf>
 
-] [98
+Overfull \hbox (20.98227pt too wide) in paragraph at lines 6145--6145
+[]\TU/lmtt/m/n/10 ## krige.conv: results will be returned only for prediction l
+ocations inside the borders[] 
+ []
+
+[107]
+File: 06-Simulacion_multidimensional_files/figure-latex/unnamed-chunk-10-1.pdf 
+Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/unnamed-chunk-10-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[108]
+File: 06-Simulacion_multidimensional_files/figure-latex/unnamed-chunk-11-1.pdf 
+Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/unnamed-chunk-11-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[109]
+Underfull \vbox (badness 5446) has occurred while \output is active []
+
+[110]
+File: 06-Simulacion_multidimensional_files/figure-latex/simulate-forecast-1.pdf
+ Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/simulate-forecast-1.pdf>
+
+[111] [112]
+File: 06-Simulacion_multidimensional_files/figure-latex/cclayton2-dispersion-1.
+pdf Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/cclayton2-dispersion-1.p
+df>
+
+LaTeX Warning: Reference `fig:cclayton2b-conjunta' on page 113 undefined on inp
+ut line 6379.
+
+File: 06-Simulacion_multidimensional_files/figure-latex/cclayton2-conjunta-1.pd
+f Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/cclayton2-conjunta-1.pdf
+>
+
+LaTeX Warning: Reference `fig:cclayton3-marginales' on page 113 undefined on in
+put line 6397.
+
+File: 06-Simulacion_multidimensional_files/figure-latex/cclayton2-marginales-1.
+pdf Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/cclayton2-marginales-1.p
+df>
+File: 06-Simulacion_multidimensional_files/figure-latex/cclayton2b-dispersion-1
+.pdf Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/cclayton2b-dispersion-1.
+pdf>
+File: 06-Simulacion_multidimensional_files/figure-latex/cclayton3-dispersion-1.
+pdf Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/cclayton3-dispersion-1.p
+df>
+[113]
+File: 06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-conjunta-1
+.pdf Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-conjunta-1.
+pdf>
+
+Underfull \vbox (badness 10000) detected at line 6490
+ []
+
+[114]
+File: 06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-marginales
+-1.pdf Graphic file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-marginales-
+1.pdf>
+[115]
+Underfull \hbox (badness 1137) in paragraph at lines 6516--6517
+\TU/lmr/m/n/10 para cambiar a un indexado unidimensional y posteriormente las f
+unciones \TU/lmtt/m/n/10 as.matrix()\TU/lmr/m/n/10 , o
+ []
+
+[116] [117] [118] [119] [120]
+File: 06-Simulacion_multidimensional_files/figure-latex/chi2-plot-1.pdf Graphic
+ file (type pdf)
+<use 06-Simulacion_multidimensional_files/figure-latex/chi2-plot-1.pdf>
+
+LaTeX Warning: Reference `contrastes' on page 121 undefined on input line 6976.
+
+
+[121] [122] [123
+
+] [124]
+Apéndice A.
+[125
+
+] [126
 
 ]
 Apéndice B.
-[99]
+[127]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-3-1.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-3-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[100]
+[128]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/hist-movie-1.pdf Graphic
  file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/hist-movie-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[101]
+[129]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/ecdfplot-1.pdf Graphic f
 ile (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/ecdfplot-1.pdf>
-[102]
+[130]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-1.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-1.pdf>
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-2.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-2.pdf>
-[103]
-Overfull \hbox (3.928pt too wide) in alignment at lines 5587--5591
+[131]
+Overfull \hbox (3.928pt too wide) in alignment at lines 7355--7359
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (3.928pt too wide) in alignment at lines 5591--5597
+Overfull \hbox (3.928pt too wide) in alignment at lines 7359--7365
  [] [] [] [] [] 
  []
 
-[104]
-
-LaTeX Warning: Reference `exr:chicuadind' on page 105 undefined on input line 5
-625.
-
-
-LaTeX Warning: Reference `simconting' on page 105 undefined on input line 5625.
-
-
-[105]
-Overfull \hbox (5.23227pt too wide) in paragraph at lines 5713--5713
+[132] [133]
+Overfull \hbox (5.23227pt too wide) in paragraph at lines 7481--7481
 []\TU/lmtt/m/n/10 ##                    method = METHOD, data.name = DNAME), RE
 SULTS), class = "htest")[] 
  []
@@ -1484,74 +1583,68 @@ SULTS), class = "htest")[]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-7-1.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-7-1.pdf>
+[134]
 
-Underfull \vbox (badness 3168) has occurred while \output is active []
-
-[106]
-
-LaTeX Warning: Reference `exr:ks-test-sim' on page 107 undefined on input line 
-5802.
+LaTeX Warning: Reference `exr:ks-test-sim' on page 135 undefined on input line 
+7571.
 
 
-LaTeX Warning: Reference `contrastes' on page 107 undefined on input line 5802.
+LaTeX Warning: Reference `contrastes' on page 135 undefined on input line 7571.
 
 
-[107] [108]
-
-LaTeX Warning: Reference `exm:funcional' on page 109 undefined on input line 58
-87.
-
-
-LaTeX Warning: Reference `fact-cov' on page 109 undefined on input line 5887.
-
+[135] [136]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-11-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-11-1.pdf>
-[109]
+[137]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1.pdf Graphic fi
 le (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1.pdf>
-[110]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-13-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-13-1.pdf>
+[138]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1.pdf>
-[111]
-File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-15-1.pdf G
-raphic file (type pdf)
-<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-15-1.pdf>
-File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/dispret-1.pdf Graphic fi
-le (type pdf)
-<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/dispret-1.pdf>
-[112]
-File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-18-1.pdf G
-raphic file (type pdf)
-<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-18-1.pdf>
-[113]
-File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-19-1.pdf G
-raphic file (type pdf)
-<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-19-1.pdf>
-File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-20-1.pdf G
-raphic file (type pdf)
-<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-20-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[114] [115] [116]
-Underfull \hbox (badness 1062) in paragraph at lines 6372--6375
+[139]
+File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-15-1.pdf G
+raphic file (type pdf)
+<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-15-1.pdf>
+[140]
+File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/dispret-1.pdf Graphic fi
+le (type pdf)
+<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/dispret-1.pdf>
+File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-18-1.pdf G
+raphic file (type pdf)
+<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-18-1.pdf>
+
+Underfull \vbox (badness 1297) has occurred while \output is active []
+
+[141]
+File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-19-1.pdf G
+raphic file (type pdf)
+<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-19-1.pdf>
+[142]
+File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-20-1.pdf G
+raphic file (type pdf)
+<use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-20-1.pdf>
+[143] [144]
+Underfull \hbox (badness 1062) in paragraph at lines 8145--8148
 []\TU/lmr/m/n/10 Empleando la discretización anterior se simplifica notablement
 e el contraste chi-cuadrado de
  []
 
-
-Overfull \hbox (11.2765pt too wide) in paragraph at lines 6412--6417
+[145]
+Overfull \hbox (11.2765pt too wide) in paragraph at lines 8185--8190
 []\TU/lmr/m/n/10 El contraste anterior se puede generalizar a contrastar la uni
 formidad de las $[]$-uplas $[][][][] [][][] [] [] [][][]$
  []
 
-[117] [118] [119] [120
+[146] [147] [148
 
 ]
 Apéndice C.
@@ -1561,32 +1654,28 @@ file (type pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[121] [122] [123] [124]
+[149] [150] [151] [152]
 File: 23-Integracion_numerica_files/figure-latex/unnamed-chunk-9-1.pdf Graphic 
 file (type pdf)
 <use 23-Integracion_numerica_files/figure-latex/unnamed-chunk-9-1.pdf>
-[125] [126]
+[153] [154]
 Apéndice D.
-[127
+[155
 
 ]
-
-LaTeX Warning: Reference `exm:ar-esfera' on page 128 undefined on input line 69
-51.
-
 File: 24-Soluciones_files/figure-latex/simpiplot-1.pdf Graphic file (type pdf)
 <use 24-Soluciones_files/figure-latex/simpiplot-1.pdf>
-[128]
+[156]
 File: 24-Soluciones_files/figure-latex/simberplot-1.pdf Graphic file (type pdf)
 
 <use 24-Soluciones_files/figure-latex/simberplot-1.pdf>
-[129]
+[157]
 File: 24-Soluciones_files/figure-latex/simberconv-1.pdf Graphic file (type pdf)
 
 <use 24-Soluciones_files/figure-latex/simberconv-1.pdf>
 File: images/circuito2.png Graphic file (type bmp)
 <images/circuito2.png>
-[130] [131] [132]
+[158] [159] [160]
 File: 24-Soluciones_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (typ
 e pdf)
 <use 24-Soluciones_files/figure-latex/unnamed-chunk-14-1.pdf>
@@ -1596,14 +1685,14 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[133] [134]
+[161] [162]
 File: 24-Soluciones_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (typ
 e pdf)
 <use 24-Soluciones_files/figure-latex/unnamed-chunk-17-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[135] [136]
+[163] [164]
 File: 24-Soluciones_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (typ
 e pdf)
 <use 24-Soluciones_files/figure-latex/unnamed-chunk-19-1.pdf>
@@ -1613,7 +1702,7 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[137]
+[165]
 No file Simulacion.bbl.
 \tf@thm=\write5
 \openout5 = `Simulacion.thm'.
@@ -1668,7 +1757,7 @@ The property list \__xpg_alias contains the pairs (without outer braces):
 >  {spanishmx/target}  =>  {spanish}
 >  {spanishmx/variant}  =>  {mexican}
 >  {spanishmx/options}  =>  {variant=mexican}.
-[138] (Simulacion.aux
+[166] (Simulacion.aux
 LaTeX Info: Redefining \rmfamily on input line 17.
 LaTeX Info: Redefining \sffamily on input line 17.
 LaTeX Info: Redefining \ttfamily on input line 17.
@@ -1678,12 +1767,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 22481 strings out of 410500
- 443693 string characters out of 2815815
- 957294 words of memory out of 3000000
- 43265 multiletter control sequences out of 15000+600000
+ 22694 strings out of 410500
+ 456519 string characters out of 2815815
+ 966545 words of memory out of 3000000
+ 43462 multiletter control sequences out of 15000+600000
  477299 words of font info for 107 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,12n,121p,1009b,607s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
-Output written on Simulacion.pdf (138 pages).
+Output written on Simulacion.pdf (166 pages).

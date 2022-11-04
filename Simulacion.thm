@@ -58,4 +58,26 @@
 \contentsline {conjecture}{{Algoritmo}{5.{6}}{distribución binomial negativa}}{92}{conjecture.5.6}%
 \contentsline {exercise}{{Ejercicio}{5.{1}}{Simulación de una distribución mixta mediante el método de inversión generalizado}}{92}{exercise.5.1}%
 \contentsline {exercise}{{Ejercicio}{5.{2}}{distribución hipergeométrica}}{93}{exercise.5.2}%
-\contentsline {remark}{{Nota}{6}{}}{130}{remark.6}%
+\contentsline {example}{{Ejemplo}{6.{1}}{simulación de normales independientes}}{95}{example.6.1}%
+\contentsline {conjecture}{{Algoritmo}{6.{1}}{de simulación de normales independientes}}{95}{conjecture.6.1}%
+\contentsline {example}{{Ejemplo}{6.{2}}{distribución bidimensional acotada}}{97}{example.6.2}%
+\contentsline {exercise}{{Ejercicio}{6.{1}}{distribución bidimensional acotada}}{97}{exercise.6.1}%
+\contentsline {example}{{Ejemplo}{6.{3}}{distribución uniforme en la esfera}}{97}{example.6.3}%
+\contentsline {proposition}{{Proposición}{6.{1}}{}}{99}{proposition.6.1}%
+\contentsline {conjecture}{{Algoritmo}{6.{2}}{de simulación de una normal multivariante}}{99}{conjecture.6.2}%
+\contentsline {example}{{Ejemplo}{6.{4}}{simulación de datos funcionales o temporales}}{99}{example.6.4}%
+\contentsline {conjecture}{{Algoritmo}{6.{3}}{de simulación mediante distribuciones condicionadas}}{101}{conjecture.6.3}%
+\contentsline {example}{{Ejemplo}{6.{5}}{distribución uniforme en el círculo unitario}}{102}{example.6.5}%
+\contentsline {example}{{Ejemplo}{6.{6}}{distribución normal bidimensional}}{103}{example.6.6}%
+\contentsline {conjecture}{{Algoritmo}{6.{4}}{de simulación de una normal bidimensional}}{103}{conjecture.6.4}%
+\contentsline {exercise}{{Ejercicio}{6.{2}}{}}{104}{exercise.6.2}%
+\contentsline {conjecture}{{Algoritmo}{6.{5}}{de simulación condicional}}{104}{conjecture.6.5}%
+\contentsline {example}{{Ejemplo}{6.{7}}{simulación condicional de datos funcionales o temporales}}{105}{example.6.7}%
+\contentsline {example}{{Ejemplo}{6.{8}}{simulación condicional de datos espaciales}}{105}{example.6.8}%
+\contentsline {theorem}{{Teorema}{6.{1}}{de Sklar caso bidimensional}}{111}{theorem.6.1}%
+\contentsline {conjecture}{{Algoritmo}{6.{6}}{de simulación bidimensional mediante cópulas}}{112}{conjecture.6.6}%
+\contentsline {example}{{Ejemplo}{6.{9}}{Cópula bidimensional de Clayton}}{112}{example.6.9}%
+\contentsline {example}{{Ejemplo}{6.{10}}{Distribución del estadístico chi-cuadrado de independencia}}{121}{example.6.10}%
+\contentsline {example}{{Ejemplo}{B.{1}}{Datos simulados dependientes}}{137}{example.B.1}%
+\contentsline {example}{{Ejemplo}{B.{2}}{Calidad de un generador aleatorio}}{140}{example.B.2}%
+\contentsline {remark}{{Nota}{6}{}}{158}{remark.6}%
