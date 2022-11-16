@@ -4,19 +4,19 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.8 Ejercicios | Simulación Estadística</title>
+  <title>1.1 Conceptos básicos | Simulación Estadística</title>
   <meta name="description" content="Apuntes de la asignatura de Simulación Estadística del Máster en Técnicas Estadísticas." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.8 Ejercicios | Simulación Estadística" />
+  <meta property="og:title" content="1.1 Conceptos básicos | Simulación Estadística" />
   <meta property="og:type" content="book" />
   
   
   <meta property="og:description" content="Apuntes de la asignatura de Simulación Estadística del Máster en Técnicas Estadísticas." />
-  <meta name="github-repo" content="rubenfcasal/simbook" />
+  <meta name="github-repo" content="rubenfcasal/simbook2" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.8 Ejercicios | Simulación Estadística" />
+  <meta name="twitter:title" content="1.1 Conceptos básicos | Simulación Estadística" />
   
   <meta name="twitter:description" content="Apuntes de la asignatura de Simulación Estadística del Máster en Técnicas Estadísticas." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="notables-disc.html"/>
-<link rel="next" href="referencias.html"/>
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="tipos-de-números-aleatorios.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -139,11 +139,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prólogo</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introducción a la simulación</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="conceptos-básicos.html"><a href="conceptos-básicos.html"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos</a>
+<li class="chapter" data-level="1.1" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="conceptos-básicos.html"><a href="conceptos-básicos.html#ealbum"><i class="fa fa-check"></i><b>1.1.1</b> Ejemplo</a></li>
-<li class="chapter" data-level="1.1.2" data-path="conceptos-básicos.html"><a href="conceptos-básicos.html#ventajas-e-inconvenientes-de-la-simulación"><i class="fa fa-check"></i><b>1.1.2</b> Ventajas e inconvenientes de la simulación</a></li>
-<li class="chapter" data-level="1.1.3" data-path="conceptos-básicos.html"><a href="conceptos-básicos.html#aplicaciones-de-la-simulación"><i class="fa fa-check"></i><b>1.1.3</b> Aplicaciones de la simulación</a></li>
+<li class="chapter" data-level="1.1.1" data-path="conceptos.html"><a href="conceptos.html#ealbum"><i class="fa fa-check"></i><b>1.1.1</b> Ejemplo</a></li>
+<li class="chapter" data-level="1.1.2" data-path="conceptos.html"><a href="conceptos.html#ventajas-e-inconvenientes-de-la-simulación"><i class="fa fa-check"></i><b>1.1.2</b> Ventajas e inconvenientes de la simulación</a></li>
+<li class="chapter" data-level="1.1.3" data-path="conceptos.html"><a href="conceptos.html#aplicaciones-de-la-simulación"><i class="fa fa-check"></i><b>1.1.3</b> Aplicaciones de la simulación</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="tipos-de-números-aleatorios.html"><a href="tipos-de-números-aleatorios.html"><i class="fa fa-check"></i><b>1.2</b> Tipos de números aleatorios</a>
 <ul>
@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="observaciones.html"><a href="observaciones.html"><i class="fa fa-check"></i><b>3.4</b> Observaciones</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="sim-con.html"><a href="sim-con.html"><i class="fa fa-check"></i><b>4</b> Simulación de variables continuas</a>
+<li class="chapter" data-level="4" data-path="continuas.html"><a href="continuas.html"><i class="fa fa-check"></i><b>4</b> Simulación de variables continuas</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="inversion.html"><a href="inversion.html"><i class="fa fa-check"></i><b>4.1</b> Método de inversión</a>
 <ul>
@@ -224,7 +224,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="cálculo-directo-de-la-función-cuantil.html"><a href="cálculo-directo-de-la-función-cuantil.html"><i class="fa fa-check"></i><b>5.5</b> Cálculo directo de la función cuantil</a></li>
 <li class="chapter" data-level="5.6" data-path="otros-métodos.html"><a href="otros-métodos.html"><i class="fa fa-check"></i><b>5.6</b> Otros métodos</a></li>
 <li class="chapter" data-level="5.7" data-path="notables-disc.html"><a href="notables-disc.html"><i class="fa fa-check"></i><b>5.7</b> Métodos específicos para generación de distribuciones notables</a></li>
-<li class="chapter" data-level="5.8" data-path="ejercicios-2.html"><a href="ejercicios-2.html"><i class="fa fa-check"></i><b>5.8</b> Ejercicios</a></li>
+<li class="chapter" data-level="5.8" data-path="ejercicios-discretas.html"><a href="ejercicios-discretas.html"><i class="fa fa-check"></i><b>5.8</b> Ejercicios</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="multivariante.html"><a href="multivariante.html"><i class="fa fa-check"></i><b>6</b> Simulación de distribuciones multivariantes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="simulación-de-componentes-independientes.html"><a href="simulación-de-componentes-independientes.html"><i class="fa fa-check"></i><b>6.1</b> Simulación de componentes independientes</a></li>
+<li class="chapter" data-level="6.2" data-path="el-método-de-aceptaciónrechazo.html"><a href="el-método-de-aceptaciónrechazo.html"><i class="fa fa-check"></i><b>6.2</b> El método de aceptación/rechazo</a></li>
+<li class="chapter" data-level="6.3" data-path="fact-cov.html"><a href="fact-cov.html"><i class="fa fa-check"></i><b>6.3</b> Factorización de la matriz de covarianzas</a></li>
+<li class="chapter" data-level="6.4" data-path="distrcond.html"><a href="distrcond.html"><i class="fa fa-check"></i><b>6.4</b> Método de las distribuciones condicionadas</a></li>
+<li class="chapter" data-level="6.5" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html"><i class="fa fa-check"></i><b>6.5</b> Simulación condicional e incondicional</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#condnormal"><i class="fa fa-check"></i><b>6.5.1</b> Simulación condicional de una normal multivariante</a></li>
+<li class="chapter" data-level="6.5.2" data-path="simulación-condicional-e-incondicional.html"><a href="simulación-condicional-e-incondicional.html#simulación-condicional-a-partir-de-un-modelo-ajustado"><i class="fa fa-check"></i><b>6.5.2</b> Simulación condicional a partir de un modelo ajustado</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html"><i class="fa fa-check"></i><b>6.6</b> Simulación basada en cópulas</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#cópulas-arquimedianas"><i class="fa fa-check"></i><b>6.6.1</b> Cópulas Arquimedianas</a></li>
+<li class="chapter" data-level="6.6.2" data-path="simulación-basada-en-cópulas.html"><a href="simulación-basada-en-cópulas.html#simulación"><i class="fa fa-check"></i><b>6.6.2</b> Simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="mult-discr.html"><a href="mult-discr.html"><i class="fa fa-check"></i><b>6.7</b> Simulación de distribuciones multivariantes discretas</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="mult-discr.html"><a href="mult-discr.html#simulación-de-una-variable-discreta-bidimensional"><i class="fa fa-check"></i><b>6.7.1</b> Simulación de una variable discreta bidimensional</a></li>
+<li class="chapter" data-level="6.7.2" data-path="mult-discr.html"><a href="mult-discr.html#simconting"><i class="fa fa-check"></i><b>6.7.2</b> Simulación de tablas de contingencia</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>7</b> Métodos Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="int-MC.html"><a href="int-MC.html"><i class="fa fa-check"></i><b>7.1</b> Integración Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="int-MC.html"><a href="int-MC.html#integración-monte-carlo-clásica"><i class="fa fa-check"></i><b>7.1.1</b> Integración Monte Carlo clásica</a></li>
+<li class="chapter" data-level="7.1.2" data-path="int-MC.html"><a href="int-MC.html#caso-general"><i class="fa fa-check"></i><b>7.1.2</b> Caso general</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="muestreo-importancia.html"><a href="muestreo-importancia.html"><i class="fa fa-check"></i><b>7.2</b> Muestreo por importancia</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="muestreo-importancia.html"><a href="muestreo-importancia.html#remuestreo-del-muestreo-por-importancia"><i class="fa fa-check"></i><b>7.2.1</b> Remuestreo (del muestreo) por importancia</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="opt-MC.html"><a href="opt-MC.html"><i class="fa fa-check"></i><b>7.3</b> Optimización Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="opt-MC.html"><a href="opt-MC.html#algoritmos-de-optimización-monte-carlo"><i class="fa fa-check"></i><b>7.3.1</b> Algoritmos de optimización Monte Carlo</a></li>
+<li class="chapter" data-level="7.3.2" data-path="opt-MC.html"><a href="opt-MC.html#temple-simulado"><i class="fa fa-check"></i><b>7.3.2</b> Temple simulado</a></li>
+<li class="chapter" data-level="7.3.3" data-path="opt-MC.html"><a href="opt-MC.html#algoritmos-genéticos"><i class="fa fa-check"></i><b>7.3.3</b> Algoritmos genéticos</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="aplic-inf.html"><a href="aplic-inf.html"><i class="fa fa-check"></i><b>7.4</b> Métodos Monte Carlo en Inferencia Estadística</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="aplic-inf.html"><a href="aplic-inf.html#distribución-en-el-muestreo"><i class="fa fa-check"></i><b>7.4.1</b> Distribución en el muestreo</a></li>
+<li class="chapter" data-level="7.4.2" data-path="aplic-inf.html"><a href="aplic-inf.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>7.4.2</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="7.4.3" data-path="aplic-inf.html"><a href="aplic-inf.html#contrastes"><i class="fa fa-check"></i><b>7.4.3</b> Contrastes de hipótesis</a></li>
+<li class="chapter" data-level="7.4.4" data-path="aplic-inf.html"><a href="aplic-inf.html#comparación-de-estimadores"><i class="fa fa-check"></i><b>7.4.4</b> Comparación de estimadores</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
@@ -318,70 +365,193 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ejercicios-2" class="section level2" number="5.8">
-<h2><span class="header-section-number">5.8</span> Ejercicios</h2>
-<div class="exercise">
-<p><span id="exr:mixta-cuantil" class="exercise"><strong>Ejercicio 5.1  (Simulación de una distribución mixta mediante el método de inversión generalizado) </strong></span><br></p>
-<p>Consideramos la variable aleatoria con función de distribución dada por:
-<span class="math display">\[F(x)=\left\{
-\begin{array}
-[c]{cl}0 &amp; \mbox{si $x&lt;0$}\\
-\frac{x}{2}+\frac{1}{10} &amp; \mbox{si $x\in[0,\frac{1}{5})$}\\
-x+\frac{1}{10} &amp; \mbox{si $x\in[\frac{1}{5},\frac{9}{10}]$}\\
-1 &amp; \mbox{en otro caso}
-\end{array}
-\right.\]</span></p>
-<p>Esta función está implementada en el siguiente código:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="ejercicios-2.html#cb219-1" aria-hidden="true" tabindex="-1"></a>fdistr <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb219-2"><a href="ejercicios-2.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb219-3"><a href="ejercicios-2.html#cb219-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>, x<span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb219-4"><a href="ejercicios-2.html#cb219-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ifelse</span>(x <span class="sc">&lt;=</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">10</span>, x <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">1</span>) ) )</span>
-<span id="cb219-5"><a href="ejercicios-2.html#cb219-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb219-6"><a href="ejercicios-2.html#cb219-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Empleando ifelse la función es vectorial (y podemos emplear curve...)</span></span>
-<span id="cb219-7"><a href="ejercicios-2.html#cb219-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(fdistr, <span class="at">from =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, </span>
-<span id="cb219-8"><a href="ejercicios-2.html#cb219-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Función de distribución&#39;</span>)</span>
-<span id="cb219-9"><a href="ejercicios-2.html#cb219-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Discontinuidades en 0 y 1/5</span></span>
-<span id="cb219-10"><a href="ejercicios-2.html#cb219-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">3</span><span class="sc">/</span><span class="dv">10</span>), <span class="at">lty =</span> <span class="dv">2</span>) </span></code></pre></div>
-<p><img src="05-Metodos_generales_discretas_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>Nota</strong>: Esta variable toma los valores 0 y 1/5 con probabilidad 1/10.</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>Diseñar un algoritmo basado en el método de inversión generalizado
-para generar observaciones de esta variable.</p></li>
-<li><p>Implementar el algoritmo en una función que permita generar <span class="math inline">\(nsim\)</span>
-valores de esta variable.</p></li>
-</ol>
+<div id="conceptos" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Conceptos básicos</h2>
+<p>La experimentación directa sobre la realidad puede tener muchos inconvenientes, entre otros:</p>
+<ul>
+<li><p>Coste elevado: por ejemplo cuando las pruebas son destructivas o si es necesario esperar mucho tiempo para observar los resultados.</p></li>
+<li><p>Puede no ser ética: por ejemplo la experimentación sobre seres humanos o la dispersión de un contaminante.</p></li>
+<li><p>Puede resultar imposible: por ejemplo cuando se trata de un acontecimiento futuro o una alternativa en el pasado.</p></li>
+</ul>
+<p>Además la realidad puede ser demasiado compleja como para ser estudiada directamente y resultar preferible trabajar con un modelo del sistema real.
+Un modelo no es más que un conjunto de variables junto con ecuaciones matemáticas que las relacionan y restricciones sobre dichas variables.
+Habría dos tipos de modelos:</p>
+<ul>
+<li><p>Modelos deterministas: en los que bajo las mismas condiciones (fijados los valores de las variables explicativas) se obtienen siempre los mismos resultados.</p></li>
+<li><p>Modelos estocásticos (con componente aleatoria): tienen en cuenta la incertidumbre asociada al modelo. Tradicionalmente se supone que esta incertidumbre es debida a que no se dispone de toda la información sobre las variables que influyen en el fenómeno en estudio (puede ser debida simplemente a que haya errores de medida), lo que se conoce como <em>aleatoriedad aparente</em>:</p>
+<blockquote>
+<p>“Nothing in Nature is random… a thing appears random only through the incompleteness of our knowledge.”</p>
+<p>— Spinoza, Baruch (Ethics, 1677)</p>
+</blockquote>
+<p>aunque hoy en día gana peso la idea de la física cuántica de que en el fondo hay una <em>aleatoriedad intrínseca</em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p></li>
+</ul>
+<p>La modelización es una etapa presente en la mayor parte de los trabajos de investigación, especialmente en las ciencias experimentales.
+El modelo debería considerar las variables más relevantes para explicar el fenómeno en estudio y las principales relaciones entre ellas.
+La inferencia estadística proporciona herramientas para estimar los parámetros y contrastar la validez de un modelo estocástico a partir de los datos observados.</p>
+<p>La idea es emplear el modelo, asumiendo que es válido, para resolver el problema de interés.
+Si se puede obtener la solución de forma analítica, esta suele ser exacta (aunque en ocasiones solo se dispone de soluciones aproximadas, basadas en resultados asintóticos, o que dependen de suposiciones que pueden ser cuestionables) y a menudo la resolución también es rápida.
+Cuando la solución no se puede obtener de modo analítico (o si la aproximación disponible no es adecuada) se puede recurrir a la simulación.
+De esta forma se pueden obtener resultados para un conjunto más amplio de modelos, que pueden ser mucho más complejos.</p>
+<p>Nos centraremos en el caso de la <em>simulación estocástica</em>: las conclusiones se obtienen generando repetidamente simulaciones del modelo aleatorio.
+Muchas veces se emplea la denominación de <em>método Monte Carlo</em><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> como sinónimo de simulación estocástica, pero realmente se trata de métodos especializados que emplean simulación para resolver problemas que pueden no estar relacionados con un modelo estocástico de un sistema real. Por ejemplo, en el Capítulo <a href="monte-carlo.html#monte-carlo">7</a> se tratarán métodos de integración y optimización Monte Carlo.</p>
+<!-- 
+Ejemplo: caballero de Meré 
+Experimentación directa sobre la realidad
+Modelo de probabilidad
+Aproximación por simulación
+-->
+<div id="ealbum" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Ejemplo</h3>
+<p>Supongamos que nos regalan un álbum con <span class="math inline">\(n = 75\)</span> cromos, que se venden sobres con <span class="math inline">\(m = 6\)</span> cromos por 0.8€, y que estamos interesados en el número de sobres que hay que comprar para completar la colección, por ejemplo en su valor medio.</p>
+<p>Podemos aproximar la distribución del número de sobres para completar la colección a partir de <span class="math inline">\(nsim=1000\)</span> simulaciones de coleccionistas de cromos:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="conceptos.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parámetros</span></span>
+<span id="cb3-2"><a href="conceptos.html#cb3-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">75</span> <span class="co"># Número total de cromos</span></span>
+<span id="cb3-3"><a href="conceptos.html#cb3-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">6</span>  <span class="co"># Número de cromos en cada sobre</span></span>
+<span id="cb3-4"><a href="conceptos.html#cb3-4" aria-hidden="true" tabindex="-1"></a>repe <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co"># Repetición de cromos en cada sobre</span></span>
+<span id="cb3-5"><a href="conceptos.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de simulaciones</span></span>
+<span id="cb3-6"><a href="conceptos.html#cb3-6" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb3-7"><a href="conceptos.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultados simulación</span></span>
+<span id="cb3-8"><a href="conceptos.html#cb3-8" aria-hidden="true" tabindex="-1"></a>nsobres <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsim)</span>
+<span id="cb3-9"><a href="conceptos.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># evol &lt;- vector(&quot;list&quot;, nsim)</span></span>
+<span id="cb3-10"><a href="conceptos.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Fijar semilla</span></span>
+<span id="cb3-11"><a href="conceptos.html#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb3-12"><a href="conceptos.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Bucle simulación</span></span>
+<span id="cb3-13"><a href="conceptos.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (isim <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb3-14"><a href="conceptos.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># seed &lt;- .Random.seed    # .Random.seed &lt;- seed</span></span>
+<span id="cb3-15"><a href="conceptos.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  album <span class="ot">&lt;-</span> <span class="fu">logical</span>(n)</span>
+<span id="cb3-16"><a href="conceptos.html#cb3-16" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># Número de sobres</span></span>
+<span id="cb3-17"><a href="conceptos.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(<span class="fu">sum</span>(album) <span class="sc">&lt;</span> n) {</span>
+<span id="cb3-18"><a href="conceptos.html#cb3-18" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-19"><a href="conceptos.html#cb3-19" aria-hidden="true" tabindex="-1"></a>    album[<span class="fu">sample</span>(n,m, <span class="at">replace =</span> repe)] <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb3-20"><a href="conceptos.html#cb3-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-21"><a href="conceptos.html#cb3-21" aria-hidden="true" tabindex="-1"></a>  nsobres[isim] <span class="ot">&lt;-</span> i</span>
+<span id="cb3-22"><a href="conceptos.html#cb3-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Distribución del número de sobres para completar la colección
+(aproximada por simulación):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="conceptos.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(nsobres, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-2"><a href="conceptos.html#cb4-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Número de sobres&quot;</span>)</span>
+<span id="cb4-3"><a href="conceptos.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(nsobres))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:distr-ealbum"></span>
+<img src="01-Introduccion_files/figure-html/distr-ealbum-1.png" alt="Aproximación por simulación de la distribución del número de sobres para completar la colección." width="70%" />
+<p class="caption">
+Figura 1.1: Aproximación por simulación de la distribución del número de sobres para completar la colección.
+</p>
 </div>
-<p>Ver solución en Sección <a href="capítulo-5-simulación-de-variables-discretas.html#sol-mixta-cuantil">D.3.1</a>.</p>
-<div class="exercise">
-<p><span id="exr:hipergeom" class="exercise"><strong>Ejercicio 5.2  (distribución hipergeométrica) </strong></span><br></p>
-<p>Se pretende simular <span class="math inline">\(nsim=10^{4}\)</span> observaciones de una variable
-hipergeométrica (<code>dhyper(x, m, n, k)</code>) de parámetros <span class="math inline">\(m=\)</span> el número
-de grupo multiplicado por 10, <span class="math inline">\(n=100-m\)</span> y <span class="math inline">\(k=20\)</span>.</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>Comprobar que el rango de posibles valores de esta variable es
-<code>max(0, k-n):min(m, k)</code>. Generar los valores empleando el método
-de la transformación cuantil usando búsqueda secuencial. Obtener
-el tiempo de CPU empleado. Aproximar por simulación la función
-de masa de probabilidad, representarla gráficamente y compararla
-con la teórica. Calcular también la media muestral (compararla
-con la teórica <span class="math inline">\(km/(m+n)\)</span>) y el número medio de comparaciones
-para generar cada observación.</p></li>
-<li><p>Repetir el apartado anterior: ordenando previamente las
-probabilidades en orden decreciente, empleando la
-función <code>sample</code> de R, mediante una tabla guía (con
-<span class="math inline">\(k-1\)</span> subintervalos) y usando el método de Alias.</p></li>
-</ol>
-</div>
+<p>Aproximación por simulación del número medio de sobres para completar la colección:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="conceptos.html#cb5-1" aria-hidden="true" tabindex="-1"></a>sol <span class="ot">&lt;-</span> <span class="fu">mean</span>(nsobres)</span>
+<span id="cb5-2"><a href="conceptos.html#cb5-2" aria-hidden="true" tabindex="-1"></a>sol</span></code></pre></div>
+<pre><code>## [1] 61.775</code></pre>
+<!-- 
+Análisis de la convergencia:
 
+
+```r
+plot(1:nsim, cumsum(nsobres)/1:nsim, type = "l",
+     ylab="Número de sobres", xlab="Número de simulaciones")
+abline(h = sol)
+```
+
+<img src="01-Introduccion_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
+-->
+<p>Número mínimo de sobres para asegurar de que se completa la colección con una probabilidad del 95%:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="conceptos.html#cb7-1" aria-hidden="true" tabindex="-1"></a>nmin <span class="ot">&lt;-</span> <span class="fu">quantile</span>(nsobres, <span class="at">probs =</span> <span class="fl">0.95</span>)</span>
+<span id="cb7-2"><a href="conceptos.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(nmin)</span></code></pre></div>
+<pre><code>## 95% 
+##  92</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="conceptos.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reserva de dinero para poder completar la colección el 95% de las veces:</span></span>
+<span id="cb9-2"><a href="conceptos.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(nmin)<span class="sc">*</span><span class="fl">0.8</span></span></code></pre></div>
+<pre><code>##  95% 
+## 73.6</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="conceptos.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(nsobres, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-2"><a href="conceptos.html#cb11-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Número de sobres&quot;</span>)</span>
+<span id="cb11-3"><a href="conceptos.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(nsobres))</span>
+<span id="cb11-4"><a href="conceptos.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> sol)</span>
+<span id="cb11-5"><a href="conceptos.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> nmin, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:distr-ealbum2"></span>
+<img src="01-Introduccion_files/figure-html/distr-ealbum2-1.png" alt="Aproximaciones por simulación de la distribución del número de sobres para completar la colección, de su valor esperado (línea vertical continua) y del cuantil 0.95 (línea vertical discontinua)." width="70%" />
+<p class="caption">
+Figura 1.2: Aproximaciones por simulación de la distribución del número de sobres para completar la colección, de su valor esperado (línea vertical continua) y del cuantil 0.95 (línea vertical discontinua).
+</p>
 </div>
-<!-- </div> -->
+<p>Por supuesto, la distribución del gasto necesario para completar la colección es esta misma reescalada.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="conceptos.html#cb12-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> simres<span class="sc">::</span><span class="fu">mc.plot</span>(nsobres<span class="sc">*</span><span class="fl">0.8</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mc-plot-ealbum"></span>
+<img src="01-Introduccion_files/figure-html/mc-plot-ealbum-1.png" alt="Gráficos exploratorios de las simulaciones del gasto para completar la colección obtenidos con la función `simres::mc.plot()`." width="90%" />
+<p class="caption">
+Figura 1.3: Gráficos exploratorios de las simulaciones del gasto para completar la colección obtenidos con la función <code>simres::mc.plot()</code>.
+</p>
+</div>
+<p>Aproximación del gasto medio:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="conceptos.html#cb13-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>approx  <span class="co"># sol*0.8</span></span></code></pre></div>
+<pre><code>## [1] 49.42</code></pre>
+<p>En el Ejercicio <a href="ejercicios.html#exr:album">1.5</a> se propone modificar este código para obtener información adicional sobre la evolución del número de cromos distintos dependiendo de los sobres comprados por un coleccionista.</p>
+</div>
+<div id="ventajas-e-inconvenientes-de-la-simulación" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Ventajas e inconvenientes de la simulación</h3>
+<p>Ventajas (Shannon, 1975):</p>
+<ul>
+<li><p>Cuando la resolución analítica no puede llevarse a cabo.</p></li>
+<li><p>Cuando existen medios de resolver analíticamente el problema
+pero dicha resolución es complicada y costosa
+(o solo proporciona una solución aproximada).</p></li>
+<li><p>Si se desea experimentar antes de que exista el sistema
+(pruebas para la construcción de un sistema).</p></li>
+<li><p>Cuando es imposible experimentar sobre el sistema real
+por ser dicha experimentación destructiva.</p></li>
+<li><p>En ocasiones en las que la experimentación sobre el sistema es
+posible pero no ética.</p></li>
+<li><p>En sistemas que evolucionan muy lentamente en el tiempo.</p></li>
+</ul>
+<p>El principal incoveniente puede ser el tiempo de computación necesario, aunque gracias a la gran potencia de cálculo de los computadores actuales, se puede obtener rápidamente una solución aproximada en la mayor parte de los problemas susceptibles de ser modelizados.
+Además siempre están presentes los posibles problemas debidos a emplear un modelo:</p>
+<ul>
+<li><p>La construcción de un buen modelo puede ser una tarea muy costosa
+(compleja, laboriosa y requerir mucho tiempo;
+e.g. modelos climáticos).</p></li>
+<li><p>Frecuentemente el modelo omite variables o relaciones importantes entre ellas
+(los resultados pueden no ser válidos para el sistema real).</p></li>
+<li><p>Resulta difícil conocer la precisión del modelo formulado.</p></li>
+</ul>
+<p>Otro problema de la simulación es que se obtienen resultados para unos valores concretos de los parámetros del modelo, por lo que en principio
+resultaría complicado extrapolar las conclusiones a otras situaciones.</p>
+</div>
+<div id="aplicaciones-de-la-simulación" class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Aplicaciones de la simulación</h3>
+<p>La simulación resulta de utilidad en multitud de contextos diferentes.
+Los principales campos de aplicación son:</p>
+<ul>
+<li><p>Estadística:</p>
+<ul>
+<li><p>Muestreo, remuestreo…</p></li>
+<li><p>Aproximación de distribuciones (de estadísticos, estimadores…)</p></li>
+<li><p>Realización de contrastes, intervalos de confianza…</p></li>
+<li><p>Comparación de estimadores, contrastes…</p></li>
+<li><p>Validación teoría (distribución asintótica…)</p></li>
+<li><p>Inferencia Bayesiana</p></li>
+</ul></li>
+<li><p>Optimización: Algoritmos genéticos, temple simulado…</p></li>
+<li><p>Análisis numérico: Aproximación de integrales, resolución de ecuaciones…</p></li>
+<li><p>Computación: Diseño, verificación y validación de algoritmos…</p></li>
+<li><p>Criptografía: Protocolos de comunicación segura…</p></li>
+<li><p>Física: Simulación de fenómenos naturales…</p></li>
+</ul>
+<p>En los capítulos <a href="aplic-inf.html#aplic-inf">7.4</a> y <a href="monte-carlo.html#monte-carlo">7</a> nos centraremos en algunas de las aplicaciones de utilidad en Estadística.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Como ejemplo, en física cuántica, la <a href="https://es.wikipedia.org/wiki/Ecuaci%C3%B3n_de_Schr%C3%B6dinger">ecuación de Schrödinger</a> es un modelo determinista que describe la evolución en el tiempo de la función de onda de un sistema. Sin embargo, como las funciones de onda pueden cambiar de forma aleatoria al realizar una medición, se emplea la <a href="https://en.wikipedia.org/wiki/Born_rule">regla de Born</a> para modelar las probabilidades de las distintas posibilidades (algo que inicialmente generó rechazo, dió lugar a la famosa frase de Einstein “Dios no juega a los dados,” pero experimentos posteriores parecen confirmar). Por tanto en la práctica se emplea un modelo estocástico.<a href="conceptos.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Estos métodos surgieron a finales de la década de 1940 como resultado del trabajo realizado por Stanislaw Ulam y John von Neumann en el proyecto Manhattan para el desarrollo de la bomba atómica. Al parecer, como se trataba de una investigación secreta, Nicholas Metropolis sugirió emplear el nombre clave de “Monte-Carlo” en referencia al casino de Monte Carlo de Mónaco.<a href="conceptos.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="notables-disc.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tipos-de-números-aleatorios.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -412,7 +582,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rubenfcasal/simbook/edit/master/05-Metodos_generales_discretas.Rmd",
+"link": "https://github.com/rubenfcasal/simbook2/edit/master/01-Introduccion.Rmd",
 "text": "Edit"
 },
 "history": {

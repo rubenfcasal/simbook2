@@ -83,14 +83,10 @@ el algoritmo para simular esta variable mediante el método de inversión es:
 En el último paso podemos emplear directamente $U$ en lugar de $1-U$, ya que $1 - U \sim \mathcal{U}(0, 1)$.
 Esta última expresión para acelerar los cálculos es la que denominaremos *forma simplificada*. 
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/inv-movie-1} 
-
-}
-
-\caption{Ilustración de la simulación de una distribución exponencial por el método de inversión.}(\#fig:inv-movie)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/inv-movie.gif" alt="Ilustración de la simulación de una distribución exponencial por el método de inversión." width="90%" />
+<p class="caption">(\#fig:inv-movie)Ilustración de la simulación de una distribución exponencial por el método de inversión.</p>
+</div>
 
 
 El código para implementar este algoritmo en R podría ser el siguiente:
@@ -110,7 +106,7 @@ tiempo
 
 ```
 ##    user  system elapsed 
-##    0.02    0.00    0.02
+##    0.01    0.00    0.02
 ```
 
 ```r
@@ -119,14 +115,10 @@ hist(x, breaks = "FD", freq = FALSE,
 curve(dexp(x, lambda), lwd = 2, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/exp-inv-plot-1} 
-
-}
-
-\caption{Distribución de los valores generados de una exponencial mediante el método de inversión.}(\#fig:exp-inv-plot)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-Metodos_generales_continuas_files/figure-html/exp-inv-plot-1.png" alt="Distribución de los valores generados de una exponencial mediante el método de inversión." width="70%" />
+<p class="caption">(\#fig:exp-inv-plot)Distribución de los valores generados de una exponencial mediante el método de inversión.</p>
+</div>
 
 Como se observa en la Figura \@ref(fig:exp-inv-plot) se trata de un método exacto (si está bien implementado) y la distribución de los valores generados se aproxima a la distribución teórica como cabría esperar con una muestra de ese tamaño.
 
@@ -208,7 +200,7 @@ b)  Generar $10^{4}$ valores de la distribución doble exponencial de
     
     ```
     ##    user  system elapsed 
-    ##    0.01    0.02    0.03
+    ##    0.03    0.00    0.03
     ```
 
 
@@ -221,14 +213,10 @@ c)  Representar el histograma y compararlo con la densidad teórica.
     curve(ddexp(x, 2), add = TRUE)
     ```
     
-    \begin{figure}[!htb]
-    
-    {\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/ddexp-inv-1} 
-    
-    }
-    
-    \caption{Distribución de los valores generados de una doble exponencial mediante el método de inversión.}(\#fig:ddexp-inv)
-    \end{figure}
+    <div class="figure" style="text-align: center">
+    <img src="04-Metodos_generales_continuas_files/figure-html/ddexp-inv-1.png" alt="Distribución de los valores generados de una doble exponencial mediante el método de inversión." width="70%" />
+    <p class="caption">(\#fig:ddexp-inv)Distribución de los valores generados de una doble exponencial mediante el método de inversión.</p>
+    </div>
     
     Como se trata de un método exacto de simulación, si está bien implementado, la distribución de los valores generados debería comportarse como una muestra genuina de la distribución objetivo.
     
@@ -308,14 +296,10 @@ La idea es simular una variable aleatoria bidimensional $\left( X, Y\right)$ con
 $$A_{f}=\left\{ \left( x,y\right) \in \mathbb{R}^{2}:0\leq y\leq f(x) \right\}.$$
 De esta forma la primera componente tendrá la distribución deseada (Figura \@ref(fig:var-gen)):
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.8\linewidth]{04-Metodos_generales_continuas_files/figure-latex/var-gen-1} 
-
-}
-
-\caption{Puntos con distribución uniforme en el hipografo de una función de densidad.}(\#fig:var-gen)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-Metodos_generales_continuas_files/figure-html/var-gen-1.png" alt="Puntos con distribución uniforme en el hipografo de una función de densidad." width="80%" />
+<p class="caption">(\#fig:var-gen)Puntos con distribución uniforme en el hipografo de una función de densidad.</p>
+</div>
 
 $$ P\left( a<X<b\right) = \frac{\text{Area de }\left\{ \left( x,y\right) \in 
 \mathbb{R}^{2}:a<x<b;~0\leq y\leq f(x) \right\} }{\text{Area de }
@@ -437,14 +421,10 @@ abline(v = 1, lty = 3)
 abline(h = 0, lty = 3)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/dbeta-dunif-plot-1} 
-
-}
-
-\caption{Densidad objetivo beta (línea continua) y densidad auxiliar unifome reescalada (línea discontinua).}(\#fig:dbeta-dunif-plot)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-Metodos_generales_continuas_files/figure-html/dbeta-dunif-plot-1.png" alt="Densidad objetivo beta (línea continua) y densidad auxiliar unifome reescalada (línea discontinua)." width="70%" />
+<p class="caption">(\#fig:dbeta-dunif-plot)Densidad objetivo beta (línea continua) y densidad auxiliar unifome reescalada (línea discontinua).</p>
+</div>
 
 El siguiente código implementa el método de aceptación-rechazo para simular valores de la densidad objetivo (se incluye una variable "global" `ngen` para contar el número de generaciones de la distribución auxiliar):
 
@@ -484,7 +464,7 @@ system.time(x <- rbeta2n(nsim, s1, s2))
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.02    0.00    0.01
 ```
 
 Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):
@@ -510,14 +490,10 @@ hist(x, breaks = "FD", freq = FALSE, main = "")
 curve(dbeta(x, s1, s2), col = 2, lwd = 2, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/dbeta-ar-1} 
-
-}
-
-\caption{Distribución de los valores generados mediante el método de aceptación-rechazo.}(\#fig:dbeta-ar)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-Metodos_generales_continuas_files/figure-html/dbeta-ar-1.png" alt="Distribución de los valores generados mediante el método de aceptación-rechazo." width="70%" />
+<p class="caption">(\#fig:dbeta-ar)Distribución de los valores generados mediante el método de aceptación-rechazo.</p>
+</div>
 
 Al ser un método exacto de simulación (si está bien implementado), la distribución de los valores generados debería comportarse como una muestra genuina de la distribución objetivo.
 
@@ -594,14 +570,10 @@ curve(c.opt * ddexp(x), xlim = c(-4, 4), lty = 2)
 curve(dnorm, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/dnorm-ddexp-plot-1} 
-
-}
-
-\caption{Densidad objetivo (normal estándar, línea continua) y densidad auxiliar (doble exponencial, línea discontinua) reescalada.}(\#fig:dnorm-ddexp-plot)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-Metodos_generales_continuas_files/figure-html/dnorm-ddexp-plot-1.png" alt="Densidad objetivo (normal estándar, línea continua) y densidad auxiliar (doble exponencial, línea discontinua) reescalada." width="70%" />
+<p class="caption">(\#fig:dnorm-ddexp-plot)Densidad objetivo (normal estándar, línea continua) y densidad auxiliar (doble exponencial, línea discontinua) reescalada.</p>
+</div>
 
 Alternativamente, en lugar de obtener la cota óptima de modo analítico, podríamos aproximarla numéricamente:
 
@@ -700,14 +672,10 @@ hist(x, breaks = "FD", freq = FALSE, main = "")
 curve(dnorm, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/dnorm-ar-1} 
-
-}
-
-\caption{Distribución de los valores generados mediante el método de aceptación-rechazo.}(\#fig:dnorm-ar)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-Metodos_generales_continuas_files/figure-html/dnorm-ar-1.png" alt="Distribución de los valores generados mediante el método de aceptación-rechazo." width="70%" />
+<p class="caption">(\#fig:dnorm-ar)Distribución de los valores generados mediante el método de aceptación-rechazo.</p>
+</div>
 
 Podemos observar que la distribución de los valores generados es la que cabría esperar de una muestra de tamaño `nsim` de la distribución objetivo (lo que nos ayudaría a confirmar que el algoritmo está bien implementado, al ser un método exacto de simulación).
 
@@ -759,14 +727,10 @@ curve(exp(x^2/2)/x*sqrt(2/pi), 0.1, 2.5,
 abline(v = 1, lty = 2)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/cop-lambda-1} 
-
-}
-
-\caption{Representación de la cota óptima dependiedo del valor del parámetro.}(\#fig:cop-lambda)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-Metodos_generales_continuas_files/figure-html/cop-lambda-1.png" alt="Representación de la cota óptima dependiedo del valor del parámetro." width="70%" />
+<p class="caption">(\#fig:cop-lambda)Representación de la cota óptima dependiedo del valor del parámetro.</p>
+</div>
 
 De esto se deduce que la mejor densidad auxiliar doble exponencial es la correspondiente a $\lambda=1$. 
 Por tanto el algoritmo más eficiente, con esta familia de densidades auxiliares, es el expuesto en el Ejemplo \@ref(exm:dnorm-ddexp-ar).
@@ -926,14 +890,10 @@ a)  Generar una muestra i.i.d. $X_{i}\sim N(\theta_{0},1)$ de tamaño
     curve(f.cuasi, add = TRUE)
     ```
     
-    \begin{figure}[!htb]
-    
-    {\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/post-pri-plot-1} 
-    
-    }
-    
-    \caption{Comparación de la cuasidensidad a posteriori (línea contínua) con la densidad a priori reescalada (línea discontinua).}(\#fig:post-pri-plot)
-    \end{figure}
+    <div class="figure" style="text-align: center">
+    <img src="04-Metodos_generales_continuas_files/figure-html/post-pri-plot-1.png" alt="Comparación de la cuasidensidad a posteriori (línea contínua) con la densidad a priori reescalada (línea discontinua)." width="70%" />
+    <p class="caption">(\#fig:post-pri-plot)Comparación de la cuasidensidad a posteriori (línea contínua) con la densidad a priori reescalada (línea discontinua).</p>
+    </div>
     
     Por ejemplo, podríamos emplear el siguiente código para generar simulaciones de la distribución a posteriori mediante aceptación-rechazo a partir de la distribución de Cauchy:
     
@@ -994,14 +954,10 @@ a)  Generar una muestra i.i.d. $X_{i}\sim N(\theta_{0},1)$ de tamaño
     curve(f.aprox, col = "blue", add = TRUE)
     ```
     
-    \begin{figure}[!htb]
-    
-    {\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/ic-bayes-1} 
-    
-    }
-    
-    \caption{Distribución de los valores generados y aproximación del intervalo de credibilidad.}(\#fig:ic-bayes)
-    \end{figure}
+    <div class="figure" style="text-align: center">
+    <img src="04-Metodos_generales_continuas_files/figure-html/ic-bayes-1.png" alt="Distribución de los valores generados y aproximación del intervalo de credibilidad." width="70%" />
+    <p class="caption">(\#fig:ic-bayes)Distribución de los valores generados y aproximación del intervalo de credibilidad.</p>
+    </div>
 
 
 b)  Repetir el apartado anterior con $n=100$.
@@ -1040,14 +996,10 @@ $$s(x)\leq f(x) \text{, }\forall x\in \mathbb{R}.$$
 
 :::
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.8\linewidth]{images/squeeze} 
-
-}
-
-\caption{Ilustración del algoritmo de aceptación-rechazo con envolvente inferior (función "squeeze").}(\#fig:squeeze)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/squeeze.png" alt="Ilustración del algoritmo de aceptación-rechazo con envolvente inferior (función &quot;squeeze&quot;)." width="80%" />
+<p class="caption">(\#fig:squeeze)Ilustración del algoritmo de aceptación-rechazo con envolvente inferior (función "squeeze").</p>
+</div>
 
 Cuanto mayor sea el área bajo $s(x)$ (más próxima a 1)
 más efectivo será el algoritmo.
@@ -1179,7 +1131,7 @@ simres::rcauchy.rou
 ##   attr(x, "ngen") <- ngen
 ##   return(x)
 ## }
-## <bytecode: 0x00000000419af510>
+## <bytecode: 0x0000000039d226b0>
 ## <environment: namespace:simres>
 ```
 
@@ -1192,14 +1144,10 @@ hist(rx, breaks = "FD", freq = FALSE, main = "", xlim = c(-6, 6))
 curve(dcauchy, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{04-Metodos_generales_continuas_files/figure-latex/rcauchy-rou-1} 
-
-}
-
-\caption{Distribución de los valores generados mediante el método de cociente de uniformes.}(\#fig:rcauchy-rou)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="04-Metodos_generales_continuas_files/figure-html/rcauchy-rou-1.png" alt="Distribución de los valores generados mediante el método de cociente de uniformes." width="70%" />
+<p class="caption">(\#fig:rcauchy-rou)Distribución de los valores generados mediante el método de cociente de uniformes.</p>
+</div>
 
 ```r
 # Número generaciones

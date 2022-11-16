@@ -78,6 +78,23 @@
 \contentsline {conjecture}{{Algoritmo}{6.{6}}{de simulación bidimensional mediante cópulas}}{112}{conjecture.6.6}%
 \contentsline {example}{{Ejemplo}{6.{9}}{Cópula bidimensional de Clayton}}{112}{example.6.9}%
 \contentsline {example}{{Ejemplo}{6.{10}}{Distribución del estadístico chi-cuadrado de independencia}}{121}{example.6.10}%
-\contentsline {example}{{Ejemplo}{B.{1}}{Datos simulados dependientes}}{137}{example.B.1}%
-\contentsline {example}{{Ejemplo}{B.{2}}{Calidad de un generador aleatorio}}{140}{example.B.2}%
-\contentsline {remark}{{Nota}{6}{}}{158}{remark.6}%
+\contentsline {example}{{Ejemplo}{7.{1}}{integración Monte Carlo clásica}}{124}{example.7.1}%
+\contentsline {example}{{Ejemplo}{7.{2}}{integración Monte Carlo con dominio no acotado}}{127}{example.7.2}%
+\contentsline {example}{{Ejemplo}{7.{3}}{}}{128}{example.7.3}%
+\contentsline {example}{{Ejemplo}{7.{4}}{muestreo por importancia con mala densidad auxiliar}}{129}{example.7.4}%
+\contentsline {example}{{Ejemplo}{7.{5}}{simulación de normal estándar a partir de Cauchy; Sampling Importance Resampling}}{132}{example.7.5}%
+\contentsline {exercise}{{Ejercicio}{7.{1}}{propuesto}}{132}{exercise.7.1}%
+\contentsline {example}{{Ejemplo}{7.{6}}{Estimación por máxima verosimilitud mediante un algoritmo de Newton}}{134}{example.7.6}%
+\contentsline {example}{{Ejemplo}{7.{7}}{Estimación máximo-verosimil empleando temple simulado}}{138}{example.7.7}%
+\contentsline {example}{{Ejemplo}{7.{8}}{Estimación máximo-verosimil empleando un algoritmo genético}}{140}{example.7.8}%
+\contentsline {exercise}{{Ejercicio}{7.{2}}{Distribución de la media muestral}}{142}{exercise.7.2}%
+\contentsline {exercise}{{Ejercicio}{7.{3}}{Distribución de la media muestral continuación}}{143}{exercise.7.3}%
+\contentsline {exercise}{{Ejercicio}{7.{4}}{Intervalo de confianza para la media}}{145}{exercise.7.4}%
+\contentsline {remark}{{Nota}{6}{}}{148}{remark.6}%
+\contentsline {exercise}{{Ejercicio}{7.{5}}{Intervalo de confianza Agresti-Coull para una proporción}}{149}{exercise.7.5}%
+\contentsline {exercise}{{Ejercicio}{7.{6}}{Test de Kolmogorov-Smirnov}}{152}{exercise.7.6}%
+\contentsline {exercise}{{Ejercicio}{7.{7}}{Comparación de la eficiencia de la media muestral y de la mediana bajo contaminación}}{160}{exercise.7.7}%
+\contentsline {remark}{{Nota}{7}{}}{161}{remark.7}%
+\contentsline {example}{{Ejemplo}{B.{1}}{Datos simulados dependientes}}{179}{example.B.1}%
+\contentsline {example}{{Ejemplo}{B.{2}}{Calidad de un generador aleatorio}}{182}{example.B.2}%
+\contentsline {remark}{{Nota}{8}{}}{200}{remark.8}%

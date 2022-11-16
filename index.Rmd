@@ -8,7 +8,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: rubenfcasal/simbook
+github-repo: rubenfcasal/simbook2
 description: "Apuntes de la asignatura de Simulación Estadística del Máster en Técnicas Estadísticas."
 ---
 
@@ -19,7 +19,7 @@ description: "Apuntes de la asignatura de Simulación Estadística del Máster e
 
 <!-- 
 PENDENTE: 
-- Codigo simres en capítulos
+- Código simres en capítulos
 -->
 
 Esta es la segunda edición del libro, **en proceso de elaboración** (se puede acceder a la primera edición a través de este [enlace](https://rubenfcasal.github.io/simbook/index.html)).
@@ -36,7 +36,8 @@ donde puede descargarse en formato [pdf](https://rubenfcasal.github.io/simbook2/
 Para poder ejecutar los ejemplos mostrados en el libro es recomendable emplear el paquete `r cite_simres()`, ***no disponible actualmente en CRAN***, aunque se puede instalar la versión de desarrollo en [GitHub](https://github.com/rubenfcasal/simres)):
 ```{r eval=FALSE}
 # install.packages("remotes")
-remotes::install_github("rubenfcasal/simres")
+# remotes::install_github("rubenfcasal/simres")
+remotes::install_github("rubenfcasal/simres", INSTALL_opts = "--with-keep.source")
 ```
 Alternativamente se pueden emplear los ficheros de la carpeta *codigo*.
 

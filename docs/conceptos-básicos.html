@@ -13,7 +13,7 @@
   
   
   <meta property="og:description" content="Apuntes de la asignatura de Simulación Estadística del Máster en Técnicas Estadísticas." />
-  <meta name="github-repo" content="rubenfcasal/simbook" />
+  <meta name="github-repo" content="rubenfcasal/simbook2" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="1.1 Conceptos básicos | Simulación Estadística" />
@@ -248,6 +248,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7.2" data-path="mult-discr.html"><a href="mult-discr.html#simconting"><i class="fa fa-check"></i><b>6.7.2</b> Simulación de tablas de contingencia</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>7</b> Métodos Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="int-MC.html"><a href="int-MC.html"><i class="fa fa-check"></i><b>7.1</b> Integración Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="int-MC.html"><a href="int-MC.html#integración-monte-carlo-clásica"><i class="fa fa-check"></i><b>7.1.1</b> Integración Monte Carlo clásica</a></li>
+<li class="chapter" data-level="7.1.2" data-path="int-MC.html"><a href="int-MC.html#caso-general"><i class="fa fa-check"></i><b>7.1.2</b> Caso general</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="muestreo-importancia.html"><a href="muestreo-importancia.html"><i class="fa fa-check"></i><b>7.2</b> Muestreo por importancia</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="muestreo-importancia.html"><a href="muestreo-importancia.html#remuestreo-del-muestreo-por-importancia"><i class="fa fa-check"></i><b>7.2.1</b> Remuestreo (del muestreo) por importancia</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="opt-MC.html"><a href="opt-MC.html"><i class="fa fa-check"></i><b>7.3</b> Optimización Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="opt-MC.html"><a href="opt-MC.html#algoritmos-de-optimización-monte-carlo"><i class="fa fa-check"></i><b>7.3.1</b> Algoritmos de optimización Monte Carlo</a></li>
+<li class="chapter" data-level="7.3.2" data-path="opt-MC.html"><a href="opt-MC.html#temple-simulado"><i class="fa fa-check"></i><b>7.3.2</b> Temple simulado</a></li>
+<li class="chapter" data-level="7.3.3" data-path="opt-MC.html"><a href="opt-MC.html#algoritmos-genéticos"><i class="fa fa-check"></i><b>7.3.3</b> Algoritmos genéticos</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="aplic-inf.html"><a href="aplic-inf.html"><i class="fa fa-check"></i><b>7.4</b> Métodos Monte Carlo en Inferencia Estadística</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="aplic-inf.html"><a href="aplic-inf.html#distribución-en-el-muestreo"><i class="fa fa-check"></i><b>7.4.1</b> Distribución en el muestreo</a></li>
+<li class="chapter" data-level="7.4.2" data-path="aplic-inf.html"><a href="aplic-inf.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>7.4.2</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="7.4.3" data-path="aplic-inf.html"><a href="aplic-inf.html#contrastes"><i class="fa fa-check"></i><b>7.4.3</b> Contrastes de hipótesis</a></li>
+<li class="chapter" data-level="7.4.4" data-path="aplic-inf.html"><a href="aplic-inf.html#comparación-de-estimadores"><i class="fa fa-check"></i><b>7.4.4</b> Comparación de estimadores</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
 <li class="chapter" data-level="" data-path="bibliografía-complementaria.html"><a href="bibliografía-complementaria.html"><i class="fa fa-check"></i>Bibliografía complementaria</a>
@@ -368,7 +393,7 @@ Si se puede obtener la solución de forma analítica, esta suele ser exacta (aun
 Cuando la solución no se puede obtener de modo analítico (o si la aproximación disponible no es adecuada) se puede recurrir a la simulación.
 De esta forma se pueden obtener resultados para un conjunto más amplio de modelos, que pueden ser mucho más complejos.</p>
 <p>Nos centraremos en el caso de la <em>simulación estocástica</em>: las conclusiones se obtienen generando repetidamente simulaciones del modelo aleatorio.
-Muchas veces se emplea la denominación de <em>método Monte Carlo</em><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> como sinónimo de simulación estocástica, pero realmente se trata de métodos especializados que emplean simulación para resolver problemas que pueden no estar relacionados con un modelo estocástico de un sistema real. Por ejemplo, en el Capítulo <a href="#monte-carlo"><strong>??</strong></a> se tratarán métodos de integración y optimización Monte Carlo.</p>
+Muchas veces se emplea la denominación de <em>método Monte Carlo</em><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> como sinónimo de simulación estocástica, pero realmente se trata de métodos especializados que emplean simulación para resolver problemas que pueden no estar relacionados con un modelo estocástico de un sistema real. Por ejemplo, en el Capítulo <a href="monte-carlo.html#monte-carlo">7</a> se tratarán métodos de integración y optimización Monte Carlo.</p>
 <!-- 
 Ejemplo: caballero de Meré 
 Experimentación directa sobre la realidad
@@ -510,7 +535,7 @@ Los principales campos de aplicación son:</p>
 <li><p>Criptografía: Protocolos de comunicación segura…</p></li>
 <li><p>Física: Simulación de fenómenos naturales…</p></li>
 </ul>
-<p>En los capítulos <a href="#aplic-inf"><strong>??</strong></a> y <a href="#monte-carlo"><strong>??</strong></a> nos centraremos en algunas de las aplicaciones de utilidad en Estadística.</p>
+<p>En los capítulos <a href="aplic-inf.html#aplic-inf">7.4</a> y <a href="monte-carlo.html#monte-carlo">7</a> nos centraremos en algunas de las aplicaciones de utilidad en Estadística.</p>
 </div>
 </div>
 <div class="footnotes">
@@ -557,7 +582,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rubenfcasal/simbook/edit/master/01-Introduccion.Rmd",
+"link": "https://github.com/rubenfcasal/simbook2/edit/master/01-Introduccion.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.10) (preloaded format=xelatex 2022.10.27)  4 NOV 2022 13:14
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.10) (preloaded format=xelatex 2022.10.27)  16 NOV 2022 14:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1119,11 +1119,8 @@ File: images/by-nc-nd-88x31.png Graphic file (type bmp)
 ]
 Capítulo 1.
 [7]
-
-LaTeX Warning: Reference `monte-carlo' on page 8 undefined on input line 294.
-
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 317.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 318.
 [8]
 File: 01-Introduccion_files/figure-latex/distr-ealbum-1.pdf Graphic file (type 
 pdf)
@@ -1136,77 +1133,68 @@ File: 01-Introduccion_files/figure-latex/mc-plot-ealbum-1.pdf Graphic file (typ
 e pdf)
 <use 01-Introduccion_files/figure-latex/mc-plot-ealbum-1.pdf>
 [10] [11]
-
-LaTeX Warning: Reference `aplic-inf' on page 12 undefined on input line 518.
-
-
-LaTeX Warning: Reference `monte-carlo' on page 12 undefined on input line 518.
-
 File: images/RAND.png Graphic file (type bmp)
 <images/RAND.png>
 [12]
-
-LaTeX Warning: Reference `monte-carlo' on page 13 undefined on input line 595.
-
 File: 01-Introduccion_files/figure-latex/randtoolbox-1.pdf Graphic file (type p
 df)
 <use 01-Introduccion_files/figure-latex/randtoolbox-1.pdf>
 [13] [14] [15] [16] [17]
 
 LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 968.
+(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 969.
 
 [18]
 Package hyperref Info: bookmark level for unknown exercise defaults to 0 on inp
-ut line 1066.
+ut line 1067.
 [19]
 File: images/circuito2.png Graphic file (type bmp)
 <images/circuito2.png>
 Package hyperref Info: bookmark level for unknown remark defaults to 0 on input
- line 1129.
+ line 1130.
 [20]
 Capítulo 2.
 [21
 
 ]
-Overfull \hbox (15.73227pt too wide) in paragraph at lines 1222--1222
+Overfull \hbox (15.73227pt too wide) in paragraph at lines 1223--1223
 []\TU/lmtt/m/n/10 ##   # .rng <<- list(seed = seed, type = "lcg", parameters = 
 list(a = a, c = c, m = m))[] 
  []
 
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
-t line 1242.
+t line 1243.
 [22]
 File: 02-Generacion_numeros_aleatorios_files/figure-latex/randu-1.pdf Graphic f
 ile (type pdf)
 <use 02-Generacion_numeros_aleatorios_files/figure-latex/randu-1.pdf>
 [23]
 Package hyperref Info: bookmark level for unknown example defaults to 0 on inpu
-t line 1347.
+t line 1348.
 File: 02-Generacion_numeros_aleatorios_files/figure-latex/ejcona-1.pdf Graphic 
 file (type pdf)
 <use 02-Generacion_numeros_aleatorios_files/figure-latex/ejcona-1.pdf>
 [24]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 1457.
+(Font)              scaled to size 10.0pt on input line 1458.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 7.0pt on input line 1457.
+(Font)              scaled to size 7.0pt on input line 1458.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 5.0pt on input line 1457.
+(Font)              scaled to size 5.0pt on input line 1458.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 10.00092pt on input line 1457.
+(Font)              scaled to size 10.00092pt on input line 1458.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 7.00064pt on input line 1457.
+(Font)              scaled to size 7.00064pt on input line 1458.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 5.00046pt on input line 1457.
+(Font)              scaled to size 5.00046pt on input line 1458.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 9.99893pt on input line 1457.
+(Font)              scaled to size 9.99893pt on input line 1458.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 6.99925pt on input line 1457.
+(Font)              scaled to size 6.99925pt on input line 1458.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 4.99947pt on input line 1457.
+(Font)              scaled to size 4.99947pt on input line 1458.
 [25] [26]
-Overfull \hbox (5.23227pt too wide) in paragraph at lines 1614--1614
+Overfull \hbox (5.23227pt too wide) in paragraph at lines 1615--1615
 []\TU/lmtt/m/n/10 ##                    method = METHOD, data.name = DNAME), RE
 SULTS), class = "htest")[] 
  []
@@ -1230,11 +1218,7 @@ c file (type pdf)
 File: 02-Generacion_numeros_aleatorios_files/figure-latex/plot-acf-1.pdf Graphi
 c file (type pdf)
 <use 02-Generacion_numeros_aleatorios_files/figure-latex/plot-acf-1.pdf>
-[30]
-
-LaTeX Warning: Reference `contrastes' on page 31 undefined on input line 1806.
-
-[31]
+[30] [31]
 File: 02-Generacion_numeros_aleatorios_files/figure-latex/rep-test-ecdf-1.pdf G
 raphic file (type pdf)
 <use 02-Generacion_numeros_aleatorios_files/figure-latex/rep-test-ecdf-1.pdf>
@@ -1250,7 +1234,7 @@ File: 02-Generacion_numeros_aleatorios_files/figure-latex/rephtest-1.pdf Graphi
 c file (type pdf)
 <use 02-Generacion_numeros_aleatorios_files/figure-latex/rephtest-1.pdf>
 
-Overfull \hbox (26.64561pt too wide) in paragraph at lines 2027--2030
+Overfull \hbox (26.64561pt too wide) in paragraph at lines 2028--2031
 []\TU/lmr/m/n/10 Diehard tests (The Marsaglia Random Number CDROM, 1995): []htt
 p://www.stat.fsu.edu/pub/diehard
  []
@@ -1318,12 +1302,12 @@ e pdf)
 <use 03-Analisis_resultados_files/figure-latex/sim-ar1-1.pdf>
 [51]
 
-LaTeX Warning: Reference `bootstrap' on page 52 undefined on input line 2809.
+LaTeX Warning: Reference `bootstrap' on page 52 undefined on input line 2810.
 
 [52]
 Capítulo 4.
 Package hyperref Info: bookmark level for unknown conjecture defaults to 0 on i
-nput line 2837.
+nput line 2838.
 [53
 
 ]
@@ -1388,7 +1372,7 @@ UCIONES NOTABLES \TU/lmr/m/n/10 77
 [77] [78]
 Capítulo 5.
 Package hyperref Info: bookmark level for unknown proof defaults to 0 on input 
-line 4363.
+line 4364.
 [79
 
 ]
@@ -1427,7 +1411,7 @@ hic file (type pdf)
 <use 06-Simulacion_multidimensional_files/figure-latex/normind-plot-1.pdf>
 [96] [97]
 Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
-input line 5512.
+input line 5513.
 [98] [99]
 File: 06-Simulacion_multidimensional_files/figure-latex/funcional-plot-1.pdf Gr
 aphic file (type pdf)
@@ -1445,7 +1429,7 @@ File: 06-Simulacion_multidimensional_files/figure-latex/pos-sp-simcond-1.pdf Gr
 aphic file (type pdf)
 <use 06-Simulacion_multidimensional_files/figure-latex/pos-sp-simcond-1.pdf>
 
-Overfull \hbox (20.98227pt too wide) in paragraph at lines 6145--6145
+Overfull \hbox (20.98227pt too wide) in paragraph at lines 6146--6146
 []\TU/lmtt/m/n/10 ## krige.conv: results will be returned only for prediction l
 ocations inside the borders[] 
  []
@@ -1479,7 +1463,7 @@ pdf Graphic file (type pdf)
 df>
 
 LaTeX Warning: Reference `fig:cclayton2b-conjunta' on page 113 undefined on inp
-ut line 6379.
+ut line 6380.
 
 File: 06-Simulacion_multidimensional_files/figure-latex/cclayton2-conjunta-1.pd
 f Graphic file (type pdf)
@@ -1487,7 +1471,7 @@ f Graphic file (type pdf)
 >
 
 LaTeX Warning: Reference `fig:cclayton3-marginales' on page 113 undefined on in
-put line 6397.
+put line 6398.
 
 File: 06-Simulacion_multidimensional_files/figure-latex/cclayton2-marginales-1.
 pdf Graphic file (type pdf)
@@ -1507,7 +1491,7 @@ File: 06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-conjunta-1
 <use 06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-conjunta-1.
 pdf>
 
-Underfull \vbox (badness 10000) detected at line 6490
+Underfull \vbox (badness 10000) detected at line 6491
  []
 
 [114]
@@ -1516,7 +1500,7 @@ File: 06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-marginales
 <use 06-Simulacion_multidimensional_files/figure-latex/cclayton-exp-marginales-
 1.pdf>
 [115]
-Underfull \hbox (badness 1137) in paragraph at lines 6516--6517
+Underfull \hbox (badness 1137) in paragraph at lines 6517--6518
 \TU/lmr/m/n/10 para cambiar a un indexado unidimensional y posteriormente las f
 unciones \TU/lmtt/m/n/10 as.matrix()\TU/lmr/m/n/10 , o
  []
@@ -1525,57 +1509,236 @@ unciones \TU/lmtt/m/n/10 as.matrix()\TU/lmr/m/n/10 , o
 File: 06-Simulacion_multidimensional_files/figure-latex/chi2-plot-1.pdf Graphic
  file (type pdf)
 <use 06-Simulacion_multidimensional_files/figure-latex/chi2-plot-1.pdf>
+[121] [122]
+Capítulo 7.
 
-LaTeX Warning: Reference `contrastes' on page 121 undefined on input line 6976.
+LaTeX Warning: Reference `conceptos' on page 123 undefined on input line 7025.
 
-
-[121] [122] [123
+[123
 
 ] [124]
-Apéndice A.
-[125
+File: 07-Monte_Carlo_files/figure-latex/int-mc-clas-1.pdf Graphic file (type pd
+f)
+<use 07-Monte_Carlo_files/figure-latex/int-mc-clas-1.pdf>
+[125]
+File: 07-Monte_Carlo_files/figure-latex/mc-integral-1.pdf Graphic file (type pd
+f)
+<use 07-Monte_Carlo_files/figure-latex/mc-integral-1.pdf>
+[126] [127]
+File: 07-Monte_Carlo_files/figure-latex/mc-imp-int-1.pdf Graphic file (type pdf
+)
+<use 07-Monte_Carlo_files/figure-latex/mc-imp-int-1.pdf>
+[128]
+File: 07-Monte_Carlo_files/figure-latex/mc-imp-conv-1.pdf Graphic file (type pd
+f)
+<use 07-Monte_Carlo_files/figure-latex/mc-imp-conv-1.pdf>
+[129]
+File: 07-Monte_Carlo_files/figure-latex/mc-imp2-conv-1.pdf Graphic file (type p
+df)
+<use 07-Monte_Carlo_files/figure-latex/mc-imp2-conv-1.pdf>
+File: 07-Monte_Carlo_files/figure-latex/mc-imp2-boxplot-1.pdf Graphic file (typ
+e pdf)
+<use 07-Monte_Carlo_files/figure-latex/mc-imp2-boxplot-1.pdf>
 
-] [126
+Underfull \vbox (badness 1082) has occurred while \output is active []
+
+[130]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[131]
+File: 07-Monte_Carlo_files/figure-latex/imp-res-1.pdf Graphic file (type pdf)
+<use 07-Monte_Carlo_files/figure-latex/imp-res-1.pdf>
+[132] [133]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-14-1.pdf>
+[134]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-18-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[135] [136]
+File: images/templesimulado.png Graphic file (type bmp)
+<images/templesimulado.png>
+[137]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-21-1.pdf>
+[138]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-22-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[139]
+Underfull \hbox (badness 1122) in paragraph at lines 7998--7999
+[]\TU/lmr/m/n/10 Repetimos el ejemplo anterior empleando el algoritmo genético 
+implementado en la función
+ []
+
+[140]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-23-1.pdf>
+[141] [142]
+File: 07-Monte_Carlo_files/figure-latex/mednorm-1.pdf Graphic file (type pdf)
+<use 07-Monte_Carlo_files/figure-latex/mednorm-1.pdf>
+[143] [144]
+File: 07-Monte_Carlo_files/figure-latex/medexp-1.pdf Graphic file (type pdf)
+<use 07-Monte_Carlo_files/figure-latex/medexp-1.pdf>
+[145]
+File: 07-Monte_Carlo_files/figure-latex/cobicnorm-1.pdf Graphic file (type pdf)
+
+<use 07-Monte_Carlo_files/figure-latex/cobicnorm-1.pdf>
+[146]
+File: 07-Monte_Carlo_files/figure-latex/cobicexp-1.pdf Graphic file (type pdf)
+<use 07-Monte_Carlo_files/figure-latex/cobicexp-1.pdf>
+[147]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-35-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-35-1.pdf>
+[148]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-40-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-40-1.pdf>
+[149]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-41-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-41-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[150]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-44-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-44-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[151] [152]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-47-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-47-1.pdf>
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-47-2.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-47-2.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[153] [154]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-52-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-52-1.pdf>
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-52-2.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-52-2.pdf>
+[155]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-56-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-56-1.pdf>
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-56-2.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-56-2.pdf>
+[156]
+Underfull \vbox (badness 1184) detected at line 9025
+ []
+
+
+Underfull \vbox (badness 1158) has occurred while \output is active []
+
+[157]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-60-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-60-1.pdf>
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-60-2.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-60-2.pdf>
+[158]
+Underfull \hbox (badness 1924) in paragraph at lines 9086--9089
+[]\TU/lmr/m/n/10 La distribución exponencial es un caso particular de la Weibul
+l: \TU/lmtt/m/n/10 dexp(x, ratex) ==
+ []
+
+File: 07-Monte_Carlo_files/figure-latex/potencia-1.pdf Graphic file (type pdf)
+<use 07-Monte_Carlo_files/figure-latex/potencia-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[159]
+File: 07-Monte_Carlo_files/figure-latex/contaminada-1.pdf Graphic file (type pd
+f)
+<use 07-Monte_Carlo_files/figure-latex/contaminada-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[160]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-62-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-62-1.pdf>
+
+Underfull \vbox (badness 7308) has occurred while \output is active []
+
+[161]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-65-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-65-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[162]
+File: 07-Monte_Carlo_files/figure-latex/unnamed-chunk-66-1.pdf Graphic file (ty
+pe pdf)
+<use 07-Monte_Carlo_files/figure-latex/unnamed-chunk-66-1.pdf>
+[163] [164] [165
+
+] [166]
+Apéndice A.
+[167
+
+] [168
 
 ]
 Apéndice B.
-[127]
+[169]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-3-1.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-3-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[128]
+[170]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/hist-movie-1.pdf Graphic
  file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/hist-movie-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[129]
+[171]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/ecdfplot-1.pdf Graphic f
 ile (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/ecdfplot-1.pdf>
-[130]
+[172]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-1.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-1.pdf>
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-2.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-2.pdf>
-[131]
-Overfull \hbox (3.928pt too wide) in alignment at lines 7355--7359
+[173]
+Overfull \hbox (3.928pt too wide) in alignment at lines 9662--9666
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (3.928pt too wide) in alignment at lines 7359--7365
+Overfull \hbox (3.928pt too wide) in alignment at lines 9666--9672
  [] [] [] [] [] 
  []
 
-[132] [133]
-Overfull \hbox (5.23227pt too wide) in paragraph at lines 7481--7481
+[174] [175]
+Overfull \hbox (5.23227pt too wide) in paragraph at lines 9788--9788
 []\TU/lmtt/m/n/10 ##                    method = METHOD, data.name = DNAME), RE
 SULTS), class = "htest")[] 
  []
@@ -1583,38 +1746,29 @@ SULTS), class = "htest")[]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-7-1.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-7-1.pdf>
-[134]
-
-LaTeX Warning: Reference `exr:ks-test-sim' on page 135 undefined on input line 
-7571.
-
-
-LaTeX Warning: Reference `contrastes' on page 135 undefined on input line 7571.
-
-
-[135] [136]
+[176] [177] [178]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-11-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-11-1.pdf>
-[137]
+[179]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1.pdf Graphic fi
 le (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1.pdf>
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-13-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-13-1.pdf>
-[138]
+[180]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[139]
+[181]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-15-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-15-1.pdf>
-[140]
+[182]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/dispret-1.pdf Graphic fi
 le (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/dispret-1.pdf>
@@ -1624,27 +1778,27 @@ raphic file (type pdf)
 
 Underfull \vbox (badness 1297) has occurred while \output is active []
 
-[141]
+[183]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-19-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-19-1.pdf>
-[142]
+[184]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-20-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-20-1.pdf>
-[143] [144]
-Underfull \hbox (badness 1062) in paragraph at lines 8145--8148
+[185] [186]
+Underfull \hbox (badness 1062) in paragraph at lines 10452--10455
 []\TU/lmr/m/n/10 Empleando la discretización anterior se simplifica notablement
 e el contraste chi-cuadrado de
  []
 
-[145]
-Overfull \hbox (11.2765pt too wide) in paragraph at lines 8185--8190
+[187]
+Overfull \hbox (11.2765pt too wide) in paragraph at lines 10492--10497
 []\TU/lmr/m/n/10 El contraste anterior se puede generalizar a contrastar la uni
 formidad de las $[]$-uplas $[][][][] [][][] [] [] [][][]$
  []
 
-[146] [147] [148
+[188] [189] [190
 
 ]
 Apéndice C.
@@ -1654,28 +1808,28 @@ file (type pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[149] [150] [151] [152]
+[191] [192] [193] [194]
 File: 23-Integracion_numerica_files/figure-latex/unnamed-chunk-9-1.pdf Graphic 
 file (type pdf)
 <use 23-Integracion_numerica_files/figure-latex/unnamed-chunk-9-1.pdf>
-[153] [154]
+[195] [196]
 Apéndice D.
-[155
+[197
 
 ]
 File: 24-Soluciones_files/figure-latex/simpiplot-1.pdf Graphic file (type pdf)
 <use 24-Soluciones_files/figure-latex/simpiplot-1.pdf>
-[156]
+[198]
 File: 24-Soluciones_files/figure-latex/simberplot-1.pdf Graphic file (type pdf)
 
 <use 24-Soluciones_files/figure-latex/simberplot-1.pdf>
-[157]
+[199]
 File: 24-Soluciones_files/figure-latex/simberconv-1.pdf Graphic file (type pdf)
 
 <use 24-Soluciones_files/figure-latex/simberconv-1.pdf>
 File: images/circuito2.png Graphic file (type bmp)
 <images/circuito2.png>
-[158] [159] [160]
+[200] [201] [202]
 File: 24-Soluciones_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (typ
 e pdf)
 <use 24-Soluciones_files/figure-latex/unnamed-chunk-14-1.pdf>
@@ -1685,14 +1839,14 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[161] [162]
+[203] [204]
 File: 24-Soluciones_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (typ
 e pdf)
 <use 24-Soluciones_files/figure-latex/unnamed-chunk-17-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[163] [164]
+[205] [206]
 File: 24-Soluciones_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (typ
 e pdf)
 <use 24-Soluciones_files/figure-latex/unnamed-chunk-19-1.pdf>
@@ -1702,7 +1856,7 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[165]
+[207]
 No file Simulacion.bbl.
 \tf@thm=\write5
 \openout5 = `Simulacion.thm'.
@@ -1757,7 +1911,7 @@ The property list \__xpg_alias contains the pairs (without outer braces):
 >  {spanishmx/target}  =>  {spanish}
 >  {spanishmx/variant}  =>  {mexican}
 >  {spanishmx/options}  =>  {variant=mexican}.
-[166] (Simulacion.aux
+[208] (Simulacion.aux
 LaTeX Info: Redefining \rmfamily on input line 17.
 LaTeX Info: Redefining \sffamily on input line 17.
 LaTeX Info: Redefining \ttfamily on input line 17.
@@ -1767,12 +1921,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 22694 strings out of 410500
- 456519 string characters out of 2815815
- 966545 words of memory out of 3000000
- 43462 multiletter control sequences out of 15000+600000
+ 23085 strings out of 410500
+ 476166 string characters out of 2815815
+ 971295 words of memory out of 3000000
+ 43820 multiletter control sequences out of 15000+600000
  477299 words of font info for 107 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 86i,12n,121p,1009b,607s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 86i,12n,121p,1009b,668s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
-Output written on Simulacion.pdf (166 pages).
+Output written on Simulacion.pdf (208 pages).

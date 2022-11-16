@@ -37,7 +37,7 @@ La simulación ofrece una alternativa a esa última fase del proceso, y sustituy
 
 Así, se puede definir la *simulación* como una técnica que consiste en realizar experimentos sobre el modelo de un sistema (experimentos de muestreo si la simulación incorpora aleatoriedad), con el objetivo de recopilar información bajo determinadas condiciones. 
 
-## Conceptos básicos
+## Conceptos básicos {#conceptos}
 
 La experimentación directa sobre la realidad puede tener muchos inconvenientes, entre otros:
 

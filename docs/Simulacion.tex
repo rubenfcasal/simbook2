@@ -178,7 +178,7 @@
 
 \title{Simulación Estadística}
 \author{Rubén Fernández Casal (\href{mailto:ruben.fcasal@udc.es}{\nolinkurl{ruben.fcasal@udc.es}}), Ricardo Cao (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}})}
-\date{Edición: Agosto de 2022. Impresión: 2022-11-04}
+\date{Edición: Agosto de 2022. Impresión: 2022-11-16}
 
 \begin{document}
 \maketitle
@@ -207,7 +207,8 @@ Para poder ejecutar los ejemplos mostrados en el libro es recomendable emplear e
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# install.packages("remotes")}
-\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"rubenfcasal/simres"}\NormalTok{)}
+\CommentTok{\# remotes::install\_github("rubenfcasal/simres")}
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"rubenfcasal/simres"}\NormalTok{, }\AttributeTok{INSTALL\_opts =} \StringTok{"{-}{-}with{-}keep.source"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -928,10 +929,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.25    0.01    0.28 
+##    0.25    0.02    0.27 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.25    0.01    0.28
+##    0.25    0.02    0.27
 \end{verbatim}
 
 \begin{Shaded}
@@ -947,7 +948,7 @@ Ejemplo:
 ##       0       0       0 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.25    0.01    0.28
+##    0.25    0.02    0.27
 \end{verbatim}
 
 Hay diversos paquetes que implementan herramientas similares, por ejemplo:
@@ -997,7 +998,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## outer: 0.25 sec elapsed
+## outer: 0.28 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -1019,8 +1020,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ## 'data.frame':    10 obs. of  3 variables:
-##  $ tic: num  5.45 5.45 5.45 5.45 5.46 5.46 5.46 5.46 5.46 5.46
-##  $ toc: num  5.45 5.45 5.45 5.46 5.46 5.46 5.46 5.46 5.46 5.46
+##  $ tic: num  5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54
+##  $ toc: num  5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54
 ##  $ msg: chr  "1" "2" "3" "4" ...
 \end{verbatim}
 
@@ -1036,7 +1037,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   0.000   0.000   0.001   0.000   0.010
+##       0       0       0       0       0       0
 \end{verbatim}
   \end{itemize}
 \item
@@ -1217,7 +1218,7 @@ Este método está implementado\footnote{Aunque de forma no muy eficiente. Para 
 ##   # Devolver valores
 ##   return(u)
 ## }
-## <bytecode: 0x00000000403017c0>
+## <bytecode: 0x0000000040beaaf0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -1609,7 +1610,7 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 ##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
 ##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x000000003dd75458>
+## <bytecode: 0x000000003dd97cf8>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2108,7 +2109,7 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 ##   # Devolver valores
 ##   return(u)
 ## }
-## <bytecode: 0x0000000023b92b58>
+## <bytecode: 0x0000000023b67cb8>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2901,7 +2902,7 @@ El código para implementar este algoritmo en R podría ser el siguiente:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.02
+##    0.01    0.00    0.01
 \end{verbatim}
 
 \begin{Shaded}
@@ -3013,7 +3014,7 @@ y función de distribución:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.01    0.02    0.03
+##    0.03    0.00    0.03
 \end{verbatim}
 \item
   Representar el histograma y compararlo con la densidad teórica.
@@ -3489,7 +3490,7 @@ Generamos una muestra de \(10^4\) observaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.09    0.00    0.09
+##    0.10    0.00    0.09
 \end{verbatim}
 
 Evaluamos la eficiencia:
@@ -4032,7 +4033,7 @@ El correspondiente algoritmo está implementado en la función \href{https://rub
 ##   attr(x, "ngen") <- ngen
 ##   return(x)
 ## }
-## <bytecode: 0x00000000419af510>
+## <bytecode: 0x00000000430b1958>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4473,7 +4474,7 @@ Este algoritmo está implementado en la función \href{https://rubenfcasal.githu
 ##   attr(X, "ncomp") <- ncomp
 ##   return(X)
 ## }
-## <bytecode: 0x0000000042245940>
+## <bytecode: 0x0000000042732350>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4502,7 +4503,7 @@ Empleamos la rutina anterior para generar las simulaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.06    0.00    0.06
+##    0.03    0.00    0.04
 \end{verbatim}
 
 A partir de ellas podríamos aproximar el valor esperado:
@@ -4661,7 +4662,7 @@ Podemos repetir la simulación del Ejemplo \ref{exm:binom-cuant} anterior ordena
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.05    0.00    0.04
 \end{verbatim}
 
 \begin{Shaded}
@@ -4803,7 +4804,7 @@ Este algoritmo está implementado en la función \href{https://rubenfcasal.githu
 ##   attr(X, "ncomp") <- ncomp
 ##   return(X)
 ## }
-## <bytecode: 0x000000004008fd70>
+## <bytecode: 0x0000000040110a28>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4821,7 +4822,7 @@ Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando es
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.01    0.00    0.01
+##    0.03    0.00    0.03
 \end{verbatim}
 
 Número medio de comparaciones:
@@ -4975,7 +4976,7 @@ Este método también está implementado en la función \href{https://rubenfcasa
 ##   if(as.factor) X <- factor(X, levels = x)
 ##   return(X)
 ## }
-## <bytecode: 0x0000000039eabbb0>
+## <bytecode: 0x0000000039e273b0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4993,7 +4994,7 @@ Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando es
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.01
+##    0.02    0.00    0.02
 \end{verbatim}
 
 Análisis de los resultados:
@@ -5674,7 +5675,7 @@ del paquete \texttt{MASS} que emplea la factorización espectral (\texttt{eigen}
 ##         drop(X)
 ##     else t(X)
 ## }
-## <bytecode: 0x000000003c9f3b90>
+## <bytecode: 0x000000003caaa338>
 ## <environment: namespace:MASS>
 \end{verbatim}
 
@@ -7006,6 +7007,2312 @@ Esto es similar a lo que realiza la función \texttt{chisq.test()} con la opció
 
 \end{example}
 
+\hypertarget{monte-carlo}{%
+\chapter{Métodos Monte Carlo}\label{monte-carlo}}
+
+Uno de los objetivos habituales en inferencia es la aproximación de una esperanza (o el caso particular de una probabilidad), es decir, se trataría de evaluar una integral, que en ocasiones puede ser compleja.
+Esto puede ser de interés en otros campos, aunque la integral no esté relacionada con procesos estocásticos.
+Si el número de dimensiones es pequeño puede ser recomendable emplear métodos numéricos (ver Apéndice \ref{int-num}), pero si la dimensión del dominio de la integral es grande, puede ser mucho más eficiente emplear métodos basados en simulación o incluso ser la única aproximación realmente viable.
+En las secciones \ref{int-MC} y \ref{muestreo-importancia} se describen este tipo de procedimientos, denominados métodos de integración Monte Carlo.
+
+Los métodos Monte Carlo emplean simulación para resolver problemas matemáticos, como la evaluación de expresiones, la aproximación de integrales o la resolución de sistemas, entre muchos otros.
+Estos problemas son de interés en muchos campos (Física, Economía, Informática\ldots) y pueden ser estrictamente deterministas.
+Otro ejemplo es la resolución de problemas de optimización.
+Para evitar problemas de mínimos locales se puede recurrir a herramientas que emplean búsquedas aleatorias de los valores óptimos.
+En la Sección \ref{opt-MC} se describen brevemente los principales métodos de optimización Monte Carlo.
+
+En muchos casos, especialmente en Inferencia Estadística, existe una aleatoriedad inherente al modelo empleado para resolver el problema y los métodos Monte Carlo surgen de forma natural.
+Como se comentó en la Sección \ref{conceptos}, en ocasiones no se pueden obtener soluciones analíticas a problemas de inferencia, o solo se disponen de resultados asintóticos que pueden no ser suficientemente buenos para muestras finitas, y se puede recurrir a la simulación.
+
+Los estudios Monte Carlo son una herramienta habitual para investigar las ventajas e inconvenientes de un método de inferencia, y para entender mejor su funcionamiento.
+Por este motivo suelen ser el primer paso en el desarrollo de métodos Monte Carlo (que posteriormente pueden ser objeto de estudios analíticos si producen buenos resultados).
+También se pueden emplear para tratar de determinar, entre los métodos disponibles, el más adecuado para resolver el problema de interés.
+
+En Estadística Computacional (que incluiría los métodos de Aprendizaje Estadístico/Automático) se emplean métodos de inferencia computacionalmente intensivos y muchos de ellos emplean simulación.
+Entre las técnicas empleadas destacan los métodos de remuestreo, como el jackknife o el bootstrap, que trataremos en capítulos siguientes.
+Como ya se comentó, la simulación empleando un modelo estimado también se denomina bootstrap paramétrico y la mayoría de los métodos Monte Carlo de inferencia estadística los podríamos clasificar como métodos de remuestreo.
+
+\hypertarget{int-MC}{%
+\section{Integración Monte Carlo}\label{int-MC}}
+
+La integración Monte Carlo se emplea principalmente para aproximar integrales multidimensionales:
+\[I = \int \cdots \int _D s\left( x_1,\ldots ,x_n\right) dx_1 \cdots dx_n\]
+donde puede presentar ventajas respecto a los métodos tradicionales de integración numérica (ver Apéndice \ref{int-num}), ya que la velocidad de convergencia no depende del número de dimensiones.
+
+La idea es reescibir la expresión de la integral, encontrando una función de densidad \(f\) definida sobre \(D\), de forma que:
+\[I = \int _D s(\mathbf{x}) d \mathbf{x} = \int h(\mathbf{x})f(\mathbf{x}) d \mathbf{x} = E\left( h(\mathbf{X}) \right)\]
+donde \(\mathbf{X} \sim f\) (y preferiblemente fácil de simular).
+
+\hypertarget{integraciuxf3n-monte-carlo-cluxe1sica}{%
+\subsection{Integración Monte Carlo clásica}\label{integraciuxf3n-monte-carlo-cluxe1sica}}
+
+En el caso de que el dominio \(D\) sea acotado, la aproximación más simple consiste en considerar una distribución uniforme en \(D\) (i.e.~\(f(\mathbf{x})=1_D(\mathbf{x})/|D|\) y \(h(\mathbf{x}) = |D|s(\mathbf{x})\)).
+
+Por simplicidad nos centraremos en el caso unidimensional (el orden de convergencia es independiente del número de dimensiones).
+Supongamos que nos interesa aproximar:
+\[I = \int_0^1 s(x) dx\]
+Si \(x_1,x_2,\ldots ,x_n\) \emph{i.i.d.} \(\mathcal{U}(0, 1)\)
+entonces:
+\[I = E\left( s\left( \mathcal{U}(0, 1) \right) \right)
+\approx \frac{1}{n}\sum\limits_{i=1}^n s\left( x_i\right)\]
+
+Si el intervalo de integración es genérico:
+\[I = \int_a^b s(x) dx = 
+(b-a)\int_a^b s(x) \frac1{(b-a)}dx = 
+(b-a)E\left( s\left( \mathcal{U}(a, b) \right) \right).\]
+Si \(x_1,x_2,\ldots ,x_n\) \emph{i.i.d.} \(\mathcal{U}(a, b)\):
+\[I \approx \frac{b-a}{n}\sum\limits_{i=1}^n s\left( x_i\right)\]
+
+\begin{example}[integración Monte Carlo clásica]
+\protect\hypertarget{exm:mc-integral-clas}{}\label{exm:mc-integral-clas}
+
+Como primera aproximación para implementar la integración Monte Carlo clásica
+para aproximar integrales del tipo:
+\[I = \int_a^b s(x)  dx,\]
+podríamos considerar la siguiente función:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mc.integral0 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(fun, a, b, n) \{}
+  \CommentTok{\# Integración Monte Carlo de \textasciigrave{}fun()\textasciigrave{} entre \textasciigrave{}a\textasciigrave{} y \textasciigrave{}b\textasciigrave{} utilizando una muestra }
+  \CommentTok{\# (pseudo) aleatoria de tamaño \textasciigrave{}n\textasciigrave{}. Se asume que \textasciigrave{}fun()\textasciigrave{} es una función de }
+  \CommentTok{\# una sola variable (no vectorial), \textasciigrave{}a \textless{} b\textasciigrave{} y \textasciigrave{}n\textasciigrave{} entero positivo.}
+  \CommentTok{\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}  }
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(n, a, b)}
+\NormalTok{  fx }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(x, fun) }\CommentTok{\# Si fun fuese vectorial bastaría con: fx \textless{}{-} fun(x)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{mean}\NormalTok{(fx) }\SpecialCharTok{*}\NormalTok{ (b }\SpecialCharTok{{-}}\NormalTok{ a))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Como ejemplo la empleamos para aproximar:
+\[\int_0^1 4x^4 dx = \frac{4}{5},\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fun }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{ifelse}\NormalTok{((x }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ (x }\SpecialCharTok{\textless{}} \DecValTok{1}\NormalTok{), }\DecValTok{4} \SpecialCharTok{*}\NormalTok{ x}\SpecialCharTok{\^{}}\DecValTok{4}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\CommentTok{\# return(4 * x\^{}4)}
+\FunctionTok{curve}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/int-mc-clas-1} 
+
+}
+
+\caption{Ejemplo de integral en dominio acotado.}\label{fig:int-mc-clas}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{mc.integral0}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.977663
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mc.integral0}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7311169
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mc.integral0}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8304299
+\end{verbatim}
+
+La función \texttt{mc.integral0} no es adecuada para analizar la convergencia de la aproximación por simulación.
+Una alternativa más eficiente para representar gráficamente la convergencia está implementada en la función \href{https://rubenfcasal.github.io/simres/reference/mc.integral.html}{\texttt{mc.integral()}} del paquete \href{https://rubenfcasal.github.io/simres}{\texttt{simres}} (fichero \href{R/mc.plot.R}{\emph{mc.plot.R}}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(simres)}
+\NormalTok{mc.integral}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function(fun, a, b, n, level = 0.95, plot = TRUE, ...) {
+##   fx <- sapply(runif(n, a, b), fun) * (b - a)
+##   result <- if (plot) conv.plot(fx, level = level, ...) else {
+##     q <- qnorm((1 + level)/2)
+##     list(approx = mean(fx), max.error = q * sd(fx)/sqrt(n))
+##   }
+##   return(result)
+## }
+## <bytecode: 0x000000003ef05608>
+## <environment: namespace:simres>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{mc.integral}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5000}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{, }\FloatTok{1.4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $approx
+## [1] 0.8142206
+## 
+## $max.error
+## [1] 0.03028194
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{4}\SpecialCharTok{/}\DecValTok{5}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-integral-1} 
+
+}
+
+\caption{Convergencia de la aproximación de la integral mediante simulación.}\label{fig:mc-integral}
+\end{figure}
+
+Si sólo interesa la aproximación:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{mc.integral}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5000}\NormalTok{, }\AttributeTok{plot =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $approx
+## [1] 0.8142206
+## 
+## $max.error
+## [1] 0.03028194
+\end{verbatim}
+
+\textbf{Nota}: Es importante tener en cuenta que la función \texttt{mc.integral()} solo es válida para dominio finito.
+\end{example}
+
+\hypertarget{caso-general}{%
+\subsection{Caso general}\label{caso-general}}
+
+En lo que resta de esta sección (y en las siguientes) asumiremos que nos interesa aproximar una esperanza:
+\[\theta = E\left( h\left( X\right) \right) = \int h\left( x\right) f(x)dx\]
+siendo \(X\sim f\).
+Entonces, si \(x_1,x_2,\ldots ,x_n\) \emph{i.i.d.} \(X\):
+\[\theta \approx \frac{1}{n}\sum\limits_{i=1}^nh\left( x_i\right)\]
+
+Por ejemplo, como en el ejercicio anterior se considera de una función de densidad,
+se correspondería con el caso general de \(h(x) = x\) y \(f(x) = 4x^3\) para \(0<x<1\).
+La idea es que, en lugar de considerar una distribución uniforme,
+es preferible generar más valores donde hay mayor ``área'' (ver Figura \ref{fig:int-mc-clas}).
+
+Los pasos serían simular \texttt{x} con densidad \(f\) y aproximar la integral por \texttt{mean(h(x))}.
+En este caso podemos generar valores de la densidad objetivo fácilmente mediante el método de inversión, ya que \(F(x) = x^4\) si \(0<x<1\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rfun }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(nsim) }\FunctionTok{runif}\NormalTok{(nsim)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{) }\CommentTok{\# Método de inversión}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{5000}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rfun}\NormalTok{(nsim)}
+\CommentTok{\# h \textless{}{-} function(x) x}
+\CommentTok{\# res \textless{}{-} mean(h(x)) \# Aproximación por simulación }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x)}
+\NormalTok{res}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7967756
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# error \textless{}{-} 2*sd(h(x))/sqrt(nsim)}
+\NormalTok{error }\OtherTok{\textless{}{-}} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{sd}\NormalTok{(x)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(nsim)}
+\NormalTok{error}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.004728174
+\end{verbatim}
+
+Esta forma de proceder permite aproximar integrales impropias en las que el dominio de integración no es acotado.
+
+\begin{example}[integración Monte Carlo con dominio no acotado]
+\protect\hypertarget{exm:mc-intinf}{}\label{exm:mc-intinf}
+
+Aproximar:
+\[\phi(t)=\int_{t}^{\infty}\frac1{\sqrt{2\pi}}e^{-\frac{x^2}2}dx,\]
+para \(t=4.5\), empleando integración Monte Carlo (aproximación tradicional con dominio infinito).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# h \textless{}{-} function(x) x \textgreater{} 4.5}
+\CommentTok{\# f \textless{}{-} function(x) dnorm(x)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{3}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(nsim)}
+\FunctionTok{mean}\NormalTok{(x }\SpecialCharTok{\textgreater{}} \FloatTok{4.5}\NormalTok{) }\CommentTok{\# mean(h(x))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{4.5}\NormalTok{)  }\CommentTok{\# valor teórico P(X \textgreater{} 4.5) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.397673e-06
+\end{verbatim}
+
+De esta forma es difícil que se generen valores (en este caso ninguno) en la región que interesaría para la aproximación de la integral:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{any}\NormalTok{(x }\SpecialCharTok{\textgreater{}} \FloatTok{4.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+Como ya se comentó anteriormente, sería preferible generar más valores donde hay mayor ``área'', pero en este caso \(f\) concentra la densidad en una región que no resulta de utilidad.
+Por ese motivo puede ser preferible recurrir a una densidad auxiliar que solvente este problema.
+\end{example}
+
+\hypertarget{muestreo-importancia}{%
+\section{Muestreo por importancia}\label{muestreo-importancia}}
+
+Para aproximar la integral:
+\[\theta = E\left( h\left( X\right) \right) = \int h\left( x\right) f(x)dx,\]
+puede ser preferible generar observaciones de una densidad \(g\) que tenga una forma similar al producto \(hf\).
+
+Si \(Y\sim g\):
+\[\theta  = \int h\left( x\right) f(x)dx 
+ = \int \frac{h\left( x\right) f(x)}{g(x)}g(x)dx
+ = E\left( q\left( Y\right) \right).\]
+siendo
+\(q\left( x\right) = \frac{h\left( x\right) f(x)}{g(x)}\).
+
+Si \(y_1,y_2,\ldots ,y_n\) \emph{i.i.d.} \(Y\sim g\):
+\[\theta \approx \frac{1}{n}\sum\limits_{i=1}^nq\left( y_i\right) 
+= \frac{1}{n}\sum\limits_{i=1}^nw(y_i)h\left( y_i\right)  
+= \hat{\theta}_{g}\]
+con \(w(y) = \frac{f(y)}{g(y)}\).
+
+En este caso \(Var(\hat{\theta}_{g}) = Var\left( q\left( Y\right) \right) /n\), pudiendo reducirse significativamente respecto al método clásico si:
+\[g(x)\underset{aprox.}{\propto } \left\vert h(x) \right\vert f(x),\]
+ya que en ese caso \(\left\vert q(x) \right\vert\) sería aproximadamente constante (puede demostrarse fácilmente que la varianza es mínima si esa relación es exacta).
+
+Para garantizar la convergencia de la aproximación por simulación, la varianza del estimador \(\hat{\theta}_{g}\) debería ser finita, i.e.:
+\[E\left( q^2\left( Y\right) \right)  
+= \int \frac{h^2\left( x\right)f^2(x)}{g(x)}dx 
+= E\left( h^2\left( X\right) \frac{f(X)}{g(X)}\right)
+< \infty.\]
+La idea básica es que si la densidad \(g\) tiene colas más pesadas que la densidad \(f\) con mayor facilidad puede dar lugar a ``simulaciones'' con varianza finita (podría emplearse en casos en los que no existe \(E \left( h^2 \left( X \right) \right)\); ver Sección \ref{convergencia}).
+
+La distribución de los pesos \(w(y_i)\) debería ser homogénea para evitar datos influyentes (que introducirían inestabilidad en la aproximación).
+
+\begin{example}
+\protect\hypertarget{exm:mc-imp}{}\label{exm:mc-imp}
+
+Podríamos aproximar la integral del Ejemplo \ref{exm:mc-intinf} anterior empleando muestreo por importancia considerando como densidad auxiliar una exponencial de parámetro \(\lambda=1\) truncada en \(t\):
+\[g(x) = \lambda e^{-\lambda (x - t)}\text{, }x>t,\]
+(podemos emplear \texttt{dexp(y\ -\ t)} para evaluar esta densidad y \texttt{rexp(n)\ +\ t} para generar valores).
+
+En primer lugar comparamos \(h(x)f(x)\) con la densidad auxiliar reescalada, \(g(x)f(4.5)\), para comprobar si es una buena elección:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x), }\FloatTok{4.5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"dnorm(x) y dexp(x{-}4.5)*k"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \FloatTok{4.5}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\NormalTok{escala }\OtherTok{\textless{}{-}} \FunctionTok{dnorm}\NormalTok{(}\FloatTok{4.5}\NormalTok{)  }\CommentTok{\# Reescalado para comparación...}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dexp}\NormalTok{(x }\SpecialCharTok{{-}} \FloatTok{4.5}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ escala, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-imp-int-1} 
+
+}
+
+\caption{Objetivo a integrar (densidad objetivo truncada) y densidad auxiliar reescalada.}\label{fig:mc-imp-int}
+\end{figure}
+
+Generamos valores de la densidad auxiliar y calculamos los pesos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{3}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rexp}\NormalTok{(nsim) }\SpecialCharTok{+} \FloatTok{4.5}    \CommentTok{\#  Y \textasciitilde{} g}
+\NormalTok{w }\OtherTok{\textless{}{-}} \FunctionTok{dnorm}\NormalTok{(y)}\SpecialCharTok{/}\FunctionTok{dexp}\NormalTok{(y }\SpecialCharTok{{-}} \FloatTok{4.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+La aproximación por simulación sería \texttt{mean(w\ *\ h(y))}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# h(x) \textless{}{-} function(x) x \textgreater{} 4.5  \# (1 si x \textgreater{} 4.5 =\textgreater{} h(y) = 1)}
+\FunctionTok{mean}\NormalTok{(w) }\CommentTok{\# mean(w*h(y))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.144811e-06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{4.5}\NormalTok{)  }\CommentTok{\# valor teórico}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.397673e-06
+\end{verbatim}
+
+Representamos gráficamente la aproximación en función del número de simulaciones:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cumsum}\NormalTok{(w)}\SpecialCharTok{/}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Aproximación"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Iteraciones"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{4.5}\NormalTok{), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-imp-conv-1} 
+
+}
+
+\caption{Convergencia de la aproximación de la integral mediante muestreo por importancia.}\label{fig:mc-imp-conv}
+\end{figure}
+
+El error estándar de la aproximación sería \texttt{sqrt(var(w\ *\ h(y))/nsim)}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{var}\NormalTok{(w)}\SpecialCharTok{/}\NormalTok{nsim) }\CommentTok{\# sd(w*h(y))/sqrt(nsim)   }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.371154e-07
+\end{verbatim}
+
+Mientras que empleando la aproximación tradicional:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{est }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(nsim) }\SpecialCharTok{\textgreater{}} \FloatTok{4.5}\NormalTok{)}
+\NormalTok{est}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(est }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ est)}\SpecialCharTok{/}\NormalTok{nsim)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\end{example}
+
+\begin{example}[muestreo por importancia con mala densidad auxiliar]
+\protect\hypertarget{exm:mc-imp2}{}\label{exm:mc-imp2}
+
+Supongamos que se pretende aproximar \(P\left(2<X<6\right)\) siendo \(X\sim Cauchy(0,1)\) empleando muestreo por importancia y considerando como densidad auxiliar la normal estándar \(Y\sim N(0,1)\). Representaremos gráficamente la aproximación y estudiaremos los pesos \(w(y_i)\).
+
+\textbf{Nota}: En este caso van a aparecer problemas
+(la densidad auxiliar debería tener colas más pesadas que la densidad objetivo;
+sería adecuado si intercambiáramos las distribuciones objetivo y auxiliar,
+como en el Ejemplo \ref{exm:mc-imp-sample} siguiente).
+
+Se trata de aproximar \texttt{pcauchy(6)\ -\ pcauchy(2)},
+i.e.~\texttt{f(y)\ =\ dcauchy(y)} y \texttt{h(y)\ =\ (y\ \textgreater{}\ 2)\ *\ (y\ \textless{}\ 6)},
+empleando muestreo por importancia con \texttt{g(y)\ =\ dnorm(y)}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{5}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{4321}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(nsim)}
+\NormalTok{w }\OtherTok{\textless{}{-}} \FunctionTok{dcauchy}\NormalTok{(y)}\SpecialCharTok{/}\FunctionTok{dnorm}\NormalTok{(y) }\CommentTok{\# w \textless{}{-} w/sum(w) si alguna es una cuasidensidad}
+\end{Highlighting}
+\end{Shaded}
+
+La aproximación por simulación es \texttt{mean(w(y)\ *\ h(y))}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(w }\SpecialCharTok{*}\NormalTok{ (y }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ (y }\SpecialCharTok{\textless{}} \DecValTok{6}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.09929348
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pcauchy}\NormalTok{(}\DecValTok{6}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{pcauchy}\NormalTok{(}\DecValTok{2}\NormalTok{)  }\CommentTok{\# Valor teórico}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.09501516
+\end{verbatim}
+
+Si se estudia la convergencia:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cumsum}\NormalTok{(w }\SpecialCharTok{*}\NormalTok{ (y }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ (y }\SpecialCharTok{\textless{}} \DecValTok{6}\NormalTok{))}\SpecialCharTok{/}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Aproximación"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Iteraciones"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FunctionTok{pcauchy}\NormalTok{(}\DecValTok{6}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{pcauchy}\NormalTok{(}\DecValTok{2}\NormalTok{), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-imp2-conv-1} 
+
+}
+
+\caption{Gráfico de convergencia de la aproximación mediante muestreo por importancia con mala densidad auxiliar.}\label{fig:mc-imp2-conv}
+\end{figure}
+
+Lo que indica es una mala elección de la densidad auxiliar.
+
+La distribución de los pesos debería ser homogénea.
+Por ejemplo, si los reescalamos para que su suma sea el número de valores generados, deberían tomar valores en torno a uno:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(nsim }\SpecialCharTok{*}\NormalTok{ w}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(w))  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-imp2-boxplot-1} 
+
+}
+
+\caption{Gráfico de cajas de los pesos del muestreo por importancia reescalados (de forma que su media es 1).}\label{fig:mc-imp2-boxplot}
+\end{figure}
+
+\end{example}
+
+\hypertarget{remuestreo-del-muestreo-por-importancia}{%
+\subsection{Remuestreo (del muestreo) por importancia}\label{remuestreo-del-muestreo-por-importancia}}
+
+Cuando \(f\) y/o \(g\) son cuasi-densidades, para evitar calcular constantes normalizadoras, se emplea como aproximación:
+\[\theta \approx \frac{\sum\limits_{i=1}^n w(y_i) h\left( y_i\right) }{ \sum\limits_{i=1}^n w(y_i)}.\]
+De hecho este estimador es empleado muchas veces en lugar del anterior ya que, aunque en general no es insesgado, puede ser más eficiente si \(w(Y)\) y \(w(Y)h(Y)\) están altamente correlacionadas (e.g.~Liu, 2004, p.35).
+
+Adicionalmente, puede verse que con un muestreo de \(\left\{y_1, y_2, \ldots, y_n \right\}\) ponderado por \(w(y_i)\) (prob. \(=w(y_i)\left/ \sum\nolimits_{i=1}^n w(y_i) \right.\) ) se obtiene una simulación aproximada de \(f\) (\emph{Sample importance resampling}, Rubin, 1987).
+
+\begin{example}[simulación de normal estándar a partir de Cauchy; Sampling Importance Resampling]
+\protect\hypertarget{exm:mc-imp-sample}{}\label{exm:mc-imp-sample}
+
+Generamos 1000 simulaciones de una distribución (aprox.) \(N(0,1)\) (densidad objetivo) mediante remuestreo del muestreo por importancia de \(10^{5}\) valores de una \(Cauchy(0,1)\) (densidad auxiliar).
+
+\textbf{Nota}: En este caso \texttt{f(y)\ =\ dnorm(y)} y \texttt{g(y)\ =\ dcauchy(y)}, al revés del Ejemplo \ref{exm:mc-imp2} anterior.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Densidad objetivo}
+\CommentTok{\# f \textless{}{-} dnorm \# f \textless{}{-} function(x) ....}
+
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{3}
+\CommentTok{\# El nº de simulaciones de la densidad auxiliar debe ser mucho mayor:}
+\NormalTok{nsim2 }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{5}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{4321}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rcauchy}\NormalTok{(nsim2)}
+\NormalTok{w }\OtherTok{\textless{}{-}} \FunctionTok{dnorm}\NormalTok{(y)}\SpecialCharTok{/}\FunctionTok{dcauchy}\NormalTok{(y) }\CommentTok{\# w \textless{}{-} w/sum(w) si alguna es una cuasidensidad}
+
+\CommentTok{\# Si se pidiera aproximar una integral}
+\CommentTok{\# h(y) = y si es la media \# h \textless{}{-} function(y) y}
+\CommentTok{\# mean(w * h(y))}
+\end{Highlighting}
+\end{Shaded}
+
+Sampling Importance Resampling:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rx }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(y, nsim, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ w}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(w))}
+\FunctionTok{hist}\NormalTok{(rx, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.5}\NormalTok{))}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(rx))}
+\FunctionTok{curve}\NormalTok{(dnorm, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/imp-res-1} 
+
+}
+
+\caption{Distribución de los valores generados mediante remuestreo por importancia y densidad objetivo.}\label{fig:imp-res}
+\end{figure}
+
+\end{example}
+
+\textbf{Nota}: Si f o g fuesen cuasidensidades y se pidiese aproximar la integral, habría que reescalar los pesos \texttt{w\ \textless{}-\ f(y)/g(y)} en la aproximación por simulación, resultando \texttt{sum(w\ *\ h(y))/sum(w)} (media ponderada) y en el análisis de convergencia se emplearía \texttt{cumsum(w\ *\ h(y))/cumsum(w)}.
+
+\begin{exercise}[propuesto]
+\protect\hypertarget{exr:mc-imp-sample2}{}\label{exr:mc-imp-sample2}
+
+Consideramos una variable aleatoria con densidad:
+\[f(x)\propto e^{-x}\cos^{2}(x),\text{ si }x>0.\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  Aproximar mediante integración Monte Carlo la media de esta
+  distribución (\(h(x)=x\)) empleando muestreo de importancia con
+  distribución auxiliar una exponencial de parámetro \(\lambda=1\) a
+  partir de 10000 simulaciones (OJO: se conoce la cuasi-densidad
+  de la variable aleatoria de interés, emplear la aproximación descrita
+  en apuntes).
+\item
+  Generar 500 simulaciones (aprox.) de la distribución de interés
+  mediante remuestreo del muestreo por importancia.
+\end{enumerate}
+
+\textbf{NOTA}: En el último apartado, para comprobar que los valores generados proceden de la distribución objetivo, si representamos la cuasidensidad \(f^{\ast}(x) = e^{-x}\cos^{2}(x)\) junto con el histograma (en escala de densidades, \texttt{freq\ =\ FALSE}), hay que tener en cuenta que faltaría dividir la cuasidensidad por una constante normalizadora para poder compararlos directamente.
+Si no se reescala la cuasidensidad, podríamos compobar si la forma es similar (si la distribución de los valores generados es proporcional a la cuasidensidad, con mayor concentración donde la cuasidensidad se aleja de 0).
+En este caso (como \(g\) es una densidad) podríamos estimar la constante normalizadora (\(f(x) = \frac{1}{c}f^{\ast}(x)\)) a partir de los pesos del muestreo por importancia (\texttt{c.approx\ \textless{}-\ mean(w)}; en este caso concreto \(c=\frac{3}{5}\)).
+\end{exercise}
+
+\hypertarget{opt-MC}{%
+\section{Optimización Monte Carlo}\label{opt-MC}}
+
+Supongamos que estamos interesados en la minimización de una función:
+\[\underset{\mathbf{x}\in D}{\min }f(\mathbf{x}).\]
+
+Hay una gran cantidad de algoritmos numéricos para resolver problemas de optimización no lineal multidimensional, por ejemplo los basados en el método de Newton-Raphson (implementados en la función \texttt{nlm}, entre otras).
+
+La idea original consiste en buscar los ceros de su primera derivada (o del gradiente) empleando una aproximación iterativa:
+\[\mathbf{x}_{i+1} = \mathbf{x}_i-[Hf(\mathbf{x}_i)]^{-1}\nabla f(\mathbf{x}_i),\]
+donde \(Hf(\mathbf{x}_i)\) es el hessiano de la función (matriz de segundas derivadas) y \(\nabla f(\mathbf{x}_i)\) el gradiente (vector de primeras derivadas).
+Estos métodos normalmente funcionan muy bien cuando la función objetivo no tiene mínimos locales (ideal \(f\) cuadrática).
+Los resultados obtenidos pueden ser muy malos en caso contrario (especialmente en el caso multidimensional) y dependen en gran medida del punto inicial\footnote{Este tipo de algoritmos se denominan \emph{codiciosos} o \emph{voraces}, porque buscan la mejor opción a ``corto plazo''.}
+Un ejemplo donde es habitual que aparezcan este tipo de problemas es en la estimación por máxima verosimilitud (la función objetivo puede ser multimodal).
+
+\begin{example}[Estimación por máxima verosimilitud mediante un algoritmo de Newton]
+\protect\hypertarget{exm:mv-nlm}{}\label{exm:mv-nlm}
+
+La mixtura de distribuciones normales:
+\[\frac1{4}N(\mu_1,1)+\frac{3}{4}N(\mu_2,1),\]
+tiene una función de verosimilitud asociada bimodal.
+Generaremos una muestra de 200 valores de esta distribución con \(\mu_1=0\) y \(\mu_2=2.5\), construiremos la correspondiente función de verosimilitud y la representaremos gráficamente.
+
+Obtención de la muestra (simulación mixtura dos normales):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{200}
+\NormalTok{mu1 }\OtherTok{\textless{}{-}} \DecValTok{0} 
+\NormalTok{mu2 }\OtherTok{\textless{}{-}} \FloatTok{2.5}
+\NormalTok{sd1 }\OtherTok{\textless{}{-}}\NormalTok{ sd2 }\OtherTok{\textless{}{-}} \DecValTok{1}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{12345}\NormalTok{)}
+\NormalTok{p.sim }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(nsim, }\DecValTok{1}\NormalTok{, }\FloatTok{0.25}\NormalTok{)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(nsim, mu1}\SpecialCharTok{*}\NormalTok{p.sim }\SpecialCharTok{+}\NormalTok{ mu2}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p.sim), sd1}\SpecialCharTok{*}\NormalTok{p.sim }\SpecialCharTok{+}\NormalTok{ sd2}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p.sim))}
+
+\FunctionTok{hist}\NormalTok{(data, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.3}\NormalTok{))}
+\FunctionTok{curve}\NormalTok{(}\FloatTok{0.25} \SpecialCharTok{*} \FunctionTok{dnorm}\NormalTok{(x, mu1, sd1) }\SpecialCharTok{+} \FloatTok{0.75} \SpecialCharTok{*} \FunctionTok{dnorm}\NormalTok{(x, mu2, sd2), }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-14-1} \end{center}
+
+Podemos obtener la estimación por máxima verosimilitud de los parámetros empleando la rutina \texttt{nlm} para minimizar el logaritmo (negativo) de la función de verosimilitud:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{like }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mu)}
+  \SpecialCharTok{{-}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{log}\NormalTok{((}\FloatTok{0.25} \SpecialCharTok{*} \FunctionTok{dnorm}\NormalTok{(data, mu[}\DecValTok{1}\NormalTok{], sd1) }\SpecialCharTok{+} \FloatTok{0.75} \SpecialCharTok{*} \FunctionTok{dnorm}\NormalTok{(data, mu[}\DecValTok{2}\NormalTok{], sd2))))}
+  \CommentTok{\# NOTA: Pueden aparecer NA/Inf por log(0)}
+\end{Highlighting}
+\end{Shaded}
+
+Si queremos capturar los valores en los que se evalúa esta función, podemos proceder de forma similar a como se describe en el capítulo
+\href{http://adv-r.had.co.nz/Function-operators.html\#behavioural-fos}{Function operators}
+de la primera edición del libro ``Advanced R'' de Hadley Wickham:
+``Behavioural FOs leave the inputs and outputs of a function unchanged,
+but add some extra behaviour''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tee }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(f) \{}
+  \ControlFlowTok{function}\NormalTok{(...) \{}
+\NormalTok{    input }\OtherTok{\textless{}{-}} \ControlFlowTok{if}\NormalTok{(}\FunctionTok{nargs}\NormalTok{() }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) }\FunctionTok{c}\NormalTok{(...) }\ControlFlowTok{else} \FunctionTok{list}\NormalTok{(...)}
+\NormalTok{    output }\OtherTok{\textless{}{-}} \FunctionTok{f}\NormalTok{(...)}
+    \CommentTok{\# Hacer algo ...}
+    \CommentTok{\# ... con output e input}
+    \FunctionTok{return}\NormalTok{(output)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+En este caso queremos representar los puntos en los que el algoritmo de optimización evalúa la función objetivo (especialmente como evoluciona el valor óptimo)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tee.optim2d }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(f) \{}
+\NormalTok{  best.f }\OtherTok{\textless{}{-}} \ConstantTok{Inf}   \CommentTok{\# Suponemos que se va a minimizar (opción por defecto)}
+\NormalTok{  best.par }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\ConstantTok{NA}\NormalTok{)   }
+  \ControlFlowTok{function}\NormalTok{(...) \{}
+\NormalTok{    input }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(...)}
+\NormalTok{    output }\OtherTok{\textless{}{-}} \FunctionTok{f}\NormalTok{(...)}
+    \DocumentationTok{\#\# Hacer algo ...}
+    \FunctionTok{points}\NormalTok{(input[}\DecValTok{1}\NormalTok{], input[}\DecValTok{2}\NormalTok{], }\AttributeTok{col =} \StringTok{"lightgray"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{(best.f }\SpecialCharTok{\textgreater{}}\NormalTok{ output) \{}
+      \FunctionTok{lines}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(best.par, input), }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\NormalTok{      best.f }\OtherTok{\textless{}\textless{}{-}}\NormalTok{ output}
+\NormalTok{      best.par }\OtherTok{\textless{}\textless{}{-}}\NormalTok{ input}
+      \CommentTok{\# points(best.par[1], best.par[2], col = "blue", pch = 20)}
+      \CommentTok{\# cat("par = ", best.par, "value = ", best.f, "\textbackslash{}n")}
+\NormalTok{    \} }
+    \DocumentationTok{\#\# ... con output e input}
+    \FunctionTok{return}\NormalTok{(output)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Representar la superficie del logaritmo de la verosimilitud,
+los puntos iniciales y las iteraciones en la optimización numérica con \texttt{nlm}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mmu1 }\OtherTok{\textless{}{-}}\NormalTok{ mmu2 }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\AttributeTok{length =} \DecValTok{128}\NormalTok{)}
+\NormalTok{lli }\OtherTok{\textless{}{-}} \FunctionTok{outer}\NormalTok{(mmu1, mmu2, }\ControlFlowTok{function}\NormalTok{(x,y) }\FunctionTok{apply}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(x,y), }\DecValTok{1}\NormalTok{, like))}
+
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{image}\NormalTok{(mmu1, mmu2, }\SpecialCharTok{{-}}\NormalTok{lli, }\AttributeTok{xlab =} \FunctionTok{expression}\NormalTok{(mu[}\DecValTok{1}\NormalTok{]), }\AttributeTok{ylab =} \FunctionTok{expression}\NormalTok{(mu[}\DecValTok{2}\NormalTok{]))}
+\FunctionTok{contour}\NormalTok{(mmu1, mmu2, }\SpecialCharTok{{-}}\NormalTok{lli, }\AttributeTok{nlevels =} \DecValTok{50}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Valores iniciales aleatorios}
+\NormalTok{nstarts }\OtherTok{\textless{}{-}} \DecValTok{5}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{starts }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\NormalTok{nstarts, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{), }\AttributeTok{nrow =}\NormalTok{ nstarts)}
+\FunctionTok{points}\NormalTok{(starts, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+
+\CommentTok{\# Minimización numérica con nlm}
+\ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nstarts)\{}
+  \CommentTok{\# Normalmente llamaríamos a nlm(like, start)}
+\NormalTok{  res }\OtherTok{\textless{}{-}} \FunctionTok{nlm}\NormalTok{(}\FunctionTok{tee.optim2d}\NormalTok{(like), starts[j, ]) }\CommentTok{\# nlm(like, starts[j, ])}
+  \FunctionTok{points}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{estimate[}\DecValTok{1}\NormalTok{],res}\SpecialCharTok{$}\NormalTok{estimate[}\DecValTok{2}\NormalTok{], }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"par = "}\NormalTok{, res}\SpecialCharTok{$}\NormalTok{estimate, }\StringTok{", value ="}\NormalTok{, res}\SpecialCharTok{$}\NormalTok{minimum, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-18-1} \end{center}
+
+\begin{verbatim}
+## par =  -0.03892511 2.494589 , value = 361.5712 
+## par =  -0.03892501 2.494589 , value = 361.5712 
+## par =  -0.03892507 2.494589 , value = 361.5712 
+## par =  3.132201 0.9628536 , value = 379.3739 
+## par =  20.51013 1.71201 , value = 474.1414
+\end{verbatim}
+
+\end{example}
+
+\hypertarget{algoritmos-de-optimizaciuxf3n-monte-carlo}{%
+\subsection{Algoritmos de optimización Monte Carlo}\label{algoritmos-de-optimizaciuxf3n-monte-carlo}}
+
+Una alternativa sería tratar de generar valores aleatoriamente de forma que las regiones donde la función objetivo es menor tuviesen mayor probabilidad y menor probabilidad las regiones donde la función objetivo es mayor.
+Por ejemplo, se podría pensar en generar valores de acuerdo a una densidad (tranformación Boltzman-Gibbs):
+\[g(x)\propto \exp \left( -f(x)/T\right) ,\]
+donde \(T>0\) es un parámetro (denominado temperatura) seleccionado de forma que se garantice la integrabilidad.
+
+Entre los métodos de optimización Monte Carlo podríamos destacar:
+
+\begin{itemize}
+\item
+  Métodos con gradiente aleatorio.
+\item
+  Temple simulado.
+\item
+  Algoritmos genéticos.
+\item
+  Monte Carlo EM.
+\item
+  \ldots{}
+\end{itemize}
+
+\hypertarget{temple-simulado}{%
+\subsection{Temple simulado}\label{temple-simulado}}
+
+Método inspirado en el templado de un metal (se calienta el metal a alta temperatura y se va enfriando lentamente).
+En cada paso se reemplaza la aproximación actual por un valor aleatorio ``cercano'', elegido con una probabilidad que depende de la mejora en la función objetivo y de un parámetro \(T\) (denominado temperatura) que disminuye gradualmente durante el proceso.
+
+\begin{itemize}
+\item
+  Cuando la temperatura es grande los cambios son bastante
+  probables en cualquier dirección.
+\item
+  Al ir disminuyendo la temperatura los cambios tienden a ser
+  siempre ``cuesta abajo''.
+\end{itemize}
+
+Al tener una probabilidad no nula de aceptar una modificación ``cuesta arriba'' se trata de evitar quedar atrapado en un óptimo local (ver Figura \ref{fig:templesimulado}).
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/templesimulado} 
+
+}
+
+\caption{Fuente: Premchand Akella ([ppt](https://www.presentica.com/doc/11473134/simulated-annealing-pdf-document)).}\label{fig:templesimulado}
+\end{figure}
+
+Este procedimiento se puede ver como una adaptación del método de Metropolis-Hastings que se tratará en el Capítulo XX (Introducción a los métodos de cadenas de Markov Monte Carlo).
+
+\textbf{\emph{Algoritmo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{temp }\OtherTok{\textless{}{-}}\NormalTok{ temp.ini}
+\NormalTok{par }\OtherTok{\textless{}{-}}\NormalTok{ par.ini}
+\NormalTok{fun.par }\OtherTok{\textless{}{-}} \FunctionTok{FUN}\NormalTok{(par)}
+\NormalTok{iter }\OtherTok{\textless{}{-}} \DecValTok{1}
+\ControlFlowTok{while}\NormalTok{(temp }\SpecialCharTok{\textgreater{}}\NormalTok{ temp.final }\SpecialCharTok{\&\&}\NormalTok{ iter }\SpecialCharTok{\textless{}}\NormalTok{ iter.max) \{}
+\NormalTok{  iter.temp }\OtherTok{\textless{}{-}} \DecValTok{1}
+  \ControlFlowTok{while}\NormalTok{(iter.temp }\SpecialCharTok{\textless{}}\NormalTok{ iter.temp.max)}\ErrorTok{)}\NormalTok{ \{ }\CommentTok{\# iteraciones con temperatura constante}
+\NormalTok{    par.new }\OtherTok{\textless{}{-}} \FunctionTok{PERTURB}\NormalTok{(par, temp)}
+\NormalTok{    fun.new }\OtherTok{\textless{}{-}} \FunctionTok{FUN}\NormalTok{(par.new)}
+\NormalTok{    fun.inc }\OtherTok{\textless{}{-}}\NormalTok{ fun.new }\SpecialCharTok{{-}}\NormalTok{ fun.par}
+    \ControlFlowTok{if}\NormalTok{ ((fun.inc }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) }\SpecialCharTok{||}\NormalTok{ (}\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{) }\SpecialCharTok{\textgreater{}} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(fun.inc}\SpecialCharTok{/}\NormalTok{temp)))) }\ControlFlowTok{break}
+\NormalTok{    iter.temp }\OtherTok{\textless{}{-}}\NormalTok{ iter.temp }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{  iter }\OtherTok{\textless{}{-}}\NormalTok{ iter }\SpecialCharTok{+}\NormalTok{ iter.temp}
+\NormalTok{  par }\OtherTok{\textless{}{-}}\NormalTok{ par.new}
+\NormalTok{  fun.par }\OtherTok{\textless{}{-}}\NormalTok{ fun.new}
+\NormalTok{  temp }\OtherTok{\textless{}{-}} \FunctionTok{SCHEDULE}\NormalTok{(temp)}
+\NormalTok{\}}
+
+\NormalTok{FUN }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(par, ...) \{...\}}
+\NormalTok{SCHEDULE }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(temp, temp.ini, iter) }
+\NormalTok{  temp.ini }\SpecialCharTok{/} \FunctionTok{log}\NormalTok{(iter }\SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{) }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}
+  \CommentTok{\# temp.ini / log(((temp {-} 1) \%/\% tmax)*tmax + exp(1))}
+\NormalTok{PERTURB }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(par, temp, }\AttributeTok{scale =} \DecValTok{1}\SpecialCharTok{/}\NormalTok{temp.ini) }
+  \FunctionTok{rnorm}\NormalTok{(}\FunctionTok{length}\NormalTok{(par), par, }\DecValTok{1}\SpecialCharTok{/}\NormalTok{(scale}\SpecialCharTok{*}\NormalTok{temp))}
+\end{Highlighting}
+\end{Shaded}
+
+Una versión de este método está implementado\footnote{En el fichero fuente \href{https://svn.r-project.org/R/trunk/src/appl/optim.c}{optim.c}.} en la función \texttt{optim()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{optim}\NormalTok{(par, fn, }\AttributeTok{gr =} \ConstantTok{NULL}\NormalTok{, ..., }\AttributeTok{method =} \StringTok{"SANN"}\NormalTok{, }\AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{maxit =} \DecValTok{10000}\NormalTok{, }\AttributeTok{temp =} \DecValTok{10}\NormalTok{, }\AttributeTok{tmax =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+El argumento \texttt{gr} permite especificar la función para generar posiciones candidatas (por defecto núcleo gausiano con escala proporcional a la temperatura actual) y permitiría resolver problemas de optimización combinatoria.
+El argumento \texttt{control} permite establecer algunas opciones adicionales:
+
+\begin{itemize}
+\item
+  \texttt{maxit}: número total de evaluaciones de la función (único criterio de parada), por defecto 10000.
+\item
+  \texttt{temp}: temperatura inicial, por defecto 10.
+\item
+  \texttt{tmax}: número de evaluaciones de la función para cada temperatura, por defecto 10.
+\end{itemize}
+
+\begin{example}[Estimación máximo-verosimil empleando temple simulado]
+\protect\hypertarget{exm:mv-sann}{}\label{exm:mv-sann}
+
+Repetimos el Ejemplo \ref{exm:mv-nlm} anterior empleando el método ``SANN'' de la función \texttt{optim()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Representar la superficie del logaritmo de la verosimilitud}
+\FunctionTok{image}\NormalTok{(mmu1, mmu2, }\SpecialCharTok{{-}}\NormalTok{lli, }\AttributeTok{xlab =} \FunctionTok{expression}\NormalTok{(mu[}\DecValTok{1}\NormalTok{]), }\AttributeTok{ylab =} \FunctionTok{expression}\NormalTok{(mu[}\DecValTok{2}\NormalTok{]))}
+\FunctionTok{contour}\NormalTok{(mmu1, mmu2, }\SpecialCharTok{{-}}\NormalTok{lli, }\AttributeTok{nlevels =} \DecValTok{50}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(starts, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nstarts)\{}
+  \CommentTok{\# Normalmente llamaríamos a optim(start, like, method = "SANN")}
+  \CommentTok{\# Note that the "SANN" method depends critically on the settings of the control parameters.}
+  \CommentTok{\# For "SANN" maxit gives the total number of function evaluations: there is no other stopping criterion. }
+  \CommentTok{\# Defaults to 10000.}
+\NormalTok{  res }\OtherTok{\textless{}{-}} \FunctionTok{optim}\NormalTok{(starts[j, ], }\FunctionTok{tee.optim2d}\NormalTok{(like), }\AttributeTok{method =} \StringTok{"SANN"}\NormalTok{, }\AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{temp =} \DecValTok{100}\NormalTok{, }\AttributeTok{maxit =} \DecValTok{2000}\NormalTok{))}
+  \FunctionTok{points}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{par[}\DecValTok{1}\NormalTok{],res}\SpecialCharTok{$}\NormalTok{par[}\DecValTok{2}\NormalTok{], }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"par = "}\NormalTok{, res}\SpecialCharTok{$}\NormalTok{par, }\StringTok{", value ="}\NormalTok{, res}\SpecialCharTok{$}\NormalTok{value, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-21-1} \end{center}
+
+\begin{verbatim}
+## par =  0.0002023461 2.473437 , value = 361.6372 
+## par =  -0.182735 2.45585 , value = 362.0255 
+## par =  -0.0281341 2.484467 , value = 361.5801 
+## par =  -0.03642928 2.488626 , value = 361.5732 
+## par =  0.6814165 2.370026 , value = 374.839
+\end{verbatim}
+
+Como alternativa podríamos emplear la siguiente función basada en el algoritmo del Ejemplo 5.9 de Robert y Casella (2010):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SA }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(fun, pini, }\AttributeTok{lower =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{upper =} \ConstantTok{Inf}\NormalTok{, }\AttributeTok{tolerance =} \FloatTok{1e{-}04}\NormalTok{, }\AttributeTok{factor =} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{  temp }\OtherTok{\textless{}{-}}\NormalTok{ scale }\OtherTok{\textless{}{-}}\NormalTok{ iter }\OtherTok{\textless{}{-}}\NormalTok{ dif }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{  npar }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(pini) }
+\NormalTok{  par }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(pini, }\AttributeTok{ncol =}\NormalTok{ npar)}
+\NormalTok{  curfun }\OtherTok{\textless{}{-}}\NormalTok{ hval }\OtherTok{\textless{}{-}} \FunctionTok{fun}\NormalTok{(pini)}
+  \ControlFlowTok{while}\NormalTok{ (dif }\SpecialCharTok{\textgreater{}}\NormalTok{ tolerance) \{}
+\NormalTok{    prop }\OtherTok{\textless{}{-}}\NormalTok{ par[iter, ] }\SpecialCharTok{+} \FunctionTok{rnorm}\NormalTok{(npar) }\SpecialCharTok{*}\NormalTok{ scale[iter]}
+    \CommentTok{\# Se decide si se acepta la propuesta}
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{any}\NormalTok{(prop }\SpecialCharTok{\textless{}}\NormalTok{ lower) }\SpecialCharTok{||} \FunctionTok{any}\NormalTok{(prop }\SpecialCharTok{\textgreater{}}\NormalTok{ upper) }\SpecialCharTok{||} 
+\NormalTok{        (temp[iter] }\SpecialCharTok{*} \FunctionTok{log}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{\textgreater{}}\NormalTok{ curfun }\SpecialCharTok{{-}} \FunctionTok{fun}\NormalTok{(prop)))  prop }\OtherTok{\textless{}{-}}\NormalTok{ par[iter, ]}
+\NormalTok{    curfun }\OtherTok{\textless{}{-}} \FunctionTok{fun}\NormalTok{(prop)}
+\NormalTok{    hval }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(hval, curfun)}
+\NormalTok{    par }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(par, prop)}
+\NormalTok{    iter }\OtherTok{\textless{}{-}}\NormalTok{ iter }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{    temp }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(temp, }\DecValTok{1}\SpecialCharTok{/}\FunctionTok{log}\NormalTok{(iter }\SpecialCharTok{+} \DecValTok{1}\NormalTok{))  }\CommentTok{\# Actualizar la temperatura}
+    \CommentTok{\# Se controla el número de perturbaciones aceptadas}
+\NormalTok{    ace }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(par[(iter}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}\SpecialCharTok{:}\NormalTok{iter, }\DecValTok{1}\NormalTok{]))}
+    \ControlFlowTok{if}\NormalTok{ (ace }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) }
+      \CommentTok{\# si es muy pequeño se disminuye la escala de la perturbación}
+\NormalTok{      factor }\OtherTok{\textless{}{-}}\NormalTok{ factor}\SpecialCharTok{/}\DecValTok{10}
+    \ControlFlowTok{if}\NormalTok{ (}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ ace }\SpecialCharTok{\textgreater{}}\NormalTok{ iter) }
+      \CommentTok{\# si es muy grande se aumenta}
+\NormalTok{      factor }\OtherTok{\textless{}{-}}\NormalTok{ factor }\SpecialCharTok{*} \DecValTok{10}
+\NormalTok{    scale }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(scale, }\FunctionTok{max}\NormalTok{(}\DecValTok{2}\NormalTok{, factor }\SpecialCharTok{*} \FunctionTok{sqrt}\NormalTok{(temp[iter])))  }\CommentTok{\# Actualizar la escala de la perturbación}
+\NormalTok{    dif }\OtherTok{\textless{}{-}}\NormalTok{ (iter }\SpecialCharTok{\textless{}} \DecValTok{100}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ (ace }\SpecialCharTok{\textless{}} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ (}\FunctionTok{max}\NormalTok{(hval) }\SpecialCharTok{{-}} \FunctionTok{max}\NormalTok{(hval[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{(iter}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{  \}}
+  \FunctionTok{list}\NormalTok{(}\AttributeTok{par =}\NormalTok{ par, }\AttributeTok{value =}\NormalTok{ hval, }\AttributeTok{iter =}\NormalTok{ iter)}
+\NormalTok{\}}
+
+\CommentTok{\# Representar la superficie del logaritmo de la verosimilitud}
+\FunctionTok{image}\NormalTok{(mmu1, mmu2, }\SpecialCharTok{{-}}\NormalTok{lli, }\AttributeTok{xlab =} \FunctionTok{expression}\NormalTok{(mu[}\DecValTok{1}\NormalTok{]), }\AttributeTok{ylab =} \FunctionTok{expression}\NormalTok{(mu[}\DecValTok{2}\NormalTok{]))}
+\FunctionTok{contour}\NormalTok{(mmu1, mmu2, }\SpecialCharTok{{-}}\NormalTok{lli, }\AttributeTok{nlevels =} \DecValTok{50}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(starts, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nstarts) \{}
+\NormalTok{  sar }\OtherTok{\textless{}{-}} \FunctionTok{SA}\NormalTok{(like, starts[j, ])}
+  \FunctionTok{with}\NormalTok{(sar, }\FunctionTok{lines}\NormalTok{(par[, }\DecValTok{1}\NormalTok{], par[, }\DecValTok{2}\NormalTok{], }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{))}
+  \FunctionTok{with}\NormalTok{(sar, }\FunctionTok{points}\NormalTok{(par[iter, }\DecValTok{1}\NormalTok{], par[iter, }\DecValTok{2}\NormalTok{], }\AttributeTok{pch =} \DecValTok{19}\NormalTok{))}
+  \FunctionTok{with}\NormalTok{(sar, }\FunctionTok{cat}\NormalTok{(}\StringTok{"par = "}\NormalTok{, par[iter, ], }\StringTok{", value ="}\NormalTok{, value[iter], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-22-1} \end{center}
+
+\begin{verbatim}
+## par =  -0.2091332 2.341469 , value = 363.0035 
+## par =  -0.2986682 2.573345 , value = 363.6607 
+## par =  -0.4708455 2.425984 , value = 365.3277 
+## par =  -0.3454382 2.446332 , value = 363.5074 
+## par =  -0.1236326 2.464842 , value = 361.7403
+\end{verbatim}
+
+\end{example}
+
+\hypertarget{algoritmos-genuxe9ticos}{%
+\subsection{Algoritmos genéticos}\label{algoritmos-genuxe9ticos}}
+
+Los algoritmos genéticos tratan de encontrar la mejor solución
+(entre un conjunto de soluciones posibles) imitando los procesos de
+evolución biológica:
+
+\begin{itemize}
+\item
+  \textbf{Población}: formada por \(n\) individuos \(\mathbf{x}_i\)
+  codificados en \textbf{cromosomas}.
+\item
+  \(f(\mathbf{x}_i)\) ajuste/capacidad/\textbf{adaptación} del
+  individuo \(\mathbf{x}_i\).
+\item
+  \textbf{Selección}: los individuos mejor adaptados tienen mayor
+  probabilidad de ser \textbf{padres}.
+\item
+  \textbf{Cruzamiento}: los cromosomas de dos padres se combinan para
+  generar hijos.
+\item
+  \textbf{Mutación}: modificación al azar del cromosoma de los
+  hijos (variabilidad).
+\item
+  \textbf{Elitismo}: el mejor individuo pasa a la siguiente generación.
+\end{itemize}
+
+Los paquetes de R \texttt{DEOptim} y \texttt{gafit} implementan algunos de estos
+tipos de algoritmos.
+
+\begin{example}[Estimación máximo-verosimil empleando un algoritmo genético]
+\protect\hypertarget{exm:mv-DEoptim}{}\label{exm:mv-DEoptim}
+
+Repetimos el ejemplo anterior empleando el algoritmo genético implementado en la función \texttt{DEoptim::DEOptim()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{require}\NormalTok{(DEoptim)}
+
+\CommentTok{\# Representar la superficie del logaritmo de la verosimilitud}
+\FunctionTok{image}\NormalTok{(mmu1, mmu2, }\SpecialCharTok{{-}}\NormalTok{lli, }\AttributeTok{xlab =} \FunctionTok{expression}\NormalTok{(mu[}\DecValTok{1}\NormalTok{]), }\AttributeTok{ylab =} \FunctionTok{expression}\NormalTok{(mu[}\DecValTok{2}\NormalTok{]))}
+\FunctionTok{contour}\NormalTok{(mmu1, mmu2, }\SpecialCharTok{{-}}\NormalTok{lli, }\AttributeTok{nlevels =} \DecValTok{50}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\# Estos algoritmos no requieren valores iniciales (los generan al azar en el rango)}
+
+\NormalTok{lower }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{)}
+\NormalTok{upper }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\CommentTok{\# DEoptim(like, lower, upper)}
+\NormalTok{der }\OtherTok{\textless{}{-}} \FunctionTok{DEoptim}\NormalTok{(}\FunctionTok{tee.optim2d}\NormalTok{(like), lower, upper, }\FunctionTok{DEoptim.control}\NormalTok{(}\AttributeTok{itermax =} \DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Iteration: 1 bestvalit: 373.132461 bestmemit:   -0.764103    2.196961
+## Iteration: 2 bestvalit: 367.580379 bestmemit:   -0.430095    2.196961
+## Iteration: 3 bestvalit: 367.580379 bestmemit:   -0.430095    2.196961
+## Iteration: 4 bestvalit: 367.580379 bestmemit:   -0.430095    2.196961
+## Iteration: 5 bestvalit: 361.906887 bestmemit:    0.058951    2.455186
+## Iteration: 6 bestvalit: 361.906887 bestmemit:    0.058951    2.455186
+## Iteration: 7 bestvalit: 361.906887 bestmemit:    0.058951    2.455186
+## Iteration: 8 bestvalit: 361.657986 bestmemit:   -0.064005    2.452184
+## Iteration: 9 bestvalit: 361.657986 bestmemit:   -0.064005    2.452184
+## Iteration: 10 bestvalit: 361.657986 bestmemit:   -0.064005    2.452184
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Por defecto fija el tamaño de la población a NP = 10*npar = 20}
+\CommentTok{\# Puede ser mejor dejar el valor por defecto itermax = 200}
+\FunctionTok{points}\NormalTok{(der}\SpecialCharTok{$}\NormalTok{optim}\SpecialCharTok{$}\NormalTok{bestmem[}\DecValTok{1}\NormalTok{], der}\SpecialCharTok{$}\NormalTok{optim}\SpecialCharTok{$}\NormalTok{bestmem[}\DecValTok{2}\NormalTok{], }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-23-1} \end{center}
+
+\end{example}
+
+\hypertarget{aplic-inf}{%
+\section{Métodos Monte Carlo en Inferencia Estadística}\label{aplic-inf}}
+
+*** Work in progress ***: Esta sección es muy preliminar y variará en siguientes versiones
+
+Como ya se comentó en la introducción muchas de las aplicaciones de la simulación serían de utilidad en Estadística:
+
+\begin{itemize}
+\item
+  Distribución de estimadores puntuales/estadísticos:
+
+  \begin{itemize}
+  \item
+    Aproximación de la distribución.
+
+    \begin{itemize}
+    \item
+      Aproximación de características de la distribución.
+    \item
+      Valided de la distribución asintótica.
+    \end{itemize}
+  \item
+    Comparación de estimadores.
+  \end{itemize}
+\item
+  Estimación por intervalo de confianza:
+
+  \begin{itemize}
+  \item
+    Obtención de intervalos/bandas de confianza (probabilidad).
+  \item
+    Análisis de un estimador por intervalo de confianza.
+  \end{itemize}
+\item
+  Contrastes de hipótesis:
+
+  \begin{itemize}
+  \item
+    Aproximación del \(p\)-valor.
+  \item
+    Análisis de un contraste de hipótesis.
+  \item
+    Validación teoría.
+  \end{itemize}
+\item
+  Métodos de remuestro bootstrap.
+\item
+  Inferencia Bayesiana
+\item
+  \ldots{}
+\end{itemize}
+
+En esta sección nos centraremos en estudios de simulación Monte Carlo en algunas de estas aplicaciones y daremos algún ejemplo de métodos Monte Carlo para inferencia estadística.
+La mayoría de los métodos Monte Carlo los podríamos clasificar como métodos de remuestreo y se tratarán con mayor profundidad en capítulos siguientes.
+
+Observación:
+En esta sección se obtendrán simulaciones de estadísticos a partir de muestras (podemos pensar que se parte de generaciones de una variable multivariante).
+En la mayoría de los ejemplos se generan todas las muestras de una vez, se guardan y se procesan vectorialmente (normalmente empleando la función \texttt{apply}).
+Como ya se comentó en el Capítulo \ref{rrng}, en problemas mas complejos, en los que no es necesario almacenar todas las muestras, puede ser preferible emplear un bucle para generar y procesar las muestras iterativamente.
+
+\hypertarget{distribuciuxf3n-en-el-muestreo}{%
+\subsection{Distribución en el muestreo}\label{distribuciuxf3n-en-el-muestreo}}
+
+\begin{exercise}[Distribución de la media muestral]
+\protect\hypertarget{exr:distr-media}{}\label{exr:distr-media}
+
+Si \(X_{1},\ldots,X_{n}\) es una muestra aleatoria simple de una
+variable aleatoria \(X \sim N\left( \mu, \sigma \right)\), la
+distribución en el muestreo de:
+\[\hat{\mu}=\overline{X}=\dfrac{1}{n}\sum_{i=1}^{n}X_{i}\]
+es:
+\[\overline{X} \sim N\left(  \mu,\dfrac{\sigma}{\sqrt{n}}\right)\]
+Confirmar este resultado mediante simulación, para ello:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Crear un conjunto de datos \texttt{muestras} con 500 muestras de tamaño
+  \(n=10\) de una \(N(1,2)\). Añadir al conjunto de datos las
+  estimaciones de la media y desviación típica obtenidas con cada
+  una de las muestras.
+
+  Valores iniciales:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{54321}\NormalTok{) }\CommentTok{\# Fijar semilla para reproducibilidad}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{500}
+\NormalTok{nx }\OtherTok{\textless{}{-}} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+  Valores teóricos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mux }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{sdx }\OtherTok{\textless{}{-}} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+  Simulación de las muestras (al estilo \texttt{Rcmdr}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestras }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(nsim}\SpecialCharTok{*}\NormalTok{nx, }\AttributeTok{mean=}\NormalTok{mux, }\AttributeTok{sd=}\NormalTok{sdx), }\AttributeTok{ncol=}\NormalTok{nx))}
+\FunctionTok{rownames}\NormalTok{(muestras) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"muestra"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(muestras) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"obs"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{nx, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(muestras)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    500 obs. of  10 variables:
+##  $ obs1 : num  0.642 -0.856 -0.568 -2.301 0.184 ...
+##  $ obs2 : num  3.483 2.216 1.1 4.305 0.677 ...
+##  $ obs3 : num  1.24 -1.51 -3.98 2.29 2.46 ...
+##  $ obs4 : num  3.286 0.947 0.953 -1.663 2.623 ...
+##  $ obs5 : num  3.77 -1.34 1.61 -2.46 1.11 ...
+##  $ obs6 : num  -2.044 0.32 3.046 0.136 3.555 ...
+##  $ obs7 : num  0.6186 -1.8614 4.3386 0.0996 0.8334 ...
+##  $ obs8 : num  -0.829 2.202 -1.688 1.534 -0.114 ...
+##  $ obs9 : num  0.4904 -0.6713 0.5451 -0.6517 0.0168 ...
+##  $ obs10: num  2.79 2.84 1.27 3.93 2.17 ...
+\end{verbatim}
+
+  Estimaciones:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestras}\SpecialCharTok{$}\NormalTok{mean }\OtherTok{\textless{}{-}} \FunctionTok{rowMeans}\NormalTok{(muestras[,}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nx])}
+\NormalTok{muestras}\SpecialCharTok{$}\NormalTok{sd }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(muestras[,}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nx], }\DecValTok{1}\NormalTok{, sd)}
+\end{Highlighting}
+\end{Shaded}
+
+  La fila \texttt{muestras{[}i,{]}} contiene las observaciones de la i-ésima muestra y
+  la correspondiente media y desviación típica.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestras[}\DecValTok{1}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               obs1     obs2     obs3    obs4     obs5     obs6      obs7
+## muestra1 0.6421985 3.482661 1.242483 3.28559 3.766896 -2.04443 0.6186323
+##                obs8      obs9    obs10     mean       sd
+## muestra1 -0.8293636 0.4903819 2.790091 1.344514 1.951292
+\end{verbatim}
+\end{enumerate}
+
+Normalmente emplearemos sin embargo una ordenación por columnas (cada fila se corresponderá con una generación).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\item
+  Generar el histograma (en escala de densidades) de las medias
+  muestrales y compararlo con la densidad teórica.
+
+  Distribución de la media muestral:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(muestras}\SpecialCharTok{$}\NormalTok{mean, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Medias"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Densidad"}\NormalTok{)}
+\CommentTok{\# Densidad observada (estimación)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(muestras}\SpecialCharTok{$}\NormalTok{mean)) }
+\CommentTok{\# Densidad teórica (bajo normalidad)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x, mux, sdx}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(nx)), }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{) }
+\CommentTok{\# Aproximación del valor esperado de la media muestral mediante simulación}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \FunctionTok{mean}\NormalTok{(muestras}\SpecialCharTok{$}\NormalTok{mean), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)  }
+\CommentTok{\# Valor esperado de la media muestral (teórico)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =}\NormalTok{ mux, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{figure}[!htb]
+
+  {\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mednorm-1} 
+
+  }
+
+  \caption{Distribución de la media muestral de una distribución normal.}\label{fig:mednorm}
+  \end{figure}
+\end{enumerate}
+
+\end{exercise}
+
+\vspace{0.5cm}
+
+\begin{exercise}[Distribución de la media muestral continuación]
+\protect\hypertarget{exr:distr-mediab}{}\label{exr:distr-mediab}
+
+Si \(X_{1},\ldots,X_{n}\) es una m.a.s. de una variable aleatoria
+\(X\) (cualquiera) con \(E\left( X \right) = \mu\) y
+\(Var\left( X \right) = \sigma^{2}\), por el Teorema Central del Límite,
+la distribución en el muestreo de \(\hat{\mu}=\overline{X}\) se aproxima a la
+normalidad:
+\[\overline{X}\underset{n\rightarrow\infty}{\longrightarrow}
+N\left( \mu, \dfrac{\sigma}{\sqrt{n}}\right)\]
+Típicamente se suele considerar que esta aproximación es buena
+para tamaños muestrales \(n>30\),
+aunque dependerá de las características de la distribución de \(X\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Repetir el Ejercicio \ref{exr:distr-media} anterior considerando muestras de una \(Exp(1)\) (tener en cuenta que \(X\sim Exp(\lambda)\Rightarrow\mu_{X}=\sigma_{X}=1/\lambda\)).
+  ¿Qué ocurre con la distribución de la media muestral?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{54321}\NormalTok{) }\CommentTok{\# Fijar semilla para reproducibilidad}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{500}
+\NormalTok{nx }\OtherTok{\textless{}{-}} \DecValTok{10}    
+\CommentTok{\# nx \textless{}{-} 50}
+\end{Highlighting}
+\end{Shaded}
+
+  Valores teóricos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lambda }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{muexp }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{lambda}
+\NormalTok{sdexp }\OtherTok{\textless{}{-}}\NormalTok{ muexp}
+\end{Highlighting}
+\end{Shaded}
+
+  Simulación de las muestras:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestras2 }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{rexp}\NormalTok{(nsim}\SpecialCharTok{*}\NormalTok{nx, }\AttributeTok{rate=}\NormalTok{lambda), }\AttributeTok{ncol=}\NormalTok{nx))}
+\FunctionTok{rownames}\NormalTok{(muestras2) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"muestra"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(muestras2) }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\StringTok{"obs"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{nx, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Estimaciones:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestras2}\SpecialCharTok{$}\NormalTok{mean }\OtherTok{\textless{}{-}} \FunctionTok{rowMeans}\NormalTok{(muestras2[,}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nx])}
+\NormalTok{muestras2}\SpecialCharTok{$}\NormalTok{sd }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(muestras2[,}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nx], }\DecValTok{1}\NormalTok{, sd)}
+\end{Highlighting}
+\end{Shaded}
+
+  Distribución de la media muestral:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(muestras2}\SpecialCharTok{$}\NormalTok{mean, }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.1}\NormalTok{, }\FloatTok{2.5}\NormalTok{), }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{breaks =} \StringTok{"FD"}\NormalTok{, }
+     \AttributeTok{xlab =} \StringTok{"Medias"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Densidad"}\NormalTok{)}
+\CommentTok{\# Densidad observada (estimación)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(muestras2}\SpecialCharTok{$}\NormalTok{mean)) }
+\CommentTok{\# Distribución asintótica (TCL)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x,muexp,sdexp}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(nx)), }\AttributeTok{lwd=}\DecValTok{2}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{add=}\ConstantTok{TRUE}\NormalTok{) }
+\CommentTok{\# Aproximación del valor esperado de la media muestral mediante simulación}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\FunctionTok{mean}\NormalTok{(muestras2}\SpecialCharTok{$}\NormalTok{mean),}\AttributeTok{lty=}\DecValTok{2}\NormalTok{)  }
+\CommentTok{\# Valor esperado de la media muestral (teórico)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{muexp, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{figure}[!htb]
+
+  {\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/medexp-1} 
+
+  }
+
+  \caption{Distribución de la media muestral de una distribución exponencial y distribución asintótica.}\label{fig:medexp}
+  \end{figure}
+\item
+  Aumentar el tamaño muestral a 50. ¿Se aproxima más la
+  distribución de las medias muestrales a la teórica bajo
+  normalidad?
+
+  Ejecutar el código del apartado anterior fijando \texttt{nx\ \textless{}-\ 50}.
+\end{enumerate}
+
+\end{exercise}
+
+\hypertarget{intervalos-de-confianza}{%
+\subsection{Intervalos de confianza}\label{intervalos-de-confianza}}
+
+\begin{exercise}[Intervalo de confianza para la media]
+\protect\hypertarget{exr:ic-media}{}\label{exr:ic-media}
+
+A partir del enunciado del Ejercicio \ref{exr:distr-media}, se deduce que el intervalo de confianza (de nivel \(1-\alpha\)) para la media \(\mu\) de una población normal con varianza conocida es:
+\[IC_{1-\alpha}\left(  \mu\right)  = 
+\left(  \overline{X}-z_{1-\alpha/2}\dfrac{\sigma}{\sqrt{n}},\ \overline{X} 
++ z_{1-\alpha/2}\dfrac{\sigma}{\sqrt{n}} \right).\]
+La idea es que el \(100(1-\alpha)\%\) de los intervalos así construidos contentrán el verdadero valor del parámetro.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Utilizando el conjunto de datos \texttt{muestras} del ejercicio 1 (500
+  muestras de tamaño \(n=10\) de una \(N(1,2)\)), añadir en dos nuevas
+  variables los extremos del intervalo de confianza para la media
+  con varianza conocida al conjunto de datos. Analizar la
+  cobertura de estas estimaciones por IC.
+
+  IC para la media con varianza conocida (bajo normalidad):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alfa }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{muestras}\SpecialCharTok{$}\NormalTok{ici }\OtherTok{\textless{}{-}}\NormalTok{ muestras}\SpecialCharTok{$}\NormalTok{mean }\SpecialCharTok{{-}}\NormalTok{ z}\SpecialCharTok{*}\NormalTok{sdx}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(nx)}
+\NormalTok{muestras}\SpecialCharTok{$}\NormalTok{ics }\OtherTok{\textless{}{-}}\NormalTok{ muestras}\SpecialCharTok{$}\NormalTok{mean }\SpecialCharTok{+}\NormalTok{ z}\SpecialCharTok{*}\NormalTok{sdx}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(nx)}
+\end{Highlighting}
+\end{Shaded}
+
+  Cobertura de las estimaciones por IC:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestras}\SpecialCharTok{$}\NormalTok{cob }\OtherTok{\textless{}{-}}\NormalTok{ (muestras}\SpecialCharTok{$}\NormalTok{ici }\SpecialCharTok{\textless{}}\NormalTok{ mux) }\SpecialCharTok{\&}\NormalTok{ (mux }\SpecialCharTok{\textless{}}\NormalTok{ muestras}\SpecialCharTok{$}\NormalTok{ics) }
+\NormalTok{ncob }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(muestras}\SpecialCharTok{$}\NormalTok{cob) }\CommentTok{\# Nº de intervalos que contienen la verdadera media}
+\NormalTok{ncob}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 480
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{100}\SpecialCharTok{*}\NormalTok{ncob}\SpecialCharTok{/}\NormalTok{nsim     }\CommentTok{\# Proporción de intervalos}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 96
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{100}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alfa)    }\CommentTok{\# Proporción teórica bajo normalidad}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 95
+\end{verbatim}
+
+  Como ejemplo ilustrativo, generamos el gráfico de los primeros 50 intervalos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m }\OtherTok{\textless{}{-}} \DecValTok{50}
+\NormalTok{tmp }\OtherTok{\textless{}{-}}\NormalTok{ muestras[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{m,]}
+\FunctionTok{attach}\NormalTok{(tmp)}
+\NormalTok{color }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(cob,}\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{m, mean, }\AttributeTok{col =}\NormalTok{ color, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(ici),}\FunctionTok{max}\NormalTok{(ics)), }
+     \AttributeTok{xlab =} \StringTok{"Muestra"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"IC"}\NormalTok{)}
+\FunctionTok{arrows}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{m, ici, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{m, ics, }\AttributeTok{angle =} \DecValTok{90}\NormalTok{, }\AttributeTok{length =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{code =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =}\NormalTok{ color)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =}\NormalTok{ mux, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{figure}[!htb]
+
+  {\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/cobicnorm-1} 
+
+  }
+
+  \caption{Cobertura de las estimaciones por IC.}\label{fig:cobicnorm}
+  \end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{detach}\NormalTok{(tmp)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Repetir el apartado anterior considerando muestras de una
+  \(Exp(1)\). ¿Qué ocurre con la cobertura del intervalo de
+  confianza obtenido bajo normalidad?
+
+  Ejecutar el código del apartado a) del ejercicio 2.
+
+  IC para la media con varianza conocida (bajo normalidad)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alfa }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{muestras2}\SpecialCharTok{$}\NormalTok{ici }\OtherTok{\textless{}{-}}\NormalTok{ muestras2}\SpecialCharTok{$}\NormalTok{mean }\SpecialCharTok{{-}}\NormalTok{ z}\SpecialCharTok{*}\NormalTok{sdexp}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(nx)}
+\NormalTok{muestras2}\SpecialCharTok{$}\NormalTok{ics }\OtherTok{\textless{}{-}}\NormalTok{ muestras2}\SpecialCharTok{$}\NormalTok{mean }\SpecialCharTok{+}\NormalTok{ z}\SpecialCharTok{*}\NormalTok{sdexp}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(nx)}
+\end{Highlighting}
+\end{Shaded}
+
+  Cobertura de las estimaciones por IC:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestras2}\SpecialCharTok{$}\NormalTok{cob }\OtherTok{\textless{}{-}}\NormalTok{ (muestras2}\SpecialCharTok{$}\NormalTok{ici }\SpecialCharTok{\textless{}}\NormalTok{ muexp) }\SpecialCharTok{\&}\NormalTok{ (muexp }\SpecialCharTok{\textless{}}\NormalTok{ muestras2}\SpecialCharTok{$}\NormalTok{ics) }
+\NormalTok{ncob }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(muestras2}\SpecialCharTok{$}\NormalTok{cob) }\CommentTok{\# Nº de intervalos que contienen la verdadera media}
+\NormalTok{ncob}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 469
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{100}\SpecialCharTok{*}\NormalTok{ncob}\SpecialCharTok{/}\NormalTok{nsim     }\CommentTok{\# Proporción de intervalos}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 93.8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{100}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alfa)    }\CommentTok{\# Proporción teórica bajo normalidad}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 95
+\end{verbatim}
+
+  Como ejemplo ilustrativo, generamos el gráfico de los primeros 100 intervalos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{tmp }\OtherTok{\textless{}{-}}\NormalTok{ muestras2[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{m,]}
+\FunctionTok{attach}\NormalTok{(tmp)}
+\NormalTok{color }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(cob,}\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{m, mean, }\AttributeTok{col =}\NormalTok{ color, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(ici),}\FunctionTok{max}\NormalTok{(ics)), }
+     \AttributeTok{xlab =} \StringTok{"Muestra"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"IC"}\NormalTok{)}
+\FunctionTok{arrows}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{m, ici, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{m, ics, }\AttributeTok{angle =} \DecValTok{90}\NormalTok{, }\AttributeTok{length =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{code =} \DecValTok{3}\NormalTok{, }\AttributeTok{col =}\NormalTok{ color)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =}\NormalTok{ muexp, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{figure}[!htb]
+
+  {\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/cobicexp-1} 
+
+  }
+
+  \caption{Cobertura de las estimaciones por IC (bajo normalidad).}\label{fig:cobicexp}
+  \end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{detach}\NormalTok{(tmp)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  ¿Qué ocurre si aumentamos el tamaño muestral a 50?
+
+  Ejecutar el código del ejercicio anterior fijando \texttt{nx\ \textless{}-\ 50}
+  y el del apartado anterior.
+\end{enumerate}
+
+\end{exercise}
+
+En los apartados b) y c) podíamos considerar bootstrap descrito en siguientes capítulos.
+
+Podemos aproximar por simulación los intervalos de probabilidad de la media muestral (tendríamos una idea del valor esperado de lo que obtendríamos
+con el bootstrap percentil; en este caso el estimador es insesgado\ldots):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribución de la media muestral}
+\FunctionTok{hist}\NormalTok{(muestras2}\SpecialCharTok{$}\NormalTok{mean, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{breaks=}\StringTok{"FD"}\NormalTok{, }
+     \AttributeTok{main=}\StringTok{"Distribución de la media muestral"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Medias"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Densidad"}\NormalTok{)}
+\CommentTok{\# Densidad observada (estimación)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(muestras2}\SpecialCharTok{$}\NormalTok{mean), }\AttributeTok{lwd=}\DecValTok{2}\NormalTok{, }\AttributeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{) }
+\CommentTok{\# Densidad teórica (bajo normalidad)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x,muexp,sdexp}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(nx)), }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{add=}\ConstantTok{TRUE}\NormalTok{) }
+\CommentTok{\# Aproximación por simulación del valor esperado de la media muestral}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\FunctionTok{mean}\NormalTok{(muestras2}\SpecialCharTok{$}\NormalTok{mean), }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)}
+\CommentTok{\# Valor esperado de la media muestral (teórico)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{muexp, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{) }
+\CommentTok{\# IP bajo normalidad}
+\NormalTok{ic.aprox }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(muestras2[ ,}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}ici\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}ics\textquotesingle{}}\NormalTok{)], }\DecValTok{2}\NormalTok{, mean)}
+\DocumentationTok{\#\# ic.aprox }
+\DocumentationTok{\#\#       ici       ics }
+\DocumentationTok{\#\# 0.3865199 1.6261099}
+\CommentTok{\# Intervalo de probabilidad para la media muestral aproximado bajo normalidad}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =}\NormalTok{ ic.aprox, }\AttributeTok{col=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Intervalo de probabilidad para la media muestral (aproximado por simulación)}
+\NormalTok{ic.sim }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(muestras2}\SpecialCharTok{$}\NormalTok{mean, }\FunctionTok{c}\NormalTok{(alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{))}
+\DocumentationTok{\#\# ic.sim}
+\DocumentationTok{\#\#      2.5\%     97.5\% }
+\DocumentationTok{\#\# 0.4714233 1.8059094}
+\CommentTok{\# IP (aprox.) }
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{ic.sim, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{, }\AttributeTok{col=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-35-1} \end{center}
+
+\begin{remark}
+Estimaciones puntuales, por intervalo de confianza y contrastes de hipótesis
+para la media con varianza desconocida bajo normalidad
+se pueden obtener con la función \texttt{t.test}.
+\end{remark}
+
+\vspace{0.5cm}
+
+\begin{exercise}[Intervalo de confianza Agresti-Coull para una proporción]
+\protect\hypertarget{exr:ic-agresti-coull}{}\label{exr:ic-agresti-coull}
+
+El Intervalo de confianza para una proporción construido usando la
+aproximación normal tiene un mal comportamiento cuando el tamaño de
+la muestra es pequeño. Una simple y efectiva mejora consiste en
+añadir a la muestra \(2a\) elementos, \(a\) exitos y \(a\) fracasos. Así
+el intervalo de confianza al \(\left( 1-\alpha\right) 100\%\) para
+una proporción mejorado es:
+\[\begin{aligned}
+IC_{1-\alpha}^{a}\left(  p\right)   
+& =\left(  \tilde{p}-z_{1-\alpha/2}\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}} \text{ , }
+\tilde{p}+z_{1-\alpha/2}\sqrt{\frac{\tilde{p}(1-\tilde{p})}{\tilde{n}}}\right)  ,\\
+\text{siendo }\tilde{n} & = n+2a \text{, } \tilde{p} = \frac{np+a}{\tilde{n}}.
+\end{aligned}\]
+En el caso de \(a=2\) se denomina IC Agresti-Coull.
+
+(Los apartados a) y b) están basados en los ejemplos 1.5 y 1.6 de \href{http://www.springer.com/gp/book/9780387402734}{Suess y Trumbo}, 2010)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Teniendo en cuenta que la variable aleatoria \(X=n\hat{p}\sim\mathcal{B}(n,p)\),
+  obtener y representar gráficamente la cobertura teórica del
+  intervalo de confianza estándar (\(a=0\)) de una proporción para
+  una muestra de tamaño \(n=30\), \(\alpha=0.05\) y distintos valores
+  de \(p\) (\texttt{p.teor\ \textless{}-\ seq(1/n,\ 1\ -\ 1/n,\ length\ =\ 1000)}).
+
+  Parámetros:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\NormalTok{adj }\OtherTok{\textless{}{-}} \DecValTok{0}  \CommentTok{\# (adj \textless{}{-} 2 para Agresti{-}Coull)}
+\end{Highlighting}
+\end{Shaded}
+
+  Probabilidades teóricas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{p.teor }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\NormalTok{n, }\DecValTok{1} \SpecialCharTok{{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{n, }\AttributeTok{length =}\NormalTok{ m) }
+\end{Highlighting}
+\end{Shaded}
+
+  Posibles resultados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\NormalTok{n}
+\NormalTok{p.est }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{+}\NormalTok{ adj)}\SpecialCharTok{/}\NormalTok{(n }\SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ adj) }
+\NormalTok{ic.err }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sqrt}\NormalTok{(p.est }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ p.est)}\SpecialCharTok{/}\NormalTok{(n }\SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ adj))  }
+\NormalTok{lcl }\OtherTok{\textless{}{-}}\NormalTok{ p.est }\SpecialCharTok{{-}}\NormalTok{ ic.err }
+\NormalTok{ucl }\OtherTok{\textless{}{-}}\NormalTok{ p.est }\SpecialCharTok{+}\NormalTok{ ic.err }
+\end{Highlighting}
+\end{Shaded}
+
+  Recorrer prob. teóricas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p.cov }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(m)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m) \{}
+  \CommentTok{\# cobertura de los posibles intervalos}
+\NormalTok{  cover }\OtherTok{\textless{}{-}}\NormalTok{ (p.teor[i] }\SpecialCharTok{\textgreater{}=}\NormalTok{ lcl) }\SpecialCharTok{\&}\NormalTok{ (p.teor[i] }\SpecialCharTok{\textless{}=}\NormalTok{ ucl)  }
+  \CommentTok{\# prob. de los posibles intervalos}
+\NormalTok{  p.rel }\OtherTok{\textless{}{-}} \FunctionTok{dbinom}\NormalTok{(x[cover], n, p.teor[i])           }
+  \CommentTok{\# prob. total de cobertura}
+\NormalTok{  p.cov[i] }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(p.rel)                            }
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Gráfico coberturas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(p.teor, p.cov, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}} \DecValTok{4} \SpecialCharTok{*}\NormalTok{ alpha, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alpha, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-40-1} \end{center}
+
+  Fuente \href{http://www.springer.com/gp/book/9780387402734}{Suess y Trumbo (2010)}.
+\item
+  Repetir el apartado anterior considerando intervalos de
+  confianza Agresti-Coull (\(a=2\)).
+
+  Parámetros:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\NormalTok{adj }\OtherTok{\textless{}{-}} \DecValTok{2}  \CommentTok{\# Agresti{-}Coull}
+
+\CommentTok{\# Probabilidades teóricas:}
+\NormalTok{m }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{p.teor }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\NormalTok{n, }\DecValTok{1} \SpecialCharTok{{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{n, }\AttributeTok{length =}\NormalTok{ m) }
+\CommentTok{\# Posibles resultados:}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\NormalTok{n}
+\NormalTok{p.est }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{+}\NormalTok{ adj)}\SpecialCharTok{/}\NormalTok{(n }\SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ adj) }
+\NormalTok{ic.err }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sqrt}\NormalTok{(p.est }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ p.est)}\SpecialCharTok{/}\NormalTok{(n }\SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ adj))  }
+\NormalTok{lcl }\OtherTok{\textless{}{-}}\NormalTok{ p.est }\SpecialCharTok{{-}}\NormalTok{ ic.err }
+\NormalTok{ucl }\OtherTok{\textless{}{-}}\NormalTok{ p.est }\SpecialCharTok{+}\NormalTok{ ic.err }
+\CommentTok{\# Recorrer prob. teóricas:}
+\NormalTok{p.cov }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(m)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m) \{}
+  \CommentTok{\# cobertura de los posibles intervalos}
+\NormalTok{  cover }\OtherTok{\textless{}{-}}\NormalTok{ (p.teor[i] }\SpecialCharTok{\textgreater{}=}\NormalTok{ lcl) }\SpecialCharTok{\&}\NormalTok{ (p.teor[i] }\SpecialCharTok{\textless{}=}\NormalTok{ ucl)  }
+  \CommentTok{\# prob. de los posibles intervalos}
+\NormalTok{  p.rel }\OtherTok{\textless{}{-}} \FunctionTok{dbinom}\NormalTok{(x[cover], n, p.teor[i])           }
+  \CommentTok{\# prob. total de cobertura}
+\NormalTok{  p.cov[i] }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(p.rel)                            }
+\NormalTok{\}}
+\CommentTok{\# Gráfico coberturas:}
+\FunctionTok{plot}\NormalTok{(p.teor, p.cov, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}} \DecValTok{4} \SpecialCharTok{*}\NormalTok{ alpha, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alpha, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-41-1} \end{center}
+\item
+  Repetir el apartado anterior empleando simulación para aproximar
+  la cobertura.
+
+  Parámetros:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\NormalTok{adj }\OtherTok{\textless{}{-}} \DecValTok{2}  \CommentTok{\#\textquotesingle{} (2 para Agresti{-}Coull)}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{54321}\NormalTok{)}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{500} 
+\CommentTok{\# Probabilidades teóricas:}
+\NormalTok{m }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{p.teor }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\NormalTok{n, }\DecValTok{1} \SpecialCharTok{{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{n, }\AttributeTok{length =}\NormalTok{ m) }
+\end{Highlighting}
+\end{Shaded}
+
+  Recorrer prob. teóricas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# m \textless{}{-} length(p.teor)}
+\NormalTok{p.cov }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(m)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{m) \{}
+  \CommentTok{\# Equivalente a simular nsim muestras de tamaño n}
+  \CommentTok{\# ry \textless{}{-} matrix(rbinom(n*nsim, 1, p.teor[i]), ncol=n)}
+  \CommentTok{\# rx \textless{}{-} apply(ry, 1, sum)}
+\NormalTok{  rx }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(nsim, n, p.teor[i])}
+\NormalTok{  p.est }\OtherTok{\textless{}{-}}\NormalTok{ (rx }\SpecialCharTok{+}\NormalTok{ adj)}\SpecialCharTok{/}\NormalTok{(n }\SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ adj)  }
+\NormalTok{  ic.err }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{) }\SpecialCharTok{*} \FunctionTok{sqrt}\NormalTok{(p.est }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ p.est)}\SpecialCharTok{/}\NormalTok{(n }\SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ adj))}
+\NormalTok{  p.cov[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{( }\FunctionTok{abs}\NormalTok{(p.est }\SpecialCharTok{{-}}\NormalTok{ p.teor[i]) }\SpecialCharTok{\textless{}}\NormalTok{ ic.err )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Representar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(p.teor, p.cov, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}} \DecValTok{4} \SpecialCharTok{*}\NormalTok{ alpha, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alpha, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-44-1} \end{center}
+\end{enumerate}
+
+\end{exercise}
+
+Como ya se comentó, el caso de ajustar un modelo a los datos y realizar simulaciones a partir de ese modelo ajustado para aproximar las características de interés de un estadístico, se denomina también bootstrap paramétrico.
+Para más detalles ver por ejemplo la \href{https://rubenfcasal.github.io/book_remuestreo/modunif-boot-par.html}{Sección 3.1} de Cao y Fernández-Casal (2020).
+En este libro, en las secciones \href{https://rubenfcasal.github.io/book_remuestreo/icboot-ejem.html\#estudio-sim-exp}{4.6.2} y \href{https://rubenfcasal.github.io/book_remuestreo/ejemplos-3.html\#estudio-sim-boot}{B.3.2}, se incluyen ejemplos adicionales de estudios de simulación.
+
+\hypertarget{contrastes}{%
+\subsection{Contrastes de hipótesis}\label{contrastes}}
+
+Ver \href{https://rubenfcasal.github.io/book_remuestreo/contrastes.html}{Capítulo 5} de Cao y Fernández-Casal (2020).
+
+\begin{exercise}[Test de Kolmogorov-Smirnov]
+\protect\hypertarget{exr:ks-test-sim}{}\label{exr:ks-test-sim}
+
+En la Sección \ref{calgen} del Tema \ref{gen-pseudo} se propuso el análisis de la bondad de ajuste de un generador de números pseudo-aleatorios mediante el test de Kolmogorov-Smirnov (ver Sección \ref{ks-test}).
+Sin embargo, si \(H_{0}\) es compuesta (los parámetros desconocidos se estiman por máxima verosimilitud y se trabaja con \(\hat{F}_{0}\)) los cuantiles de la distribución (asintótica) de \(D_{n}\) pueden ser demasiado conservativos y sería preferible utilizar la distribución exacta.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Analizar el comportamiento del contraste de Kolmogorov-Smirnov
+  para contrastar normalidad empleando repetidamente este test,
+  considerando 1000 pruebas con muestras de tamaño 30 de
+  una \(\mathcal{N}(0,1)\). Comparar gráficamente el ajuste
+  de la distribución del \(p\)-valor a la de referencia
+  (estudiar el tamaño del contraste).
+
+  Valores iniciales:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{54321}\NormalTok{)}
+\NormalTok{nx }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{mx }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{sx }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{estadistico }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nsim)}
+\NormalTok{pvalor }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nsim)}
+\end{Highlighting}
+\end{Shaded}
+
+  Realizar contrastes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{(isim }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim) \{}
+\NormalTok{  rx }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(nx, mx, sx)}
+\NormalTok{  tmp }\OtherTok{\textless{}{-}} \FunctionTok{ks.test}\NormalTok{(rx, }\StringTok{"pnorm"}\NormalTok{, }\FunctionTok{mean}\NormalTok{(rx), }\FunctionTok{sd}\NormalTok{(rx))}
+\NormalTok{  estadistico[isim] }\OtherTok{\textless{}{-}}\NormalTok{ tmp}\SpecialCharTok{$}\NormalTok{statistic}
+\NormalTok{  pvalor[isim] }\OtherTok{\textless{}{-}}\NormalTok{ tmp}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Proporción de rechazos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Proporción de rechazos al 1\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.01}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Proporción de rechazos al 5\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Proporción de rechazos al 10\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.1}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Proporción de rechazos al 1% = 0 
+## Proporción de rechazos al 5% = 0 
+## Proporción de rechazos al 10% = 0.001
+\end{verbatim}
+
+  Análisis de los p-valores:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(pvalor, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(dunif(x,0,1), add=TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-47-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribución empírica}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }
+      \AttributeTok{main =} \StringTok{\textquotesingle{}Tamaño del contraste\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{a=}\DecValTok{0}\NormalTok{, }\AttributeTok{b=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(punif(x, 0, 1), add = TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-47-2} \end{center}
+\item
+  Repetir el apartado anterior considerando el test de Lilliefors
+  (rutina \texttt{lillie.test} del paquete \texttt{nortest}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(nortest, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Valores iniciales:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{54321}\NormalTok{)}
+\NormalTok{nx }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{mx }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{sx }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{estadistico }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nsim)}
+\NormalTok{pvalor }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nsim)}
+\end{Highlighting}
+\end{Shaded}
+
+  Realizar contrastes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{(isim }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim) \{}
+\NormalTok{  rx }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(nx, mx, sx)}
+  \CommentTok{\# tmp \textless{}{-} ks.test(rx, "pnorm", mean(rx), sd(rx))}
+\NormalTok{  tmp }\OtherTok{\textless{}{-}} \FunctionTok{lillie.test}\NormalTok{(rx)}
+\NormalTok{  estadistico[isim] }\OtherTok{\textless{}{-}}\NormalTok{ tmp}\SpecialCharTok{$}\NormalTok{statistic}
+\NormalTok{  pvalor[isim] }\OtherTok{\textless{}{-}}\NormalTok{ tmp}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Proporción de rechazos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Proporción de rechazos al 1\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.01}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Proporción de rechazos al 5\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Proporción de rechazos al 10\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.1}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Proporción de rechazos al 1% = 0.01 
+## Proporción de rechazos al 5% = 0.044 
+## Proporción de rechazos al 10% = 0.089
+\end{verbatim}
+
+  Análisis de los p-valores:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(pvalor, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(dunif(x,0,1), add=TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-52-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribución empírica}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{main =} \StringTok{\textquotesingle{}Tamaño del contraste\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }\AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{a=}\DecValTok{0}\NormalTok{, }\AttributeTok{b=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(punif(x, 0, 1), add = TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-52-2} \end{center}
+\item
+  Repetir el apartado a) contrastando una distribución exponencial
+  y considerando 500 pruebas con muestras de tamaño 30 de una \(Exp(1)\).
+
+  Valores iniciales:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{54321}\NormalTok{)}
+\NormalTok{nx }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{ratex }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{500}
+\NormalTok{estadistico }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nsim)}
+\NormalTok{pvalor }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nsim)}
+\end{Highlighting}
+\end{Shaded}
+
+  Realizar contrastes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{(isim }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim) \{}
+\NormalTok{  rx }\OtherTok{\textless{}{-}} \FunctionTok{rexp}\NormalTok{(nx, ratex)}
+\NormalTok{  tmp }\OtherTok{\textless{}{-}} \FunctionTok{ks.test}\NormalTok{(rx, }\StringTok{"pexp"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\FunctionTok{mean}\NormalTok{(rx))}
+\NormalTok{  estadistico[isim] }\OtherTok{\textless{}{-}}\NormalTok{ tmp}\SpecialCharTok{$}\NormalTok{statistic}
+\NormalTok{  pvalor[isim] }\OtherTok{\textless{}{-}}\NormalTok{ tmp}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Proporción de rechazos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Proporción de rechazos al 1\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.01}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Proporción de rechazos al 5\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Proporción de rechazos al 10\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.1}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Proporción de rechazos al 1% = 0 
+## Proporción de rechazos al 5% = 0.004 
+## Proporción de rechazos al 10% = 0.008
+\end{verbatim}
+
+  Análisis de los p-valores:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(pvalor, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(dunif(x,0,1), add=TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-56-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribución empírica}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }
+      \AttributeTok{main =} \StringTok{\textquotesingle{}Tamaño del contraste\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{a=}\DecValTok{0}\NormalTok{, }\AttributeTok{b=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(punif(x, 0, 1), add = TRUE) }
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-56-2} \end{center}
+\item
+  Diseñar una rutina que permita realizar el contraste KS de
+  bondad de ajuste de una variable exponencial aproximando el
+  \(p\)-valor por simulación y repetir el apartado anterior
+  empleando esta rutina.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ks.exp.sim }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{nsim =} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{3}\NormalTok{) \{}
+\NormalTok{  DNAME }\OtherTok{\textless{}{-}} \FunctionTok{deparse}\NormalTok{(}\FunctionTok{substitute}\NormalTok{(x))}
+\NormalTok{  METHOD }\OtherTok{\textless{}{-}} \StringTok{"Kolmogorov{-}Smirnov Test of pexp by simulation"} 
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(x)}
+\NormalTok{  RATE }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\FunctionTok{mean}\NormalTok{(x)}
+\NormalTok{  ks.exp.stat }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{rate=}\DecValTok{1}\SpecialCharTok{/}\FunctionTok{mean}\NormalTok{(x)) \{}
+\NormalTok{    DMinus }\OtherTok{\textless{}{-}} \FunctionTok{pexp}\NormalTok{(}\FunctionTok{sort}\NormalTok{(x), }\AttributeTok{rate=}\NormalTok{rate) }\SpecialCharTok{{-}}\NormalTok{ (}\DecValTok{0}\SpecialCharTok{:}\NormalTok{(n }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{))}\SpecialCharTok{/}\NormalTok{n}
+\NormalTok{    DPlus }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{n }\SpecialCharTok{{-}}\NormalTok{ DMinus}
+\NormalTok{    Dn }\OtherTok{=} \FunctionTok{max}\NormalTok{(}\FunctionTok{c}\NormalTok{(DMinus, DPlus))}
+\NormalTok{  \}  }
+\NormalTok{  STATISTIC }\OtherTok{\textless{}{-}} \FunctionTok{ks.exp.stat}\NormalTok{(x, }\AttributeTok{rate =}\NormalTok{ RATE) }
+  \FunctionTok{names}\NormalTok{(STATISTIC) }\OtherTok{\textless{}{-}} \StringTok{"Dn"}
+  \CommentTok{\# PVAL \textless{}{-} 0}
+  \CommentTok{\# for(i in 1:nsim) \{}
+  \CommentTok{\#   rx \textless{}{-} rexp(n, rate = RATE)}
+  \CommentTok{\#   if (STATISTIC \textless{}= ks.exp.stat(rx)) PVAL \textless{}{-} PVAL+1}
+  \CommentTok{\# \}}
+  \CommentTok{\# PVAL \textless{}{-} PVAL/nsim}
+  \CommentTok{\# PVAL \textless{}{-} PVAL/(nsim + 1)}
+  \CommentTok{\# PVAL \textless{}{-} (PVAL + 1)/(nsim + 2)}
+\NormalTok{  rx }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rexp}\NormalTok{(n}\SpecialCharTok{*}\NormalTok{nsim, }\AttributeTok{rate =}\NormalTok{ RATE), }\AttributeTok{ncol=}\NormalTok{n)}
+\NormalTok{  PVAL }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(STATISTIC }\SpecialCharTok{\textless{}=} \FunctionTok{apply}\NormalTok{(rx, }\DecValTok{1}\NormalTok{, ks.exp.stat))}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{structure}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{statistic =}\NormalTok{ STATISTIC, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{, }
+                   \AttributeTok{p.value =}\NormalTok{ PVAL, }\AttributeTok{method =}\NormalTok{ METHOD, }\AttributeTok{data.name =}\NormalTok{ DNAME), }
+                   \AttributeTok{class =} \StringTok{"htest"}\NormalTok{))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Simulación:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{54321}\NormalTok{)}
+\NormalTok{nx }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{ratex }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{500}
+\NormalTok{estadistico }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nsim)}
+\NormalTok{pvalor }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(nsim)}
+\end{Highlighting}
+\end{Shaded}
+
+  Realizar contrastes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{(isim }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nsim) \{}
+\NormalTok{  rx }\OtherTok{\textless{}{-}} \FunctionTok{rexp}\NormalTok{(nx, ratex)}
+  \CommentTok{\# tmp \textless{}{-} ks.test(rx, "pexp", 1/mean(rx))}
+\NormalTok{  tmp }\OtherTok{\textless{}{-}} \FunctionTok{ks.exp.sim}\NormalTok{(rx, }\AttributeTok{nsim =} \DecValTok{200}\NormalTok{)}
+\NormalTok{  estadistico[isim] }\OtherTok{\textless{}{-}}\NormalTok{ tmp}\SpecialCharTok{$}\NormalTok{statistic}
+\NormalTok{  pvalor[isim] }\OtherTok{\textless{}{-}}\NormalTok{ tmp}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  Proporción de rechazos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Proporción de rechazos al 1\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.01}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Proporción de rechazos al 5\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Proporción de rechazos al 10\% ="}\NormalTok{, }\FunctionTok{mean}\NormalTok{(pvalor }\SpecialCharTok{\textless{}} \FloatTok{0.1}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Proporción de rechazos al 1% = 0.008 
+## Proporción de rechazos al 5% = 0.058 
+## Proporción de rechazos al 10% = 0.106
+\end{verbatim}
+
+  Análisis de los p-valores:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(pvalor, }\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(dunif(x,0,1), add=TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-60-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribución empírica}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(pvalor)(x), }\AttributeTok{type =} \StringTok{"s"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }
+      \AttributeTok{main =} \StringTok{\textquotesingle{}Tamaño del contraste\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}Proporción de rechazos\textquotesingle{}}\NormalTok{, }
+      \AttributeTok{xlab =} \StringTok{\textquotesingle{}Nivel de significación\textquotesingle{}}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{a=}\DecValTok{0}\NormalTok{, }\AttributeTok{b=}\DecValTok{1}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)   }\CommentTok{\# curve(punif(x, 0, 1), add = TRUE) }
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-60-2} \end{center}
+\item
+  Estudiar la potencia de los contrastes de los apartados c) y d),
+  considerando como alternativa una distribución Weibull.
+
+  La distribución exponencial es un caso particular de la Weibull:
+  \texttt{dexp(x,\ ratex)\ ==\ dweibull(x,\ 1,\ 1/ratex)}.
+  Estudiamos lo que ocurre al desplazar \texttt{dweibull(x,\ shape,\ 1/ratex)} con \texttt{0\ \textless{}\ shape\ \textless{}\ 2}.
+
+  CUIDADO: las simulaciones pueden requerir de mucho tiempo de computación
+  (consideramos valores pequeños de \texttt{nx} y \texttt{nsim} en datos y en \texttt{ks.exp.sim}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{54321}\NormalTok{)}
+\NormalTok{nx }\OtherTok{\textless{}{-}} \DecValTok{20}
+\NormalTok{ratex }\OtherTok{\textless{}{-}} \DecValTok{1}    \CommentTok{\# Puede ser interesante representarlo variando rate}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{200}
+\NormalTok{alfa }\OtherTok{\textless{}{-}} \FloatTok{0.1}   \CommentTok{\# Puede ser interesante representarlo variando alfa}
+
+
+\NormalTok{shapex }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{1.75}\NormalTok{, }\AttributeTok{len=}\DecValTok{21}\NormalTok{)}
+\NormalTok{preject }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(}\FunctionTok{length}\NormalTok{(shapex)) }\CommentTok{\# Porporciones de rechazos con ks.test}
+\NormalTok{ks.test.p }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{ks.test}\NormalTok{(x, }\StringTok{"pexp"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\FunctionTok{mean}\NormalTok{(x))}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{preject2 }\OtherTok{\textless{}{-}}\NormalTok{ preject }\CommentTok{\# Porporciones de rechazos con ks.exp.sim}
+\NormalTok{ks.exp.sim.p }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{ks.exp.sim}\NormalTok{(x, }\DecValTok{200}\NormalTok{)}\SpecialCharTok{$}\NormalTok{p.value}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(shapex)) \{ }
+\NormalTok{  rx }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rweibull}\NormalTok{(nx}\SpecialCharTok{*}\NormalTok{nsim, }\AttributeTok{shape =}\NormalTok{ shapex[i], }\AttributeTok{scale =} \DecValTok{1}\SpecialCharTok{/}\NormalTok{ratex), }\AttributeTok{ncol=}\NormalTok{nx)}
+\NormalTok{  preject[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{( }\FunctionTok{apply}\NormalTok{(rx, }\DecValTok{1}\NormalTok{, ks.test.p) }\SpecialCharTok{\textless{}=}\NormalTok{ alfa )}
+\NormalTok{  preject2[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{( }\FunctionTok{apply}\NormalTok{(rx, }\DecValTok{1}\NormalTok{, ks.exp.sim.p) }\SpecialCharTok{\textless{}=}\NormalTok{ alfa )}
+\NormalTok{\}}
+
+\FunctionTok{plot}\NormalTok{(shapex, preject, }\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\AttributeTok{main =} \FunctionTok{paste}\NormalTok{(}\StringTok{"Potencia del contraste ( alfa ="}\NormalTok{, alfa, }\StringTok{")"}\NormalTok{), }
+     \AttributeTok{xlab =} \StringTok{"shape"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Proporción de rechazos"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(shapex, preject2, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =}\NormalTok{ alfa, }\AttributeTok{v =} \DecValTok{1}\NormalTok{, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/potencia-1} \end{center}
+\end{enumerate}
+
+\end{exercise}
+
+El estadístico de Kolmogorov-Smirnov \texttt{Dn\ =\ max(c(DMinus,\ DPlus))} tiene ventajas desde el
+punto de vista teórico, pero puede no ser muy potente para detectar diferencias entre la
+distribución bajo la hipótesis nula y la distribución de los datos.
+La ventaja de la aproximación por simulación es que no estamos atados a resultados teóricos
+y podemos emplear el estadístico que se considere oportuno
+(la principal desventaja es el tiempo de computación).
+Por ejemplo, podríamos pensar en utilizar como estadístico la suma de los errores en
+valor absoluto del correspondiente gráfico PP, y solo habría que cambiar el estadístico
+\texttt{Dn} en la función \texttt{ks.exp.sim} por \texttt{Dn\ =\ sum(abs(\ (1:n\ -\ 0.5)/n\ -\ \ pexp(sort(x),\ rate=rate)\ ))}.
+
+\hypertarget{comparaciuxf3n-de-estimadores}{%
+\subsection{Comparación de estimadores}\label{comparaciuxf3n-de-estimadores}}
+
+\begin{exercise}[Comparación de la eficiencia de la media muestral y de la mediana bajo contaminación]
+\protect\hypertarget{exr:media-median}{}\label{exr:media-median}
+
+Supongamos que estamos interesados en estudiar el efecto de datos atípicos en la estimación de la media teórica mediante la media y la mediana muestrales.
+Consideramos una variable aleatoria con distribución normal contaminada, en la que una observación procede de una \(N(0,1)\) con probabilidad 0.95 y de una \(N(3,3^2)\) con probabilidad 0.05 (mixtura).
+Se puede generar una muestra de esta variable (mixtura) mediante el método de composición descrito en la Sección \ref{composicion}, por ejemplo empleando el siguiente código:
+
+\begin{verbatim}
+p.sim <- rbinom(n, 1, 0.05)
+dat.sim <- rnorm(n, 3*p.sim, 1+2*p.sim)
+\end{verbatim}
+
+Podemos comparar la densidad objetivo con la de los valores contaminados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{12}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}densidad\textquotesingle{}}\NormalTok{, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FloatTok{0.95}\SpecialCharTok{*}\FunctionTok{dnorm}\NormalTok{(x, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{+} \FloatTok{0.05}\SpecialCharTok{*}\FunctionTok{dnorm}\NormalTok{(x, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/contaminada-1} \end{center}
+
+\end{exercise}
+
+\begin{remark}
+Como se comentó en la Sección \ref{composicion}, también es habitual simular este tipo de datos generando un porcentaje alto de valores (en este caso un 95\%) de la distribución base (\(N(0,1)\)) y el resto (5\%) de la distibución ``contaminadora'' (\(N(3,3^2)\)), aunque se suele considerar un porcentaje de contaminación del 1\% o inferior (además, como en este caso concreto no va importar el orden, no sería necesario combinar aleatoriamente los valores).
+\end{remark}
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Aproximar mediante simulación (500 generaciones) el sesgo y
+  error estándar de la media y la mediana en el caso de una
+  muestra de tamaño \(n=100\) (suponiendo que se pretende estimar la
+  media no contaminada 0).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# media y mediana}
+\NormalTok{xsd }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{xmed }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{ndat }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{nsim }\OtherTok{\textless{}{-}} \DecValTok{500}
+
+\CommentTok{\# for (isim in 1:nsim) \# evitar matrix y apply}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{ntsim }\OtherTok{\textless{}{-}}\NormalTok{ ndat}\SpecialCharTok{*}\NormalTok{nsim}
+\NormalTok{p.sim }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(ntsim, }\DecValTok{1}\NormalTok{, }\FloatTok{0.05}\NormalTok{)}
+\NormalTok{dat.sim }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(ntsim, }\DecValTok{3}\SpecialCharTok{*}\NormalTok{p.sim, }\DecValTok{1}\SpecialCharTok{+}\DecValTok{2}\SpecialCharTok{*}\NormalTok{p.sim)}
+\NormalTok{dat.sim }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(dat.sim, }\AttributeTok{ncol=}\NormalTok{nsim)}
+\end{Highlighting}
+\end{Shaded}
+
+  Cada columna es una muestra
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(dat.sim[,}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  num [1:100] 0.197 -0.42 1.163 -0.406 0.744 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(dat.sim[,}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-62-1} \end{center}
+
+  Calculamos los estimadores:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean.sim }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(dat.sim, }\DecValTok{2}\NormalTok{, mean)}
+\NormalTok{median.sim }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(dat.sim, }\DecValTok{2}\NormalTok{, median)}
+\end{Highlighting}
+\end{Shaded}
+
+  Estimamos sus características:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(mean.sim) }\CommentTok{\# Coincide con el sesgo (media teórica es 0)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1459986
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sd}\NormalTok{(mean.sim)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1349537
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(median.sim) }\CommentTok{\# Coincide con el sesgo (media teórica es 0)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.04453509
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sd}\NormalTok{(median.sim)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1300611
+\end{verbatim}
+
+  Sesgo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(mean.sim}\SpecialCharTok{{-}}\NormalTok{xmed, median.sim}\SpecialCharTok{{-}}\NormalTok{xmed, }
+      \AttributeTok{names=}\FunctionTok{c}\NormalTok{(}\StringTok{"Media"}\NormalTok{,}\StringTok{"Mediana"}\NormalTok{), }\AttributeTok{ylab=}\StringTok{"Sesgo"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-65-1} \end{center}
+
+  Error cuadrático:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{((mean.sim}\SpecialCharTok{{-}}\NormalTok{xmed)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{, (median.sim}\SpecialCharTok{{-}}\NormalTok{xmed)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{, }
+      \AttributeTok{names=}\FunctionTok{c}\NormalTok{(}\StringTok{"Media"}\NormalTok{,}\StringTok{"Mediana"}\NormalTok{), }\AttributeTok{ylab=}\StringTok{"Error cuadrático"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-66-1} \end{center}
+
+  Estadísticos error cuadrático:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# SE media}
+\FunctionTok{summary}\NormalTok{((mean.sim}\SpecialCharTok{{-}}\NormalTok{xmed)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## 0.0000005 0.0045072 0.0206272 0.0394917 0.0591531 0.3619587
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# SE mediana}
+\FunctionTok{summary}\NormalTok{((median.sim}\SpecialCharTok{{-}}\NormalTok{xmed)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## 0.0000001 0.0016481 0.0070625 0.0188654 0.0243903 0.2618368
+\end{verbatim}
+\end{enumerate}
+
 \hypertarget{referencias}{%
 \chapter*{Referencias}\label{referencias}}
 \addcontentsline{toc}{chapter}{Referencias}
@@ -7476,7 +9783,7 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 ##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
 ##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x0000000012e325c8>
+## <bytecode: 0x000000003b505978>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -9163,7 +11470,7 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 ##   # Devolver valores
 ##   return(u)
 ## }
-## <bytecode: 0x000000004021d338>
+## <bytecode: 0x000000003b6c14c0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -9282,7 +11589,7 @@ Esta función está implementada en el siguiente código:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##       0       0       0
+##    0.02    0.00    0.01
 \end{verbatim}
 
 \begin{Shaded}

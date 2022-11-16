@@ -12,8 +12,8 @@ output:
   bookdown::html_document2:
     pandoc_args: ["--number-offset", "5,0"]
     toc: yes 
-    mathjax: local            # copia local de MathJax, hay que establecer:
-    self_contained: false     # las dependencias se guardan en ficheros externos 
+    # mathjax: local            # copia local de MathJax, hay que establecer:
+    # self_contained: false     # las dependencias se guardan en ficheros externos 
   bookdown::pdf_document2:
     keep_tex: yes
     toc: yes 
@@ -24,7 +24,7 @@ knitr::purl("06-Simulacion_multidimensional.Rmd", documentation = 2)
 knitr::spin("06-Simulacion_multidimensional.R",knit = FALSE)
 -->
 
-La simulación de vectores aleatorios $\mathbf{X} =\left( X_1,X_2,\ldots,X_d\right)$ que sigan cierta distribución dada no es tarea siempre sencilla. 
+La simulación de vectores aleatorios $\mathbf{X} =\left( X_1, X_2, \ldots, X_d\right)$ que sigan cierta distribución dada no es tarea siempre sencilla. 
 En general, no resulta una extensión inmediata del caso unidimensional, aunque muchos de los algoritmos descritos en los temas anteriores (como el de aceptación-rechazo o el de composición) son válidos para distribuciones multivariantes.
 En este caso sin embargo, puede ser mucho más difícil cumplir los requerimientos (e.g. encontrar una densidad auxiliar adecuada) y los algoritmos obtenidos pueden ser computacionalmente poco eficientes (especialmente si el número de dimensiones es grande).
 
@@ -240,8 +240,7 @@ tremendamente lento en dimensión $10$.
 Esto está relacionado con la *maldición de la dimensionalidad* (curse of dimensionality), a medida que aumenta el número de dimensiones el volumen de la "frontera" crece exponencialmente (ver p.e. Fernández-Casal et al, 2021, [Sección 1.4](https://rubenfcasal.github.io/aprendizaje_estadistico/dimen-curse.html)).
 :::
 
-Factorización de la matriz de covarianzas {#fact-cov}
------------------------------------------
+## Factorización de la matriz de covarianzas {#fact-cov}
 
 Teniendo en cuenta que si $Cov(\mathbf{X})= I$, entonces:
 $$Cov(A\mathbf{X}) = AA^t.$$ 
@@ -582,15 +581,19 @@ a partir de $\mathbf{X}_1$ con media y varianzas conocidas (denominado predictor
 Continuando con el Ejemplo \@ref(exm:funcional) anterior, consideramos los primeros
 valores de una simulación incondicional como los datos:
 ```{r}
-idata <- t < 0.5
-# idata <- t < 0.2 | t > 0.8
+# Indice correspondiente a los datos observados
+# idata <- t < 0.5 # Extrapolación
+idata <- t < 0.2 | t > 0.8 # Interpolación
 mu1 <- mu[idata]
 n1 <- length(mu1)
 cov.data <- x.cov[idata, idata]
 U <- chol(cov.data)
-# Simulación (incondicional):
+# Simulación incondicional:
 set.seed(1)
 data <- drop(mu1 + t(U) %*% rnorm(n1))
+y <- rep(NA, n)
+y[idata] <- data
+
 ```
 Para obtener la simulación condicional en los puntos de predicción, calculamos la correspondiente media y matriz de covarianzas condicionadas:
 ```{r}
@@ -608,21 +611,22 @@ kcov <- cov.pred -  lambda %*% t(cov.preddat)
 # (La diagonal serán las varianzas kriging). 
 ```
 
-Las simulaciones condicionales se obtendrán de forma análoga (Figura \@ref(fig:funcional-cond)):
+Finalmente generamos las simulaciones condicionales empleando el método de factorización de la matriz de covarianzas (Figura \@ref(fig:funcional-cond)):
 
-(ref:funcional-cond) Realizaciones condicionales del proceso funcional del Ejemplo \@ref(exm:funcionalcond).
+(ref:funcional-cond) Realizaciones condicionales (líneas de puntos) del proceso funcional del Ejemplo \@ref(exm:funcionalcond) (datos: línea continua, tendencia/media incondicional: linea gruesa continua, predicción/media condicional: linea gruesa discontinua).
 
 ```{r funcional-cond, fig.cap = "(ref:funcional-cond)"}
 z <- matrix(rnorm(nsim * n2), nrow = n2)
-y <- kpred + t(chol(kcov)) %*% z
+ycond <- kpred + t(chol(kcov)) %*% z
 # Representación gráfica:
-plot(t, mu, type = "l", lwd = 2, ylab = "y", ylim = c(-3.5, 3.5)) # media teórica
-lines(t[idata], data) # datos
-# y <- rep(NA, n)
-# y[idata] <- data
-# lines(t, y)
-matplot(t[!idata], y, type = "l", add = TRUE) # simulaciones condicionales
-lines(t[!idata], kpred, lwd = 2, lty = 2) # media condicional (predicción kriging)
+#   Media teórica
+plot(t, mu, type = "l", lwd = 2, ylab = "y", ylim = c(-3.5, 3.5)) 
+#   Datos
+lines(t, y) # lines(t[idata], data) 
+#   Media condicional (predicción kriging)
+lines(t[!idata], kpred, lwd = 2, lty = 2)
+#   Simulaciones condicionales
+matplot(t[!idata], ycond, type = "l", lty = 3, add = TRUE) 
 ```
 
 :::
@@ -847,7 +851,7 @@ rcclayton <- function(alpha, n) {
 }
 ```
 
-Utilizando esta función generamos una muestra de tamaño 10000 y representamos gráficamente los valores obtenidos`r latexfig("cclayton2b-dispersion")`:
+Utilizando esta función generamos una muestra de tamaño 10000 y representamos gráficamente los valores obtenidos`r latexfig("cclayton2-dispersion")`:
 
 ```{r cclayton2-dispersion, fig.cap="Gráfico de dispersión de los valores generados con distribución bidimensional de Clayton."}
 set.seed(54321)
@@ -855,14 +859,14 @@ rcunif <- rcclayton(2, 10000)
 plot(rcunif, xlab = "u", ylab = "v")
 ```
 
-Podemos representar la densidad conjunta (con `sm::sm.density()`)`r latexfig("cclayton2b-conjunta")`:
+Podemos representar la densidad conjunta (con `sm::sm.density()`)`r latexfig("cclayton2-conjunta")`:
 
 ```{r cclayton2-conjunta, fig.cap="Densidad conjunta de los valores generados con distribución bidimensional de Clayton", message=FALSE, warning=FALSE}
 # if(!require(sm)) stop('Required package `sm` not installed.')
 sm::sm.density(rcunif, xlab = "u", ylab = "v", zlab = "Density")    
 ```
 
-y las distribuciones marginales`r latexfig("cclayton3-marginales")`:
+y las distribuciones marginales`r latexfig("cclayton2-marginales")`:
 
 ```{r cclayton2-marginales, fig.cap="Distribuciones marginales de los valores generados con distribución bidimensional de Clayton.", out.width="90%", fig.width=12}
 par.old <- par(mfrow = c(1, 2))

@@ -120,14 +120,10 @@ Para encontrar este valor se puede emplear el siguiente algoritmo:
 Este algoritmo no es muy eficiente, especialmente si el número de posibles valores de la variable es grande.
 
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.8\linewidth]{images/cuantil-sim} 
-
-}
-
-\caption{Ilustración de la simulación de una distribución discreta mediante transformación cuantil (con búsqueda secuencial).}(\#fig:cuantil-movie)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/cuantil-movie.gif" alt="Ilustración de la simulación de una distribución discreta mediante transformación cuantil (con búsqueda secuencial)." width="80%" />
+<p class="caption">(\#fig:cuantil-movie)Ilustración de la simulación de una distribución discreta mediante transformación cuantil (con búsqueda secuencial).</p>
+</div>
 
 ::: {.remark}
 El algoritmo anterior es válido independientemente de que los valores que toma la variable estén ordenados.
@@ -181,7 +177,7 @@ rpmf
 ##   attr(X, "ncomp") <- ncomp
 ##   return(X)
 ## }
-## <bytecode: 0x0000000042245940>
+## <bytecode: 0x00000000373d4e50>
 ## <environment: namespace:simres>
 ```
 
@@ -209,7 +205,7 @@ system.time( rx <- rpmf(x, pmf, nsim) )
 
 ```
 ##    user  system elapsed 
-##    0.06    0.00    0.06
+##    0.04    0.00    0.05
 ```
 
 A partir de ellas podríamos aproximar el valor esperado:
@@ -247,14 +243,10 @@ plot(res, ylab = "frecuencia relativa", xlab = "valor")
 points(x, pmf, pch = 4, col = "blue")  # Comparación teórica
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{05-Metodos_generales_discretas_files/figure-latex/comprfmp-1} 
-
-}
-
-\caption{Comparación de las frecuencias relativas de los valores generados, mediante el método de la transformación cuantil, con las probabilidades teóricas.}(\#fig:comprfmp)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="05-Metodos_generales_discretas_files/figure-html/comprfmp-1.png" alt="Comparación de las frecuencias relativas de los valores generados, mediante el método de la transformación cuantil, con las probabilidades teóricas." width="70%" />
+<p class="caption">(\#fig:comprfmp)Comparación de las frecuencias relativas de los valores generados, mediante el método de la transformación cuantil, con las probabilidades teóricas.</p>
+</div>
 
 También podríamos realizar comparaciones numéricas:
 
@@ -364,7 +356,7 @@ tiempo
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.04    0.00    0.05
 ```
 
 ```r
@@ -413,14 +405,10 @@ El punto de partida para un valor $U$ será $g_{j_{0}}$ con:
 $$j_{0}=\left\lfloor mU\right\rfloor +1$$
 
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.8\linewidth]{images/tabla-sim} 
-
-}
-
-\caption{Ilustración de la simulación de una distribución discreta mediante tabla guía.}(\#fig:tabla-movie)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="images/tabla-movie.gif" alt="Ilustración de la simulación de una distribución discreta mediante tabla guía." width="80%" />
+<p class="caption">(\#fig:tabla-movie)Ilustración de la simulación de una distribución discreta mediante tabla guía.</p>
+</div>
 
 En este caso, puede verse que una cota del número medio de comparaciones es:
 $$E\left( N\right) \leq 1+\frac{n}{m}$$
@@ -489,7 +477,7 @@ rpmf.table
 ##   attr(X, "ncomp") <- ncomp
 ##   return(X)
 ## }
-## <bytecode: 0x000000004008fd70>
+## <bytecode: 0x000000003bc5b918>
 ## <environment: namespace:simres>
 ```
 
@@ -506,7 +494,7 @@ system.time( rx <- rpmf.table(x, pmf, n-1, nsim) )
 
 ```
 ##    user  system elapsed 
-##    0.01    0.00    0.01
+##    0.03    0.00    0.03
 ```
 
 Número medio de comparaciones:
@@ -536,14 +524,10 @@ plot(res, ylab = "frecuencia relativa", xlab = "valores")
 points(x, pmf, pch = 4, col = "blue")  # Comparación teórica
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{05-Metodos_generales_discretas_files/figure-latex/comptabla-1} 
-
-}
-
-\caption{Comparación de las frecuencias relativas de los valores generados, mediante el método de la tabla guía, con las probabilidades teóricas.}(\#fig:comptabla)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="05-Metodos_generales_discretas_files/figure-html/comptabla-1.png" alt="Comparación de las frecuencias relativas de los valores generados, mediante el método de la tabla guía, con las probabilidades teóricas." width="70%" />
+<p class="caption">(\#fig:comptabla)Comparación de las frecuencias relativas de los valores generados, mediante el método de la tabla guía, con las probabilidades teóricas.</p>
+</div>
 
 :::
 
@@ -587,14 +571,10 @@ La idea es "tomar prestada" parte de la probabilidad de los valores más probabl
 
 :::
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.9\linewidth]{05-Metodos_generales_discretas_files/figure-latex/unnamed-chunk-15-1} 
-
-}
-
-\caption{Pasos del algoritmo de inicialización del método Alias.}(\#fig:unnamed-chunk-15)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="05-Metodos_generales_discretas_files/figure-html/unnamed-chunk-15-1.png" alt="Pasos del algoritmo de inicialización del método Alias." width="90%" />
+<p class="caption">(\#fig:unnamed-chunk-15)Pasos del algoritmo de inicialización del método Alias.</p>
+</div>
 
 El algoritmo para generar las simulaciones es el estándar del método de composición:
 
@@ -645,7 +625,7 @@ rpmf.alias
 ##   if(as.factor) X <- factor(X, levels = x)
 ##   return(X)
 ## }
-## <bytecode: 0x0000000039eabbb0>
+## <bytecode: 0x000000003760d640>
 ## <environment: namespace:simres>
 ```
 
@@ -664,7 +644,7 @@ system.time( rx <- rpmf.alias(x, pmf, nsim) )
 
 ```
 ##    user  system elapsed 
-##    0.02    0.00    0.01
+##    0.02    0.00    0.02
 ```
 
 Análisis de los resultados:
@@ -675,14 +655,10 @@ plot(res, ylab = "frecuencia relativa", xlab = "valores")
 points(x, pmf, pch = 4, col = "blue")  # Comparación teórica
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{05-Metodos_generales_discretas_files/figure-latex/compalias-1} 
-
-}
-
-\caption{Comparación de las frecuencias relativas de los valores generados, mediante el método de alias, con las probabilidades teóricas.}(\#fig:compalias)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="05-Metodos_generales_discretas_files/figure-html/compalias-1.png" alt="Comparación de las frecuencias relativas de los valores generados, mediante el método de alias, con las probabilidades teóricas." width="70%" />
+<p class="caption">(\#fig:compalias)Comparación de las frecuencias relativas de los valores generados, mediante el método de alias, con las probabilidades teóricas.</p>
+</div>
 
 :::
 
@@ -846,9 +822,7 @@ curve(fdistr, from = -0.1, to = 1.1, type = 's',
 abline(h = c(1/10, 2/10, 3/10), lty = 2) 
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{05-Metodos_generales_discretas_files/figure-latex/unnamed-chunk-18-1} \end{center}
+<img src="05-Metodos_generales_discretas_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" />
 
 **Nota**: Esta variable toma los valores 0 y 1/5 con probabilidad 1/10.
 

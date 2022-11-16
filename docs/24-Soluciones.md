@@ -128,14 +128,10 @@ symbols(0, 0, circles = 1, inches = FALSE, add = TRUE)
 symbols(0, 0, squares = 2, inches = FALSE, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/simpiplot-1} 
-
-}
-
-\caption{Valores generados con distribución uniforme bidimensional, con colores y símbolos indicando si están dentro del círculo unidad.}(\#fig:simpiplot)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="24-Soluciones_files/figure-html/simpiplot-1.png" alt="Valores generados con distribución uniforme bidimensional, con colores y símbolos indicando si están dentro del círculo unidad." width="70%" />
+<p class="caption">(\#fig:simpiplot)Valores generados con distribución uniforme bidimensional, con colores y símbolos indicando si están dentro del círculo unidad.</p>
+</div>
 
 
 
@@ -170,14 +166,10 @@ mean(x)
 barplot(100*table(x)/nsim, ylab = "Porcentaje") # Representar porcentajes 
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/simberplot-1} 
-
-}
-
-\caption{Frecuencias relativas de los valores generados con distribución Bernoulli (aproximaciones por simulación de las probabilidades teóricas).}(\#fig:simberplot)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="24-Soluciones_files/figure-html/simberplot-1.png" alt="Frecuencias relativas de los valores generados con distribución Bernoulli (aproximaciones por simulación de las probabilidades teóricas)." width="70%" />
+<p class="caption">(\#fig:simberplot)Frecuencias relativas de los valores generados con distribución Bernoulli (aproximaciones por simulación de las probabilidades teóricas).</p>
+</div>
 
 ---
 
@@ -211,14 +203,10 @@ plot(n, cumsum(x)/n, type="l", ylab="Proporción de caras",
 abline(h=p, lty=2, col="red")
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/simberconv-1} 
-
-}
-
-\caption{Gráfico de convergencia de la aproximación por simulación a la probabilidad teórica.}(\#fig:simberconv)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="24-Soluciones_files/figure-html/simberconv-1.png" alt="Gráfico de convergencia de la aproximación por simulación a la probabilidad teórica." width="70%" />
+<p class="caption">(\#fig:simberconv)Gráfico de convergencia de la aproximación por simulación a la probabilidad teórica.</p>
+</div>
 
 
 ### Ejercicio [1.3](ejercicios.html#exr:circuito) {#sol-circuito}
@@ -229,8 +217,7 @@ Simular el paso de corriente a través del siguiente circuito, donde
 figuran las probabilidades de que pase corriente por cada uno de los
 interruptores:
 
-
-\begin{center}\includegraphics[width=0.5\linewidth]{images/circuito2} \end{center}
+<img src="images/circuito2.png" width="50%" style="display: block; margin: auto;" />
 
 Considerar que cada interruptor es una variable aleatoria de Bernoulli independiente
 para simular 1000 valores de cada una de ellas.
@@ -447,9 +434,7 @@ hist(evol[20, ], breaks = "FD", freq = FALSE,
 abline(v = limits[, 20], lty = 2)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-14-1} \end{center}
+<img src="24-Soluciones_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" />
 
 Representar las realizaciones del proceso y los intervalos de predicción puntuales:
 
@@ -460,9 +445,7 @@ matplot(1:max_len, evol, type = "l", col = "lightgray", lty = 1,
 matlines(1:max_len, t(limits), lty = c(2, 1, 2), col = 1)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-15-1} \end{center}
+<img src="24-Soluciones_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 ## Capítulo 2 [Generación de números pseudoaleatorios](gen-pseudo.html)
@@ -517,7 +500,7 @@ simres::rvng
 ##   # Devolver valores
 ##   return(u)
 ## }
-## <bytecode: 0x000000004021d338>
+## <bytecode: 0x000000003bd99e78>
 ## <environment: namespace:simres>
 ```
 
@@ -558,9 +541,7 @@ curve(fdistr, from = -0.1, to = 1.1, type = 's',
 abline(h = c(1/10, 2/10, 3/10), lty = 2) 
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-17-1} \end{center}
+<img src="24-Soluciones_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" />
 
 **Nota**: Esta variable toma los valores 0 y 1/5 con probabilidad 1/10.
 
@@ -626,9 +607,7 @@ b)  El algoritmo de simulación se puede implementar a partir de la función cua
     hist(simx, breaks = "FD", freq = FALSE)
     ```
     
-    
-    
-    \begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-19-1} \end{center}
+    <img src="24-Soluciones_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" />
     
     En este caso como no es una variable absolutamente continua mejor emplear 
     la función de distribución para compararla con la teórica:
@@ -639,7 +618,5 @@ b)  El algoritmo de simulación se puede implementar a partir de la función cua
     curve(fdistr(x), type = "s", lty = 2, add = TRUE)
     ```
     
-    
-    
-    \begin{center}\includegraphics[width=0.7\linewidth]{24-Soluciones_files/figure-latex/unnamed-chunk-20-1} \end{center}
+    <img src="24-Soluciones_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" />
 
