@@ -178,7 +178,7 @@
 
 \title{Simulación Estadística}
 \author{Rubén Fernández Casal (\href{mailto:ruben.fcasal@udc.es}{\nolinkurl{ruben.fcasal@udc.es}}), Ricardo Cao (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}})}
-\date{Edición: Agosto de 2022. Impresión: 2022-11-16}
+\date{Edición: Agosto de 2022. Impresión: 2022-11-23}
 
 \begin{document}
 \maketitle
@@ -249,8 +249,8 @@ La simulación ofrece una alternativa a esa última fase del proceso, y sustituy
 
 Así, se puede definir la \emph{simulación} como una técnica que consiste en realizar experimentos sobre el modelo de un sistema (experimentos de muestreo si la simulación incorpora aleatoriedad), con el objetivo de recopilar información bajo determinadas condiciones.
 
-\hypertarget{conceptos-buxe1sicos}{%
-\section{Conceptos básicos}\label{conceptos-buxe1sicos}}
+\hypertarget{conceptos}{%
+\section{Conceptos básicos}\label{conceptos}}
 
 La experimentación directa sobre la realidad puede tener muchos inconvenientes, entre otros:
 
@@ -929,10 +929,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.25    0.02    0.27 
+##    0.37    0.00    0.43 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.25    0.02    0.27
+##    0.37    0.00    0.43
 \end{verbatim}
 
 \begin{Shaded}
@@ -945,10 +945,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##       0       0       0 
+##    0.02    0.00    0.02 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.25    0.02    0.27
+##    0.39    0.00    0.45
 \end{verbatim}
 
 Hay diversos paquetes que implementan herramientas similares, por ejemplo:
@@ -998,7 +998,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## outer: 0.28 sec elapsed
+## outer: 0.36 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -1020,8 +1020,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ## 'data.frame':    10 obs. of  3 variables:
-##  $ tic: num  5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54
-##  $ toc: num  5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54 5.54
+##  $ tic: num  8.51 8.53 8.53 8.53 8.53 8.53 8.53 8.53 8.53 8.53
+##  $ toc: num  8.51 8.53 8.53 8.53 8.53 8.53 8.53 8.53 8.53 8.53
 ##  $ msg: chr  "1" "2" "3" "4" ...
 \end{verbatim}
 
@@ -1203,22 +1203,19 @@ Este método está implementado\footnote{Aunque de forma no muy eficiente. Para 
 \end{Shaded}
 
 \begin{verbatim}
-## function(n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 1) {
-##   u <- numeric(n)
-##   for(i in 1:n) {
-##     seed <- (a * seed + c) %% m
-##     u[i] <- seed/m # (seed + 1)/(m + 1)
-##   }
-##   # Almacenar semilla y parámetros
-##   assign(".rng", list(seed = seed, type = "lcg",
-##           parameters = list(a = a, c = c, m = m)), envir = globalenv())
-##   # .rng <<- list(seed = seed, type = "lcg", parameters = list(a = a, c = c, m = m))
-##   # Para continuar con semilla y parámetros:
-##   #   with(.rng, rlcg(n, seed, parameters$a, parameters$c, parameters$m))
-##   # Devolver valores
-##   return(u)
+## function (n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 
+##     1) 
+## {
+##     u <- numeric(n)
+##     for (i in 1:n) {
+##         seed <- (a * seed + c)%%m
+##         u[i] <- seed/m
+##     }
+##     assign(".rng", list(seed = seed, type = "lcg", parameters = list(a = a, 
+##         c = c, m = m)), envir = globalenv())
+##     return(u)
 ## }
-## <bytecode: 0x0000000040beaaf0>
+## <bytecode: 0x000000003d709700>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -1567,50 +1564,48 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 \end{Shaded}
 
 \begin{verbatim}
-## function(x, distribution = "norm", nclass = floor(length(x)/5),
-##                             output = TRUE, nestpar = 0, ...) {
-##   # Función distribución
-##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##   # Puntos de corte
-##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##   tol <- sqrt(.Machine$double.eps)
-##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##   # Gráficos y frecuencias
-##   if (output) {
-##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
-##                   lty = 2, border = "grey50")
-##     # Función densidad
-##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
-##     curve(d.distrib(x, ...), add = TRUE)
-##   } else {
-##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##   }
-##   # Cálculo estadístico y p-valor
-##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
-##   E <- length(x)/nclass
-##   DNAME <- deparse(substitute(x))
-##   METHOD <- "Pearson's Chi-squared test"
-##   STATISTIC <- sum((O - E)^2/E)
-##   names(STATISTIC) <- "X-squared"
-##   PARAMETER <- nclass - nestpar - 1
-##   names(PARAMETER) <- "df"
-##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##   # Preparar resultados
-##   classes <- format(xbreaks)
-##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
-##                    sep = "")
-##   RESULTS <- list(classes = classes, observed = O, expected = E,
-##                   residuals = (O - E)/sqrt(E))
-##   if (output) {
-##     cat("\nPearson's Chi-squared test table\n")
-##     print(as.data.frame(RESULTS))
-##   }
-##   if (any(E < 5))
-##     warning("Chi-squared approximation may be incorrect")
-##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
-##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
+## function (x, distribution = "norm", nclass = floor(length(x)/5), 
+##     output = TRUE, nestpar = 0, ...) 
+## {
+##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##     tol <- sqrt(.Machine$double.eps)
+##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##     if (output) {
+##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
+##             border = "grey50")
+##         d.distrib <- eval(parse(text = paste("d", distribution, 
+##             sep = "")))
+##         curve(d.distrib(x, ...), add = TRUE)
+##     }
+##     else {
+##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##     }
+##     O <- xhist$counts
+##     E <- length(x)/nclass
+##     DNAME <- deparse(substitute(x))
+##     METHOD <- "Pearson's Chi-squared test"
+##     STATISTIC <- sum((O - E)^2/E)
+##     names(STATISTIC) <- "X-squared"
+##     PARAMETER <- nclass - nestpar - 1
+##     names(PARAMETER) <- "df"
+##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##     classes <- format(xbreaks)
+##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
+##         "]", sep = "")
+##     RESULTS <- list(classes = classes, observed = O, expected = E, 
+##         residuals = (O - E)/sqrt(E))
+##     if (output) {
+##         cat("\nPearson's Chi-squared test table\n")
+##         print(as.data.frame(RESULTS))
+##     }
+##     if (any(E < 5)) 
+##         warning("Chi-squared approximation may be incorrect")
+##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
+##         p.value = PVAL, method = METHOD, data.name = DNAME), 
+##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x000000003dd97cf8>
+## <bytecode: 0x0000000039764ae8>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2090,26 +2085,22 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 \end{Shaded}
 
 \begin{verbatim}
-## function(n, seed = as.numeric(Sys.time()), k = 4) {
-##   seed <- seed %% 10^k
-##   aux <- 10^(2*k-k/2)
-##   aux2 <- 10^(k/2)
-##   u <- numeric(n)
-##   for(i in 1:n) {
-##     z <- seed^2
-##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
-##     u[i] <- seed/10^k
-##   }
-##   # Almacenar semilla y parámetros
-##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
-##       envir = globalenv())
-##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
-##   # Para continuar con semilla y parámetros:
-##   #   with(.rng, rvng(n, seed, parameters$k))
-##   # Devolver valores
-##   return(u)
+## function (n, seed = as.numeric(Sys.time()), k = 4) 
+## {
+##     seed <- seed%%10^k
+##     aux <- 10^(2 * k - k/2)
+##     aux2 <- 10^(k/2)
+##     u <- numeric(n)
+##     for (i in 1:n) {
+##         z <- seed^2
+##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
+##         u[i] <- seed/10^k
+##     }
+##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
+##         envir = globalenv())
+##     return(u)
 ## }
-## <bytecode: 0x0000000023b67cb8>
+## <bytecode: 0x0000000037f4ad78>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2807,7 +2798,7 @@ Como comentarios finales, podríamos añadir que:
 \item
   Incluso en el caso de la media, con el CLT obtenemos intervalos de confianza puntuales, que no habría que confundir con \emph{bandas de confianza} (es muy probable que no contengan el verdadero valor del parámetro en todo el rango).
 \item
-  En muchos casos (por ejemplo, cuando la generación de múltiples secuencias de simulación supone un coste computacional importante), puede ser preferible emplear un método de remuestreo para aproximar la precisión de la aproximación (ver Sección \ref{bootstrap}).
+  En muchos casos (por ejemplo, cuando la generación de múltiples secuencias de simulación supone un coste computacional importante), puede ser preferible emplear un método de remuestreo para aproximar la precisión de la aproximación (ver Capítulo \ref{bootstrap}).
 \end{itemize}
 
 \hypertarget{continuas}{%
@@ -2902,7 +2893,7 @@ El código para implementar este algoritmo en R podría ser el siguiente:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.01    0.00    0.01
+##    0.01    0.00    0.02
 \end{verbatim}
 
 \begin{Shaded}
@@ -3014,7 +3005,7 @@ y función de distribución:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.03    0.02    0.04
 \end{verbatim}
 \item
   Representar el histograma y compararlo con la densidad teórica.
@@ -3302,7 +3293,7 @@ Empleando estas funciones podemos generar una muestra de \(10^3\) observaciones 
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.06    0.00    0.07
 \end{verbatim}
 
 Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):
@@ -3490,7 +3481,7 @@ Generamos una muestra de \(10^4\) observaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.10    0.00    0.09
+##    0.12    0.00    0.18
 \end{verbatim}
 
 Evaluamos la eficiencia:
@@ -4015,25 +4006,24 @@ El correspondiente algoritmo está implementado en la función \href{https://rub
 \end{Shaded}
 
 \begin{verbatim}
-## function(n) {
-##   # Cauchy mediante cociente de uniformes
-##   ngen <- n
-##   u <- runif(n, 0, 1)
-##   v <- runif(n, -1, 1)
-##   x <- v/u
-##   ind <- u^2 + v^2 > 1 # TRUE si no verifica condición
-##   # Volver a generar si no verifica condición
-##   while (le <- sum(ind)){ # mientras le = sum(ind) > 0
-##     ngen <- ngen + le
-##     u <- runif(le, 0, 1)
-##     v <- runif(le, -1, 1)
-##     x[ind] <- v/u
-##     ind[ind] <- u^2 + v^2 > 1 # TRUE si no verifica condición
-##   }
-##   attr(x, "ngen") <- ngen
-##   return(x)
+## function (n) 
+## {
+##     ngen <- n
+##     u <- runif(n, 0, 1)
+##     v <- runif(n, -1, 1)
+##     x <- v/u
+##     ind <- u^2 + v^2 > 1
+##     while (le <- sum(ind)) {
+##         ngen <- ngen + le
+##         u <- runif(le, 0, 1)
+##         v <- runif(le, -1, 1)
+##         x[ind] <- v/u
+##         ind[ind] <- u^2 + v^2 > 1
+##     }
+##     attr(x, "ngen") <- ngen
+##     return(x)
 ## }
-## <bytecode: 0x00000000430b1958>
+## <bytecode: 0x000000004041f6f0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4456,25 +4446,24 @@ Este algoritmo está implementado en la función \href{https://rubenfcasal.githu
 \end{Shaded}
 
 \begin{verbatim}
-## function(x, prob = 1/length(x), n = 1000, as.factor = FALSE) {
-##   # Numero de comparaciones
-##   ncomp <- 0
-##   # Inicializar FD
-##   Fx <- cumsum(prob)
-##   # Simular
-##   X <- numeric(n)
-##   U <- runif(n)
-##   for(j in 1:n) {
-##     i <- 1
-##     while (Fx[i] < U[j]) i <- i + 1
-##     X[j] <- x[i]
-##     ncomp <- ncomp + i
-##   }
-##   if(as.factor) X <- factor(X, levels = x)
-##   attr(X, "ncomp") <- ncomp
-##   return(X)
+## function (x, prob = 1/length(x), n = 1000, as.factor = FALSE) 
+## {
+##     ncomp <- 0
+##     Fx <- cumsum(prob)
+##     X <- numeric(n)
+##     U <- runif(n)
+##     for (j in 1:n) {
+##         i <- 1
+##         while (Fx[i] < U[j]) i <- i + 1
+##         X[j] <- x[i]
+##         ncomp <- ncomp + i
+##     }
+##     if (as.factor) 
+##         X <- factor(X, levels = x)
+##     attr(X, "ncomp") <- ncomp
+##     return(X)
 ## }
-## <bytecode: 0x0000000042732350>
+## <bytecode: 0x000000003e0f3e70>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4503,7 +4492,7 @@ Empleamos la rutina anterior para generar las simulaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.03    0.00    0.04
+##    0.08    0.00    0.07
 \end{verbatim}
 
 A partir de ellas podríamos aproximar el valor esperado:
@@ -4662,7 +4651,7 @@ Podemos repetir la simulación del Ejemplo \ref{exm:binom-cuant} anterior ordena
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.05    0.00    0.04
+##    0.11    0.00    0.23
 \end{verbatim}
 
 \begin{Shaded}
@@ -4698,7 +4687,7 @@ Como ya se comentó, en R se recomienda emplear la función \texttt{sample()}
 
 \begin{verbatim}
 ##    user  system elapsed 
-##       0       0       0
+##    0.02    0.00    0.01
 \end{verbatim}
 
 \end{example}
@@ -4781,30 +4770,30 @@ Este algoritmo está implementado en la función \href{https://rubenfcasal.githu
 \end{Shaded}
 
 \begin{verbatim}
-## function(x, prob = 1/length(x), m, n = 1000, as.factor = FALSE) {
-##   # Inicializar tabla y FD
-##   Fx <- cumsum(prob)
-##   g <- rep(1,m)
-##   i <- 1
-##   for(j in 2:m) {
-##     while (Fx[i] < (j-1)/m) i <- i + 1
-##     g[j] <- i
-##   }
-##   ncomp <- i - 1
-##   # Generar valores
-##   X <- numeric(n)
-##   U <- runif(n)
-##   for(j in 1:n) {
-##     i <- i0 <- g[floor(U[j] * m) + 1]
-##     while (Fx[i] < U[j]) i <- i + 1
-##     ncomp <- ncomp + i - i0
-##     X[j] <- x[i]
-##   }
-##   if(as.factor) X <- factor(X, levels = x)
-##   attr(X, "ncomp") <- ncomp
-##   return(X)
+## function (x, prob = 1/length(x), m, n = 1000, as.factor = FALSE) 
+## {
+##     Fx <- cumsum(prob)
+##     g <- rep(1, m)
+##     i <- 1
+##     for (j in 2:m) {
+##         while (Fx[i] < (j - 1)/m) i <- i + 1
+##         g[j] <- i
+##     }
+##     ncomp <- i - 1
+##     X <- numeric(n)
+##     U <- runif(n)
+##     for (j in 1:n) {
+##         i <- i0 <- g[floor(U[j] * m) + 1]
+##         while (Fx[i] < U[j]) i <- i + 1
+##         ncomp <- ncomp + i - i0
+##         X[j] <- x[i]
+##     }
+##     if (as.factor) 
+##         X <- factor(X, levels = x)
+##     attr(X, "ncomp") <- ncomp
+##     return(X)
 ## }
-## <bytecode: 0x0000000040110a28>
+## <bytecode: 0x000000003b83f028>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4822,7 +4811,7 @@ Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando es
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.05    0.00    0.05
 \end{verbatim}
 
 Número medio de comparaciones:
@@ -4952,31 +4941,32 @@ Este método también está implementado en la función \href{https://rubenfcasa
 \end{Shaded}
 
 \begin{verbatim}
-## function(x, prob = 1/length(x), n = 1000, as.factor = FALSE) {
-##   # Inicializar tablas
-##   a <- numeric(length(x))
-##   q <- prob*length(x)
-##   low <- q < 1
-##   high <- which(!low)
-##   low <- which(low)
-##   while (length(high) && length(low)) {
-##     l <- low[1]
-##     h <- high[1]
-##     a[l] <- h
-##     q[h] <- q[h] - (1 - q[l])
-##     if (q[h] < 1) {
-##       high <- high[-1]
-##       low[1] <- h
-##     } else low <- low[-1]
-##   } # while
-##   # Generar valores
-##   V <- runif(n)
-##   i <- floor(runif(n)*length(x)) + 1
-##   X <- x[ ifelse( V < q[i], i, a[i]) ]
-##   if(as.factor) X <- factor(X, levels = x)
-##   return(X)
+## function (x, prob = 1/length(x), n = 1000, as.factor = FALSE) 
+## {
+##     a <- numeric(length(x))
+##     q <- prob * length(x)
+##     low <- q < 1
+##     high <- which(!low)
+##     low <- which(low)
+##     while (length(high) && length(low)) {
+##         l <- low[1]
+##         h <- high[1]
+##         a[l] <- h
+##         q[h] <- q[h] - (1 - q[l])
+##         if (q[h] < 1) {
+##             high <- high[-1]
+##             low[1] <- h
+##         }
+##         else low <- low[-1]
+##     }
+##     V <- runif(n)
+##     i <- floor(runif(n) * length(x)) + 1
+##     X <- x[ifelse(V < q[i], i, a[i])]
+##     if (as.factor) 
+##         X <- factor(X, levels = x)
+##     return(X)
 ## }
-## <bytecode: 0x0000000039e273b0>
+## <bytecode: 0x00000000355a4230>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4994,7 +4984,7 @@ Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando es
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.02
+##    0.02    0.00    0.01
 \end{verbatim}
 
 Análisis de los resultados:
@@ -5056,8 +5046,8 @@ Como alternativa, siempre se puede pensar en truncar la distribución,
 eliminando los valores muy poco probables (teniendo en cuenta el número de generaciones que se pretenden realizar),
 aunque la distribución de las simulaciones será aproximada.
 
-\hypertarget{cuxe1lculo-directo-de-la-funciuxf3n-cuantil}{%
-\section{Cálculo directo de la función cuantil}\label{cuxe1lculo-directo-de-la-funciuxf3n-cuantil}}
+\hypertarget{transcuant-directo}{%
+\section{Cálculo directo de la función cuantil}\label{transcuant-directo}}
 
 En ocasiones el método de la transformación cuantil puede acelerarse computacionalmente porque, mediante cálculos directos, es posible encontrar el valor de la función cuantil en cualquier \(U\), evitando el bucle de búsqueda.
 Normalmente se realiza mediante truncamiento de una distribución continua.
@@ -5244,7 +5234,7 @@ de grupo multiplicado por 10, \(n=100-m\) y \(k=20\).
 \hypertarget{multivariante}{%
 \chapter{Simulación de distribuciones multivariantes}\label{multivariante}}
 
-La simulación de vectores aleatorios \(\mathbf{X} =\left( X_1,X_2,\ldots,X_d\right)\) que sigan cierta distribución dada no es tarea siempre sencilla.
+La simulación de vectores aleatorios \(\mathbf{X} =\left( X_1, X_2, \ldots, X_d\right)\) que sigan cierta distribución dada no es tarea siempre sencilla.
 En general, no resulta una extensión inmediata del caso unidimensional, aunque muchos de los algoritmos descritos en los temas anteriores (como el de aceptación-rechazo o el de composición) son válidos para distribuciones multivariantes.
 En este caso sin embargo, puede ser mucho más difícil cumplir los requerimientos (e.g.~encontrar una densidad auxiliar adecuada) y los algoritmos obtenidos pueden ser computacionalmente poco eficientes (especialmente si el número de dimensiones es grande).
 
@@ -5675,7 +5665,7 @@ del paquete \texttt{MASS} que emplea la factorización espectral (\texttt{eigen}
 ##         drop(X)
 ##     else t(X)
 ## }
-## <bytecode: 0x000000003caaa338>
+## <bytecode: 0x00000000382d69d8>
 ## <environment: namespace:MASS>
 \end{verbatim}
 
@@ -5934,15 +5924,18 @@ valores de una simulación incondicional como los datos:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{idata }\OtherTok{\textless{}{-}}\NormalTok{ t }\SpecialCharTok{\textless{}} \FloatTok{0.5}
-\CommentTok{\# idata \textless{}{-} t \textless{} 0.2 | t \textgreater{} 0.8}
+\CommentTok{\# Indice correspondiente a los datos observados}
+\CommentTok{\# idata \textless{}{-} t \textless{} 0.5 \# Extrapolación}
+\NormalTok{idata }\OtherTok{\textless{}{-}}\NormalTok{ t }\SpecialCharTok{\textless{}} \FloatTok{0.2} \SpecialCharTok{|}\NormalTok{ t }\SpecialCharTok{\textgreater{}} \FloatTok{0.8} \CommentTok{\# Interpolación}
 \NormalTok{mu1 }\OtherTok{\textless{}{-}}\NormalTok{ mu[idata]}
 \NormalTok{n1 }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(mu1)}
 \NormalTok{cov.data }\OtherTok{\textless{}{-}}\NormalTok{ x.cov[idata, idata]}
 \NormalTok{U }\OtherTok{\textless{}{-}} \FunctionTok{chol}\NormalTok{(cov.data)}
-\CommentTok{\# Simulación (incondicional):}
+\CommentTok{\# Simulación incondicional:}
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{drop}\NormalTok{(mu1 }\SpecialCharTok{+} \FunctionTok{t}\NormalTok{(U) }\SpecialCharTok{\%*\%} \FunctionTok{rnorm}\NormalTok{(n1))}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, n)}
+\NormalTok{y[idata] }\OtherTok{\textless{}{-}}\NormalTok{ data}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5965,22 +5958,23 @@ Para obtener la simulación condicional en los puntos de predicción, calculamos
 \end{Highlighting}
 \end{Shaded}
 
-Las simulaciones condicionales se obtendrán de forma análoga (Figura \ref{fig:funcional-cond}):
+Finalmente generamos las simulaciones condicionales empleando el método de factorización de la matriz de covarianzas (Figura \ref{fig:funcional-cond}):
 
 
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(nsim }\SpecialCharTok{*}\NormalTok{ n2), }\AttributeTok{nrow =}\NormalTok{ n2)}
-\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ kpred }\SpecialCharTok{+} \FunctionTok{t}\NormalTok{(}\FunctionTok{chol}\NormalTok{(kcov)) }\SpecialCharTok{\%*\%}\NormalTok{ z}
+\NormalTok{ycond }\OtherTok{\textless{}{-}}\NormalTok{ kpred }\SpecialCharTok{+} \FunctionTok{t}\NormalTok{(}\FunctionTok{chol}\NormalTok{(kcov)) }\SpecialCharTok{\%*\%}\NormalTok{ z}
 \CommentTok{\# Representación gráfica:}
-\FunctionTok{plot}\NormalTok{(t, mu, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"y"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{, }\FloatTok{3.5}\NormalTok{)) }\CommentTok{\# media teórica}
-\FunctionTok{lines}\NormalTok{(t[idata], data) }\CommentTok{\# datos}
-\CommentTok{\# y \textless{}{-} rep(NA, n)}
-\CommentTok{\# y[idata] \textless{}{-} data}
-\CommentTok{\# lines(t, y)}
-\FunctionTok{matplot}\NormalTok{(t[}\SpecialCharTok{!}\NormalTok{idata], y, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\# simulaciones condicionales}
-\FunctionTok{lines}\NormalTok{(t[}\SpecialCharTok{!}\NormalTok{idata], kpred, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{) }\CommentTok{\# media condicional (predicción kriging)}
+\CommentTok{\#   Media teórica}
+\FunctionTok{plot}\NormalTok{(t, mu, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"y"}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{, }\FloatTok{3.5}\NormalTok{)) }
+\CommentTok{\#   Datos}
+\FunctionTok{lines}\NormalTok{(t, y) }\CommentTok{\# lines(t[idata], data) }
+\CommentTok{\#   Media condicional (predicción kriging)}
+\FunctionTok{lines}\NormalTok{(t[}\SpecialCharTok{!}\NormalTok{idata], kpred, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\CommentTok{\#   Simulaciones condicionales}
+\FunctionTok{matplot}\NormalTok{(t[}\SpecialCharTok{!}\NormalTok{idata], ycond, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{3}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -5990,7 +5984,7 @@ Las simulaciones condicionales se obtendrán de forma análoga (Figura \ref{fig:
 
 }
 
-\caption{Realizaciones condicionales del proceso funcional del Ejemplo \ref{exm:funcionalcond}.}\label{fig:funcional-cond}
+\caption{Realizaciones condicionales (líneas de puntos) del proceso funcional del Ejemplo \ref{exm:funcionalcond} (datos: línea continua, tendencia/media incondicional: linea gruesa continua, predicción/media condicional: linea gruesa discontinua).}\label{fig:funcional-cond}
 \end{figure}
 
 \end{example}
@@ -6358,7 +6352,7 @@ la siguiente función permitiría generar una muestra de tamaño \(n\) de esta d
 \end{Highlighting}
 \end{Shaded}
 
-Utilizando esta función generamos una muestra de tamaño 10000 y representamos gráficamente los valores obtenidos {[}Figura \ref{fig:cclayton2b-dispersion}{]}:
+Utilizando esta función generamos una muestra de tamaño 10000 y representamos gráficamente los valores obtenidos {[}Figura \ref{fig:cclayton2-dispersion}{]}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6377,7 +6371,7 @@ Utilizando esta función generamos una muestra de tamaño 10000 y representamos 
 \caption{Gráfico de dispersión de los valores generados con distribución bidimensional de Clayton.}\label{fig:cclayton2-dispersion}
 \end{figure}
 
-Podemos representar la densidad conjunta (con \texttt{sm::sm.density()}) {[}Figura \ref{fig:cclayton2b-conjunta}{]}:
+Podemos representar la densidad conjunta (con \texttt{sm::sm.density()}) {[}Figura \ref{fig:cclayton2-conjunta}{]}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6385,6 +6379,10 @@ Podemos representar la densidad conjunta (con \texttt{sm::sm.density()}) {[}Figu
 \NormalTok{sm}\SpecialCharTok{::}\FunctionTok{sm.density}\NormalTok{(rcunif, }\AttributeTok{xlab =} \StringTok{"u"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"v"}\NormalTok{, }\AttributeTok{zlab =} \StringTok{"Density"}\NormalTok{)    }
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Warning: weights overwritten by binning
+\end{verbatim}
 
 \begin{figure}[!htb]
 
@@ -6395,7 +6393,7 @@ Podemos representar la densidad conjunta (con \texttt{sm::sm.density()}) {[}Figu
 \caption{Densidad conjunta de los valores generados con distribución bidimensional de Clayton}\label{fig:cclayton2-conjunta}
 \end{figure}
 
-y las distribuciones marginales {[}Figura \ref{fig:cclayton3-marginales}{]}:
+y las distribuciones marginales {[}Figura \ref{fig:cclayton2-marginales}{]}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7149,15 +7147,18 @@ Una alternativa más eficiente para representar gráficamente la convergencia es
 \end{Shaded}
 
 \begin{verbatim}
-## function(fun, a, b, n, level = 0.95, plot = TRUE, ...) {
-##   fx <- sapply(runif(n, a, b), fun) * (b - a)
-##   result <- if (plot) conv.plot(fx, level = level, ...) else {
-##     q <- qnorm((1 + level)/2)
-##     list(approx = mean(fx), max.error = q * sd(fx)/sqrt(n))
-##   }
-##   return(result)
+## function (fun, a, b, n, level = 0.95, plot = TRUE, ...) 
+## {
+##     fx <- sapply(runif(n, a, b), fun) * (b - a)
+##     result <- if (plot) 
+##         conv.plot(fx, level = level, ...)
+##     else {
+##         q <- qnorm((1 + level)/2)
+##         list(approx = mean(fx), max.error = q * sd(fx)/sqrt(n))
+##     }
+##     return(result)
 ## }
-## <bytecode: 0x000000003ef05608>
+## <bytecode: 0x000000003afa1ed8>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -9313,6 +9314,1405 @@ Como se comentó en la Sección \ref{composicion}, también es habitual simular 
 \end{verbatim}
 \end{enumerate}
 
+\hypertarget{bootstrap}{%
+\chapter{Métodos de remuestreo}\label{bootstrap}}
+
+Etimología: bootstrap = cinta de la bota (oreja lateral o trasera para ayudar a calzarse las botas).
+Modismo anglosajón: ``to pull oneself up by one's bootstraps'', que podríamos traducir como resolver un problema con medios propios, sin la ayuda de otros.
+Se cree que esta frase está basada en un libro del siglo XVIII:
+
+\begin{quote}
+``The Baron had fallen to the bottom of a deep lake.
+Just when it looked like all was lost,
+he thought to pick himself up by his own bootstraps''.
+
+--- Raspe, Rudolph Erich (The Surprising Adventures of Baron Munchausen, 1785)
+\end{quote}
+
+El bootstrap es un procedimiento estadístico que sirve para aproximar características de la distribución en el muestreo de un estadístico.
+Para ello se emplea (normalmente) simulación, generando un gran número de muestras mediante algún tipo de remuestreo de la muestra original.
+
+Su ventaja principal es que no requiere hipótesis sobre el mecanismo generador de los datos (aunque los resultados asintóticos requieren de hipótesis generales).
+Por lo que son de especial utilidad cuando no se dispone la distribución exacta del estadístico y no es
+posible o adecuado emplear la distribución asintótica.
+
+En este capítulo se incluye una breve introducción al bootstrap desde un punto de vista aplicado.
+Para información adicional, inluyendo resultados teóricos, ver por ejemplo Davison y Hinkley (1997) o \href{https://rubenfcasal.github.io/book_remuestreo}{Cao y Fernández-Casal (2020)}.
+
+En este libro nos centraremos principalmente en los métodos de remuestreo bootstrap, aunque hay otros tipos de remuestreo como el \emph{jackknife}, para la aproximación del sesgo y varianza de un estimador (ver \href{https://rubenfcasal.github.io/book_remuestreo/jackknife.html}{Sección 2.2} de Cao y Fernández-Casal, 2020), o los empleados en contrastes de permutaciones (ver \href{https://rubenfcasal.github.io/book_remuestreo/contrastes-de-permutaciones.html}{Sección 5.3} de Cao y Fernández-Casal, 2020).
+
+En el siguiente capítulo se tratarán algunas de las principales aplicaciones de los métodos bootstrap.
+Entre ellas podríamos destacar:
+
+\begin{itemize}
+\item
+  Aproximación del sesgo y de la varianza de un estimador.
+\item
+  Construcción de intervalos de confianza.
+\item
+  Contraste de hipótesis.
+\end{itemize}
+
+\hypertarget{boot-intro}{%
+\section{Introducción}\label{boot-intro}}
+
+En primer lugar nos centraremos en la idea original del bootstrap uniforme (Efron, 1979; también denominado bootstrap no paramétrico o bootstrap naïve), que se expondrá de manera más formal en la Sección \ref{boot-unif}.
+
+Supongamos que \(\mathbf{X}=\left( X_1,\ldots ,X_n \right)\) es una una muestra aleatoria simple (m.a.s.)
+de una población con distribución \(F_{\theta}\) y que estamos interesados en hacer inferencia sobre \(\theta\) empleando un estimador \(\hat{\theta} = T\left( \mathbf{X} \right)\).
+
+La idea es aproximar características poblacionales por las correspondientes de la distribución empírica de los
+datos observados.
+Se trata de imitar el experimento de muestreo en la población real, pero empleando la distribución empírica en lugar de la distribución teórica \(F_{\theta}\) desconocida.
+Al conocer el mecanismo que genera los datos en el universo bootstrap, se puede emplear Monte Carlo para simularlo.
+En el caso i.i.d. esto puede ser implementado mediante remuestreo, realizando repetidamente \textbf{muestreo aleatorio con reemplazamiento del conjunto de datos original} (manteniendo el tamaño muestral).
+
+Para aproximar la distribución en el muestreo por Monte Carlo, se genera un número grande \(B\) de réplicas bootstrap:
+
+\begin{itemize}
+\item
+  \(\mathbf{X}^{\ast (b)}=\left( X_1^{\ast (b)},\ldots ,X_n^{\ast (b)} \right)\) muestra bootstrap (remuestra),
+  obtenida mediante muestreo con reemplazamiento de \(\mathbf{X}=\left( X_1,\ldots ,X_n \right)\).
+\item
+  \(\hat{\theta}^{\ast (b)} = T\left( \mathbf{X}^{\ast (b)} \right)\)
+  valor del estadístico en la muestra bootstrap (réplica bootstrap del estadístico).
+\end{itemize}
+
+para \(b = 1,\ldots ,B\).
+
+La idea original (bootstrap natural, Efron) es que la variabilidad de \(\hat{\theta}_{b}^{\ast }\) en torno a \(\hat{\theta}\) aproxima la variabilidad de \(\hat{\theta}\) en torno a \(\theta\):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{La distribución de} \(\hat{\theta}_{b}^{\ast }-\hat{\theta}\) \textbf{aproxima la distribución de } \(\hat{\theta}-\theta\).
+\end{itemize}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/bootstrap} 
+
+}
+
+\caption{Esquema de la idea del boostrap (de Efron).}\label{fig:unnamed-chunk-2}
+\end{figure}
+
+En general podríamos decir que:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{la muestra es a la población} \textbf{lo que la muestra bootstrap es a la muestra}.
+\end{itemize}
+
+\begin{example}[aproximación bootstrap de la distribución de la media muestral]
+\protect\hypertarget{exm:mean-boot}{}\label{exm:mean-boot}
+
+Como ejemplo ilustrativo consideramos una muestra simulada de tamaño \(n=100\) de una normal estándar y la media muestral como estimador de la media teórica:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{mean\_teor }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{sd\_teor }\OtherTok{\textless{}{-}} \DecValTok{1}  
+\NormalTok{muestra }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(n, }\AttributeTok{mean =}\NormalTok{ mean\_teor, }\AttributeTok{sd =}\NormalTok{ sd\_teor)}
+\end{Highlighting}
+\end{Shaded}
+
+El valor del estadístico en la muestra es:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{estadistico }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(muestra)}
+\end{Highlighting}
+\end{Shaded}
+
+Representamos la distribución de la muestra {[}Figura \ref{fig:muestra-sim}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(muestra, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{),}
+     \AttributeTok{main =} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }\AttributeTok{xlab =} \StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab =} \StringTok{\textquotesingle{}densidad\textquotesingle{}}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(dnorm, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =}\NormalTok{ estadistico, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/muestra-sim-1} 
+
+}
+
+\caption{Distribución de la muestra simulada.}\label{fig:muestra-sim}
+\end{figure}
+
+Como aproximación de la distribución poblacional, desconocida en la práctica,
+siempre podemos considerar la distribución empírica
+(o una versión suavizada: bootstrap suavizado; Sección \ref{modunif-boot-suav}).
+Alternativamente podríamos asumir un modelo paramétrico y estimar los parámetros a partir de la muestra (bootstrap paramétrico; Sección \ref{modunif-boot-par} {[}Figura \ref{fig:muestra-sim-aprox}{]}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribución bootstrap uniforme}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(muestra)(x), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{ylab =} \StringTok{"F(x)"}\NormalTok{, }\AttributeTok{type =} \StringTok{"s"}\NormalTok{)}
+\CommentTok{\# Distribución bootstrap paramétrico (asumiendo normalidad)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{pnorm}\NormalTok{(x, }\FunctionTok{mean}\NormalTok{(muestra), }\FunctionTok{sd}\NormalTok{(muestra)), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\# Distribución teórica}
+\FunctionTok{curve}\NormalTok{(pnorm, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Empírica"}\NormalTok{, }\StringTok{"Aprox. paramétrica"}\NormalTok{, }\StringTok{"Teórica"}\NormalTok{), }\AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"black"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/muestra-sim-aprox-1} 
+
+}
+
+\caption{Distribución teórica de la muestra simulada y distintas aproximaciones.}\label{fig:muestra-sim-aprox}
+\end{figure}
+
+En este caso (bootstrap uniforme) generamos las réplicas bootstrap empleando la distribución empírica:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{B }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{estadistico\_boot }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(B)}
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{B) \{}
+\NormalTok{    remuestra }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(muestra, n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    estadistico\_boot[k] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(remuestra)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Podríamos emplear directamente las réplicas bootstrap del estimador para aproximar la distribución en el muestreo de la media muestral (esto es lo que se conoce como bootstrap percentil directo, o simplemente bootstrap percentil):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(estadistico\_boot, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.2}\NormalTok{, }\FloatTok{0.5}\NormalTok{),}
+     \AttributeTok{ylab =} \StringTok{"Densidad"}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
+\CommentTok{\# Valor esperado bootstrap del estadístico}
+\NormalTok{mean\_boot }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(estadistico\_boot)  }
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =}\NormalTok{ mean\_boot, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\CommentTok{\# abline(v = estadistico, col = "blue")}
+
+\CommentTok{\# Distribución poblacional}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x, mean\_teor, sd\_teor}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n)), }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \DecValTok{0}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/mean-boot-perc-1} 
+
+}
+
+\caption{Aproximación de la distribución de la media muestral mediante bootstrap percentil (uniforme).}\label{fig:mean-boot-perc}
+\end{figure}
+
+Sin embargo, especialmente si el estimador es sesgado, puede ser preferible emplear la distribución de \(\hat{\theta}_{b}^{\ast }-\hat{\theta}\) como aproximación de la distribución de \(\hat{\theta}-\theta\) (bootstrap natural, bootstrap básico o bootstrap percentil básico):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(estadistico\_boot }\SpecialCharTok{{-}}\NormalTok{ estadistico, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }
+     \AttributeTok{ylab =} \StringTok{"Densidad"}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{)}
+\CommentTok{\# Distribución teórica}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x, }\DecValTok{0}\NormalTok{, sd\_teor}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n)), }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \DecValTok{0}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/mean-boot-basico-1} 
+
+}
+
+\caption{Aproximación de la distribución de la media muestral mediante bootstrap natural (uniforme).}\label{fig:mean-boot-basico}
+\end{figure}
+
+Sin embargo, asintóticamente ambos procedimientos son equivalentes y pueden dar lugar a los mismos resultados en determinados problemas de inferencia.
+Por ejemplo en la aproximación del sesgo y de la varianza de un estimador (Sección \ref{prec-sesgo}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sesgo (teor=0)}
+\NormalTok{mean\_boot }\SpecialCharTok{{-}}\NormalTok{ estadistico }\CommentTok{\# mean(estadistico\_boot {-} estadistico)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.004714973
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Error estándar}
+\FunctionTok{sd}\NormalTok{(estadistico\_boot) }\CommentTok{\# sd(estadistico\_boot {-} estadistico)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.08610306
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Error estándar teórico}
+\NormalTok{sd\_teor}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1
+\end{verbatim}
+
+\end{example}
+
+\hypertarget{boot-unif}{%
+\section{El Bootstrap uniforme}\label{boot-unif}}
+
+Suponemos que \(\mathbf{X}=\left( X_1,\ldots ,X_n \right)\) es una una muestra aleatoria simple (m.a.s.)
+de una población con distribución \(F\) y que estamos interesados en hacer inferencia sobre \(\theta =\theta \left(F \right)\) empleando un estimador \(\hat{\theta} = T\left( \mathbf{X} \right)\).
+Para ello nos gustaría conocer la distribución en el muestreo de un estadístico \(R\left( \mathbf{X},F \right)\), función del estimador (y por tanto de la muestra) y de la distribución poblacional.
+Por ejemplo el estimador studentizado:
+\[R=R\left( \mathbf{X},F \right) = \frac{\hat \theta - \theta}{\sqrt{\widehat{Var}(\hat \theta)}}.\]
+
+A veces podemos calcular directamente la distribución de \(R\left( \mathbf{X},F \right)\), aunque suele depender de cantidades poblacionales, no conocidas en la práctica.
+Otras veces sólo podemos llegar a aproximar la distribución de \(R\left( \mathbf{X},F \right)\) cuando \(n \rightarrow \infty\).
+Por ejemplo, bajo normalidad \(X_i \overset{i.i.d.}{\sim} \mathcal{N}\left( \mu ,\sigma^2 \right)\), si el parámetro de interés es la media
+\[\theta \left( F \right) =\mu =\int x~dF\left( x \right) =\int xf\left( x \right) ~dx\]
+y consideramos como estimador la media muestral
+\[\theta \left( F_n \right) =\int x~dF_n\left( x \right) =\bar{X}.\]
+Como normalmente en la práctica la varianza es desconocida, podríamos considerar el estadístico:
+\[R=R\left( \mathbf{X},F \right) =\sqrt{n}\frac{\bar{X}-\mu }{S_{n-1}} \sim t_{n-1},\]
+donde \(S_{n-1}^2\) es la cuasivarianza muestral:
+\[S_{n-1}^2=\frac{1}{n-1}\sum_{j=1}^{n}\left( X_j-\bar{X} \right)^2.\]
+Si \(F\) no es normal entonces la distribución de \(R\) ya no es una \(t_{n-1}\),
+aunque, bajo condiciones muy generales, \(R\overset{d}{\rightarrow}\mathcal{N}\left(0,1 \right)\).
+
+En el universo bootstrap se reemplaza la distribución poblacional (desconocida) \(F\) por una estimación, \(\hat{F}\), de la misma.
+A partir de la aproximación \(\hat{F}\) podríamos generar, condicionalmente a la muestra observada, remuestras
+\[\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots ,X_n^{\ast} \right)\]
+con distribución \(X_i^{\ast} \sim \hat{F}\), que demoninaremos remuestras bootstrap.
+Por lo que podemos hablar de la distribución en el remuestreo de
+\[R^{\ast}=R\left( \mathbf{X}^{\ast},\hat{F} \right),\]
+denominada \emph{distribución bootstrap}.
+
+Como ya se comentó anteriormente, en el bootstrap uniforme se emplea como aproximación la distribución empírica:
+\[F_n\left( x \right) =\frac{1}{n}\sum_{i=1}^{n}\mathbf{1}\left\{ X_i\leq x\right\}.\]
+Es decir, \(\hat{F}=F_n\), y por tanto \(R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right)\).
+En raras ocasiones (e.g.~\href{https://rubenfcasal.github.io/book_remuestreo/c\%C3\%A1lculo-de-la-distribuci\%C3\%B3n-bootstrap-exacta-y-aproximada.html}{Sección 1.3} de Cao y Fernández-Casal, 2020) es posible calcular exactamente la distribución bootstrap de \(R^{\ast}\).
+Normalmente se aproxima esa distribución mediante Monte Carlo, generando una gran cantidad, \(B\), de réplicas de \(R^{\ast}\).
+En el caso del bootstrap uniforme, el algoritmo es:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Para cada \(i=1,\ldots ,n\) generar \(X_i^{\ast}\) a partir de \(F_n\), es decir
+  \(P^{\ast}\left( X_i^{\ast}=X_j \right) =\frac{1}{n}\), \(j=1,\ldots,n\)
+\item
+  Obtener \(\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots ,X_n^{\ast} \right)\)
+\item
+  Calcular \(R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right)\)
+\item
+  Repetir \(B\) veces los pasos 1-3 para obtener las réplicas bootstrap
+  \(R^{\ast (1)}, \ldots, R^{\ast (B)}\)
+\item
+  Utilizar esas réplicas bootstrap para aproximar la distribución en el
+  muestreo de \(R\).
+\end{enumerate}
+
+Como ya se mostró anteriormente, el paso 1 se puede llevar a cabo simulando una distribución uniforme discreta
+mediante el método de la transformación cuantil (Sección \ref{transcuant-directo}):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Para cada \(i=1,\ldots ,n\) arrojar \(U_i\sim \mathcal{U}\left( 0,1 \right)\) y
+  hacer \(X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}\)
+\end{enumerate}
+
+Aunque en \texttt{R} es recomendable\footnote{De esta forma se evitan posibles problemas numéricos
+  al emplear el método de la transformación cuantil cuando \(n\) es extremadamente grande
+  (e.g.~\url{https://stat.ethz.ch/pipermail/r-devel/2018-September/076817.html}).}
+emplear la función \texttt{sample} para generar muestras aleatorias con reemplazamiento
+del conjunto de datos original:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestra\_boot }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(muestra, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+En el caso multidimensional, cuando trabajamos con un conjunto de datos
+con múltiples variables,
+podríamos emplear un procedimiento análogo, a partir de remuestras del
+vector de índices. Por ejemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(iris)}
+\FunctionTok{str}\NormalTok{(iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(iris)}
+\CommentTok{\# i\_boot \textless{}{-} floor(n*runif(n)) + 1}
+\CommentTok{\# i\_boot \textless{}{-} sample.int(n, replace = TRUE)}
+\NormalTok{i\_boot }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{data\_boot }\OtherTok{\textless{}{-}}\NormalTok{ iris[i\_boot, ]}
+\FunctionTok{str}\NormalTok{(data\_boot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    150 obs. of  5 variables:
+##  $ Sepal.Length: num  4.8 5.7 6.1 5 6.1 7.3 4.9 4.6 6.8 6.6 ...
+##  $ Sepal.Width : num  3 2.5 2.8 3 2.9 2.9 3.1 3.2 3 2.9 ...
+##  $ Petal.Length: num  1.4 5 4.7 1.6 4.7 6.3 1.5 1.4 5.5 4.6 ...
+##  $ Petal.Width : num  0.1 2 1.2 0.2 1.4 1.8 0.2 0.2 2.1 1.3 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 3 2 1 2 3 1 1 3 2 ...
+\end{verbatim}
+
+Esta forma de proceder es la que emplea por defecto el paquete \texttt{boot} que describiremos más adelante (Sección \ref{intro-pkgboot}).
+
+Para la elección del número de réplicas Monte Carlo \(B\) se aplicarían las mismas recomendaciones de la Sección \ref{num-gen} para el caso general de una aproximación por simulación.
+
+\begin{example}[Inferencia sobre la media con varianza desconocida]
+\protect\hypertarget{exm:media-dt-desconocida}{}\label{exm:media-dt-desconocida}
+
+Como ejemplo consideramos la muestra de tiempos de vida de microorganismos \texttt{lifetimes} del paquete \texttt{simres} {[}Figura \ref{fig:microorganismos}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(simres)}
+\NormalTok{muestra }\OtherTok{\textless{}{-}}\NormalTok{ lifetimes}
+\FunctionTok{summary}\NormalTok{(muestra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.1430  0.2650  0.6110  0.8053  1.1200  2.0800
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(muestra)}
+\FunctionTok{rug}\NormalTok{(muestra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/microorganismos-1} 
+
+}
+
+\caption{Distribución del tiempo de vida de una muestra de microorganismos.}\label{fig:microorganismos}
+\end{figure}
+
+Supongamos que queremos obtener una estimación por intervalo de confianza de su vida media a partir de los 15 valores observados mediante bootstrap uniforme considerando el estadístico
+\[R=R\left( \mathbf{X},F \right) =\sqrt{n}\frac{\bar{X}-\mu }{S_{n-1}},\]
+(en la Sección Sección \ref{icboot} se tratará con más detalle la construcción de intervalos de confianza).
+
+En el bootstrap uniforme se emplea \(\hat{F}=F_n\,\), con lo cual el análogo bootstrap del estadístico \(R\) será
+\[R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right) =\sqrt{n}\frac{\bar{X}^{\ast}-\bar{X}}{S_{n-1}^{\ast}},\]
+siendo
+\[\begin{aligned}
+\bar{X}^{\ast} &= \frac{1}{n}\sum_{i=1}^{n}X_i^{\ast}, \\
+S_{n-1}^{\ast 2} &= \frac{1}{n-1}\sum_{i=1}^{n}\left( X_i^{\ast}-
+\bar{X}^{\ast} \right)^2.
+\end{aligned}\]
+
+El algoritmo bootstrap (aproximado por Monte Carlo) procedería así:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Para cada \(i=1,\ldots ,n\) arrojar \(U_i\sim \mathcal{U}\left( 0,1 \right)\) y
+  hacer \(X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}\)
+\item
+  Obtener \(\bar{X}^{\ast}\) y \(S_{n-1}^{\ast 2}\)
+\item
+  Calcular
+  \(R^{\ast}=\sqrt{n}\frac{\bar{X}^{\ast}-\bar{X}}{ S_{n-1}^{\ast}}\)
+\item
+  Repetir \(B\) veces los pasos 1-3 para obtener las réplicas bootstrap
+  \(R^{\ast (1)}, \ldots, R^{\ast (B)}\)
+\item
+  Aproximar la distribución en el muestreo de \(R\) mediante la
+  distribución empírica de \(R^{\ast (1)}, \ldots, R^{\ast (B)}\)
+\end{enumerate}
+
+El código para implementar este método es similar al del caso de varianza conocida
+del Ejemplo \ref{exm:media-dt-conocida}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(muestra)}
+\NormalTok{alfa }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\NormalTok{x\_barra }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(muestra)}
+\NormalTok{cuasi\_dt }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(muestra)}
+
+\CommentTok{\# Remuestreo}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{B }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{remuestra }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(n)}
+\NormalTok{estadistico\_boot }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(B)}
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{B) \{}
+\NormalTok{  remuestra }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(muestra, n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  x\_barra\_boot }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(remuestra)}
+\NormalTok{  cuasi\_dt\_boot }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(remuestra)}
+\NormalTok{  estadistico\_boot[k] }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(n) }\SpecialCharTok{*}\NormalTok{ (x\_barra\_boot }\SpecialCharTok{{-}}\NormalTok{ x\_barra)}\SpecialCharTok{/}\NormalTok{cuasi\_dt\_boot}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Las características de interés de la distribución en el muestreo de \(R\)
+se aproximan por las correspondientes de la distribución bootstrap de \(R^{\ast}\).
+En este caso nos interesa aproximar los puntos críticos \(x_{\alpha /2}\) y
+\(x_{1-\alpha /2}\), tales que:
+\[P\left( x_{\alpha /2} < R < x_{1-\alpha /2} \right) = 1-\alpha.\]
+Para lo que podemos emplear los cuantiles muestrales\footnote{
+  Se podrían considerar distintos estimadores del cuantil \(x_{\alpha}\)
+  (ver p.e. la ayuda de la función \texttt{quantile()}).
+  Si empleamos directamente la distribución empírica, el cuantil se
+  correspondería con la observación ordenada en la posición \(B \alpha\)
+  (se suele hacer una interpolación lineal si este valor no es entero),
+  lo que equivale a emplear la función \texttt{quantile()} de \texttt{R} con el parámetro
+  \texttt{type\ =\ 1}. Esta función considera por defecto la posición
+  \(1 + (B - 1) \alpha\) (\texttt{type\ =\ 7}).
+  En el libro de Davison y Hinkley (1997), y en el paquete \texttt{boot}, se emplea \((B + 1) \alpha\) (equivalente a \texttt{type\ =\ 6}; lo que justifica que
+  consideren habitualmente 99, 199 ó 999 réplicas bootstrap).}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pto\_crit }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(estadistico\_boot, }\FunctionTok{c}\NormalTok{(alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{))}
+\NormalTok{pto\_crit}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      2.5%     97.5% 
+## -3.002197  1.877302
+\end{verbatim}
+
+A partir de los cuales obtenemos la correspondiente estimación por IC boostrap:
+\[\hat{IC}^{boot}_{1-\alpha}\left(  \mu\right)  = 
+\left(  \overline{X}-x_{1-\alpha/2}\dfrac{S_{n-1}}{\sqrt{n}},\ \overline{X} 
+- x_{\alpha/2}\dfrac{S_{n-1}}{\sqrt{n}} \right).\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ic\_inf\_boot }\OtherTok{\textless{}{-}}\NormalTok{ x\_barra }\SpecialCharTok{{-}}\NormalTok{ pto\_crit[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{*}\NormalTok{ cuasi\_dt}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n)}
+\NormalTok{ic\_sup\_boot }\OtherTok{\textless{}{-}}\NormalTok{ x\_barra }\SpecialCharTok{{-}}\NormalTok{ pto\_crit[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{*}\NormalTok{ cuasi\_dt}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n)}
+\NormalTok{IC\_boot }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(ic\_inf\_boot, ic\_sup\_boot)}
+\FunctionTok{names}\NormalTok{(IC\_boot) }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"\%"}\NormalTok{)}
+\NormalTok{IC\_boot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      2.5%     97.5% 
+## 0.5030131 1.2888063
+\end{verbatim}
+
+Este procedimiento para la construcción de intervalos de confianza se denomina \emph{método percentil-t} y se tratará en la Sección \ref{icboot-perc-t}.
+
+Como ejemplo adicional podemos comparar la aproximación de la distribución bootstrap del estadístico con la aproximación \(t_{n-1}\) basada en normalidad.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(estadistico\_boot, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.4}\NormalTok{))}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =}\NormalTok{ pto\_crit)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dt}\NormalTok{(x, n}\DecValTok{{-}1}\NormalTok{), }\AttributeTok{add=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\NormalTok{pto\_crit\_t }\OtherTok{\textless{}{-}} \FunctionTok{qt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, n}\DecValTok{{-}1}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{pto\_crit\_t, pto\_crit\_t), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/unnamed-chunk-12-1} \end{center}
+
+En este caso la distribución bootstrap del estadístico es más asimétrica, por lo que el intervalo de confianza no está centrado en la media,
+al contrario que el obtenido con la aproximación tradicional.
+Por ejemplo, podemos obtener la estimación basada en normalidad mediante la función \texttt{t.test()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(muestra)}\SpecialCharTok{$}\NormalTok{conf.int}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4599374 1.1507292
+## attr(,"conf.level")
+## [1] 0.95
+\end{verbatim}
+
+\end{example}
+
+\hypertarget{intro-paquetes}{%
+\section{Herramientas disponibles en R sobre bootstrap}\label{intro-paquetes}}
+
+En \texttt{R} hay una gran cantidad de paquetes que implementan métodos bootstrap.
+Por ejemplo, al ejecutar el comando \texttt{??bootstrap} (o \texttt{help.search(\textquotesingle{}bootstrap\textquotesingle{})})
+se mostrarán las funciones de los paquetes instalados que incluyen este término
+en su documentación (se puede realizar la búsqueda en todos los paquetes disponibles
+de \texttt{R} a través de \url{https://www.rdocumentation.org}).
+
+De entre todos estas herramientas destacan dos librerías
+como las más empleadas:
+
+\begin{itemize}
+\item
+  \texttt{bootstrap}: contiene las rutinas (bootstrap, cross-validation,
+  jackknife) y los datos del libro ``An Introduction to the Bootstrap'' de B.
+  Efron y R. Tibshirani, 1993, Chapman and Hall. La librería fue
+  desarrollada originalmente en \texttt{S} por Rob Tibshirani y exportada a \texttt{R} por
+  Friedrich Leisch. Es útil para desarrollar los ejemplos que se citan en
+  ese libro.
+\item
+  \texttt{boot}: incluye las funciones y conjuntos de datos utilizados en el libro
+  ``Bootstrap Methods and Their Applications'' de A. C. Davison y D. V. Hinkley, 1997,
+  Cambridge University Press. Esta librería fue desarrollada originalmente
+  en \texttt{S} por Angelo J. Canty y posteriormente exportada a \texttt{R} (ver \href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Canty, 2002}).
+  Este paquete es mucho más completo que el paquete \texttt{bootstrap}, forma parte de la distribución estándar de \texttt{R} y es el que emplearemos como referencia en este libro (ver Sección \ref{intro-pkgboot}).
+\end{itemize}
+
+Por otra parte existen numerosas rutinas (scripts) realizadas en \texttt{R} por
+diversos autores, que están disponibles en Internet
+(por ejemplo, puede ser interesante realizar una búsqueda en
+\url{https://rseek.org}).
+
+El bootstrap uniforme se puede implementar fácilmente. Por ejemplo,
+una rutina general para el caso univariante sería la siguiente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\textquotesingle{} @param x vector que contiene la muestra.}
+\CommentTok{\#\textquotesingle{} @param B número de réplicas bootstrap.}
+\CommentTok{\#\textquotesingle{} @param statistic función que calcula el estadístico.}
+\NormalTok{boot.strap0 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{B=}\DecValTok{1000}\NormalTok{, }\AttributeTok{statistic=}\NormalTok{mean)\{}
+\NormalTok{  ndat }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(x)}
+\NormalTok{  x.boot }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(x, ndat}\SpecialCharTok{*}\NormalTok{B, }\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  x.boot }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(x.boot, }\AttributeTok{ncol=}\NormalTok{B, }\AttributeTok{nrow=}\NormalTok{ndat)}
+\NormalTok{  stat.boot }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(x.boot, }\DecValTok{2}\NormalTok{, statistic)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Podríamos aplicar esta función a la muestra de tiempos de vida de
+microorganismos con el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fstatistic }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)\{}
+  \CommentTok{\#  mean(x)}
+  \CommentTok{\#  mean(x, trim=0.2)}
+  \FunctionTok{median}\NormalTok{(x)}
+  \CommentTok{\#  max(x)}
+\NormalTok{\}}
+
+\NormalTok{B }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{stat.dat }\OtherTok{\textless{}{-}} \FunctionTok{fstatistic}\NormalTok{(muestra)}
+\NormalTok{stat.boot }\OtherTok{\textless{}{-}} \FunctionTok{boot.strap0}\NormalTok{(muestra, B, fstatistic)}
+
+\NormalTok{res.boot }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(stat.dat, }\FunctionTok{mean}\NormalTok{(stat.boot)}\SpecialCharTok{{-}}\NormalTok{stat.dat, }\FunctionTok{sd}\NormalTok{(stat.boot))}
+\FunctionTok{names}\NormalTok{(res.boot) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Estadístico"}\NormalTok{, }\StringTok{"Sesgo"}\NormalTok{, }\StringTok{"Error Std."}\NormalTok{)}
+\NormalTok{res.boot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Estadístico       Sesgo  Error Std. 
+##   0.6110000   0.0609260   0.2481362
+\end{verbatim}
+
+La función \texttt{boot.strap0()} anterior no es adecuada para el caso multivariante
+(por ejemplo cuando estamos interesados en regresión).
+Como se mostró en la Sección \ref{intro-implementacion}
+sería preferible emplear remuestras del vector de índices. Por ejemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\textquotesingle{} @param datos vector, matriz o data.frame que contiene los datos.}
+\CommentTok{\#\textquotesingle{} @param B número de réplicas bootstrap.}
+\CommentTok{\#\textquotesingle{} @param statistic función con al menos dos parámetros, }
+\CommentTok{\#\textquotesingle{} los datos y el vector de índices de remuestreo, }
+\CommentTok{\#\textquotesingle{} y que devuelve el vector de estadísticos.}
+\CommentTok{\#\textquotesingle{} @param ... parámetros adicionales de la función statistic.}
+\NormalTok{boot.strap }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(datos, }\AttributeTok{B=}\DecValTok{1000}\NormalTok{, statistic, ...) \{}
+\NormalTok{  ndat }\OtherTok{\textless{}{-}} \FunctionTok{NROW}\NormalTok{(datos)}
+\NormalTok{  i.boot }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(ndat, ndat}\SpecialCharTok{*}\NormalTok{B, }\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  i.boot }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(i.boot, }\AttributeTok{ncol=}\NormalTok{B, }\AttributeTok{nrow=}\NormalTok{ndat)}
+\NormalTok{  stat.boot }\OtherTok{\textless{}{-}} \FunctionTok{drop}\NormalTok{(}\FunctionTok{apply}\NormalTok{(i.boot, }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(i) }\FunctionTok{statistic}\NormalTok{(datos, i, ...)))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+El paquete \texttt{boot}, descrito a continuación, emplea una implementación similar.
+
+\hypertarget{intro-pkgboot}{%
+\subsection{\texorpdfstring{El paquete \texttt{boot}}{El paquete boot}}\label{intro-pkgboot}}
+
+La función principal de este paquete es la función \texttt{boot()} que implementa distintos métodos de remuestreo para datos i.i.d..
+En su forma más simple permite realizar bootstrap uniforme (que en la práctica también se denomina habitualmente \emph{bootstrap noparamétrico}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boot}\NormalTok{(data, statistic, R)}
+\end{Highlighting}
+\end{Shaded}
+
+donde \texttt{data} es un vector, matriz o \texttt{data.frame} que contiene los datos,
+\texttt{R} es el número de réplicas bootstrap, y \texttt{statistic} es una función
+con al menos dos parámetros (con las opciones por defecto),
+los datos y el vector de índices de remuestreo,
+y que devuelve el vector de estadísticos.
+
+Por ejemplo, para hacer inferencia sobre la mediana del tiempo de microorganismos,
+podríamos emplear el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(boot)}
+\NormalTok{muestra }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{0.143}\NormalTok{, }\FloatTok{0.182}\NormalTok{, }\FloatTok{0.256}\NormalTok{, }\FloatTok{0.26}\NormalTok{, }\FloatTok{0.27}\NormalTok{, }\FloatTok{0.437}\NormalTok{, }\FloatTok{0.509}\NormalTok{, }
+             \FloatTok{0.611}\NormalTok{, }\FloatTok{0.712}\NormalTok{, }\FloatTok{1.04}\NormalTok{, }\FloatTok{1.09}\NormalTok{, }\FloatTok{1.15}\NormalTok{, }\FloatTok{1.46}\NormalTok{, }\FloatTok{1.88}\NormalTok{, }\FloatTok{2.08}\NormalTok{)}
+
+\NormalTok{statistic }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, i)\{}
+  \CommentTok{\# remuestra \textless{}{-} data[i]; median(remuestra)}
+  \FunctionTok{median}\NormalTok{(data[i])}
+\NormalTok{\}}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{res.boot }\OtherTok{\textless{}{-}} \FunctionTok{boot}\NormalTok{(muestra, statistic, }\AttributeTok{R =} \DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+El resultado que devuelve esta función es un objeto de clase \texttt{boot}, una lista con los siguientes componentes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(res.boot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "t0"        "t"         "R"         "data"      "seed"      "statistic"
+##  [7] "sim"       "call"      "stype"     "strata"    "weights"
+\end{verbatim}
+
+Además de los parámetros de entrada (incluyendo los valores por defecto), contiene tres componentes adicionales:
+
+\begin{itemize}
+\item
+  \texttt{tO}: el valor observado del estadístico
+  (su evaluación en los datos originales).
+\item
+  \texttt{t}: la matriz de réplicas bootstrap del estadístico
+  (cada fila se corresponde con una remuestra).
+\item
+  \texttt{seed}: el valor inicial de la semilla (\texttt{.Random.seed})
+  empleada para la generación de las réplicas.
+\end{itemize}
+
+Este tipo de objetos dispone de dos métodos principales:
+el método \texttt{print()} que muestra un resumen de los resultados
+(incluyendo aproximaciones bootstrap del sesgo y del error
+estándar de los estadísticos; ver Sección \ref{prec-sesgo}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res.boot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = muestra, statistic = statistic, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##     original   bias    std. error
+## t1*    0.611 0.058523   0.2526519
+\end{verbatim}
+
+y el método \texttt{plot()} que genera gráficas básicas de diagnosis
+de los resultados (correspondientes al estadístico determinado por el parámetro \texttt{index}, por defecto \texttt{=\ 1}): {[}Figura \ref{fig:plot-res-boot}{]}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(res.boot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/plot-res-boot-1} 
+
+}
+
+\caption{Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.}\label{fig:plot-res-boot}
+\end{figure}
+
+Es recomendable examinar la distribución bootstrap del estimador (o estadístico) para detectar posibles problemas.
+Como en este caso puede ocurrir que el estadístico bootstrap tome pocos valores distintos, lo que indicaría que el número de réplicas bootstrap es insuficiente o que hay algún problema con método de remuestreo empleado (en este caso la distribución objetivo es continua).
+Se darán más detalles sobre los posibles problemas del bootstrap uniforme en la Sección \ref{deficien-unif}.
+
+Además de estos métodos, las principales funciones de interés serían:
+
+\begin{itemize}
+\item
+  \texttt{jack.after.boot()}: genera un gráfico para diagnósticar la inluencia
+  de las observaciones individuales en los resultados bootstrap
+  (se representan los cuantiles frente a las diferencias en el estadístico
+  al eliminar una observación; este gráfico también se puede obtener estableciendo
+  \texttt{jack\ =\ TRUE} en \texttt{plot.boot()}).
+\item
+  \texttt{boot.array()}: genera la matriz de índices a partir de la que se obtuvieron las remuestras (permite reconstruir las remuestras bootstrap).
+\item
+  \texttt{boot.ci()}: construye distintos tipos de intervalos de confianza
+  (se tratarán en el Sección \ref{icboot}) dependiendo del parámetro \texttt{type}:
+
+  \begin{itemize}
+  \item
+    \texttt{"norm"}: utiliza la distribución asintótica normal considerando las
+    aproximaciones bootstrap del sesgo y de la varianza.
+  \item
+    \texttt{"basic"}: emplea el estadístico \(R = \hat \theta - \theta\) para la
+    construcción del intervalo de confianza.
+  \item
+    \texttt{"stud"}: calcula el intervalo a partir del estadístico estudentizado
+    \(R = \left( \hat \theta - \theta \right) / \sqrt{\widehat{Var}(\hat \theta)}\).
+  \item
+    \texttt{"perc"}: utiliza directamente la distribución bootstrap del estadístico
+    (\(R = \hat \theta\)).
+  \item
+    \texttt{"bca"}: emplea el método \(BCa\) (``bias-corrected and accelerated'')
+    propuesto por Efron (1987) (ver Sección 5.3.2 de Davison y Hinkley, 1997).
+  \item
+    \texttt{"all"}: calcula los cinco tipos de intervalos anteriores.
+  \end{itemize}
+\end{itemize}
+
+Como ya se comentó, la función \texttt{boot()} admite estadísticos multivariantes
+(haciendo que la función \texttt{statistic} devuelva un vector en lugar de un escalar),
+pero por defecto las funciones anteriores consideran el primer componente
+como el estadístico principal.
+Para obtener resultados de otros componentes del vector de estadísticos
+habrá que establecer el parámetro \texttt{index} igual al índice deseado.
+Además, en algunos casos (por ejemplo para la obtención de intevalos de confianza
+estudentizados con la función \texttt{boot.ci()}) se supone, por defecto, que el segundo
+componente del vector de estadísticos contiene estimaciones de la varianza del
+estadístico para cada réplica boostrap.
+
+\begin{example}[Inferencia sobre la media con varianza desconocida continuación]
+\protect\hypertarget{exm:media-dt-desconocida-boot}{}\label{exm:media-dt-desconocida-boot}
+
+Continuando con el Ejemplo \ref{exm:media-dt-desconocida} de
+inferencia sobre la media con varianza desconocida.
+Para obtener la estimación por intervalo de confianza del tiempo de vida medio
+de los microorganismos con el paquete \texttt{boot}, podríamos emplear
+el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(boot)}
+\NormalTok{muestra }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{0.143}\NormalTok{, }\FloatTok{0.182}\NormalTok{, }\FloatTok{0.256}\NormalTok{, }\FloatTok{0.26}\NormalTok{, }\FloatTok{0.27}\NormalTok{, }\FloatTok{0.437}\NormalTok{, }\FloatTok{0.509}\NormalTok{, }
+             \FloatTok{0.611}\NormalTok{, }\FloatTok{0.712}\NormalTok{, }\FloatTok{1.04}\NormalTok{, }\FloatTok{1.09}\NormalTok{, }\FloatTok{1.15}\NormalTok{, }\FloatTok{1.46}\NormalTok{, }\FloatTok{1.88}\NormalTok{, }\FloatTok{2.08}\NormalTok{)}
+
+\NormalTok{statistic }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, i)\{}
+\NormalTok{  remuestra }\OtherTok{\textless{}{-}}\NormalTok{ data[i]}
+  \FunctionTok{c}\NormalTok{(}\FunctionTok{mean}\NormalTok{(remuestra), }\FunctionTok{var}\NormalTok{(remuestra)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(remuestra))}
+\NormalTok{\}}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{res.boot }\OtherTok{\textless{}{-}} \FunctionTok{boot}\NormalTok{(muestra, statistic, }\AttributeTok{R =} \DecValTok{1000}\NormalTok{)}
+\NormalTok{res.boot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = muestra, statistic = statistic, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##      original       bias    std. error
+## t1* 0.8053333  0.003173267 0.158330646
+## t2* 0.0259338 -0.002155755 0.007594682
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boot.ci}\NormalTok{(res.boot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 1000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = res.boot)
+## 
+## Intervals : 
+## Level      Normal              Basic             Studentized     
+## 95%   ( 0.4918,  1.1125 )   ( 0.4825,  1.0980 )   ( 0.4715,  1.2320 )  
+## 
+## Level     Percentile            BCa          
+## 95%   ( 0.5127,  1.1282 )   ( 0.5384,  1.1543 )  
+## Calculations and Intervals on Original Scale
+\end{verbatim}
+
+El intervalo marcado como \texttt{Studentized} se obtuvo empleando el mismo estadístico
+del Ejemplo \ref{exm:media-dt-desconocida}.
+\end{example}
+
+\textbf{\emph{Modificaciones del bootstrap uniforme}}
+
+Estableciendo parámetros adicionales de la función \texttt{boot} se pueden llevar
+a cabo modificaciones del bootstrap uniforme.
+Algunos de estos parámetros son los siguientes:
+
+\begin{itemize}
+\item
+  \texttt{strata}: permite realizar remuestreo estratificado estableciendo este parámetro
+  como un vector numérico o factor que defina los grupos.
+\item
+  \texttt{sim\ =\ c("ordinary"\ ,\ "parametric",\ "balanced",\ "permutation",\ "antithetic")}:
+  permite establecer distintos tipos de remuestreo.
+  Por defecto es igual a \texttt{"ordinary"} que se corresponde con el bootstrap uniforme,
+  descrito anteriormente. Entre el resto de opciones destacaríamos
+  \texttt{sim\ =\ "permutation"}, que permite realizar contrastes de
+  permutaciones (remuestreo sin reemplazamiento), y \texttt{sim\ =\ "parametric"},
+  que permite realizar bootstrap paramétrico (Sección \ref{modunif-boot-par}).
+  En este último caso también habrá que establecer los parámetros \texttt{ran.gen} y
+  \texttt{mle}, y la función \texttt{statistics} no empleará el segundo parámetro de índices.
+\item
+  \texttt{ran.gen}: función que genera los datos. El primer argumento será el conjunto de datos
+  original y el segundo un vector de parámetros adicionales
+  (normalmente los valores de los parámetros de la distribución).
+\item
+  \texttt{mle}: parámetros de la distribución (típicamente estimados por máxima verosimilitud)
+  o parámetros adicionales para \texttt{ran.gen} ó \texttt{statistics}.
+\end{itemize}
+
+Además hay otros parámetros para el procesamiento en paralelo: \texttt{parallel\ =\ c("no",\ "multicore",\ "snow")}, \texttt{ncpus}, \texttt{cl}.
+En el Apéndice \ref{intro-hpc} se incluye una pequeña introducción al procesamiento en paralelo y se muestran algunos ejemplos sobre el uso de estos parámetros.
+También se puede consultar la ayuda de la función \texttt{boot()} (\texttt{?boot}).
+
+El paquete \texttt{boot} también incluye otras funciones que implementan métodos
+boostrap para otros tipos de datos, como la función \texttt{censboot()} para datos
+censurados (Sección \ref{bootcen}) o la función \texttt{tsboot()} para series de tiempo (Sección \ref{bootdep}).
+
+Finalmente destacar que hay numerosas extensiones implementadas en otros paquetes utilizando el paquete \texttt{boot} (ver \emph{Reverse dependencies} en la \href{https://cran.r-project.org/package=boot}{web de CRAN}).
+Por ejemplo en la Sección \ref{boot-reg} se ilustrará el uso de la función \texttt{Boot()} del paquete \texttt{car} para hacer inferencia sobre modelos de regresión.
+
+\hypertarget{boot-unif-multi}{%
+\subsection{Ejemplo: Bootstrap uniforme multidimensional}\label{boot-unif-multi}}
+
+Como ya se mostró en las Secciones \ref{intro-implementacion} y \ref{intro-paquetes} podemos implementar el bootstrap uniforme en el caso multidimensional (denominado también \emph{remuestreo de casos} o \emph{bootstrap de las observaciones}) de modo análogo al unidimensional.
+
+Consideraremos como ejemplo el conjunto de datos \texttt{Prestige} del paquete \texttt{carData}, y supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre \texttt{prestige} (puntuación de ocupaciones obtenidas a partir de una encuesta) e\texttt{income} (media de ingresos en la ocupación).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(Prestige, }\AttributeTok{package =} \StringTok{"carData"}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(Prestige)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    102 obs. of  6 variables:
+##  $ education: num  13.1 12.3 12.8 11.4 14.6 ...
+##  $ income   : int  12351 25879 9271 8865 8403 11030 8258 14163 11377 11023 ...
+##  $ women    : num  11.16 4.02 15.7 9.11 11.68 ...
+##  $ prestige : num  68.8 69.1 63.4 56.8 73.5 77.6 72.6 78.1 73.1 68.8 ...
+##  $ census   : int  1113 1130 1171 1175 2111 2113 2133 2141 2143 2153 ...
+##  $ type     : Factor w/ 3 levels "bc","prof","wc": 2 2 2 2 2 2 2 2 2 2 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# with(Prestige, cor(income, prestige))}
+\FunctionTok{cor}\NormalTok{(Prestige}\SpecialCharTok{$}\NormalTok{income, Prestige}\SpecialCharTok{$}\NormalTok{prestige)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7149057
+\end{verbatim}
+
+En el siguiente código se emplea el paquete \texttt{boot} para realizar bootstrap uniforme multidimensional sobre este estadístico:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(boot)}
+
+\NormalTok{statistic }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, i)\{}
+\NormalTok{  remuestra }\OtherTok{\textless{}{-}}\NormalTok{ data[i, ]}
+  \FunctionTok{cor}\NormalTok{(remuestra}\SpecialCharTok{$}\NormalTok{income, remuestra}\SpecialCharTok{$}\NormalTok{prestige)}
+\NormalTok{\}}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{B }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{res.boot }\OtherTok{\textless{}{-}} \FunctionTok{boot}\NormalTok{(Prestige, statistic, }\AttributeTok{R =}\NormalTok{ B)}
+\NormalTok{res.boot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Prestige, statistic = statistic, R = B)
+## 
+## 
+## Bootstrap Statistics :
+##      original      bias    std. error
+## t1* 0.7149057 0.006306905  0.04406473
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(res.boot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/unnamed-chunk-23-1} \end{center}
+
+En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección \ref{icboot-trans}).
+
+Como comentario final, nótese que en principio el paquete boot está diseñado para obtener réplicas bootstrap de un estimador, por lo que si lo que nos interesa es emplear otro estadístico habría que construirlo a partir de ellas (como hacen otras funciones secundarias como \texttt{boot.ci()}).
+Por ejemplo, si queremos emplear el estadístico \(R = \hat \theta - \theta\)
+(bootstrap percentil básico o natural), podemos obtener la correspondiente distribución bootstrap (aproximada por Monte Carlo) con el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{estadistico\_boot }\OtherTok{\textless{}{-}}\NormalTok{ res.boot}\SpecialCharTok{$}\NormalTok{t }\SpecialCharTok{{-}}\NormalTok{ res.boot}\SpecialCharTok{$}\NormalTok{t0 }
+\FunctionTok{hist}\NormalTok{(estadistico\_boot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/unnamed-chunk-24-1} \end{center}
+
+A partir de la distribución empírica del estadístico bootstrap \(R^{\ast} = \hat \theta^{\ast} - \hat \theta\) aproximaríamos la característica de interés de la distribución en el muestreo de \(R = \hat \theta - \theta\).
+Por ejemplo, para aproximar \(\psi \left( u \right) =P\left( R\leq u \right)\) emplearíamos la frecuencia relativa:
+\[\hat{\psi}_{B}\left( u \right) =
+\frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\}.\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{u }\OtherTok{\textless{}{-}} \DecValTok{0}
+\FunctionTok{sum}\NormalTok{(estadistico\_boot }\SpecialCharTok{\textless{}=}\NormalTok{ u)}\SpecialCharTok{/}\NormalTok{B}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.427
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Equivalentemente:}
+\FunctionTok{mean}\NormalTok{(estadistico\_boot }\SpecialCharTok{\textless{}=}\NormalTok{ u)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.427
+\end{verbatim}
+
+\hypertarget{modunif}{%
+\section{Modificaciones del Bootstrap uniforme}\label{modunif}}
+
+\textbf{\emph{Work in progress}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+El bootstrap uniforme (o naïve) es aquel en el que remuestreamos a
+partir de la función de distribución empírica. Eso es muy razonable
+cuando no tenemos ninguna información adicional sobre la función de
+distribución poblacional, ya que la distribución empírica es el
+estimador máximo verosímil no paramétrico de la función de distribución
+poblacional. Sin embargo, cuando en el contexto en el que nos
+encontremos conozcamos alguna propiedad adicional de dicha distribución
+poblacional, entonces debemos incorporarla en el método de remuestreo,
+dando lugar a otro método bootstrap que ya no debemos llamar uniforme o
+naïve. Veremos algunos de ellos.
+
+\hypertarget{deficien-unif}{%
+\subsection{Deficiencias del bootstrap uniforme}\label{deficien-unif}}
+
+\hypertarget{modunif-boot-par}{%
+\subsection{Bootstrap paramétrico}\label{modunif-boot-par}}
+
+Supongamos que sabemos que la función de distribución poblacional
+pertenece a cierta familia paramétrica. Es decir \(F=F_{\theta }\) para
+algún vector \(d\)-dimensional \(\theta \in \Theta\). En ese caso parece
+lógico estimar \(\theta\) a partir de la muestra (denotemos
+\(\hat{\theta}\) un estimador de \(\theta\), por ejemplo el de máxima
+verosimilitud) y obtener remuestras de \(F_{\hat{\theta}}\) no de \(F_n\).
+Entonces, el bootstrap uniforme se modifica de la siguiente forma, dando
+lugar al llamado bootstrap paramétrico:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Dada la muestra
+  \(\mathbf{X}=\left( X_1,\ldots ,X_n \right)\), calcular
+  \(\hat{\theta}\)
+\item
+  Para cada \(i=1,\ldots ,n\) arrojar \(X_i^{\ast}\) a partir de
+  \(F_{\hat{\theta}}\)
+\item
+  Obtener \(\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots ,X_n^{\ast} \right)\)
+\item
+  Calcular \(R^{\ast}=R\left( \mathbf{X}^{\ast},F_{\hat{\theta}} \right)\)
+\end{enumerate}
+
+Así utilizaremos las distribución en el remuestreo de \(R^{\ast}\) para
+aproximar la distribución en el muestreo de \(R\). Lógicamente, cuando no
+sea posible obtener una expresión explícita para la distribución
+bootstrap de \(R^{\ast}\) utilizaremos una aproximación de Monte Carlo de
+la misma:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Dada la muestra
+  \(\mathbf{X}=\left( X_1,\ldots ,X_n \right)\), calcular
+  \(\hat{\theta}\)
+\item
+  Para cada \(i=1,\ldots ,n\) arrojar \(X_i^{\ast}\) a partir de
+  \(F_{\hat{\theta}}\)
+\item
+  Obtener \(\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots ,X_n^{\ast} \right)\)
+\item
+  Calcular
+  \(R^{\ast}=R\left( \mathbf{X}^{\ast},F_{\hat{\theta} } \right)\)
+\item
+  Repetir \(B\) veces los pasos 2-4 para obtener las réplicas bootstrap
+  \(R^{\ast (1)}\), \(\ldots\), \(R^{\ast (B)}\)
+\item
+  Utilizar esas réplicas bootstrap para aproximar la distribución en el
+  muestreo de \(R\)
+\end{enumerate}
+
+\hypertarget{modunif-boot-suav}{%
+\subsection{Bootstrap suavizado}\label{modunif-boot-suav}}
+
+\hypertarget{boot-reg}{%
+\subsection{Bootstrap basado en modelos}\label{boot-reg}}
+
+En ocasiones nos pueden interesar modelos semiparamétricos, en los que se asume una componente paramétrica pero no se especifica por completo la distribución de los datos.
+Una de las situaciones más habituales es en regresión, donde se puede considerar un modelo para la tendencia pero sin asumir una forma concreta para la distribución del error.
+
+Nos centraremos en el caso de regresión y consideraremos como base el siguiente modelo general:
+\begin{equation} 
+  Y = m(\mathbf{X}) + \varepsilon,
+  \label{eq:modelogeneral}
+\end{equation}
+donde \(Y\) es la respuesta, \(\mathbf{X}=(X_1, X_2, \ldots, X_p)\) es el vector de variables explicativas, \(m(\mathbf{x}) = E\left( \left. Y\right\vert_{\mathbf{X}=\mathbf{x}} \right)\) es la media condicional, denominada función de regresión (o tendencia), y \(\varepsilon\) es un error aleatorio de media cero y varianza \(\sigma^2\), independiente de \(\mathbf{X}\) (errores homocedásticos independientes).
+
+Supondremos que el objetivo es, a partir de una muestra:
+\[\left\{ \left( X_{1i}, \ldots, X_{pi}, Y_{i} \right)  : i = 1, \ldots, n \right\},\]
+realizar inferencias sobre la distribución condicional
+\(\left.Y \right\vert_{\mathbf{X}=\mathbf{x}}\).
+
+El modelo \eqref{eq:modelogeneral} se corresponde con el denominado \emph{diseño aleatorio}, mas general.
+Alternativamente se podría asumir que los valores de las variables explicativas no son aleatorios (por ejemplo han sido fijados por el experimentador), hablaríamos entonces de \emph{diseño fijo}.
+Para realizar inferencias sobre modelos de regresión con errores homocedásticos se podrían emplear dos algoritmos bootstrap (e.g.~\href{http://cran.fhcrc.org/doc/Rnews/Rnews_2002-3.pdf}{Canty, 2002}, y subsecciones siguientes).
+El primero consistiría en utilizar directamente bootstrap uniforme, remuestreando las observaciones, y sería adecuado para el caso de diseño aleatorio.
+La otra alternativa, que podría ser más adecuada para el caso de diseño fijo, sería lo que se conoce como \emph{remuestreo residual}, \emph{remuestreo basado en modelos} o \emph{bootstrap semiparamétrico}.
+En esta aproximación se mantienen fijos los valores de las variables explicativas y se remuestrean los residuos.
+Una de las aplicaciones del bootstrap semiparamétrico es el contraste de hipótesis en regresión, que se tratará en la Sección \ref{contrastes-semiparametricos}.
+
+Se puede generalizar el modelo \eqref{eq:modelogeneral} de diversas formas, por ejemplo asumiendo que la distribución del error depende de \(X\) únicamente a través de la varianza (error heterocedástico independiente).
+En este caso se suele reescribir como:
+\[Y = m(\mathbf{X}) + \sigma(\mathbf{X}) \varepsilon,\]
+siendo \(\sigma^2(\mathbf{x}) = Var\left( \left. Y\right\vert_{\mathbf{X}=\mathbf{x}} \right)\) la varianza condicional y suponiendo adicionalmente que \(\varepsilon\) tiene varianza uno.
+Se podría modificar el bootstrap residual para este caso pero habría que modelizar y estimar la varianza condicional.
+Alternativamente se podría emplear el denominado \emph{Wild Bootstrap} que se describirá en la Sección \ref{wild-bootstrap} para el caso de modelos de regresión no paramétricos.
+
+En esta sección nos centraremos en el caso de regresión lineal:
+\[m_{\boldsymbol{\beta}}(\mathbf{x}) =  \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \cdots + \beta_{p}X_{p},\]
+siendo \(\boldsymbol{\beta} = \left( \beta_{0}, \beta_{1}, \ldots, \beta_{p} \right)^{T}\) el vector de parámetros (desconocidos).
+Su estimador mínimo cuadrático es:
+\[\boldsymbol{\hat{\beta}} = \left( X^{T}X\right)^{-1}X^{T}\mathbf{Y},\]
+siendo \(\mathbf{Y} = \left( Y_{1}, \ldots, Y_{n} \right)^{T}\) el vector de observaciones de la variable \(Y\) y \(X\) la denominada \emph{matriz del diseño} de las variables regresoras, cuyas filas son los valores observados de las variables explicativas.
+
+En regresión lineal múltiple, bajo las hipótesis estructurales del modelo de normalidad y homocedásticidad, se dispone de resultados teóricos que permiten realizar inferencias sobre características de la distribución condicional. Si alguna de estas hipótesis no es cierta se podrían emplear aproximaciones basadas en resultados asintóticos, pero podrían ser poco adecuadas para tamaños muestrales no muy grandes. Alternativamente se podría emplear bootstrap.
+Con otros métodos de regresión, como los modelos no paramétricos descritos en el Capítulo \ref{npreg}, es habitual emplear bootstrap para realizar inferencias sobre la distribución condicional.
+
+En esta sección se empleará el conjunto de datos \texttt{Prestige} del paquete \texttt{carData}, considerando como variable respuesta \texttt{prestige} (puntuación de ocupaciones obtenidas a partir de una encuesta) y como variables explicativas: \texttt{income} (media de ingresos en la ocupación) y \texttt{education} (media de los años de educación).
+Para ajustar el correspondiente modelo de regresión lineal podemos emplear el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(Prestige, }\AttributeTok{package =} \StringTok{"carData"}\NormalTok{)}
+\CommentTok{\# ?Prestige}
+\NormalTok{modelo }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(prestige }\SpecialCharTok{\textasciitilde{}}\NormalTok{ income }\SpecialCharTok{+}\NormalTok{ education, }\AttributeTok{data =}\NormalTok{ Prestige)}
+\FunctionTok{summary}\NormalTok{(modelo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = prestige ~ income + education, data = Prestige)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -19.4040  -5.3308   0.0154   4.9803  17.6889 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -6.8477787  3.2189771  -2.127   0.0359 *  
+## income       0.0013612  0.0002242   6.071 2.36e-08 ***
+## education    4.1374444  0.3489120  11.858  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.81 on 99 degrees of freedom
+## Multiple R-squared:  0.798,  Adjusted R-squared:  0.7939 
+## F-statistic: 195.6 on 2 and 99 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+Como ejemplo, consideraremos que el objetivo es realizar inferencias sobre el coeficiente de determinación ajustado:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(modelo)}
+\FunctionTok{names}\NormalTok{(res)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "call"          "terms"         "residuals"     "coefficients" 
+##  [5] "aliased"       "sigma"         "df"            "r.squared"    
+##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res}\SpecialCharTok{$}\NormalTok{adj.r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7939201
+\end{verbatim}
+
+\hypertarget{boot-unif-reg}{%
+\subsubsection{Remuestreo de las observaciones}\label{boot-unif-reg}}
+
+Como ya se comentó, en regresión podríamos emplear bootstrap uniforme multidimensional para el caso de diseño aleatorio, aunque hay que tener en cuenta que con este método la distribución en el remuestreo de \(\left. Y^{\ast}\right\vert _{X^{\ast}=X_i}\) es degenerada.
+
+En este caso, podríamos realizar inferencias sobre el coeficiente de determinación ajustado empleando el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(boot)}
+
+\NormalTok{case.stat }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, i) \{}
+\NormalTok{  fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(prestige }\SpecialCharTok{\textasciitilde{}}\NormalTok{ income }\SpecialCharTok{+}\NormalTok{ education, }\AttributeTok{data =}\NormalTok{ data[i, ])}
+  \FunctionTok{summary}\NormalTok{(fit)}\SpecialCharTok{$}\NormalTok{adj.r.squared}
+\NormalTok{\}}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{boot.case }\OtherTok{\textless{}{-}} \FunctionTok{boot}\NormalTok{(Prestige, case.stat, }\AttributeTok{R =} \DecValTok{1000}\NormalTok{)}
+\NormalTok{boot.case}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Prestige, statistic = case.stat, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##      original      bias    std. error
+## t1* 0.7939201 0.002495631   0.0315275
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plot(boot.case)}
+\FunctionTok{boot.ci}\NormalTok{(boot.case, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"basic"}\NormalTok{, }\StringTok{"perc"}\NormalTok{, }\StringTok{"bca"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 1000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = boot.case, type = c("basic", "perc", "bca"))
+## 
+## Intervals : 
+## Level      Basic              Percentile            BCa          
+## 95%   ( 0.7331,  0.8570 )   ( 0.7308,  0.8547 )   ( 0.7203,  0.8497 )  
+## Calculations and Intervals on Original Scale
+\end{verbatim}
+
+\hypertarget{boot-residual}{%
+\subsubsection{Bootstrap residual}\label{boot-residual}}
+
+Como ya se comentó, en el caso de diseño fijo podemos realizar un remuestreo de los residuos:
+\[\mathbf{r} = \mathbf{Y} - X\hat{\mathbf{\beta}} = \mathbf{Y} - \hat{\mathbf{Y}}\]
+obteniéndose las réplicas bootstrap:
+\[\mathbf{Y}^{\ast} = \hat{\mathbf{Y}} + \mathbf{r}^{\ast}.\]
+Por ejemplo, adaptando el código en Canty (2002) para este conjunto de datos, podríamos emplear:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pres.dat }\OtherTok{\textless{}{-}}\NormalTok{ Prestige}
+\NormalTok{pres.dat}\SpecialCharTok{$}\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{fitted}\NormalTok{(modelo)}
+\NormalTok{pres.dat}\SpecialCharTok{$}\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(modelo)}
+
+\NormalTok{mod.stat }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, i) \{}
+\NormalTok{    data}\SpecialCharTok{$}\NormalTok{prestige }\OtherTok{\textless{}{-}}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{fit }\SpecialCharTok{+}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{res[i]}
+\NormalTok{    fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(prestige }\SpecialCharTok{\textasciitilde{}}\NormalTok{ income }\SpecialCharTok{+}\NormalTok{ education, }\AttributeTok{data =}\NormalTok{ data)}
+    \FunctionTok{summary}\NormalTok{(fit)}\SpecialCharTok{$}\NormalTok{adj.r.squared}
+\NormalTok{\}}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{boot.mod }\OtherTok{\textless{}{-}} \FunctionTok{boot}\NormalTok{(pres.dat, mod.stat, }\AttributeTok{R =} \DecValTok{1000}\NormalTok{)}
+\NormalTok{boot.mod}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = pres.dat, statistic = mod.stat, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##      original      bias    std. error
+## t1* 0.7939201 0.004401997  0.02671996
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plot(boot.mod)}
+\FunctionTok{boot.ci}\NormalTok{(boot.mod, }\AttributeTok{type =} \FunctionTok{c}\NormalTok{(}\StringTok{"basic"}\NormalTok{, }\StringTok{"perc"}\NormalTok{, }\StringTok{"bca"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 1000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = boot.mod, type = c("basic", "perc", "bca"))
+## 
+## Intervals : 
+## Level      Basic              Percentile            BCa          
+## 95%   ( 0.7407,  0.8464 )   ( 0.7415,  0.8471 )   ( 0.7244,  0.8331 )  
+## Calculations and Intervals on Original Scale
+## Some BCa intervals may be unstable
+\end{verbatim}
+
+Sin embargo, la variabilidad de los residuos no reproduce la de los verdaderos errores, por lo que podría ser preferible (especialmente si el tamaño muestral es pequeño) emplear la modificación descrita en Davison y Hinkley (1997, Alg. 6.3, p.~271).
+Teniendo en cuenta que:
+\[\mathbf{r} = \left( I - H \right)\mathbf{Y},\]
+siendo \(H = X\left( X^{T}X\right)^{-1}X^{T}\) la matriz de proyección.
+La idea es remuestrear los residuos reescalados (de forma que su varianza sea constante) y centrados \(e_i - \bar{e}\), siendo:
+\[e_i = \frac{r_i}{\sqrt{1 - h_{ii}}},\]
+donde \(h_{ii}\) es el valor de influencia o leverage, el elemento \(i\)-ésimo de la diagonal de \(H\).
+
+En \texttt{R} podríamos obtener estos residuos mediante los comandos\footnote{Para reescalar los
+  residuos de un modelo \texttt{gam} del paquete \texttt{mgcv}, como no implementa un método \texttt{hatvalues()},
+  habrá que emplear \texttt{influence.gam()} (o directamente \texttt{modelo.gam\$hat}).}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pres.dat}\SpecialCharTok{$}\NormalTok{sres }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(modelo)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{hatvalues}\NormalTok{(modelo))}
+\NormalTok{pres.dat}\SpecialCharTok{$}\NormalTok{sres }\OtherTok{\textless{}{-}}\NormalTok{ pres.dat}\SpecialCharTok{$}\NormalTok{sres }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(pres.dat}\SpecialCharTok{$}\NormalTok{sres)}
+\end{Highlighting}
+\end{Shaded}
+
+Sin embargo puede ser más cómodo emplear la función \texttt{Boot()} del paquete \texttt{car} (que internamente llama a la función \texttt{boot()}),
+como se describe en el apéndice ``Bootstrapping Regression Models in R'' del libro ``An R Companion to Applied Regression'' de Fox y Weisberg (2018), disponible \href{https://socialsciences.mcmaster.ca/jfox/Books/Companion/appendices/Appendix-Bootstrapping.pdf}{aquí}.
+
+Esta función es de la forma:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Boot}\NormalTok{(object, }\AttributeTok{f =}\NormalTok{ coef, }\AttributeTok{labels =} \FunctionTok{names}\NormalTok{(}\FunctionTok{f}\NormalTok{(object)), }\AttributeTok{R =} \DecValTok{999}\NormalTok{, }
+     \AttributeTok{method =} \FunctionTok{c}\NormalTok{(}\StringTok{"case"}\NormalTok{, }\StringTok{"residual"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+donde:
+
+\begin{itemize}
+\item
+  \texttt{object}: es un objeto que contiene el ajuste de un modelo de regresión.
+\item
+  \texttt{f}: es la función de estadísticos (utilizando el ajuste como argumento).
+\item
+  \texttt{method}: especifíca el tipo de remuestreo: remuestreo de observaciones (\texttt{"case"})
+  o de residuos (\texttt{"residual"}), empleando la modificación descrita anteriormente.
+\end{itemize}
+
+\begin{exercise}
+\protect\hypertarget{exr:boot-car}{}{\label{exr:boot-car} }
+\end{exercise}
+Emplear la función \texttt{Boot()} del paquete \texttt{car} para hacer inferencia sobre
+el coeficiente de determinación ajustado del modelo de regresión lineal
+que explica \texttt{prestige} a partir de \texttt{income} y \texttt{education}
+(obtener una estimación del sesgo y de la predicción,
+y una estimación por intervalo de confianza de este estadístico).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(car)}
+
+\CommentTok{\# set.seed(DNI)}
+\CommentTok{\# ...}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{referencias}{%
 \chapter*{Referencias}\label{referencias}}
 \addcontentsline{toc}{chapter}{Referencias}
@@ -9740,50 +11140,48 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 \end{Shaded}
 
 \begin{verbatim}
-## function(x, distribution = "norm", nclass = floor(length(x)/5),
-##                             output = TRUE, nestpar = 0, ...) {
-##   # Función distribución
-##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##   # Puntos de corte
-##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##   tol <- sqrt(.Machine$double.eps)
-##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##   # Gráficos y frecuencias
-##   if (output) {
-##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
-##                   lty = 2, border = "grey50")
-##     # Función densidad
-##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
-##     curve(d.distrib(x, ...), add = TRUE)
-##   } else {
-##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##   }
-##   # Cálculo estadístico y p-valor
-##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
-##   E <- length(x)/nclass
-##   DNAME <- deparse(substitute(x))
-##   METHOD <- "Pearson's Chi-squared test"
-##   STATISTIC <- sum((O - E)^2/E)
-##   names(STATISTIC) <- "X-squared"
-##   PARAMETER <- nclass - nestpar - 1
-##   names(PARAMETER) <- "df"
-##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##   # Preparar resultados
-##   classes <- format(xbreaks)
-##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
-##                    sep = "")
-##   RESULTS <- list(classes = classes, observed = O, expected = E,
-##                   residuals = (O - E)/sqrt(E))
-##   if (output) {
-##     cat("\nPearson's Chi-squared test table\n")
-##     print(as.data.frame(RESULTS))
-##   }
-##   if (any(E < 5))
-##     warning("Chi-squared approximation may be incorrect")
-##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
-##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
+## function (x, distribution = "norm", nclass = floor(length(x)/5), 
+##     output = TRUE, nestpar = 0, ...) 
+## {
+##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##     tol <- sqrt(.Machine$double.eps)
+##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##     if (output) {
+##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
+##             border = "grey50")
+##         d.distrib <- eval(parse(text = paste("d", distribution, 
+##             sep = "")))
+##         curve(d.distrib(x, ...), add = TRUE)
+##     }
+##     else {
+##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##     }
+##     O <- xhist$counts
+##     E <- length(x)/nclass
+##     DNAME <- deparse(substitute(x))
+##     METHOD <- "Pearson's Chi-squared test"
+##     STATISTIC <- sum((O - E)^2/E)
+##     names(STATISTIC) <- "X-squared"
+##     PARAMETER <- nclass - nestpar - 1
+##     names(PARAMETER) <- "df"
+##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##     classes <- format(xbreaks)
+##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
+##         "]", sep = "")
+##     RESULTS <- list(classes = classes, observed = O, expected = E, 
+##         residuals = (O - E)/sqrt(E))
+##     if (output) {
+##         cat("\nPearson's Chi-squared test table\n")
+##         print(as.data.frame(RESULTS))
+##     }
+##     if (any(E < 5)) 
+##         warning("Chi-squared approximation may be incorrect")
+##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
+##         p.value = PVAL, method = METHOD, data.name = DNAME), 
+##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x000000003b505978>
+## <bytecode: 0x0000000036e7fb58>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -10693,8 +12091,6 @@ f(x_0)+2\sum_{j=1}^{(n/2)-1}f(x_{2j})+ 4\sum_{j=1}^{n/2}f(x_{2j-1})+f(x_n) \bigg
 \NormalTok{  f.vec1 }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(x.vec1, fun)}
 \NormalTok{  f.vec2 }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(x.vec2, fun)}
   \FunctionTok{return}\NormalTok{(h}\SpecialCharTok{/}\DecValTok{3}\SpecialCharTok{*}\NormalTok{(}\FunctionTok{fun}\NormalTok{(a) }\SpecialCharTok{+} \FunctionTok{fun}\NormalTok{(b) }\SpecialCharTok{+} \DecValTok{4}\SpecialCharTok{*}\FunctionTok{sum}\NormalTok{(f.vec1) }\SpecialCharTok{+} \DecValTok{2}\SpecialCharTok{*}\FunctionTok{sum}\NormalTok{(f.vec2)))}
-  \CommentTok{\# Una cota del error en valor absoluto es:}
-  \CommentTok{\# h\^{}4*(b{-}a)*max(c(f.vec1, fvec.2))\^{}4/180.}
 \NormalTok{\}}
 
 \FunctionTok{simpson}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{20}\NormalTok{)}
@@ -10766,9 +12162,11 @@ Fuente: \href{https://www.r-bloggers.com/one-dimensional-integrals}{r-blogger Gu
 \hypertarget{comandos-de-r}{%
 \subsection{Comandos de R}\label{comandos-de-r}}
 
+La función \texttt{integrate()} implementa un método de cuadratura adaptativa que admite límites infinitos
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{integrate}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)   }\CommentTok{\# Permite límites infinitos  }
+\FunctionTok{integrate}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)  }\CommentTok{\# Cuidado: fun debe ser vectorial...}
 \end{Highlighting}
 \end{Shaded}
 
@@ -10776,10 +12174,10 @@ Fuente: \href{https://www.r-bloggers.com/one-dimensional-integrals}{r-blogger Gu
 ## 0.8 with absolute error < 8.9e-15
 \end{verbatim}
 
+Alternativamente, para dominios acotados, se puede emplear la función \texttt{MASS::area()} (suele dar muy buenos resultados, aunque los autores la desarrollaron inicialmente para fines ilustrativos):
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# Cuidado: fun debe ser vectorial...}
-
 \FunctionTok{require}\NormalTok{(MASS)}
 \FunctionTok{area}\NormalTok{(fun, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
@@ -10847,7 +12245,7 @@ del paquete \texttt{npsp}).
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{23-Integracion_numerica_files/figure-latex/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{23-Integracion_numerica_files/figure-latex/unnamed-chunk-10-1} \end{center}
 
 \hypertarget{muxe9todo-del-trapezoide-1}{%
 \subsection{Método del trapezoide}\label{muxe9todo-del-trapezoide-1}}
@@ -10914,7 +12312,7 @@ Si la función no es vectorial y solo admite parámetros escalares:
 
 Fuente: \href{http://tolstoy.newcastle.edu.au/R/help/04/10/5951.html}{tolstoy.newcastle.edu.au}.
 
-Alternativamente se podría emplear la función \texttt{adaptIntegrate()} del paquete \texttt{cubature}.
+Alternativamente se podría emplear la función \texttt{cubintegrate()} del paquete \href{https://bnaras.github.io/cubature/}{\texttt{cubature}}.
 
 \hypertarget{soluciones}{%
 \chapter{Soluciones ejercicios}\label{soluciones}}
@@ -11451,26 +12849,22 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 \end{Shaded}
 
 \begin{verbatim}
-## function(n, seed = as.numeric(Sys.time()), k = 4) {
-##   seed <- seed %% 10^k
-##   aux <- 10^(2*k-k/2)
-##   aux2 <- 10^(k/2)
-##   u <- numeric(n)
-##   for(i in 1:n) {
-##     z <- seed^2
-##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
-##     u[i] <- seed/10^k
-##   }
-##   # Almacenar semilla y parámetros
-##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
-##       envir = globalenv())
-##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
-##   # Para continuar con semilla y parámetros:
-##   #   with(.rng, rvng(n, seed, parameters$k))
-##   # Devolver valores
-##   return(u)
+## function (n, seed = as.numeric(Sys.time()), k = 4) 
+## {
+##     seed <- seed%%10^k
+##     aux <- 10^(2 * k - k/2)
+##     aux2 <- 10^(k/2)
+##     u <- numeric(n)
+##     for (i in 1:n) {
+##         z <- seed^2
+##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
+##         u[i] <- seed/10^k
+##     }
+##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
+##         envir = globalenv())
+##     return(u)
 ## }
-## <bytecode: 0x000000003b6c14c0>
+## <bytecode: 0x000000003b4abc48>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -11589,7 +12983,7 @@ Esta función está implementada en el siguiente código:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.01
+##       0       0       0
 \end{verbatim}
 
 \begin{Shaded}

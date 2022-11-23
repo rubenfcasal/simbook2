@@ -662,10 +662,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.28    0.02    0.30 
+##    0.19    0.01    0.21 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.28    0.02    0.30
+##    0.19    0.01    0.21
 ```
 
 ```r
@@ -676,10 +676,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.01    0.00    0.02 
+##    0.23    0.00    0.25 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.29    0.02    0.32
+##    0.42    0.01    0.46
 ```
 
 
@@ -706,7 +706,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## inner: 0 sec elapsed
+    ## inner: 0.02 sec elapsed
     ```
     
     ```r
@@ -714,7 +714,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## middle: 0 sec elapsed
+    ## middle: 0.02 sec elapsed
     ```
     
     ```r
@@ -722,7 +722,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## outer: 0.11 sec elapsed
+    ## outer: 0.24 sec elapsed
     ```
     
     ```r
@@ -742,8 +742,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ## 'data.frame':	10 obs. of  3 variables:
-    ##  $ tic: num  6.64 6.64 6.64 6.64 6.64 6.64 6.64 6.64 6.64 6.64
-    ##  $ toc: num  6.64 6.64 6.64 6.64 6.64 6.64 6.64 6.64 6.64 6.64
+    ##  $ tic: num  10.3 10.3 10.3 10.3 10.3 ...
+    ##  $ toc: num  10.3 10.3 10.3 10.3 10.3 ...
     ##  $ msg: chr  "1" "2" "3" "4" ...
     ```
     
@@ -757,7 +757,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##       0       0       0       0       0       0
+    ##   0.000   0.000   0.000   0.001   0.000   0.010
     ```
 
 * La función [`cpu.time()`](https://rubenfcasal.github.io/simres/reference/cpu.time.html) del paquete `simres`:

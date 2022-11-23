@@ -102,8 +102,6 @@ simpson <- function(fun, a, b, n = 100) {
   f.vec1 <- sapply(x.vec1, fun)
   f.vec2 <- sapply(x.vec2, fun)
   return(h/3*(fun(a) + fun(b) + 4*sum(f.vec1) + 2*sum(f.vec2)))
-  # Una cota del error en valor absoluto es:
-  # h^4*(b-a)*max(c(f.vec1, fvec.2))^4/180.
 }
 
 simpson(fun, 0, 1, 20)
@@ -113,11 +111,9 @@ simpson(fun, 0, 1, 20)
 ## [1] 0.8000033
 ```
 
-
 El máximo error (en el caso unidimensional) viene dado por la expresión:
 $$\frac{(b-a)^5}{180n^4}\,\max_{a\leq \xi \leq b}\left| f^{(4)}(\xi) \right|.$$
 En el caso general multidimensional sería $O(n^{-\frac{4}{d}})$.   
-
 
 
 ### Cuadratura adaptativa
@@ -176,18 +172,21 @@ Fuente: [r-blogger Guangchuang Yu](https://www.r-bloggers.com/one-dimensional-in
 
 ### Comandos de R
 
+La función `integrate()` implementa un método de cuadratura adaptativa que admite límites infinitos 
+
 
 ```r
-integrate(fun, 0, 1)   # Permite límites infinitos  
+integrate(fun, 0, 1)  # Cuidado: fun debe ser vectorial...
 ```
 
 ```
 ## 0.8 with absolute error < 8.9e-15
 ```
 
-```r
-## Cuidado: fun debe ser vectorial...
+Alternativamente, para dominios acotados, se puede emplear la función `MASS::area()` (suele dar muy buenos resultados, aunque los autores la desarrollaron inicialmente para fines ilustrativos):
 
+
+```r
 require(MASS)
 area(fun, 0, 1)
 ```
@@ -195,6 +194,7 @@ area(fun, 0, 1)
 ```
 ## [1] 0.8000001
 ```
+
 
 
 ## Integración numérica bidimensional
@@ -255,7 +255,7 @@ persp3D.f2d <- function(f2d, ax=-1, bx=1, ay=-1, by=1, nx=21, ny=21, ...) {
 persp3D.f2d(f2d, -1, 1, -1, 1, 50, 50, ticktype = "detailed") 
 ```
 
-<img src="23-Integracion_numerica_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="23-Integracion_numerica_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 ### Método del trapezoide 
@@ -323,4 +323,4 @@ integrate(function(y) {
 
 Fuente: [tolstoy.newcastle.edu.au](http://tolstoy.newcastle.edu.au/R/help/04/10/5951.html).
 
-Alternativamente se podría emplear la función `adaptIntegrate()` del paquete `cubature`.
+Alternativamente se podría emplear la función `cubintegrate()` del paquete [`cubature`](https://bnaras.github.io/cubature/).

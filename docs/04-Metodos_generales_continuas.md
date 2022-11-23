@@ -106,7 +106,7 @@ tiempo
 
 ```
 ##    user  system elapsed 
-##    0.01    0.00    0.02
+##    0.01    0.02    0.04
 ```
 
 ```r
@@ -200,7 +200,7 @@ b)  Generar $10^{4}$ valores de la distribución doble exponencial de
     
     ```
     ##    user  system elapsed 
-    ##    0.03    0.00    0.03
+    ##    0.05    0.01    0.08
     ```
 
 
@@ -464,7 +464,7 @@ system.time(x <- rbeta2n(nsim, s1, s2))
 
 ```
 ##    user  system elapsed 
-##    0.02    0.00    0.01
+##    0.05    0.00    0.07
 ```
 
 Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):
@@ -643,7 +643,7 @@ system.time(x <- rnormARn(nsim))
 
 ```
 ##    user  system elapsed 
-##    0.09    0.00    0.09
+##     0.2     0.0     0.2
 ```
 
 Evaluamos la eficiencia:
@@ -1113,25 +1113,24 @@ simres::rcauchy.rou
 ```
 
 ```
-## function(n) {
-##   # Cauchy mediante cociente de uniformes
-##   ngen <- n
-##   u <- runif(n, 0, 1)
-##   v <- runif(n, -1, 1)
-##   x <- v/u
-##   ind <- u^2 + v^2 > 1 # TRUE si no verifica condición
-##   # Volver a generar si no verifica condición
-##   while (le <- sum(ind)){ # mientras le = sum(ind) > 0
-##     ngen <- ngen + le
-##     u <- runif(le, 0, 1)
-##     v <- runif(le, -1, 1)
-##     x[ind] <- v/u
-##     ind[ind] <- u^2 + v^2 > 1 # TRUE si no verifica condición
-##   }
-##   attr(x, "ngen") <- ngen
-##   return(x)
+## function (n) 
+## {
+##     ngen <- n
+##     u <- runif(n, 0, 1)
+##     v <- runif(n, -1, 1)
+##     x <- v/u
+##     ind <- u^2 + v^2 > 1
+##     while (le <- sum(ind)) {
+##         ngen <- ngen + le
+##         u <- runif(le, 0, 1)
+##         v <- runif(le, -1, 1)
+##         x[ind] <- v/u
+##         ind[ind] <- u^2 + v^2 > 1
+##     }
+##     attr(x, "ngen") <- ngen
+##     return(x)
 ## }
-## <bytecode: 0x0000000039d226b0>
+## <bytecode: 0x000000003f835900>
 ## <environment: namespace:simres>
 ```
 

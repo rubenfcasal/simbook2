@@ -557,7 +557,7 @@ eliminando los valores muy poco probables (teniendo en cuenta el número de gene
 aunque la distribución de las simulaciones será aproximada.
 
 
-## Cálculo directo de la función cuantil
+## Cálculo directo de la función cuantil {#transcuant-directo}
 
 En ocasiones el método de la transformación cuantil puede acelerarse computacionalmente porque, mediante cálculos directos, es posible encontrar el valor de la función cuantil en cualquier $U$, evitando el bucle de búsqueda. 
 Normalmente se realiza mediante truncamiento de una distribución continua.
