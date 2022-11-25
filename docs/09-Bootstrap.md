@@ -44,7 +44,8 @@ Aplicaciones bootstrap
 Ejercicios
   mediana
   coeficiente de correlación
-
+  
+Mover caso multidimensional al final de la sección. 
 -->
 
 Un par de notas:
@@ -107,12 +108,16 @@ Para aproximar la distribución en el muestreo por Monte Carlo, se genera un nú
 
 para $b = 1,\ldots ,B$.
 
-La idea original (bootstrap natural, Efron) es que la variabilidad de $\hat{\theta}_{b}^{\ast }$ en torno a $\hat{\theta}$ aproxima la variabilidad de $\hat{\theta}$ en torno a $\theta$: **laa distribución de** $\hat{\theta}_{b}^{\ast }-\hat{\theta}$ (en el universo bootstrap) **aproxima la distribución de ** $\hat{\theta}-\theta$ (en la población).
+La idea original (bootstrap natural, Efron) es que la variabilidad de $\hat{\theta}_{b}^{\ast }$ en torno a $\hat{\theta}$ aproxima la variabilidad de $\hat{\theta}$ en torno a $\theta$: **la distribución de** $\hat{\theta}_{b}^{\ast }-\hat{\theta}$ (en el universo bootstrap) **aproxima la distribución de ** $\hat{\theta}-\theta$ (en la población).
 
-<div class="figure" style="text-align: center">
-<img src="images/bootstrap.png" alt="Esquema de la idea del boostrap (de Efron)." width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-2)Esquema de la idea del boostrap (de Efron).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/bootstrap} 
+
+}
+
+\caption{Esquema de la idea del boostrap (de Efron).}(\#fig:unnamed-chunk-2)
+\end{figure}
 
 En general podríamos decir que **la muestra es a la población** **lo que la muestra bootstrap es a la muestra**.
 
@@ -135,24 +140,27 @@ El valor del estadístico en la muestra es:
 estadistico <- mean(muestra)
 ```
 
-Representamos la distribución de la muestra:
+Representamos la distribución de la muestra [Figura \@ref(fig:muestra-sim)]:
 
 ```r
 hist(muestra, freq = FALSE, xlim = c(-3, 3),
      main = '', xlab = 'x', ylab = 'densidad')
-curve(dnorm, lty = 2, add = TRUE)
 abline(v = estadistico, lty = 2)
+curve(dnorm, col = "blue", add = TRUE)
+abline(v = mean_teor, col = "blue", lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-Bootstrap_files/figure-html/muestra-sim-1.png" alt="Distribución de la muestra simulada." width="70%" />
-<p class="caption">(\#fig:muestra-sim)Distribución de la muestra simulada.</p>
-</div>
+\begin{figure}[!htb]
 
-Como aproximación de la distribución poblacional, desconocida en la práctica,
-siempre podemos considerar la distribución empírica 
-(o una versión suavizada: bootstrap suavizado; Sección \@ref(modunif-boot-suav)). 
-Alternativamente podríamos asumir un modelo paramétrico y estimar los parámetros a partir de la muestra (bootstrap paramétrico; Sección \@ref(modunif-boot-par).
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/muestra-sim-1} 
+
+}
+
+\caption{Distribución de la muestra simulada (y distribución teórica en azul).}(\#fig:muestra-sim)
+\end{figure}
+
+Como aproximación de la distribución poblacional, desconocida en la práctica, siempre podemos considerar la distribución empírica (o una versión suavizada: bootstrap suavizado; Sección \@ref(modunif-boot-suav)). 
+Alternativamente podríamos asumir un modelo paramétrico y estimar los parámetros a partir de la muestra (bootstrap paramétrico; Sección \@ref(modunif-boot-par) [Figura \@ref(fig:muestra-sim-aprox)].
 
 ```r
 # Distribución bootstrap uniforme
@@ -161,13 +169,18 @@ curve(ecdf(muestra)(x), xlim = c(-3, 3), ylab = "F(x)", type = "s")
 curve(pnorm(x, mean(muestra), sd(muestra)), lty = 2, add = TRUE)
 # Distribución teórica
 curve(pnorm, col = "blue", add = TRUE)
-legend("bottomright", legend = c("Empírica", "Aprox. paramétrica", "Teórica"), lty = c(1, 2, 1), col = c("black","black", "blue"))
+legend("bottomright", legend = c("Empírica", "Aprox. paramétrica", "Teórica"),
+       lty = c(1, 2, 1), col = c("black","black", "blue"))
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-Bootstrap_files/figure-html/muestra-sim-aprox-1.png" alt="Distribución teórica de la muestra simulada y distintas aproximaciones." width="70%" />
-<p class="caption">(\#fig:muestra-sim-aprox)Distribución teórica de la muestra simulada y distintas aproximaciones.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/muestra-sim-aprox-1} 
+
+}
+
+\caption{Distribución teórica de la muestra simulada y distintas aproximaciones.}(\#fig:muestra-sim-aprox)
+\end{figure}
 
 En este caso (bootstrap uniforme) generamos las réplicas bootstrap empleando la distribución empírica:
 
@@ -197,10 +210,14 @@ curve(dnorm(x, mean_teor, sd_teor/sqrt(n)), col = "blue", add = TRUE)
 abline(v = 0, col = "blue", lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-Bootstrap_files/figure-html/mean-boot-perc-1.png" alt="Aproximación de la distribución de la media muestral mediante bootstrap percentil (uniforme)." width="70%" />
-<p class="caption">(\#fig:mean-boot-perc)Aproximación de la distribución de la media muestral mediante bootstrap percentil (uniforme).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/mean-boot-perc-1} 
+
+}
+
+\caption{Aproximación de la distribución de la media muestral centrada mediante bootstrap percentil (uniforme).}(\#fig:mean-boot-perc)
+\end{figure}
 
 Sin embargo, especialmente si el estimador es sesgado, puede ser preferible emplear la distribución de $\hat{\theta}_{b}^{\ast }-\hat{\theta}$ como aproximación de la distribución de $\hat{\theta}-\theta$ (bootstrap natural, básico o percentil básico):
 
@@ -213,10 +230,14 @@ curve(dnorm(x, 0, sd_teor/sqrt(n)), col = "blue", add = TRUE)
 abline(v = 0, col = "blue", lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-Bootstrap_files/figure-html/mean-boot-basico-1.png" alt="Aproximación de la distribución de la media muestral mediante bootstrap natural (uniforme)." width="70%" />
-<p class="caption">(\#fig:mean-boot-basico)Aproximación de la distribución de la media muestral mediante bootstrap natural (uniforme).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/mean-boot-basico-1} 
+
+}
+
+\caption{Aproximación de la distribución de la media muestral mediante bootstrap natural (uniforme).}(\#fig:mean-boot-basico)
+\end{figure}
 
 Sin embargo, asintóticamente ambos procedimientos son equivalentes^[Por este motivo en algunas referencias más teóricas no se diferencia entre ambos métodos y se denominan simplemente bootstrap percentil.] y pueden dar lugar a los mismos resultados en determinados problemas de inferencia.
 Por ejemplo en la aproximación del sesgo y de la varianza de un estimador (Sección \@ref(prec-sesgo)):
@@ -283,7 +304,7 @@ denominada *distribución bootstrap*.
 
 **Una de las consideraciones más importantes** al diseñar un buen método de remuestreo bootstrap es **imitar por completo el procedimiento de muestreo en la población original** (incluyendo el estadístico y las características de su distribución muestral).  
 
-Como ya se comentó anteriormente, en el bootstrap uniforme se emplea como aproximación la distribución empírica:
+Como ya se comentó anteriormente, en el bootstrap uniforme se emplea como aproximación la distribución empírica (ver Sección \@ref(empdistr)):
 $$F_n\left( x \right) =\frac{1}{n}\sum_{i=1}^{n}\mathbf{1}\left\{ X_i\leq x\right\}.$$
 Es decir, $\hat{F}=F_n$, y por tanto $R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right)$. 
 En raras ocasiones (e.g. [Sección 1.3](https://rubenfcasal.github.io/book_remuestreo/c%C3%A1lculo-de-la-distribuci%C3%B3n-bootstrap-exacta-y-aproximada.html) de Cao y Fernández-Casal, 2020) es posible calcular exactamente la distribución bootstrap de $R^{\ast}$. 
@@ -304,26 +325,25 @@ $R^{\ast (1)}, \ldots, R^{\ast (B)}$
 5. Utilizar esas réplicas bootstrap para aproximar la distribución en el
 muestreo de $R$.
 
-Como ya se mostró anteriormente, el paso 1 se puede llevar a cabo simulando una distribución uniforme discreta
-mediante el método de la transformación cuantil (Sección \@ref(transcuant-directo)):
+Para la elección del número de réplicas Monte Carlo $B$ se aplicarían las mismas recomendaciones de la Sección \@ref(num-gen) para el caso general de una aproximación por simulación.
+
+Como ya se mostró anteriormente, el paso 1 se puede llevar a cabo simulando una distribución uniforme discreta mediante el método de la transformación cuantil (Sección \@ref(transcuant-directo)):
 
 1. Para cada $i=1,\ldots ,n$ arrojar $U_i\sim \mathcal{U}\left( 0,1 \right)$ y
 hacer $X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$
 
-Aunque en `R` es recomendable^[De esta forma se evitan posibles problemas numéricos 
-al emplear el método de la transformación cuantil cuando $n$ es extremadamente grande
-(e.g. <https://stat.ethz.ch/pipermail/r-devel/2018-September/076817.html>).] 
-emplear la función `sample` para generar muestras aleatorias con reemplazamiento 
-del conjunto de datos original:
+Aunque en `R` es recomendable^[De esta forma se evitan posibles problemas numéricos al emplear el método de la transformación cuantil cuando $n$ es extremadamente grande (e.g. <https://stat.ethz.ch/pipermail/r-devel/2018-September/076817.html>).] emplear la función `sample` para generar muestras aleatorias con reemplazamiento del conjunto de datos original:
 
 ```r
 muestra_boot <- sample(muestra, replace = TRUE)
 ```
 
-En el caso multidimensional, cuando trabajamos con un conjunto de datos
-con múltiples variables, 
-podríamos emplear un procedimiento análogo, a partir de remuestras del
-vector de índices. Por ejemplo:
+<!-- 
+Pendiente: Mover caso multidimensional al final de la sección. 
+-->
+
+En el caso multidimensional, cuando trabajamos con un conjunto de datos con múltiples variables, podríamos emplear un procedimiento análogo, a partir de remuestras del vector de índices. 
+Por ejemplo:
 
 ```r
 data(iris)
@@ -359,17 +379,38 @@ str(data_boot)
 
 Esta forma de proceder es la que emplea por defecto el paquete `boot` que describiremos más adelante (Sección \@ref(intro-pkgboot)).
 
-::: {.exercise #unif-multi name="Bootstrap uniforme multidimensional}
+::: {.exercise #unif-multi name="Bootstrap uniforme multidimensional"}
 <br>
-Considerando el conjunto de datos `Prestige` del paquete `carData`, supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e `income` (media de ingresos en la ocupación). Aproximar mediante bootstrap la distribución de este estadístico.
-:::
+Considerando el conjunto de datos `Prestige` del paquete `carData`, supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e `income` (media de ingresos en la ocupación). 
+Para ello podemos considerar el coeficiente de correlación lineal de Pearson:
+$$\rho =\frac{ Cov \left( X, Y \right) }
+{ \sigma \left( X \right) \sigma \left( Y \right) }$$
+Su estimador es el coeficiente de correlación muestral:
+$$r=\frac{\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})}
+{\sqrt{ \sum_{i=1}^{n}(x_i-\overline{x})^{2}} 
+\sqrt{\sum_{i=1}^{n}(y_i-\overline{y})^{2}}},$$
+que podemos calcular en `R` empleando la función `cor()`:
 
-Para la elección del número de réplicas Monte Carlo $B$ se aplicarían las mismas recomendaciones de la Sección \@ref(num-gen) para el caso general de una aproximación por simulación.
+```r
+data(Prestige, package = "carData")
+# with(Prestige, cor(income, prestige))
+cor(Prestige$income, Prestige$prestige)
+```
+
+```
+## [1] 0.7149057
+```
+Para realizar inferencias sobre el coeficiente de correlación, como aproximación más simple, se puede considerar que la distribución muestral de $r$ es aproximadamente normal de media $\rho$ y varianza
+$$Var(r) \approx \frac{1 - \rho^2}{n - 2}.$$
+
+Aproximar mediante bootstrap uniforme (multididimensional) la distribución del estadístico $R = r -\rho$, empleando $B=1000$ réplicas, y compararla con la aproximación normal, considerando
+$$\widehat{Var}(r) = \frac{1 - r^2}{n - 2}.$$
+:::
 
 ::: {.example #media-dt-desconocida name="Inferencia sobre la media con varianza desconocida"}
 <br> 
 
-Como ejemplo consideramos la muestra de tiempos de vida de microorganismos `lifetimes` del paquete `simres`: 
+Como ejemplo consideramos la muestra de tiempos de vida de microorganismos `lifetimes` del paquete `simres` [Figura \@ref(fig:microorganismos)]: 
 
 ```r
 library(simres)
@@ -387,10 +428,14 @@ hist(muestra)
 rug(muestra)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-Bootstrap_files/figure-html/microorganismos-1.png" alt="Distribución del tiempo de vida de una muestra de microorganismos." width="70%" />
-<p class="caption">(\#fig:microorganismos)Distribución del tiempo de vida de una muestra de microorganismos.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/microorganismos-1} 
+
+}
+
+\caption{Distribución del tiempo de vida de una muestra de microorganismos.}(\#fig:microorganismos)
+\end{figure}
 
 Supongamos que queremos obtener una estimación por intervalo de confianza de su vida media a partir de los 15 valores observados mediante bootstrap uniforme considerando el estadístico
 $$R=R\left( \mathbf{X},F \right) =\sqrt{n}\frac{\bar{X}-\mu }{S_{n-1}},$$
@@ -495,13 +540,20 @@ Como ejemplo adicional podemos comparar la aproximación de la distribución boo
 
 ```r
 hist(estadistico_boot, freq = FALSE, ylim = c(0, 0.4))
-abline(v = pto_crit)
-curve(dt(x, n-1), add=TRUE, lty = 2)
-pto_crit_t <- qt(1 - alfa/2, n-1)
-abline(v = c(-pto_crit_t, pto_crit_t), lty = 2)
+abline(v = pto_crit, lty = 2)
+curve(dt(x, n - 1), add = TRUE, col = "blue")
+pto_crit_t <- qt(1 - alfa/2, n - 1)
+abline(v = c(-pto_crit_t, pto_crit_t), col = "blue", lty = 2)
 ```
 
-<img src="09-Bootstrap_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" />
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/mean-boot-stud-1} 
+
+}
+
+\caption{Aproximación de la distribución de la media muestral studentizada mediante bootstrap uniforme.}(\#fig:mean-boot-stud)
+\end{figure}
 
 En este caso la distribución bootstrap del estadístico es más asimétrica, por lo que el intervalo de confianza no está centrado en la media,
 al contrario que el obtenido con la aproximación tradicional.
@@ -685,17 +737,21 @@ res.boot
 ## t1* 0.8053333 0.003173267   0.1583306
 ```
 y el método `plot()` que genera gráficas básicas de diagnosis
-de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`): 
+de los resultados (correspondientes al estadístico determinado por el parámetro `index`, por defecto `= 1`):  [Figura \@ref(fig:plot-res-boot)]
 
 
 ```r
 plot(res.boot)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="09-Bootstrap_files/figure-html/plot-res-boot-1.png" alt="Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos." width="70%" />
-<p class="caption">(\#fig:plot-res-boot)Gráficos de diagnóstico de los resultados bootstrap de la mediana de los tiempos de vida de microorganismos.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{09-Bootstrap_files/figure-latex/plot-res-boot-1} 
+
+}
+
+\caption{Gráficos de diagnóstico de los resultados bootstrap para la media muestral de los tiempos de vida de microorganismos.}(\#fig:plot-res-boot)
+\end{figure}
 
 Es recomendable examinar la distribución bootstrap del estimador (o estadístico) para detectar posibles problemas.
 Como en este caso puede ocurrir que el estadístico bootstrap tome pocos valores distintos, lo que indicaría que el número de réplicas bootstrap es insuficiente o que hay algún problema con método de remuestreo empleado. 
@@ -703,7 +759,7 @@ Se darán más detalles sobre los posibles problemas del bootstrap uniforme en l
 
 ::: {.exercise #boot-simul-mediana}
 <br>
-Repetir el ejemplo anterior considerando simultaneamente la media truncada al 10\% y la mediana como estimadores de la posición central de los datos. Estudiar si hay algún problema con su distribución bootstrap (NOTA: al igual que en el caso anterior, las distribuciones objetivo serían continuas, asumiendo que la distribución del tiempo de vida es continua).
+Repetir el ejemplo anterior considerando simultáneamente la media truncada al 10\% y la mediana como estimadores de la posición central de los datos. Estudiar si hay algún problema con su distribución bootstrap (NOTA: al igual que en el caso anterior, las distribuciones objetivo serían continuas, asumiendo que la distribución del tiempo de vida es continua).
 :::
 
 Además de estos métodos, las principales funciones de interés serían:
@@ -807,8 +863,7 @@ boot.ci(res.boot)
 ## Calculations and Intervals on Original Scale
 ```
 
-El intervalo marcado como `Studentized` se obtuvo empleando el mismo estadístico
-del Ejemplo \@ref(exm:media-dt-desconocida).
+El intervalo marcado como `Studentized` se obtuvo empleando el mismo estadístico del Ejemplo \@ref(exm:media-dt-desconocida).
 
 :::
 
@@ -852,36 +907,9 @@ Por ejemplo en la Sección \@ref(boot-reg) se ilustrará el uso de la función `
 
 ### Ejemplo: Bootstrap uniforme multidimensional {#boot-unif-multi}
 
-Como ya se mostró en las Secciones \@ref(intro-implementacion) y \@ref(intro-paquetes) podemos implementar el bootstrap uniforme en el caso multidimensional (denominado también *remuestreo de casos* o *bootstrap de las observaciones*) de modo análogo al unidimensional.
+Como ya se mostró en las Secciones \@ref(boot-unif) y \@ref(intro-paquetes) podemos implementar el bootstrap uniforme en el caso multidimensional (denominado también *remuestreo de casos* o *bootstrap de las observaciones*) de modo análogo al unidimensional.
 
-Consideraremos como ejemplo el conjunto de datos `Prestige` del paquete `carData`, y supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e `income` (media de ingresos en la ocupación).
-
-
-```r
-data(Prestige, package = "carData")
-str(Prestige)
-```
-
-```
-## 'data.frame':	102 obs. of  6 variables:
-##  $ education: num  13.1 12.3 12.8 11.4 14.6 ...
-##  $ income   : int  12351 25879 9271 8865 8403 11030 8258 14163 11377 11023 ...
-##  $ women    : num  11.16 4.02 15.7 9.11 11.68 ...
-##  $ prestige : num  68.8 69.1 63.4 56.8 73.5 77.6 72.6 78.1 73.1 68.8 ...
-##  $ census   : int  1113 1130 1171 1175 2111 2113 2133 2141 2143 2153 ...
-##  $ type     : Factor w/ 3 levels "bc","prof","wc": 2 2 2 2 2 2 2 2 2 2 ...
-```
-
-```r
-# with(Prestige, cor(income, prestige))
-cor(Prestige$income, Prestige$prestige)
-```
-
-```
-## [1] 0.7149057
-```
-
-En el siguiente código se emplea el paquete `boot` para realizar bootstrap uniforme multidimensional sobre este estadístico:
+Como ejemplo realizamos el Ejercicio \@ref(exr:unif-multi) empleando el paquete `boot` para estudiar la correlación lineal entre `prestige` e `income` del conjunto de datos `Prestige`:
 
 
 ```r
@@ -916,7 +944,14 @@ res.boot
 plot(res.boot)
 ```
 
-<img src="09-Bootstrap_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{09-Bootstrap_files/figure-latex/plot-boot-multi-1} 
+
+}
+
+\caption{Gráficos de diagnóstico para el coeficiente de correlación.}(\#fig:plot-boot-multi)
+\end{figure}
 
 En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección \@ref(icboot-trans)).
 
@@ -930,11 +965,18 @@ estadistico_boot <- res.boot$t - res.boot$t0
 hist(estadistico_boot)
 ```
 
-<img src="09-Bootstrap_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
+\begin{figure}[!htb]
 
-A partir de la distribución empírica del estadístico bootstrap $R^{\ast} = \hat \theta^{\ast} - \hat \theta$ aproximaríamos la característica de interés de la distribución en el muestreo de $R = \hat \theta - \theta$.
-Por ejemplo, para aproximar $\psi \left( u \right) =P\left( R\leq u \right)$ emplearíamos la frecuencia relativa: 
-$$\hat{\psi}_{B}\left( u \right) =
+{\centering \includegraphics[width=0.7\linewidth]{09-Bootstrap_files/figure-latex/plot-boot-basico-1} 
+
+}
+
+\caption{Distribución bootstrap del estadístico percentil básico para el coeficiente de correlación.}(\#fig:plot-boot-basico)
+\end{figure}
+
+Podemos emplear la distribución empírica del estadístico bootstrap $R^{\ast} = \hat \theta^{\ast} - \hat \theta$ para aproximar la característica de interés de la distribución en el muestreo de $R = \hat \theta - \theta$.
+Por ejemplo, para aproximar $\psi(u) = P\left( R \leq u \right)$ podríamos emplear la frecuencia relativa: 
+$$\hat{\psi}_{B}(u) =
 \frac{1}{B}\sum_{i=1}^{B}\mathbf{1}\left\{ R^{\ast (i)}\leq u\right\}.$$
 
 

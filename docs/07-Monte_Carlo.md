@@ -123,10 +123,14 @@ abline(h = 0, lty = 2)
 abline(v = c(0, 1), lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="07-Monte_Carlo_files/figure-html/int-mc-clas-1.png" alt="Ejemplo de integral en dominio acotado." width="70%" />
-<p class="caption">(\#fig:int-mc-clas)Ejemplo de integral en dominio acotado.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/int-mc-clas-1} 
+
+}
+
+\caption{Ejemplo de integral en dominio acotado.}(\#fig:int-mc-clas)
+\end{figure}
 
 ```r
 set.seed(1)
@@ -174,7 +178,7 @@ mc.integral
 ##     }
 ##     return(result)
 ## }
-## <bytecode: 0x00000000387d7828>
+## <bytecode: 0x000000003afe2e58>
 ## <environment: namespace:simres>
 ```
 
@@ -195,10 +199,14 @@ mc.integral(fun, 0, 1, 5000, ylim = c(0.2, 1.4))
 abline(h = 4/5, lty = 2, col = "blue")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="07-Monte_Carlo_files/figure-html/mc-integral-1.png" alt="Convergencia de la aproximación de la integral mediante simulación." width="70%" />
-<p class="caption">(\#fig:mc-integral)Convergencia de la aproximación de la integral mediante simulación.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-integral-1} 
+
+}
+
+\caption{Convergencia de la aproximación de la integral mediante simulación.}(\#fig:mc-integral)
+\end{figure}
 
 Si sólo interesa la aproximación:
 
@@ -360,10 +368,14 @@ escala <- dnorm(4.5)  # Reescalado para comparación...
 curve(dexp(x - 4.5) * escala, add = TRUE, lty = 2)  
 ```
 
-<div class="figure" style="text-align: center">
-<img src="07-Monte_Carlo_files/figure-html/mc-imp-int-1.png" alt="Objetivo a integrar (densidad objetivo truncada) y densidad auxiliar reescalada." width="70%" />
-<p class="caption">(\#fig:mc-imp-int)Objetivo a integrar (densidad objetivo truncada) y densidad auxiliar reescalada.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-imp-int-1} 
+
+}
+
+\caption{Objetivo a integrar (densidad objetivo truncada) y densidad auxiliar reescalada.}(\#fig:mc-imp-int)
+\end{figure}
 
 Generamos valores de la densidad auxiliar y calculamos los pesos:
 
@@ -400,10 +412,14 @@ plot(cumsum(w)/1:nsim, type = "l", ylab = "Aproximación", xlab = "Iteraciones")
 abline(h = pnorm(-4.5), lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="07-Monte_Carlo_files/figure-html/mc-imp-conv-1.png" alt="Convergencia de la aproximación de la integral mediante muestreo por importancia." width="70%" />
-<p class="caption">(\#fig:mc-imp-conv)Convergencia de la aproximación de la integral mediante muestreo por importancia.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-imp-conv-1} 
+
+}
+
+\caption{Convergencia de la aproximación de la integral mediante muestreo por importancia.}(\#fig:mc-imp-conv)
+\end{figure}
 
 El error estándar de la aproximación sería `sqrt(var(w * h(y))/nsim)`:
 
@@ -481,10 +497,14 @@ plot(cumsum(w * (y > 2) * (y < 6))/1:nsim, type = "l", ylab = "Aproximación", x
 abline(h = pcauchy(6) - pcauchy(2), lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="07-Monte_Carlo_files/figure-html/mc-imp2-conv-1.png" alt="Gráfico de convergencia de la aproximación mediante muestreo por importancia con mala densidad auxiliar." width="70%" />
-<p class="caption">(\#fig:mc-imp2-conv)Gráfico de convergencia de la aproximación mediante muestreo por importancia con mala densidad auxiliar.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-imp2-conv-1} 
+
+}
+
+\caption{Gráfico de convergencia de la aproximación mediante muestreo por importancia con mala densidad auxiliar.}(\#fig:mc-imp2-conv)
+\end{figure}
 Lo que indica es una mala elección de la densidad auxiliar.
 
 La distribución de los pesos debería ser homogénea.
@@ -494,10 +514,14 @@ Por ejemplo, si los reescalamos para que su suma sea el número de valores gener
 boxplot(nsim * w/sum(w))  
 ```
 
-<div class="figure" style="text-align: center">
-<img src="07-Monte_Carlo_files/figure-html/mc-imp2-boxplot-1.png" alt="Gráfico de cajas de los pesos del muestreo por importancia reescalados (de forma que su media es 1)." width="70%" />
-<p class="caption">(\#fig:mc-imp2-boxplot)Gráfico de cajas de los pesos del muestreo por importancia reescalados (de forma que su media es 1).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mc-imp2-boxplot-1} 
+
+}
+
+\caption{Gráfico de cajas de los pesos del muestreo por importancia reescalados (de forma que su media es 1).}(\#fig:mc-imp2-boxplot)
+\end{figure}
 
 :::
 
@@ -545,10 +569,14 @@ lines(density(rx))
 curve(dnorm, col = "blue", add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="07-Monte_Carlo_files/figure-html/imp-res-1.png" alt="Distribución de los valores generados mediante remuestreo por importancia y densidad objetivo." width="70%" />
-<p class="caption">(\#fig:imp-res)Distribución de los valores generados mediante remuestreo por importancia y densidad objetivo.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/imp-res-1} 
+
+}
+
+\caption{Distribución de los valores generados mediante remuestreo por importancia y densidad objetivo.}(\#fig:imp-res)
+\end{figure}
 
 :::
 
@@ -626,7 +654,9 @@ hist(data, freq = FALSE, breaks = "FD", ylim = c(0, 0.3))
 curve(0.25 * dnorm(x, mu1, sd1) + 0.75 * dnorm(x, mu2, sd2), add = TRUE)
 ```
 
-<img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 Podemos obtener la estimación por máxima verosimilitud de los parámetros empleando la rutina `nlm` para minimizar el logaritmo (negativo) de la función de verosimilitud:
 
@@ -706,7 +736,9 @@ for (j in 1:nstarts){
 }
 ```
 
-<img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 ```
 ## par =  -0.03892511 2.494589 , value = 361.5712 
@@ -751,10 +783,14 @@ En cada paso se reemplaza la aproximación actual por un valor aleatorio “cerc
 
 Al tener una probabilidad no nula de aceptar una modificación “cuesta arriba” se trata de evitar quedar atrapado en un óptimo local (ver Figura \@ref(fig:templesimulado)).
 
-<div class="figure" style="text-align: center">
-<img src="images/templesimulado.png" alt="Fuente: Premchand Akella ([ppt](https://www.presentica.com/doc/11473134/simulated-annealing-pdf-document))." width="70%" />
-<p class="caption">(\#fig:templesimulado)Fuente: Premchand Akella ([ppt](https://www.presentica.com/doc/11473134/simulated-annealing-pdf-document)).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/templesimulado} 
+
+}
+
+\caption{Fuente: Premchand Akella ([ppt](https://www.presentica.com/doc/11473134/simulated-annealing-pdf-document)).}(\#fig:templesimulado)
+\end{figure}
 
 Este procedimiento se puede ver como una adaptación del método de Metropolis-Hastings que se tratará en el Capítulo XX (Introducción a los métodos de cadenas de Markov Monte Carlo).
 
@@ -829,7 +865,9 @@ for (j in 1:nstarts){
 }
 ```
 
-<img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-21-1} \end{center}
 
 ```
 ## par =  0.0002023461 2.473437 , value = 361.6372 
@@ -887,7 +925,9 @@ for (j in 1:nstarts) {
 }
 ```
 
-<img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 ```
 ## par =  -0.2091332 2.341469 , value = 363.0035 
@@ -967,7 +1007,9 @@ der <- DEoptim(tee.optim2d(like), lower, upper, DEoptim.control(itermax = 10))
 points(der$optim$bestmem[1], der$optim$bestmem[2], pch = 19)
 ```
 
-<img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-23-1} \end{center}
 
 :::
 
@@ -1133,10 +1175,14 @@ b)  Generar el histograma (en escala de densidades) de las medias
     abline(v = mux, col = "blue")
     ```
     
-    <div class="figure" style="text-align: center">
-    <img src="07-Monte_Carlo_files/figure-html/mednorm-1.png" alt="Distribución de la media muestral de una distribución normal." width="70%" />
-    <p class="caption">(\#fig:mednorm)Distribución de la media muestral de una distribución normal.</p>
-    </div>
+    \begin{figure}[!htb]
+    
+    {\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/mednorm-1} 
+    
+    }
+    
+    \caption{Distribución de la media muestral de una distribución normal.}(\#fig:mednorm)
+    \end{figure}
 
 :::
 
@@ -1209,10 +1255,14 @@ a)  Repetir el Ejercicio \@ref(exr:distr-media) anterior considerando muestras d
     abline(v=muexp, col="blue")
     ```
     
-    <div class="figure" style="text-align: center">
-    <img src="07-Monte_Carlo_files/figure-html/medexp-1.png" alt="Distribución de la media muestral de una distribución exponencial y distribución asintótica." width="70%" />
-    <p class="caption">(\#fig:medexp)Distribución de la media muestral de una distribución exponencial y distribución asintótica.</p>
-    </div>
+    \begin{figure}[!htb]
+    
+    {\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/medexp-1} 
+    
+    }
+    
+    \caption{Distribución de la media muestral de una distribución exponencial y distribución asintótica.}(\#fig:medexp)
+    \end{figure}
 
 
 b)  Aumentar el tamaño muestral a 50. ¿Se aproxima más la
@@ -1294,10 +1344,14 @@ a)  Utilizando el conjunto de datos `muestras` del ejercicio 1 (500
     abline(h = mux, lty = 3)
     ```
     
-    <div class="figure" style="text-align: center">
-    <img src="07-Monte_Carlo_files/figure-html/cobicnorm-1.png" alt="Cobertura de las estimaciones por IC." width="70%" />
-    <p class="caption">(\#fig:cobicnorm)Cobertura de las estimaciones por IC.</p>
-    </div>
+    \begin{figure}[!htb]
+    
+    {\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/cobicnorm-1} 
+    
+    }
+    
+    \caption{Cobertura de las estimaciones por IC.}(\#fig:cobicnorm)
+    \end{figure}
     
     ```r
     detach(tmp)
@@ -1362,10 +1416,14 @@ b)  Repetir el apartado anterior considerando muestras de una
     abline(h = muexp, lty = 3)
     ```
     
-    <div class="figure" style="text-align: center">
-    <img src="07-Monte_Carlo_files/figure-html/cobicexp-1.png" alt="Cobertura de las estimaciones por IC (bajo normalidad)." width="70%" />
-    <p class="caption">(\#fig:cobicexp)Cobertura de las estimaciones por IC (bajo normalidad).</p>
-    </div>
+    \begin{figure}[!htb]
+    
+    {\centering \includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/cobicexp-1} 
+    
+    }
+    
+    \caption{Cobertura de las estimaciones por IC (bajo normalidad).}(\#fig:cobicexp)
+    \end{figure}
     
     ```r
     detach(tmp)
@@ -1413,7 +1471,9 @@ ic.sim <- quantile(muestras2$mean, c(alfa/2, 1 - alfa/2))
 abline(v=ic.sim, lty=2, col='red') 
 ```
 
-<img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-35-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
 
 ::: {.remark}
@@ -1501,7 +1561,9 @@ a)  Teniendo en cuenta que la variable aleatoria $X=n\hat{p}\sim\mathcal{B}(n,p)
     abline(h = 1 - alpha, lty = 2) 
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-40-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-40-1} \end{center}
     
     Fuente [Suess y Trumbo (2010)](http://www.springer.com/gp/book/9780387402734).
 
@@ -1540,7 +1602,9 @@ b)  Repetir el apartado anterior considerando intervalos de
     abline(h = 1 - alpha, lty = 2) 
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-41-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-41-1} \end{center}
 
 c)  Repetir el apartado anterior empleando simulación para aproximar
     la cobertura.
@@ -1585,7 +1649,9 @@ c)  Repetir el apartado anterior empleando simulación para aproximar
     abline(h = 1 - alpha, lty = 2) 
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-44-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-44-1} \end{center}
 
 :::
 
@@ -1662,7 +1728,9 @@ a)  Analizar el comportamiento del contraste de Kolmogorov-Smirnov
     abline(h=1, lty=2)   # curve(dunif(x,0,1), add=TRUE)
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-47-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-47-1} \end{center}
     
     ```r
     # Distribución empírica
@@ -1672,7 +1740,9 @@ a)  Analizar el comportamiento del contraste de Kolmogorov-Smirnov
     abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-47-2.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-47-2} \end{center}
 
 b)  Repetir el apartado anterior considerando el test de Lilliefors
     (rutina `lillie.test` del paquete `nortest`).
@@ -1735,7 +1805,9 @@ b)  Repetir el apartado anterior considerando el test de Lilliefors
     abline(h=1, lty=2)   # curve(dunif(x,0,1), add=TRUE)
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-52-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-52-1} \end{center}
     
     ```r
     # Distribución empírica
@@ -1744,7 +1816,9 @@ b)  Repetir el apartado anterior considerando el test de Lilliefors
     abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE)
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-52-2.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-52-2} \end{center}
 
 c)  Repetir el apartado a) contrastando una distribución exponencial
     y considerando 500 pruebas con muestras de tamaño 30 de una $Exp(1)$.
@@ -1799,7 +1873,9 @@ c)  Repetir el apartado a) contrastando una distribución exponencial
     abline(h=1, lty=2)   # curve(dunif(x,0,1), add=TRUE)
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-56-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-56-1} \end{center}
     
     ```r
     # Distribución empírica
@@ -1809,7 +1885,9 @@ c)  Repetir el apartado a) contrastando una distribución exponencial
     abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE) 
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-56-2.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-56-2} \end{center}
 
 d)  Diseñar una rutina que permita realizar el contraste KS de
     bondad de ajuste de una variable exponencial aproximando el
@@ -1898,7 +1976,9 @@ d)  Diseñar una rutina que permita realizar el contraste KS de
     abline(h=1, lty=2)   # curve(dunif(x,0,1), add=TRUE)
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-60-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-60-1} \end{center}
     
     ```r
     # Distribución empírica
@@ -1908,7 +1988,9 @@ d)  Diseñar una rutina que permita realizar el contraste KS de
     abline(a=0, b=1, lty=2)   # curve(punif(x, 0, 1), add = TRUE) 
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-60-2.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-60-2} \end{center}
 
 e)  Estudiar la potencia de los contrastes de los apartados c) y d),
     considerando como alternativa una distribución Weibull.
@@ -1947,7 +2029,9 @@ e)  Estudiar la potencia de los contrastes de los apartados c) y d),
     abline(h = alfa, v = 1, lty = 3)
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/potencia-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/potencia-1} \end{center}
 
 :::
 
@@ -1984,7 +2068,9 @@ curve(dnorm(x, 0, 1), -3, 12, ylab = 'densidad', lty = 3)
 curve(0.95*dnorm(x, 0, 1) + 0.05*dnorm(x, 3, 3), add = TRUE)
 ```
 
-<img src="07-Monte_Carlo_files/figure-html/contaminada-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/contaminada-1} \end{center}
 :::
 
 ::: {.remark}
@@ -2029,7 +2115,9 @@ a)  Aproximar mediante simulación (500 generaciones) el sesgo y
     hist(dat.sim[,1])
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-62-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-62-1} \end{center}
     
     Calculamos los estimadores:
     
@@ -2083,7 +2171,9 @@ a)  Aproximar mediante simulación (500 generaciones) el sesgo y
     abline(h = 0, lty = 2)
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-65-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-65-1} \end{center}
     
     Error cuadrático:
     
@@ -2093,7 +2183,9 @@ a)  Aproximar mediante simulación (500 generaciones) el sesgo y
           names=c("Media","Mediana"), ylab="Error cuadrático")
     ```
     
-    <img src="07-Monte_Carlo_files/figure-html/unnamed-chunk-66-1.png" width="70%" style="display: block; margin: auto;" />
+    
+    
+    \begin{center}\includegraphics[width=0.7\linewidth]{07-Monte_Carlo_files/figure-latex/unnamed-chunk-66-1} \end{center}
     
     Estadísticos error cuadrático:
     

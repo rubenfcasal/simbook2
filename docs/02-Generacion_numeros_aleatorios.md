@@ -71,7 +71,7 @@ simres::rlcg
 ##         c = c, m = m)), envir = globalenv())
 ##     return(u)
 ## }
-## <bytecode: 0x0000000037382420>
+## <bytecode: 0x000000003d715850>
 ## <environment: namespace:simres>
 ```
 
@@ -142,7 +142,7 @@ system.time(u <- rlcg(n = 9999,
 
 ```
 ##    user  system elapsed 
-##    0.00    0.00    0.02
+##       0       0       0
 ```
 
 ```r
@@ -155,10 +155,14 @@ points3D(xyz[,3], xyz[,2], xyz[,1], colvar = NULL, phi = 60,
          theta = -50, pch = 21, cex = 0.2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/randu-1.png" alt="Grafico de dispersión de tripletas del generador RANDU de IBM (contenidas en 15 planos)." width="70%" />
-<p class="caption">(\#fig:randu)Grafico de dispersión de tripletas del generador RANDU de IBM (contenidas en 15 planos).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/randu-1} 
+
+}
+
+\caption{Grafico de dispersión de tripletas del generador RANDU de IBM (contenidas en 15 planos).}(\#fig:randu)
+\end{figure}
 
 En general todos los generadores de este tipo van a presentar estructuras reticulares.
 Marsaglia (1968) demostró que las $k$-uplas de un generadores multiplicativo están contenidas en a lo sumo $\left(k!m\right)^{1/k}$ hiperplanos paralelos (para más detalles sobre la estructura reticular, ver por ejemplo Ripley, 1987, sección 2.7).
@@ -216,10 +220,14 @@ a)  Generar 500 valores de este generador, obtener el tiempo de CPU,
     abline(h = 1)                   # Densidad uniforme
     ```
     
-    <div class="figure" style="text-align: center">
-    <img src="02-Generacion_numeros_aleatorios_files/figure-html/ejcona-1.png" alt="Histograma de los valores generados." width="70%" />
-    <p class="caption">(\#fig:ejcona)Histograma de los valores generados.</p>
-    </div>
+    \begin{figure}[!htb]
+    
+    {\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/ejcona-1} 
+    
+    }
+    
+    \caption{Histograma de los valores generados.}(\#fig:ejcona)
+    \end{figure}
 
     En este caso concreto la distribución de los valores generados es aparentemente más uniforme de lo que cabría esperar, lo que induciría a sospechar de la calidad de este generador (ver Ejemplo \@ref(exm:congru512b) en Sección \@ref(calgen)).
 
@@ -238,7 +246,7 @@ b)  Calcular la media de las simulaciones (`mean`) y compararla con
     ```
     
     La media teórica es 0.5. 
-    Error absoluto $3.90625\times 10^{-5}$.
+    Error absoluto $\ensuremath{3.90625\times 10^{-5}}$.
 
 c)  Aproximar (mediante simulación) la probabilidad del intervalo
     $(0.4;0.8)$ y compararla con la teórica.
@@ -430,7 +438,7 @@ simres::chisq.cont.test
 ##         p.value = PVAL, method = METHOD, data.name = DNAME), 
 ##         RESULTS), class = "htest")
 ## }
-## <bytecode: 0x00000000386872e8>
+## <bytecode: 0x0000000039787580>
 ## <environment: namespace:simres>
 ```
 
@@ -456,10 +464,14 @@ chisq.cont.test(u, distribution = "unif",
                 nclass = 10, nestpar = 0, min = 0, max = 1)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/chisq-test-unif-1.png" alt="Gráfico resultante de aplicar la función `chisq.cont.test()` comparando el histograma de los valores generados con la densidad uniforme." width="70%" />
-<p class="caption">(\#fig:chisq-test-unif)Gráfico resultante de aplicar la función `chisq.cont.test()` comparando el histograma de los valores generados con la densidad uniforme.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/chisq-test-unif-1} 
+
+}
+
+\caption{Gráfico resultante de aplicar la función `chisq.cont.test()` comparando el histograma de los valores generados con la densidad uniforme.}(\#fig:chisq-test-unif)
+\end{figure}
 
 ```
 ## 
@@ -499,10 +511,14 @@ curve(ecdf(u)(x), type = "s", lwd = 2)
 curve(punif(x, 0, 1), add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/empdistrunif-1.png" alt="Comparación de la distribución empírica de la secuencia generada con la función de distribución uniforme." width="70%" />
-<p class="caption">(\#fig:empdistrunif)Comparación de la distribución empírica de la secuencia generada con la función de distribución uniforme.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/empdistrunif-1} 
+
+}
+
+\caption{Comparación de la distribución empírica de la secuencia generada con la función de distribución uniforme.}(\#fig:empdistrunif)
+\end{figure}
 Podemos realizar el contraste con el siguiente código:
 
 ```r
@@ -528,20 +544,28 @@ Adicionalmente podríamos estudiar la aleatoriedad de los valores generados (ver
 plot(as.ts(u))
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/plot-sec-1.png" alt="Gráfico secuencial de los valores generados." width="70%" />
-<p class="caption">(\#fig:plot-sec)Gráfico secuencial de los valores generados.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/plot-sec-1} 
+
+}
+
+\caption{Gráfico secuencial de los valores generados.}(\#fig:plot-sec)
+\end{figure}
 
 
 ```r
 plot(u[-nsim],u[-1])
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/plot-ret-1.png" alt="Gráfico de dispersión retardado de los valores generados." width="70%" />
-<p class="caption">(\#fig:plot-ret)Gráfico de dispersión retardado de los valores generados.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/plot-ret-1} 
+
+}
+
+\caption{Gráfico de dispersión retardado de los valores generados.}(\#fig:plot-ret)
+\end{figure}
 
 Si se observa algún tipo de patrón indicaría dependencia (se podría considerar como una versión descriptiva del denominado “Parking lot test”), ver Ejemplo \@ref(exm:ret-gen).
 
@@ -552,10 +576,14 @@ También podemos analizar las autocorrelaciones (las correlaciones de $(u_{i},u_
 acf(u)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/plot-acf-1.png" alt="Autocorrelaciones de los valores generados." width="70%" />
-<p class="caption">(\#fig:plot-acf)Autocorrelaciones de los valores generados.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/plot-acf-1} 
+
+}
+
+\caption{Autocorrelaciones de los valores generados.}(\#fig:plot-acf)
+\end{figure}
     
 Por ejemplo, para contrastar si las diez primeras autocorrelaciones son nulas podríamos emplear el test de Ljung-Box:
     
@@ -654,10 +682,14 @@ plot(ecdf(pvalor), do.points = FALSE, lwd = 2,
 abline(a = 0, b = 1, lty = 2)   # curve(punif(x, 0, 1), add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/rep-test-ecdf-1.png" alt="Proporción de rechazos con los distintos niveles de significación." width="70%" />
-<p class="caption">(\#fig:rep-test-ecdf)Proporción de rechazos con los distintos niveles de significación.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/rep-test-ecdf-1} 
+
+}
+
+\caption{Proporción de rechazos con los distintos niveles de significación.}(\#fig:rep-test-ecdf)
+\end{figure}
 
 <!-- 
 curve(ecdf(pvalor)(x), type = "s", lwd = 2) 
@@ -674,10 +706,14 @@ hist(estadistico, breaks = "FD", freq = FALSE, main = "")
 curve(dchisq(x, 99), add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/rep-test-est-1.png" alt="Distribución del estadístico del constraste." width="70%" />
-<p class="caption">(\#fig:rep-test-est)Distribución del estadístico del constraste.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/rep-test-est-1} 
+
+}
+
+\caption{Distribución del estadístico del constraste.}(\#fig:rep-test-est)
+\end{figure}
 
 Además de la comparación gráfica, podríamos emplear un test de bondad de ajuste para contrastar si la distribución del estadístico es la teórica bajo la hipótesis nula:
 
@@ -710,10 +746,14 @@ hist(pvalor, freq = FALSE, main = "")
 abline(h=1) # curve(dunif(x,0,1), add=TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/rep-test-pval-1.png" alt="Distribución del p-valor del constraste." width="70%" />
-<p class="caption">(\#fig:rep-test-pval)Distribución del p-valor del constraste.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/rep-test-pval-1} 
+
+}
+
+\caption{Distribución del p-valor del constraste.}(\#fig:rep-test-pval)
+\end{figure}
 
 ```r
 # Test chi-cuadrado
@@ -770,10 +810,14 @@ old.par <- par(mfrow = c(1, 2))
 plot(res, 2:3)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="02-Generacion_numeros_aleatorios_files/figure-html/rephtest-1.png" alt="Distribución de los p-valores y proporción de rechazos." width="90%" />
-<p class="caption">(\#fig:rephtest)Distribución de los p-valores y proporción de rechazos.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{02-Generacion_numeros_aleatorios_files/figure-latex/rephtest-1} 
+
+}
+
+\caption{Distribución de los p-valores y proporción de rechazos.}(\#fig:rephtest)
+\end{figure}
 
 ```r
 par(old.par)
@@ -864,7 +908,7 @@ simres::rvng
 ##         envir = globalenv())
 ##     return(u)
 ## }
-## <bytecode: 0x0000000039595078>
+## <bytecode: 0x0000000037f37468>
 ## <environment: namespace:simres>
 ```
 

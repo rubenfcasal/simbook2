@@ -149,6 +149,19 @@ curve(ecdf(datos)(x), xlim = extendrange(datos), type = 's',
 curve(pnorm(x, mean(datos), sd(datos)), add = TRUE)
 ```
 
+La función de distribución empírica se corresponde con una variable aleatoria discreta que toma los valores
+$X_1,\ldots ,X_n$ todos ellos con probabilidad $\frac{1}{n}$.
+Suponiendo que $\mathbf{X}=\left( X_1,\ldots ,X_n \right)$ es una muestra aleatoria de una población con distribución $F$:
+$$\begin{aligned}
+nF_n\left( x \right) &= \sum_{i=1}^{n}\mathbf{1}\left\{ X_i\leq x\right\}
+\sim \mathcal{B}\left( n,F\left( x \right) \right), \\
+E\left( nF_n\left( x \right) \right) &= nF\left( x \right) \implies E\left(
+F_n\left( x \right) \right) =F\left( x \right), \\
+Var\left( nF_n\left( x \right) \right) &=  nF\left( x \right) \left(
+1-F\left( x \right) \right) \\
+&\implies  Var\left( F_n\left( x \right) \right) =\frac{F\left( x \right) \left( 1-F\left( x \right) \right)}{n}
+\end{aligned}$$
+
 
 ### Gráficos P-P y Q-Q
 

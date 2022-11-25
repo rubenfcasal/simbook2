@@ -1,7 +1,7 @@
 --- 
 title: "Simulación Estadística"
 author: "Rubén Fernández Casal (ruben.fcasal@udc.es), Ricardo Cao (rcao@udc.es)"
-date: "Edición: Agosto de 2022. Impresión: 2022-11-23"
+date: "Edición: Agosto de 2022. Impresión: 2022-11-25"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -60,7 +60,8 @@ Para generar el libro (compilar) serán necesarios paquetes adicionales,
 para lo que se recomendaría consultar el libro de ["Escritura de libros con bookdown" ](https://rubenfcasal.github.io/bookdown_intro) en castellano.
 Pueden ser también de interés los enlaces mostrados en el Apéndice \@ref(links).
 
-<img src="images/by-nc-nd-88x31.png" width="10%" style="display: block; margin: auto auto auto 0;" />
+
+\begin{flushleft}\includegraphics[width=0.1\linewidth]{images/by-nc-nd-88x31} \end{flushleft}
 
 Este obra está bajo una licencia de [Creative Commons Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es_ES) 
 (esperamos poder liberarlo bajo una licencia menos restrictiva más adelante...).

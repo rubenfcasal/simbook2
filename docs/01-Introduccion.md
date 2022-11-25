@@ -123,10 +123,14 @@ hist(nsobres, breaks = "FD", freq = FALSE,
 lines(density(nsobres))
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-Introduccion_files/figure-html/distr-ealbum-1.png" alt="Aproximación por simulación de la distribución del número de sobres para completar la colección." width="70%" />
-<p class="caption">(\#fig:distr-ealbum)Aproximación por simulación de la distribución del número de sobres para completar la colección.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/distr-ealbum-1} 
+
+}
+
+\caption{Aproximación por simulación de la distribución del número de sobres para completar la colección.}(\#fig:distr-ealbum)
+\end{figure}
 
 Aproximación por simulación del número medio de sobres para completar la colección:
 
@@ -150,7 +154,9 @@ plot(1:nsim, cumsum(nsobres)/1:nsim, type = "l",
 abline(h = sol)
 ```
 
-<img src="01-Introduccion_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/unnamed-chunk-4-1} \end{center}
 -->
 
 Número mínimo de sobres para asegurar de que se completa la colección con una probabilidad del 95\%:
@@ -184,10 +190,14 @@ abline(v = sol)
 abline(v = nmin, lty = 2)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-Introduccion_files/figure-html/distr-ealbum2-1.png" alt="Aproximaciones por simulación de la distribución del número de sobres para completar la colección, de su valor esperado (línea vertical continua) y del cuantil 0.95 (línea vertical discontinua)." width="70%" />
-<p class="caption">(\#fig:distr-ealbum2)Aproximaciones por simulación de la distribución del número de sobres para completar la colección, de su valor esperado (línea vertical continua) y del cuantil 0.95 (línea vertical discontinua).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{01-Introduccion_files/figure-latex/distr-ealbum2-1} 
+
+}
+
+\caption{Aproximaciones por simulación de la distribución del número de sobres para completar la colección, de su valor esperado (línea vertical continua) y del cuantil 0.95 (línea vertical discontinua).}(\#fig:distr-ealbum2)
+\end{figure}
 
 Por supuesto, la distribución del gasto necesario para completar la colección es esta misma reescalada.
 
@@ -196,10 +206,14 @@ Por supuesto, la distribución del gasto necesario para completar la colección 
 res <- simres::mc.plot(nsobres*0.8)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-Introduccion_files/figure-html/mc-plot-ealbum-1.png" alt="Gráficos exploratorios de las simulaciones del gasto para completar la colección obtenidos con la función `simres::mc.plot()`." width="90%" />
-<p class="caption">(\#fig:mc-plot-ealbum)Gráficos exploratorios de las simulaciones del gasto para completar la colección obtenidos con la función `simres::mc.plot()`.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.9\linewidth]{01-Introduccion_files/figure-latex/mc-plot-ealbum-1} 
+
+}
+
+\caption{Gráficos exploratorios de las simulaciones del gasto para completar la colección obtenidos con la función `simres::mc.plot()`.}(\#fig:mc-plot-ealbum)
+\end{figure}
 
 Aproximación del gasto medio:
 
@@ -302,10 +316,14 @@ Se distingue entre tres tipos de secuencias:
 Normalmente son obtenidos por procesos físicos (loterías, ruletas, ruidos...) y, hasta hace una décadas, se almacenaban en *tablas de dígitos aleatorios*. 
 Por ejemplo, en 1955 la Corporación RAND publicó el libro [*A Million Random Digits with 100,000 Normal Deviates*](https://www.rand.org/pubs/monograph_reports/MR1418.html) que contenía números aleatorios generados mediante una ruleta electrónica conectada a una computadora (ver Figura \@ref(fig:randbook)).
 
-<div class="figure" style="text-align: center">
-<img src="images/RAND.png" alt="Líneas 10580-10594, columnas 21-40, del libro *A Million Random Digits with 100,000 Normal Deviates*." width="30%" />
-<p class="caption">(\#fig:randbook)Líneas 10580-10594, columnas 21-40, del libro *A Million Random Digits with 100,000 Normal Deviates*.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.3\linewidth]{images/RAND} 
+
+}
+
+\caption{Líneas 10580-10594, columnas 21-40, del libro *A Million Random Digits with 100,000 Normal Deviates*.}(\#fig:randbook)
+\end{figure}
 
 <!-- 
 Pendiente:
@@ -368,10 +386,14 @@ plot(sobol(n, dim = 2), xlab = 'x1', ylab = 'x2')
 plot(torus(n, dim = 2), xlab = 'x1', ylab = 'x2')
 ```
 
-<div class="figure" style="text-align: center">
-<img src="01-Introduccion_files/figure-html/randtoolbox-1.png" alt="Secuencias cuasi-aleatorias bidimensionales obtenidas con los métodos de Halton (izquierda), Sobol (centro) y Torus (derecha)." width="100%" />
-<p class="caption">(\#fig:randtoolbox)Secuencias cuasi-aleatorias bidimensionales obtenidas con los métodos de Halton (izquierda), Sobol (centro) y Torus (derecha).</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=1\linewidth]{01-Introduccion_files/figure-latex/randtoolbox-1} 
+
+}
+
+\caption{Secuencias cuasi-aleatorias bidimensionales obtenidas con los métodos de Halton (izquierda), Sobol (centro) y Torus (derecha).}(\#fig:randtoolbox)
+\end{figure}
 
 ```r
 par(par.old)
@@ -662,10 +684,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.19    0.01    0.21 
+##    0.31    0.02    0.41 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.19    0.01    0.21
+##    0.31    0.02    0.41
 ```
 
 ```r
@@ -676,10 +698,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.23    0.00    0.25 
+##    0.00    0.01    0.01 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.42    0.01    0.46
+##    0.31    0.03    0.42
 ```
 
 
@@ -706,7 +728,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## inner: 0.02 sec elapsed
+    ## inner: 0 sec elapsed
     ```
     
     ```r
@@ -714,7 +736,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## middle: 0.02 sec elapsed
+    ## middle: 0 sec elapsed
     ```
     
     ```r
@@ -722,7 +744,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## outer: 0.24 sec elapsed
+    ## outer: 0.31 sec elapsed
     ```
     
     ```r
@@ -742,8 +764,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ## 'data.frame':	10 obs. of  3 variables:
-    ##  $ tic: num  10.3 10.3 10.3 10.3 10.3 ...
-    ##  $ toc: num  10.3 10.3 10.3 10.3 10.3 ...
+    ##  $ tic: num  6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93
+    ##  $ toc: num  6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93
     ##  $ msg: chr  "1" "2" "3" "4" ...
     ```
     
@@ -757,7 +779,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##   0.000   0.000   0.000   0.001   0.000   0.010
+    ##       0       0       0       0       0       0
     ```
 
 * La función [`cpu.time()`](https://rubenfcasal.github.io/simres/reference/cpu.time.html) del paquete `simres`:
@@ -827,10 +849,14 @@ Ver solución en Sección \@ref(sol-bernoulli).
   
 Simular el paso de corriente a través del circuito mostrado en la Figura \@ref(fig:circuito2), donde se muestran las probabilidades de que pase corriente por cada uno de los interruptores, que se suponen variables aleatorias de Bernoulli independientes.
 
-<div class="figure" style="text-align: center">
-<img src="images/circuito2.png" alt="Esquema de un circuito eléctrico con interruptores aleatorios." width="50%" />
-<p class="caption">(\#fig:circuito2)Esquema de un circuito eléctrico con interruptores aleatorios.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.5\linewidth]{images/circuito2} 
+
+}
+
+\caption{Esquema de un circuito eléctrico con interruptores aleatorios.}(\#fig:circuito2)
+\end{figure}
 :::
 
 

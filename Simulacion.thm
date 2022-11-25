@@ -96,9 +96,11 @@
 \contentsline {exercise}{{Ejercicio}{7.{7}}{Comparación de la eficiencia de la media muestral y de la mediana bajo contaminación}}{160}{exercise.7.7}%
 \contentsline {remark}{{Nota}{7}{}}{161}{remark.7}%
 \contentsline {example}{{Ejemplo}{8.{1}}{aproximación bootstrap de la distribución de la media muestral}}{166}{example.8.1}%
-\contentsline {example}{{Ejemplo}{8.{2}}{Inferencia sobre la media con varianza desconocida}}{171}{example.8.2}%
-\contentsline {example}{{Ejemplo}{8.{3}}{Inferencia sobre la media con varianza desconocida continuación}}{177}{example.8.3}%
-\contentsline {exercise}{{Ejercicio}{8.{1}}{}}{186}{exercise.8.1}%
-\contentsline {example}{{Ejemplo}{B.{1}}{Datos simulados dependientes}}{201}{example.B.1}%
-\contentsline {example}{{Ejemplo}{B.{2}}{Calidad de un generador aleatorio}}{204}{example.B.2}%
-\contentsline {remark}{{Nota}{8}{}}{222}{remark.8}%
+\contentsline {exercise}{{Ejercicio}{8.{1}}{Bootstrap uniforme multidimensional}}{172}{exercise.8.1}%
+\contentsline {example}{{Ejemplo}{8.{2}}{Inferencia sobre la media con varianza desconocida}}{172}{example.8.2}%
+\contentsline {exercise}{{Ejercicio}{8.{2}}{}}{177}{exercise.8.2}%
+\contentsline {example}{{Ejemplo}{8.{3}}{Inferencia sobre la media con varianza desconocida continuación}}{178}{example.8.3}%
+\contentsline {exercise}{{Ejercicio}{9.{1}}{}}{188}{exercise.9.1}%
+\contentsline {example}{{Ejemplo}{B.{1}}{Datos simulados dependientes}}{203}{example.B.1}%
+\contentsline {example}{{Ejemplo}{B.{2}}{Calidad de un generador aleatorio}}{207}{example.B.2}%
+\contentsline {remark}{{Nota}{8}{}}{230}{remark.8}%

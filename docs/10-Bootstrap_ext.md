@@ -358,7 +358,9 @@ donde:
   o de residuos (`"residual"`), empleando la modificación descrita anteriormente.
 
 
-\BeginKnitrBlock{exercise}<div class="exercise"><span class="exercise" id="exr:boot-car"><strong>(\#exr:boot-car) </strong></span></div>\EndKnitrBlock{exercise}
+\BeginKnitrBlock{exercise}
+<span class="exercise" id="exr:boot-car"><strong>(\#exr:boot-car) </strong></span>
+\EndKnitrBlock{exercise}
 Emplear la función `Boot()` del paquete `car` para hacer inferencia sobre 
 el coeficiente de determinación ajustado del modelo de regresión lineal 
 que explica `prestige` a partir de `income` y `education` 
