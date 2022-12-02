@@ -167,18 +167,15 @@ mc.integral
 ```
 
 ```
-## function (fun, a, b, n, level = 0.95, plot = TRUE, ...) 
-## {
-##     fx <- sapply(runif(n, a, b), fun) * (b - a)
-##     result <- if (plot) 
-##         conv.plot(fx, level = level, ...)
-##     else {
-##         q <- qnorm((1 + level)/2)
-##         list(approx = mean(fx), max.error = q * sd(fx)/sqrt(n))
-##     }
-##     return(result)
+## function(fun, a, b, n, level = 0.95, plot = TRUE, ...) {
+##   fx <- sapply(runif(n, a, b), fun) * (b - a)
+##   result <- if (plot) conv.plot(fx, level = level, ...) else {
+##     q <- qnorm((1 + level)/2)
+##     list(approx = mean(fx), max.error = q * sd(fx)/sqrt(n))
+##   }
+##   return(result)
 ## }
-## <bytecode: 0x000000003afe2e58>
+## <bytecode: 0x000000003f6bb0c0>
 ## <environment: namespace:simres>
 ```
 

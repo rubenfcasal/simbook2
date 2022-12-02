@@ -24,13 +24,6 @@ knitr::purl("09-Bootstrap.Rmd", documentation = 2)
 knitr::spin("09-Bootstrap.R",knit = FALSE)
 
 Pendiente: 
-5. Métodos de remuestreo	
-	5.1 Introducción al remuestreo
-	5.2 Bootstrap uniforme
-	5.4 Herramientas disponibles en R 
-	5.3 Modificaciones del bootstrap uniforme
-	  Deficiencias del bootstrap uniforme
-
 Selección del estadístico
   Interesaría un estadístico pivotal
   Bootstrap percentil: invariante frente a transformaciones monótonas, aunque debería ser insesgada y con varianza independiente del parámetro
@@ -45,7 +38,9 @@ Ejercicios
   mediana
   coeficiente de correlación
   
-Mover caso multidimensional al final de la sección. 
+Incluir expresiones teóricas en ejemplo en introducción
+Incluir aquí el caso multidimensional?
+
 -->
 
 Un par de notas:
@@ -338,75 +333,6 @@ Aunque en `R` es recomendable^[De esta forma se evitan posibles problemas numér
 muestra_boot <- sample(muestra, replace = TRUE)
 ```
 
-<!-- 
-Pendiente: Mover caso multidimensional al final de la sección. 
--->
-
-En el caso multidimensional, cuando trabajamos con un conjunto de datos con múltiples variables, podríamos emplear un procedimiento análogo, a partir de remuestras del vector de índices. 
-Por ejemplo:
-
-```r
-data(iris)
-str(iris)
-```
-
-```
-## 'data.frame':	150 obs. of  5 variables:
-##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
-##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
-##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
-##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
-##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
-```
-
-```r
-n <- nrow(iris)
-# i_boot <- floor(n*runif(n)) + 1
-# i_boot <- sample.int(n, replace = TRUE)
-i_boot <- sample(n, replace = TRUE)
-data_boot <- iris[i_boot, ]
-str(data_boot)
-```
-
-```
-## 'data.frame':	150 obs. of  5 variables:
-##  $ Sepal.Length: num  4.8 5.7 6.1 5 6.1 7.3 4.9 4.6 6.8 6.6 ...
-##  $ Sepal.Width : num  3 2.5 2.8 3 2.9 2.9 3.1 3.2 3 2.9 ...
-##  $ Petal.Length: num  1.4 5 4.7 1.6 4.7 6.3 1.5 1.4 5.5 4.6 ...
-##  $ Petal.Width : num  0.1 2 1.2 0.2 1.4 1.8 0.2 0.2 2.1 1.3 ...
-##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 3 2 1 2 3 1 1 3 2 ...
-```
-
-Esta forma de proceder es la que emplea por defecto el paquete `boot` que describiremos más adelante (Sección \@ref(intro-pkgboot)).
-
-::: {.exercise #unif-multi name="Bootstrap uniforme multidimensional"}
-<br>
-Considerando el conjunto de datos `Prestige` del paquete `carData`, supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e `income` (media de ingresos en la ocupación). 
-Para ello podemos considerar el coeficiente de correlación lineal de Pearson:
-$$\rho =\frac{ Cov \left( X, Y \right) }
-{ \sigma \left( X \right) \sigma \left( Y \right) }$$
-Su estimador es el coeficiente de correlación muestral:
-$$r=\frac{\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})}
-{\sqrt{ \sum_{i=1}^{n}(x_i-\overline{x})^{2}} 
-\sqrt{\sum_{i=1}^{n}(y_i-\overline{y})^{2}}},$$
-que podemos calcular en `R` empleando la función `cor()`:
-
-```r
-data(Prestige, package = "carData")
-# with(Prestige, cor(income, prestige))
-cor(Prestige$income, Prestige$prestige)
-```
-
-```
-## [1] 0.7149057
-```
-Para realizar inferencias sobre el coeficiente de correlación, como aproximación más simple, se puede considerar que la distribución muestral de $r$ es aproximadamente normal de media $\rho$ y varianza
-$$Var(r) \approx \frac{1 - \rho^2}{n - 2}.$$
-
-Aproximar mediante bootstrap uniforme (multididimensional) la distribución del estadístico $R = r -\rho$, empleando $B=1000$ réplicas, y compararla con la aproximación normal, considerando
-$$\widehat{Var}(r) = \frac{1 - r^2}{n - 2}.$$
-:::
-
 ::: {.example #media-dt-desconocida name="Inferencia sobre la media con varianza desconocida"}
 <br> 
 
@@ -478,7 +404,6 @@ cuasi_dt <- sd(muestra)
 # Remuestreo
 set.seed(1)
 B <- 1000
-remuestra <- numeric(n)
 estadistico_boot <- numeric(B)
 for (k in 1:B) {
   remuestra <- sample(muestra, n, replace = TRUE)
@@ -568,6 +493,78 @@ t.test(muestra)$conf.int
 ## attr(,"conf.level")
 ## [1] 0.95
 ```
+
+:::
+
+---
+
+En el caso multidimensional, cuando trabajamos con un conjunto de datos con múltiples variables, podríamos emplear un procedimiento análogo, a partir de remuestras del vector de índices. 
+Por ejemplo:
+
+```r
+data(iris)
+str(iris)
+```
+
+```
+## 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+```
+
+```r
+n <- nrow(iris)
+# i_boot <- floor(n*runif(n)) + 1
+# i_boot <- sample.int(n, replace = TRUE)
+i_boot <- sample(n, replace = TRUE)
+data_boot <- iris[i_boot, ]
+str(data_boot)
+```
+
+```
+## 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 5.6 6.2 4.8 5.5 6.2 5.5 5.6 5 6.5 ...
+##  $ Sepal.Width : num  3.8 2.5 2.9 3.1 2.3 2.9 2.6 2.8 3.6 3 ...
+##  $ Petal.Length: num  1.9 3.9 4.3 1.6 4 4.3 4.4 4.9 1.4 5.8 ...
+##  $ Petal.Width : num  0.4 1.1 1.3 0.2 1.3 1.3 1.2 2 0.2 2.2 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 2 2 1 2 2 2 3 1 3 ...
+```
+
+Esta forma de proceder es la que emplea por defecto el paquete `boot` que describiremos más adelante (Sección \@ref(intro-pkgboot)).
+
+::: {.exercise #unif-multi name="Bootstrap uniforme multidimensional"}
+<br>
+Considerando el conjunto de datos `Prestige` del paquete `carData`, supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e `income` (media de ingresos en la ocupación). 
+Para ello podemos considerar el coeficiente de correlación lineal de Pearson:
+$$\rho =\frac{ Cov \left( X, Y \right) }
+{ \sigma \left( X \right) \sigma \left( Y \right) }$$
+Su estimador es el coeficiente de correlación muestral:
+$$r=\frac{\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})}
+{\sqrt{ \sum_{i=1}^{n}(x_i-\overline{x})^{2}} 
+\sqrt{\sum_{i=1}^{n}(y_i-\overline{y})^{2}}},$$
+que podemos calcular en `R` empleando la función `cor()`:
+
+```r
+data(Prestige, package = "carData")
+# with(Prestige, cor(income, prestige))
+cor(Prestige$income, Prestige$prestige)
+```
+
+```
+## [1] 0.7149057
+```
+Para realizar inferencias sobre el coeficiente de correlación, como aproximación más simple, se puede considerar que la distribución muestral de $r$ es aproximadamente normal de media $\rho$ y varianza
+$$Var(r) \approx \frac{1 - \rho^2}{n - 2}.$$
+<!-- De donde se deduciría emplear el estadístico: 
+$$R = \sqrt{n - 2} \frac{r -\rho}{\sqrt{1 - r^2}}$$ -->
+
+Aproximar mediante bootstrap uniforme (multididimensional) la distribución del estadístico $R = r -\rho$, empleando $B=1000$ réplicas, y compararla con la aproximación normal, considerando
+$$\widehat{Var}(r) = \frac{1 - r^2}{n - 2}.$$
+
+
 
 :::
 
@@ -950,7 +947,7 @@ plot(res.boot)
 
 }
 
-\caption{Gráficos de diagnóstico para el coeficiente de correlación.}(\#fig:plot-boot-multi)
+\caption{Gráficos de diagnóstico para la distribución bootstrap del coeficiente de correlación.}(\#fig:plot-boot-multi)
 \end{figure}
 
 En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección \@ref(icboot-trans)).

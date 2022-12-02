@@ -178,7 +178,7 @@
 
 \title{Simulación Estadística}
 \author{Rubén Fernández Casal (\href{mailto:ruben.fcasal@udc.es}{\nolinkurl{ruben.fcasal@udc.es}}), Ricardo Cao (\href{mailto:rcao@udc.es}{\nolinkurl{rcao@udc.es}})}
-\date{Edición: Agosto de 2022. Impresión: 2022-11-25}
+\date{Edición: Agosto de 2022. Impresión: 2022-12-02}
 
 \begin{document}
 \maketitle
@@ -929,10 +929,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.31    0.02    0.41 
+##    0.31    0.01    0.33 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.31    0.02    0.41
+##    0.31    0.01    0.33
 \end{verbatim}
 
 \begin{Shaded}
@@ -945,10 +945,10 @@ Ejemplo:
 \begin{verbatim}
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.00    0.01    0.01 
+##    0.02    0.00    0.01 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.31    0.03    0.42
+##    0.33    0.01    0.34
 \end{verbatim}
 
 Hay diversos paquetes que implementan herramientas similares, por ejemplo:
@@ -978,7 +978,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## inner: 0 sec elapsed
+## inner: 0.02 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -988,7 +988,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## middle: 0 sec elapsed
+## middle: 0.02 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -998,7 +998,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 \end{Shaded}
 
 \begin{verbatim}
-## outer: 0.31 sec elapsed
+## outer: 0.3 sec elapsed
 \end{verbatim}
 
 \begin{Shaded}
@@ -1020,8 +1020,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ## 'data.frame':    10 obs. of  3 variables:
-##  $ tic: num  6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93
-##  $ toc: num  6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93
+##  $ tic: num  6.17 6.17 6.17 6.17 6.17 6.17 6.17 6.17 6.18 6.18
+##  $ toc: num  6.17 6.17 6.17 6.17 6.17 6.17 6.17 6.18 6.18 6.18
 ##  $ msg: chr  "1" "2" "3" "4" ...
 \end{verbatim}
 
@@ -1037,7 +1037,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
 
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##       0       0       0       0       0       0
+##   0.000   0.000   0.000   0.001   0.000   0.010
 \end{verbatim}
   \end{itemize}
 \item
@@ -1203,19 +1203,22 @@ Este método está implementado\footnote{Aunque de forma no muy eficiente. Para 
 \end{Shaded}
 
 \begin{verbatim}
-## function (n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 
-##     1) 
-## {
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         seed <- (a * seed + c)%%m
-##         u[i] <- seed/m
-##     }
-##     assign(".rng", list(seed = seed, type = "lcg", parameters = list(a = a, 
-##         c = c, m = m)), envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 1) {
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     seed <- (a * seed + c) %% m
+##     u[i] <- seed/m # (seed + 1)/(m + 1)
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "lcg",
+##           parameters = list(a = a, c = c, m = m)), envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "lcg", parameters = list(a = a, c = c, m = m))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rlcg(n, seed, parameters$a, parameters$c, parameters$m))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x000000003d715850>
+## <bytecode: 0x0000000040e3f468>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -1564,48 +1567,50 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 \end{Shaded}
 
 \begin{verbatim}
-## function (x, distribution = "norm", nclass = floor(length(x)/5), 
-##     output = TRUE, nestpar = 0, ...) 
-## {
-##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##     tol <- sqrt(.Machine$double.eps)
-##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##     if (output) {
-##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
-##             border = "grey50")
-##         d.distrib <- eval(parse(text = paste("d", distribution, 
-##             sep = "")))
-##         curve(d.distrib(x, ...), add = TRUE)
-##     }
-##     else {
-##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##     }
-##     O <- xhist$counts
-##     E <- length(x)/nclass
-##     DNAME <- deparse(substitute(x))
-##     METHOD <- "Pearson's Chi-squared test"
-##     STATISTIC <- sum((O - E)^2/E)
-##     names(STATISTIC) <- "X-squared"
-##     PARAMETER <- nclass - nestpar - 1
-##     names(PARAMETER) <- "df"
-##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##     classes <- format(xbreaks)
-##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
-##         "]", sep = "")
-##     RESULTS <- list(classes = classes, observed = O, expected = E, 
-##         residuals = (O - E)/sqrt(E))
-##     if (output) {
-##         cat("\nPearson's Chi-squared test table\n")
-##         print(as.data.frame(RESULTS))
-##     }
-##     if (any(E < 5)) 
-##         warning("Chi-squared approximation may be incorrect")
-##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
-##         p.value = PVAL, method = METHOD, data.name = DNAME), 
-##         RESULTS), class = "htest")
+## function(x, distribution = "norm", nclass = floor(length(x)/5),
+##                             output = TRUE, nestpar = 0, ...) {
+##   # Función distribución
+##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##   # Puntos de corte
+##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##   tol <- sqrt(.Machine$double.eps)
+##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##   # Gráficos y frecuencias
+##   if (output) {
+##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
+##                   lty = 2, border = "grey50")
+##     # Función densidad
+##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
+##     curve(d.distrib(x, ...), add = TRUE)
+##   } else {
+##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##   }
+##   # Cálculo estadístico y p-valor
+##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
+##   E <- length(x)/nclass
+##   DNAME <- deparse(substitute(x))
+##   METHOD <- "Pearson's Chi-squared test"
+##   STATISTIC <- sum((O - E)^2/E)
+##   names(STATISTIC) <- "X-squared"
+##   PARAMETER <- nclass - nestpar - 1
+##   names(PARAMETER) <- "df"
+##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##   # Preparar resultados
+##   classes <- format(xbreaks)
+##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
+##                    sep = "")
+##   RESULTS <- list(classes = classes, observed = O, expected = E,
+##                   residuals = (O - E)/sqrt(E))
+##   if (output) {
+##     cat("\nPearson's Chi-squared test table\n")
+##     print(as.data.frame(RESULTS))
+##   }
+##   if (any(E < 5))
+##     warning("Chi-squared approximation may be incorrect")
+##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
+##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x0000000039787580>
+## <bytecode: 0x000000003dcb8440>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2085,22 +2090,26 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 \end{Shaded}
 
 \begin{verbatim}
-## function (n, seed = as.numeric(Sys.time()), k = 4) 
-## {
-##     seed <- seed%%10^k
-##     aux <- 10^(2 * k - k/2)
-##     aux2 <- 10^(k/2)
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         z <- seed^2
-##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
-##         u[i] <- seed/10^k
-##     }
-##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
-##         envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), k = 4) {
+##   seed <- seed %% 10^k
+##   aux <- 10^(2*k-k/2)
+##   aux2 <- 10^(k/2)
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     z <- seed^2
+##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
+##     u[i] <- seed/10^k
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
+##       envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rvng(n, seed, parameters$k))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x0000000037f37468>
+## <bytecode: 0x0000000044659c10>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -2893,7 +2902,7 @@ El código para implementar este algoritmo en R podría ser el siguiente:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.02
+##    0.02    0.00    0.01
 \end{verbatim}
 
 \begin{Shaded}
@@ -3005,7 +3014,7 @@ y función de distribución:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.05    0.00    0.04
+##    0.04    0.00    0.03
 \end{verbatim}
 \item
   Representar el histograma y compararlo con la densidad teórica.
@@ -3293,7 +3302,7 @@ Empleando estas funciones podemos generar una muestra de \(10^3\) observaciones 
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.05    0.00    0.05
+##    0.03    0.00    0.03
 \end{verbatim}
 
 Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):
@@ -3481,7 +3490,7 @@ Generamos una muestra de \(10^4\) observaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.13    0.00    0.13
+##    0.09    0.00    0.09
 \end{verbatim}
 
 Evaluamos la eficiencia:
@@ -4006,24 +4015,25 @@ El correspondiente algoritmo está implementado en la función \href{https://rub
 \end{Shaded}
 
 \begin{verbatim}
-## function (n) 
-## {
-##     ngen <- n
-##     u <- runif(n, 0, 1)
-##     v <- runif(n, -1, 1)
-##     x <- v/u
-##     ind <- u^2 + v^2 > 1
-##     while (le <- sum(ind)) {
-##         ngen <- ngen + le
-##         u <- runif(le, 0, 1)
-##         v <- runif(le, -1, 1)
-##         x[ind] <- v/u
-##         ind[ind] <- u^2 + v^2 > 1
-##     }
-##     attr(x, "ngen") <- ngen
-##     return(x)
+## function(n) {
+##   # Cauchy mediante cociente de uniformes
+##   ngen <- n
+##   u <- runif(n, 0, 1)
+##   v <- runif(n, -1, 1)
+##   x <- v/u
+##   ind <- u^2 + v^2 > 1 # TRUE si no verifica condición
+##   # Volver a generar si no verifica condición
+##   while (le <- sum(ind)){ # mientras le = sum(ind) > 0
+##     ngen <- ngen + le
+##     u <- runif(le, 0, 1)
+##     v <- runif(le, -1, 1)
+##     x[ind] <- v/u
+##     ind[ind] <- u^2 + v^2 > 1 # TRUE si no verifica condición
+##   }
+##   attr(x, "ngen") <- ngen
+##   return(x)
 ## }
-## <bytecode: 0x0000000035f1fdd0>
+## <bytecode: 0x000000003e5f8e30>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4446,24 +4456,25 @@ Este algoritmo está implementado en la función \href{https://rubenfcasal.githu
 \end{Shaded}
 
 \begin{verbatim}
-## function (x, prob = 1/length(x), n = 1000, as.factor = FALSE) 
-## {
-##     ncomp <- 0
-##     Fx <- cumsum(prob)
-##     X <- numeric(n)
-##     U <- runif(n)
-##     for (j in 1:n) {
-##         i <- 1
-##         while (Fx[i] < U[j]) i <- i + 1
-##         X[j] <- x[i]
-##         ncomp <- ncomp + i
-##     }
-##     if (as.factor) 
-##         X <- factor(X, levels = x)
-##     attr(X, "ncomp") <- ncomp
-##     return(X)
+## function(x, prob = 1/length(x), n = 1000, as.factor = FALSE) {
+##   # Numero de comparaciones
+##   ncomp <- 0
+##   # Inicializar FD
+##   Fx <- cumsum(prob)
+##   # Simular
+##   X <- numeric(n)
+##   U <- runif(n)
+##   for(j in 1:n) {
+##     i <- 1
+##     while (Fx[i] < U[j]) i <- i + 1
+##     X[j] <- x[i]
+##     ncomp <- ncomp + i
+##   }
+##   if(as.factor) X <- factor(X, levels = x)
+##   attr(X, "ncomp") <- ncomp
+##   return(X)
 ## }
-## <bytecode: 0x000000003e1122c8>
+## <bytecode: 0x0000000042b6ce88>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4492,7 +4503,7 @@ Empleamos la rutina anterior para generar las simulaciones:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.04    0.00    0.04
+##    0.05    0.00    0.04
 \end{verbatim}
 
 A partir de ellas podríamos aproximar el valor esperado:
@@ -4651,7 +4662,7 @@ Podemos repetir la simulación del Ejemplo \ref{exm:binom-cuant} anterior ordena
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.04    0.00    0.05
+##    0.03    0.00    0.03
 \end{verbatim}
 
 \begin{Shaded}
@@ -4770,30 +4781,30 @@ Este algoritmo está implementado en la función \href{https://rubenfcasal.githu
 \end{Shaded}
 
 \begin{verbatim}
-## function (x, prob = 1/length(x), m, n = 1000, as.factor = FALSE) 
-## {
-##     Fx <- cumsum(prob)
-##     g <- rep(1, m)
-##     i <- 1
-##     for (j in 2:m) {
-##         while (Fx[i] < (j - 1)/m) i <- i + 1
-##         g[j] <- i
-##     }
-##     ncomp <- i - 1
-##     X <- numeric(n)
-##     U <- runif(n)
-##     for (j in 1:n) {
-##         i <- i0 <- g[floor(U[j] * m) + 1]
-##         while (Fx[i] < U[j]) i <- i + 1
-##         ncomp <- ncomp + i - i0
-##         X[j] <- x[i]
-##     }
-##     if (as.factor) 
-##         X <- factor(X, levels = x)
-##     attr(X, "ncomp") <- ncomp
-##     return(X)
+## function(x, prob = 1/length(x), m, n = 1000, as.factor = FALSE) {
+##   # Inicializar tabla y FD
+##   Fx <- cumsum(prob)
+##   g <- rep(1,m)
+##   i <- 1
+##   for(j in 2:m) {
+##     while (Fx[i] < (j-1)/m) i <- i + 1
+##     g[j] <- i
+##   }
+##   ncomp <- i - 1
+##   # Generar valores
+##   X <- numeric(n)
+##   U <- runif(n)
+##   for(j in 1:n) {
+##     i <- i0 <- g[floor(U[j] * m) + 1]
+##     while (Fx[i] < U[j]) i <- i + 1
+##     ncomp <- ncomp + i - i0
+##     X[j] <- x[i]
+##   }
+##   if(as.factor) X <- factor(X, levels = x)
+##   attr(X, "ncomp") <- ncomp
+##   return(X)
 ## }
-## <bytecode: 0x000000003b8824b8>
+## <bytecode: 0x00000000401b0178>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4811,7 +4822,7 @@ Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando es
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.02    0.00    0.02
+##    0.03    0.00    0.03
 \end{verbatim}
 
 Número medio de comparaciones:
@@ -4941,32 +4952,31 @@ Este método también está implementado en la función \href{https://rubenfcasa
 \end{Shaded}
 
 \begin{verbatim}
-## function (x, prob = 1/length(x), n = 1000, as.factor = FALSE) 
-## {
-##     a <- numeric(length(x))
-##     q <- prob * length(x)
-##     low <- q < 1
-##     high <- which(!low)
-##     low <- which(low)
-##     while (length(high) && length(low)) {
-##         l <- low[1]
-##         h <- high[1]
-##         a[l] <- h
-##         q[h] <- q[h] - (1 - q[l])
-##         if (q[h] < 1) {
-##             high <- high[-1]
-##             low[1] <- h
-##         }
-##         else low <- low[-1]
-##     }
-##     V <- runif(n)
-##     i <- floor(runif(n) * length(x)) + 1
-##     X <- x[ifelse(V < q[i], i, a[i])]
-##     if (as.factor) 
-##         X <- factor(X, levels = x)
-##     return(X)
+## function(x, prob = 1/length(x), n = 1000, as.factor = FALSE) {
+##   # Inicializar tablas
+##   a <- numeric(length(x))
+##   q <- prob*length(x)
+##   low <- q < 1
+##   high <- which(!low)
+##   low <- which(low)
+##   while (length(high) && length(low)) {
+##     l <- low[1]
+##     h <- high[1]
+##     a[l] <- h
+##     q[h] <- q[h] - (1 - q[l])
+##     if (q[h] < 1) {
+##       high <- high[-1]
+##       low[1] <- h
+##     } else low <- low[-1]
+##   } # while
+##   # Generar valores
+##   V <- runif(n)
+##   i <- floor(runif(n)*length(x)) + 1
+##   X <- x[ ifelse( V < q[i], i, a[i]) ]
+##   if(as.factor) X <- factor(X, levels = x)
+##   return(X)
 ## }
-## <bytecode: 0x00000000355c4aa8>
+## <bytecode: 0x0000000039dc8600>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -4984,7 +4994,7 @@ Repetimos la simulación del Ejemplo \ref{exm:binom-cuant} anterior empleando es
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.01    0.00    0.01
+##    0.00    0.02    0.01
 \end{verbatim}
 
 Análisis de los resultados:
@@ -5665,7 +5675,7 @@ del paquete \texttt{MASS} que emplea la factorización espectral (\texttt{eigen}
 ##         drop(X)
 ##     else t(X)
 ## }
-## <bytecode: 0x00000000382e7868>
+## <bytecode: 0x000000003cc4d280>
 ## <environment: namespace:MASS>
 \end{verbatim}
 
@@ -6379,10 +6389,6 @@ Podemos representar la densidad conjunta (con \texttt{sm::sm.density()}) {[}Figu
 \NormalTok{sm}\SpecialCharTok{::}\FunctionTok{sm.density}\NormalTok{(rcunif, }\AttributeTok{xlab =} \StringTok{"u"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"v"}\NormalTok{, }\AttributeTok{zlab =} \StringTok{"Density"}\NormalTok{)    }
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: weights overwritten by binning
-\end{verbatim}
 
 \begin{figure}[!htb]
 
@@ -7147,18 +7153,15 @@ Una alternativa más eficiente para representar gráficamente la convergencia es
 \end{Shaded}
 
 \begin{verbatim}
-## function (fun, a, b, n, level = 0.95, plot = TRUE, ...) 
-## {
-##     fx <- sapply(runif(n, a, b), fun) * (b - a)
-##     result <- if (plot) 
-##         conv.plot(fx, level = level, ...)
-##     else {
-##         q <- qnorm((1 + level)/2)
-##         list(approx = mean(fx), max.error = q * sd(fx)/sqrt(n))
-##     }
-##     return(result)
+## function(fun, a, b, n, level = 0.95, plot = TRUE, ...) {
+##   fx <- sapply(runif(n, a, b), fun) * (b - a)
+##   result <- if (plot) conv.plot(fx, level = level, ...) else {
+##     q <- qnorm((1 + level)/2)
+##     list(approx = mean(fx), max.error = q * sd(fx)/sqrt(n))
+##   }
+##   return(result)
 ## }
-## <bytecode: 0x000000003afe2e58>
+## <bytecode: 0x000000003f6bb0c0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -9645,78 +9648,6 @@ Aunque en \texttt{R} es recomendable\footnote{De esta forma se evitan posibles p
 \end{Highlighting}
 \end{Shaded}
 
-En el caso multidimensional, cuando trabajamos con un conjunto de datos con múltiples variables, podríamos emplear un procedimiento análogo, a partir de remuestras del vector de índices.
-Por ejemplo:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{data}\NormalTok{(iris)}
-\FunctionTok{str}\NormalTok{(iris)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 'data.frame':    150 obs. of  5 variables:
-##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
-##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
-##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
-##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
-##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(iris)}
-\CommentTok{\# i\_boot \textless{}{-} floor(n*runif(n)) + 1}
-\CommentTok{\# i\_boot \textless{}{-} sample.int(n, replace = TRUE)}
-\NormalTok{i\_boot }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{data\_boot }\OtherTok{\textless{}{-}}\NormalTok{ iris[i\_boot, ]}
-\FunctionTok{str}\NormalTok{(data\_boot)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 'data.frame':    150 obs. of  5 variables:
-##  $ Sepal.Length: num  4.8 5.7 6.1 5 6.1 7.3 4.9 4.6 6.8 6.6 ...
-##  $ Sepal.Width : num  3 2.5 2.8 3 2.9 2.9 3.1 3.2 3 2.9 ...
-##  $ Petal.Length: num  1.4 5 4.7 1.6 4.7 6.3 1.5 1.4 5.5 4.6 ...
-##  $ Petal.Width : num  0.1 2 1.2 0.2 1.4 1.8 0.2 0.2 2.1 1.3 ...
-##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 3 2 1 2 3 1 1 3 2 ...
-\end{verbatim}
-
-Esta forma de proceder es la que emplea por defecto el paquete \texttt{boot} que describiremos más adelante (Sección \ref{intro-pkgboot}).
-
-\begin{exercise}[Bootstrap uniforme multidimensional]
-\protect\hypertarget{exr:unif-multi}{}\label{exr:unif-multi}
-Considerando el conjunto de datos \texttt{Prestige} del paquete \texttt{carData}, supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre \texttt{prestige} (puntuación de ocupaciones obtenidas a partir de una encuesta) e \texttt{income} (media de ingresos en la ocupación).
-Para ello podemos considerar el coeficiente de correlación lineal de Pearson:
-\[\rho =\frac{ Cov \left( X, Y \right) }
-{ \sigma \left( X \right) \sigma \left( Y \right) }\]
-Su estimador es el coeficiente de correlación muestral:
-\[r=\frac{\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})}
-{\sqrt{ \sum_{i=1}^{n}(x_i-\overline{x})^{2}} 
-\sqrt{\sum_{i=1}^{n}(y_i-\overline{y})^{2}}},\]
-que podemos calcular en \texttt{R} empleando la función \texttt{cor()}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{data}\NormalTok{(Prestige, }\AttributeTok{package =} \StringTok{"carData"}\NormalTok{)}
-\CommentTok{\# with(Prestige, cor(income, prestige))}
-\FunctionTok{cor}\NormalTok{(Prestige}\SpecialCharTok{$}\NormalTok{income, Prestige}\SpecialCharTok{$}\NormalTok{prestige)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.7149057
-\end{verbatim}
-
-Para realizar inferencias sobre el coeficiente de correlación, como aproximación más simple, se puede considerar que la distribución muestral de \(r\) es aproximadamente normal de media \(\rho\) y varianza
-\[Var(r) \approx \frac{1 - \rho^2}{n - 2}.\]
-
-Aproximar mediante bootstrap uniforme (multididimensional) la distribución del estadístico \(R = r -\rho\), empleando \(B=1000\) réplicas, y compararla con la aproximación normal, considerando
-\[\widehat{Var}(r) = \frac{1 - r^2}{n - 2}.\]
-\end{exercise}
-
 \begin{example}[Inferencia sobre la media con varianza desconocida]
 \protect\hypertarget{exm:media-dt-desconocida}{}\label{exm:media-dt-desconocida}
 
@@ -9796,7 +9727,6 @@ Por ejemplo, podríamos emplear el siguiente código:
 \CommentTok{\# Remuestreo}
 \FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
 \NormalTok{B }\OtherTok{\textless{}{-}} \DecValTok{1000}
-\NormalTok{remuestra }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(n)}
 \NormalTok{estadistico\_boot }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(B)}
 \ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{B) \{}
 \NormalTok{  remuestra }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(muestra, n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
@@ -9896,6 +9826,80 @@ Por ejemplo, podemos obtener la estimación basada en normalidad mediante la fun
 \end{verbatim}
 
 \end{example}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+En el caso multidimensional, cuando trabajamos con un conjunto de datos con múltiples variables, podríamos emplear un procedimiento análogo, a partir de remuestras del vector de índices.
+Por ejemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(iris)}
+\FunctionTok{str}\NormalTok{(iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(iris)}
+\CommentTok{\# i\_boot \textless{}{-} floor(n*runif(n)) + 1}
+\CommentTok{\# i\_boot \textless{}{-} sample.int(n, replace = TRUE)}
+\NormalTok{i\_boot }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{data\_boot }\OtherTok{\textless{}{-}}\NormalTok{ iris[i\_boot, ]}
+\FunctionTok{str}\NormalTok{(data\_boot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 5.6 6.2 4.8 5.5 6.2 5.5 5.6 5 6.5 ...
+##  $ Sepal.Width : num  3.8 2.5 2.9 3.1 2.3 2.9 2.6 2.8 3.6 3 ...
+##  $ Petal.Length: num  1.9 3.9 4.3 1.6 4 4.3 4.4 4.9 1.4 5.8 ...
+##  $ Petal.Width : num  0.4 1.1 1.3 0.2 1.3 1.3 1.2 2 0.2 2.2 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 2 2 1 2 2 2 3 1 3 ...
+\end{verbatim}
+
+Esta forma de proceder es la que emplea por defecto el paquete \texttt{boot} que describiremos más adelante (Sección \ref{intro-pkgboot}).
+
+\begin{exercise}[Bootstrap uniforme multidimensional]
+\protect\hypertarget{exr:unif-multi}{}\label{exr:unif-multi}
+Considerando el conjunto de datos \texttt{Prestige} del paquete \texttt{carData}, supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre \texttt{prestige} (puntuación de ocupaciones obtenidas a partir de una encuesta) e \texttt{income} (media de ingresos en la ocupación).
+Para ello podemos considerar el coeficiente de correlación lineal de Pearson:
+\[\rho =\frac{ Cov \left( X, Y \right) }
+{ \sigma \left( X \right) \sigma \left( Y \right) }\]
+Su estimador es el coeficiente de correlación muestral:
+\[r=\frac{\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})}
+{\sqrt{ \sum_{i=1}^{n}(x_i-\overline{x})^{2}} 
+\sqrt{\sum_{i=1}^{n}(y_i-\overline{y})^{2}}},\]
+que podemos calcular en \texttt{R} empleando la función \texttt{cor()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(Prestige, }\AttributeTok{package =} \StringTok{"carData"}\NormalTok{)}
+\CommentTok{\# with(Prestige, cor(income, prestige))}
+\FunctionTok{cor}\NormalTok{(Prestige}\SpecialCharTok{$}\NormalTok{income, Prestige}\SpecialCharTok{$}\NormalTok{prestige)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7149057
+\end{verbatim}
+
+Para realizar inferencias sobre el coeficiente de correlación, como aproximación más simple, se puede considerar que la distribución muestral de \(r\) es aproximadamente normal de media \(\rho\) y varianza
+\[Var(r) \approx \frac{1 - \rho^2}{n - 2}.\]
+
+Aproximar mediante bootstrap uniforme (multididimensional) la distribución del estadístico \(R = r -\rho\), empleando \(B=1000\) réplicas, y compararla con la aproximación normal, considerando
+\[\widehat{Var}(r) = \frac{1 - r^2}{n - 2}.\]
+\end{exercise}
 
 \hypertarget{intro-paquetes}{%
 \section{Herramientas disponibles en R sobre bootstrap}\label{intro-paquetes}}
@@ -10313,7 +10317,7 @@ Como ejemplo realizamos el Ejercicio \ref{exr:unif-multi} empleando el paquete \
 
 }
 
-\caption{Gráficos de diagnóstico para el coeficiente de correlación.}\label{fig:plot-boot-multi}
+\caption{Gráficos de diagnóstico para la distribución bootstrap del coeficiente de correlación.}\label{fig:plot-boot-multi}
 \end{figure}
 
 En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección \ref{icboot-trans}).
@@ -10368,23 +10372,113 @@ Por ejemplo, para aproximar \(\psi(u) = P\left( R \leq u \right)\) podríamos em
 \hypertarget{modunif}{%
 \chapter{Extensiones del bootstrap uniforme}\label{modunif}}
 
-\textbf{\emph{Work in progress}}
+Cuando no se dispone de ninguna información adicional sobre la distribución poblacional es razonable emplear bootstrap uniforme (naïve o no paramétrico), ya que la distribución empírica es el estimador máximo verosímil no paramétrico de la función de distribución
+poblacional.
+En general (ver p.e. Cao y Fernández-Casal, 2021, \href{https://rubenfcasal.github.io/book_remuestreo/validez-de-la-aproximaci\%C3\%B3n-bootstrap.html}{Sección 3.6}), el bootstrap uniforme funcionará bien cuando el estadístico sea una función suave de la muestra\footnote{Por ejemplo si es una función diferenciable de los momentos muestrales.} (suponiendo además que la aproximación Monte Carlo converge, es decir, que las colas de la distribución poblacional no son muy pesadas; ver Sección \ref{convergencia}).
+Si el estadístico depende de la muestra de una manera poco suave o inestable, como es el caso de los cuantiles muestrales, el bootstrap uniforme puede no funcionar muy bien (Sección \ref{deficien-unif}), y puede ser recomendable emplear otro método de remuestreo.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-El bootstrap uniforme (o naïve) es aquel en el que remuestreamos a
-partir de la función de distribución empírica. Eso es muy razonable
-cuando no tenemos ninguna información adicional sobre la función de
-distribución poblacional, ya que la distribución empírica es el
-estimador máximo verosímil no paramétrico de la función de distribución
-poblacional. Sin embargo, cuando en el contexto en el que nos
-encontremos conozcamos alguna propiedad adicional de dicha distribución
-poblacional, entonces debemos incorporarla en el método de remuestreo,
-dando lugar a otro método bootstrap que ya no debemos llamar uniforme o
-naïve. Veremos algunos de ellos.
+Además, cuando en el contexto en el que nos encontremos conozcamos alguna propiedad adicional de la distribución poblacional (por ejemplo que es continua o simétrica), debería tenerse en cuenta en en el método de remuestreo, ya que habría que tratar de imitar todas las características de la distribución poblacional.
+Esto da lugar a modificaciones del bootstrap uniforme, algunas de las cuales se muestran en secciones siguientes.
 
 \hypertarget{deficien-unif}{%
 \section{Deficiencias del bootstrap uniforme}\label{deficien-unif}}
+
+Como ya se comentó en la introducción, si el estadístico es función de los cuantiles muestrales el bootstrap uniforme puede no funcionar bien (por ejemplo en el caso de la mediana; ver Ejercicio \ref{exr:boot-simul-mediana}).
+Esto es principalmente debido a que el conjunto de posibles valores de las réplicas bootstrap del estadístico puede ser muy pequeño (si el tamaño muestral es pequeño).
+
+Un ejemplo en el que el bootstrap uniforme falla por completo es el caso del máximo de una distribución uniforme.
+Supongamos que la distribución poblacional, \(F\), es la \(\mathcal{U}\left( 0,\theta \right)\) y que estamos interesados en hacer inferencia sobre del parámetro \(\theta\) empleando su estimador máximo verosímil \(\hat{\theta}=X_{(n)}\), siendo \(\mathbf{X}=\left( X_1,X_2,\ldots ,X_n \right)\) la muestra observada.
+Para realizar dicha inferencia nos interesaría aproximar la distribución de
+\(R\left( \mathbf{X},F \right) =\hat{\theta}-\theta\).
+
+La función de distribución en el muestreo, \(G\left( x \right)\), de
+\(\hat{\theta}\) puede calcularse de forma sencilla:
+
+\[\begin{aligned}
+G\left( x \right) &= P\left( X_{\left(
+n \right)}\leq x \right) =P\left( X_i\leq x\,;
+ 1 \leq i \leq n \right) \\
+&= \prod_{i=1}^{n}P\left( X_i\leq x \right) =F\left( x \right)^{n}=\left( 
+\frac{x}{\theta } \right)^{n},\text{ si }x\in \left[ 0,\theta \right]\end{aligned}\]
+
+con lo cual su función de densidad viene dada por
+\[g\left( x \right) =\frac{n}{\theta }\left( \frac{x}{\theta } \right)^{n-1},
+\text{ si }x\in \left[ 0,\theta \right] .\]
+Lo que confirma que \(\hat{\theta}\) es un estimador sesgado de \(\theta\), puesto que se tiene que \(\hat{\theta}\leq \theta\) con probabilidad 1.
+A partir de esta densidad podemos calcular fácilmente el sesgo del estimador:
+\[Sesgo\left( \hat{\theta} \right) =E\left( \hat{\theta} \right) -\theta = -\frac{\theta }{n+1}.\]
+
+Si deseamos aproximar mediante bootstrap la distribución en el muestreo de \(\hat{\theta}\) (o la de \(R\)) y utilizamos un bootstrap uniforme (naïve), la versión bootstrap del estimador resulta ser \(\hat{\theta}^{\ast}=X_{(n)}^{\ast}\),
+siendo \(\mathbf{X}^{\ast}=\left(X_1^{\ast}\text{, }X_2^{\ast}\text{, }\ldots \text{, }X_n^{\ast} \right)\) una remuestra bootstrap obtenida a partir de la distribución empírica \(F_n\).
+La distribución en el remuestreo de \(\hat{\theta} ^{\ast}\,\) resulta un poco más complicada pues es discreta y sólo puede
+tomar cualquiera de los valores de la muestra.
+
+Suponiendo que no hay empates en las observaciones de la muestra, es fácil darse cuenta de que
+\[P^{\ast}\left( \hat{\theta}^{\ast}\leq X_{(j)} \right)
+=P^{\ast}\left( X_{(n)}^{\ast}\leq X_{(j)
+} \right) =P^{\ast}\left( X_i^{\ast}\leq X_{(j)}\,;
+ 1 \leq i \leq n \right) =\left( \frac{j}{n} \right)^{n}\]
+y, por tanto, su masa de probabilidad viene dada por
+\[P^{\ast}\left( \hat{\theta}^{\ast}=X_{(j)} \right) =\left( 
+\frac{j}{n} \right)^{n}-\left( \frac{j-1}{n} \right)^{n}\text{, }j=1,\ldots,n.\]
+
+En particular,
+\[P^{\ast}\left( \hat{\theta}^{\ast}=X_{(n)} \right) =1-\left( 1-
+\frac{1}{n} \right)^{n}\rightarrow 1-\frac{1}{e}\simeq 0.6321,\]
+con lo cual la distribución en remuestreo de \(R^{\ast}=R\left( \mathbf{X}^{\ast},F_n \right) =\hat{\theta}^{\ast}-X_{\left( n \right)}\) tiene un átomo de probabilidad en el valor \(0\) cuya
+probabilidad tiende a \(1-\frac{1}{e}\) cuando el tamaño muestral tiende a infinito, es decir
+
+\[\lim_{n\rightarrow \infty }P^{\ast}\left( R^{\ast}=0 \right) =1-\frac{1}{e},\]
+
+algo que no ocurre con la distribución en el muestreo de \(R\), que es continua con densidad:
+\[g_R\left( x \right) =\frac{n}{\theta }\left( \frac{x + \theta}{\theta } \right)^{n-1},
+\text{ si }x\in \left[ -\theta, 0\right].\]
+De esta forma vemos que el bootstrap uniforme (no paramétrico) es inconsistente.
+
+\begin{example}[Inferencia sobre el máximo de una distribución uniforme]
+\protect\hypertarget{exm:boot-maximo-uniforme}{}\label{exm:boot-maximo-uniforme}El siguiente código implementa el método
+bootstrap uniforme (también llamado naïve) para aproximar la
+distribución del estadístico \(R=\hat{\theta}-\theta\), para una muestra
+de tamaño \(n=50\), proveniente de una población con distribución
+\(\mathcal{U}\left( 0,1\right)\) {[}Figura \ref{fig:boot-uniforme-maximo}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{theta }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{50}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{muestra }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{50}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ theta}
+\NormalTok{theta\_est }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(muestra)}
+\CommentTok{\# Remuestreo}
+\NormalTok{B }\OtherTok{\textless{}{-}} \DecValTok{2000}
+\NormalTok{maximo }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(B)}
+\NormalTok{estadistico }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(B)}
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{B) \{}
+\NormalTok{    remuestra }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(muestra, n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    maximo[k] }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(remuestra)}
+\NormalTok{    estadistico[k] }\OtherTok{\textless{}{-}}\NormalTok{ maximo[k] }\SpecialCharTok{{-}}\NormalTok{ theta\_est}
+\NormalTok{\}}
+\CommentTok{\# Distribución estadístico}
+\NormalTok{xlim }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{theta}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{) }\CommentTok{\# c({-}theta, 0)}
+\FunctionTok{hist}\NormalTok{(estadistico, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }
+     \AttributeTok{border =} \StringTok{"darkgray"}\NormalTok{, }\AttributeTok{xlim =}\NormalTok{ xlim)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(estadistico))}
+\FunctionTok{rug}\NormalTok{(estadistico, }\AttributeTok{col =} \StringTok{"darkgray"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(n}\SpecialCharTok{/}\NormalTok{theta }\SpecialCharTok{*}\NormalTok{ ((x }\SpecialCharTok{+}\NormalTok{ theta)}\SpecialCharTok{/}\NormalTok{theta)}\SpecialCharTok{\^{}}\NormalTok{(n }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{), }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/boot-uniforme-maximo-1} 
+
+}
+
+\caption{Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.}\label{fig:boot-uniforme-maximo}
+\end{figure}
+
+Este problema podría evitarse empleando el bootstrap paramétrico descrito a continuación (ver Ejemplo \ref{exm:boot-maximo-parametrico}).
+\end{example}
 
 \hypertarget{modunif-boot-par}{%
 \section{Bootstrap paramétrico}\label{modunif-boot-par}}
@@ -10402,47 +10496,201 @@ lugar al llamado bootstrap paramétrico:
 \def\labelenumi{\arabic{enumi}.}
 \item
   Dada la muestra
-  \(\mathbf{X}=\left( X_1,\ldots ,X_n \right)\), calcular
-  \(\hat{\theta}\)
+  \(\mathbf{X}=\left( X_1,\ldots ,X_n \right)\), calcular \(\hat{\theta}\)
 \item
-  Para cada \(i=1,\ldots ,n\) arrojar \(X_i^{\ast}\) a partir de
-  \(F_{\hat{\theta}}\)
+  Para cada \(i=1,\ldots ,n\) generar \(X_i^{\ast}\) a partir de \(F_{\hat{\theta}}\)
 \item
   Obtener \(\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots ,X_n^{\ast} \right)\)
 \item
   Calcular \(R^{\ast}=R\left( \mathbf{X}^{\ast},F_{\hat{\theta}} \right)\)
-\end{enumerate}
-
-Así utilizaremos las distribución en el remuestreo de \(R^{\ast}\) para
-aproximar la distribución en el muestreo de \(R\). Lógicamente, cuando no
-sea posible obtener una expresión explícita para la distribución
-bootstrap de \(R^{\ast}\) utilizaremos una aproximación de Monte Carlo de
-la misma:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Dada la muestra
-  \(\mathbf{X}=\left( X_1,\ldots ,X_n \right)\), calcular
-  \(\hat{\theta}\)
-\item
-  Para cada \(i=1,\ldots ,n\) arrojar \(X_i^{\ast}\) a partir de
-  \(F_{\hat{\theta}}\)
-\item
-  Obtener \(\mathbf{X}^{\ast}=\left( X_1^{\ast},\ldots ,X_n^{\ast} \right)\)
-\item
-  Calcular
-  \(R^{\ast}=R\left( \mathbf{X}^{\ast},F_{\hat{\theta} } \right)\)
 \item
   Repetir \(B\) veces los pasos 2-4 para obtener las réplicas bootstrap
   \(R^{\ast (1)}\), \(\ldots\), \(R^{\ast (B)}\)
 \item
-  Utilizar esas réplicas bootstrap para aproximar la distribución en el
-  muestreo de \(R\)
+  Utilizar esas réplicas bootstrap para aproximar la distribución en el muestreo de \(R\)
 \end{enumerate}
+
+En el paso 2, debemos poder simular valores de la distribución \(F_{\hat{\theta}}\).
+Como ya hemos visto en la Sección \ref{rrng}, en R (y en la mayoría de lenguajes de programación y software estadístico) se dispone de rutinas que permiten simular la mayoría de las distribuciones paramétricas habituales.
+En otros casos habrá que emplear métodos generales, preferiblemente el método de inversión descrito en el Capítulo \ref{continuas}.
+
+Una de las principales aplicaciones del bootstrap paramétrico
+es el contraste de hipótesis que se tratará en la Sección \ref{contrastes-parametricos}.
+
+\begin{example}[Inferencia sobre la media continuación]
+\protect\hypertarget{exm:media-dt-conocida-par}{}\label{exm:media-dt-conocida-par}
+
+Continuando con el Ejemplo \ref{exm:media-dt-desconocida} del tiempo de vida de microorganismos, podríamos pensar en emplear bootstrap paramétrico para calcular un intervalo de confianza para la media poblacional.
+
+La valided de los resultados dependerá en gran medida de que el modelo paramétrico sea adecuado para describir la variabilidad de los datos.
+En este caso parece razonable asumir una distribución exponencial (no lo es que el modelo admita tiempos de vida negativos, como ocurriría al asumir normalidad) {[}Figura \ref{fig:boot-par-aprox}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribución bootstrap uniforme}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(muestra)(x), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{.}\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{ylab =} \StringTok{"F(x)"}\NormalTok{, }\AttributeTok{type =} \StringTok{"s"}\NormalTok{)}
+\CommentTok{\# Distribución bootstrap paramétrico normal}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{pnorm}\NormalTok{(x, }\FunctionTok{mean}\NormalTok{(muestra), }\FloatTok{0.6}\NormalTok{), }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\# Distribución bootstrap paramétrico exponencial}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{pexp}\NormalTok{(x, }\DecValTok{1}\SpecialCharTok{/}\FunctionTok{mean}\NormalTok{(muestra)), }\AttributeTok{lty =} \DecValTok{3}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"bottomright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Empírica"}\NormalTok{, }\StringTok{"Aprox. normal"}\NormalTok{, }\StringTok{"Aprox. exponencial"}\NormalTok{), }\AttributeTok{lty =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/boot-par-aprox-1} 
+
+}
+
+\caption{Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.}\label{fig:boot-par-aprox}
+\end{figure}
+
+Podemos modificar fácilmente el código mostrado en el Ejemplo \ref{exm:media-dt-desconocida}, de forma que se emplee bootstrap paramétrico (exponencial):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muestra }\OtherTok{\textless{}{-}}\NormalTok{ simres}\SpecialCharTok{::}\NormalTok{lifetimes}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(muestra)}
+\NormalTok{alfa }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\CommentTok{\# Estimaciones muestrales}
+\NormalTok{x\_barra }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(muestra)}
+\NormalTok{cuasi\_dt }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(muestra)}
+\CommentTok{\# Remuestreo}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{B }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{estadistico\_boot }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(B)}
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{B) \{}
+\NormalTok{  remuestra }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(muestra, n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  x\_barra\_boot }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(remuestra)}
+\NormalTok{  cuasi\_dt\_boot }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(remuestra)}
+\NormalTok{  estadistico\_boot[k] }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(n) }\SpecialCharTok{*}\NormalTok{ (x\_barra\_boot }\SpecialCharTok{{-}}\NormalTok{ x\_barra)}\SpecialCharTok{/}\NormalTok{cuasi\_dt\_boot}
+\NormalTok{\}}
+\CommentTok{\# Aproximación Monte Carlo de los ptos críticos:}
+\NormalTok{pto\_crit }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(estadistico\_boot, }\FunctionTok{c}\NormalTok{(alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{))}
+\CommentTok{\# Construcción del IC}
+\NormalTok{ic\_inf\_boot }\OtherTok{\textless{}{-}}\NormalTok{ x\_barra }\SpecialCharTok{{-}}\NormalTok{ pto\_crit[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{*}\NormalTok{ cuasi\_dt}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n)}
+\NormalTok{ic\_sup\_boot }\OtherTok{\textless{}{-}}\NormalTok{ x\_barra }\SpecialCharTok{{-}}\NormalTok{ pto\_crit[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{*}\NormalTok{ cuasi\_dt}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n)}
+\NormalTok{IC\_boot }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(ic\_inf\_boot, ic\_sup\_boot)}
+\FunctionTok{names}\NormalTok{(IC\_boot) }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{c}\NormalTok{(alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alfa}\SpecialCharTok{/}\DecValTok{2}\NormalTok{), }\StringTok{"\%"}\NormalTok{)}
+\NormalTok{IC\_boot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      2.5%     97.5% 
+## 0.5030131 1.2888063
+\end{verbatim}
+
+Para emplear el paquete \texttt{boot}, como se comentó en la Sección
+\ref{intro-pkgboot}, habría que establecer en la llamada a la
+función \texttt{boot()} los argumentos: \texttt{sim\ =\ "parametric"},
+\texttt{mle} igual a los parámetros necesarios para la simulación y
+\texttt{ran.gen\ =\ function(data,\ mle)}, una función de los datos originales
+y de los parámetros que devuelve los datos generados.
+En este caso además, la función \texttt{statistic} no necesita el vector
+de índices como segundo parámetro.
+Por ejemplo, para calcular el intervalo de confianza para la media del
+tiempo de vida de los microorganismos, podríamos utilizar el siguiente código:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(boot)}
+\NormalTok{ran.gen.exp }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, mle) \{}
+    \CommentTok{\# Función para generar muestras aleatorias exponenciales}
+    \CommentTok{\# mle contendrá la media de los datos originales}
+\NormalTok{    out }\OtherTok{\textless{}{-}} \FunctionTok{rexp}\NormalTok{(}\FunctionTok{length}\NormalTok{(data), }\DecValTok{1}\SpecialCharTok{/}\NormalTok{mle)}
+\NormalTok{    out}
+\NormalTok{\}}
+
+\NormalTok{statistic }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data)\{}
+    \FunctionTok{c}\NormalTok{(}\FunctionTok{mean}\NormalTok{(data), }\FunctionTok{var}\NormalTok{(data)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(data))}
+\NormalTok{\}}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{res.boot }\OtherTok{\textless{}{-}} \FunctionTok{boot}\NormalTok{(muestra, statistic, }\AttributeTok{R =}\NormalTok{ B, }\AttributeTok{sim =} \StringTok{"parametric"}\NormalTok{,}
+                 \AttributeTok{ran.gen =}\NormalTok{ ran.gen.exp, }\AttributeTok{mle =} \FunctionTok{mean}\NormalTok{(muestra))}
+
+\FunctionTok{boot.ci}\NormalTok{(res.boot, }\AttributeTok{type =} \StringTok{"stud"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 1000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = res.boot, type = "stud")
+## 
+## Intervals : 
+## Level    Studentized     
+## 95%   ( 0.5308,  1.4061 )  
+## Calculations and Intervals on Original Scale
+\end{verbatim}
+
+\end{example}
+
+\begin{example}[Inferencia sobre el máximo de una distribución uniforme continuación]
+\protect\hypertarget{exm:boot-maximo-parametrico}{}\label{exm:boot-maximo-parametrico}
+
+En el Ejemplo \ref{exm:boot-maximo-uniforme} la distribución poblacional era uniforme.
+Si se dispusiese de esa información, lo natural sería utilizar un bootstrap paramétrico,
+consistente en obtener las remuestras bootstrap a partir de una distribución uniforme con parámetro estimado:
+\[\mathbf{X}^{\ast}=\left( X_1^{\ast}\text{, }X_2^{\ast}\text{, 
+}\ldots \text{, }X_n^{\ast} \right), \text{ con } X_i^{\ast} \sim \mathcal{U}\left( 0,\hat{\theta}\right).\]
+En estas circunstancias es muy sencillo obtener la distribución en el
+remuestreo de \(\hat{\theta}^{\ast}\), ya que su deducción es totalmente
+paralela a la de la distribución en el muestreo de \(\hat{\theta}\). Así,
+la función de densidad de \(\hat{\theta}^{\ast}\) es
+\[\hat{g}\left( x \right) =\frac{n}{\hat{\theta}}\left( \frac{x}{\hat{\theta}}
+ \right)^{n-1},\text{ si }x\in \left[ 0,\hat{\theta}\right] .\]
+
+Con lo cual, al utilizar un bootstrap paramétrico, la distribución en el
+remuestreo de \(R^{\ast}=R\left( \mathbf{X}^{\ast},F_{\hat{ \theta}} \right) =\hat{\theta}^{\ast}-\hat{\theta}\) imita a la
+distribución en muestreo de
+\(R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta\).
+
+Para implementarlo en la práctica podríamos emplear un código muy similar al
+del ejemplo original {[}Figura \ref{fig:boot-parametrico-maximo}{]}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Remuestreo}
+\NormalTok{B }\OtherTok{\textless{}{-}} \DecValTok{2000}
+\NormalTok{maximo }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(B)}
+\NormalTok{estadistico }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(B)}
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{B) \{}
+\NormalTok{    remuestra }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(n) }\SpecialCharTok{*}\NormalTok{ theta\_est}
+\NormalTok{    maximo[k] }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(remuestra)}
+\NormalTok{    estadistico[k] }\OtherTok{\textless{}{-}}\NormalTok{ maximo[k] }\SpecialCharTok{{-}}\NormalTok{ theta\_est}
+\NormalTok{\}}
+\CommentTok{\# Distribución estadístico}
+\NormalTok{xlim }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{theta}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{) }\CommentTok{\# c({-}theta, 0)}
+\FunctionTok{hist}\NormalTok{(estadistico, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{main =} \StringTok{""}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }
+     \AttributeTok{border =} \StringTok{"darkgray"}\NormalTok{, }\AttributeTok{xlim =}\NormalTok{ xlim)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(estadistico))}
+\FunctionTok{rug}\NormalTok{(estadistico, }\AttributeTok{col =} \StringTok{"darkgray"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(n}\SpecialCharTok{/}\NormalTok{theta }\SpecialCharTok{*}\NormalTok{ ((x }\SpecialCharTok{+}\NormalTok{ theta)}\SpecialCharTok{/}\NormalTok{theta)}\SpecialCharTok{\^{}}\NormalTok{(n }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{), }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{2}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/boot-parametrico-maximo-1} 
+
+}
+
+\caption{Distribución bootstrap paramétrica y distribución poblacional.}\label{fig:boot-parametrico-maximo}
+\end{figure}
+
+\end{example}
 
 \hypertarget{modunif-boot-suav}{%
 \section{Bootstrap suavizado}\label{modunif-boot-suav}}
+
+\textbf{\emph{Work in progress}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{boot-reg}{%
 \section{Bootstrap basado en modelos}\label{boot-reg}}
@@ -10708,8 +10956,8 @@ donde:
 \end{itemize}
 
 \begin{exercise}
-\protect\hypertarget{exr:boot-car}{}{\label{exr:boot-car} }
-\end{exercise}
+\protect\hypertarget{exr:boot-car}{}\label{exr:boot-car}
+
 Emplear la función \texttt{Boot()} del paquete \texttt{car} para hacer inferencia sobre
 el coeficiente de determinación ajustado del modelo de regresión lineal
 que explica \texttt{prestige} a partir de \texttt{income} y \texttt{education}
@@ -10725,137 +10973,11 @@ y una estimación por intervalo de confianza de este estadístico).
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{referencias}{%
-\chapter*{Referencias}\label{referencias}}
-\addcontentsline{toc}{chapter}{Referencias}
-
-\textbf{Bibliografía básica}
-
-Cao, R. (2002). \emph{Introducción a la simulación y a la teoría de colas}. NetBiblo.
-
-Cao R. y Fernández-Casal R. (2020). \emph{Técnicas de Remuestreo}. \url{https://rubenfcasal.github.io/book_remuestreo}.
-
-Gentle, J.E. (2003). \emph{Random number generation and Monte Carlo methods}. Springer‐Verlag.
-
-Jones, O. et al.~(2009). \emph{Introduction to Scientific Programming and Simulation Using R}. CRC.
-
-Ripley, B.D. (1987). \emph{Stochastic Simulation}. John Wiley \& Sons.
-
-Robert, C.P. y G. Casella (2010). \emph{Introducing Monte Carlo Methods with R}. Springer.
-
-Ross, S.M. (1999).\emph{Simulación}. Prentice Hall.
-
-Suess, E.A. y Trumbo, B.E. (2010). \emph{Introduction to probability simulation and Gibbs sampling with R}. Springer.
-
-\hypertarget{bibliografuxeda-complementaria}{%
-\section*{Bibliografía complementaria}\label{bibliografuxeda-complementaria}}
-\addcontentsline{toc}{section}{Bibliografía complementaria}
-
-\hypertarget{libros}{%
-\subsection*{Libros}\label{libros}}
-\addcontentsline{toc}{subsection}{Libros}
-
-Azarang, M. R. y García Dunna, E. (1996). \emph{Simulación y análisis de modelos estocásticos}. McGraw-Hill.
-
-Bratley, P., Fox, B.L. y Schrage L.E. (1987). \emph{A guide to simulation}. Springer-Verlag.
-
-Davison, A.C. y Hinkley, D.V. (1997). \emph{Bootstrap Methods and Their Application}. Cambridge University Press.
-
-Devroye, L. (1986). \emph{Non-uniform random variate generation}. Springer-Verlag.
-
-Evans, M. y Swartz, T. (2000). \emph{Approximating integrals via Monte Carlo and determinstic methods}. Oxford University Press.
-
-Gentle, J.E. (1998). \emph{Random number generation and Monte Carlo methods}. Springer-Verlag.
-
-Hyndman, R.J. y Athanasopoulos, G. (2018). \emph{Forecasting: principles and practice}. OTexts.
-Disponible online: \href{https://otexts.com/fpp2}{2nd edition (forecast)}, \href{https://otexts.com/fpp3}{third edition (fable)}.
-
-Hofert, M. (2018). \emph{Elements of Copula Modeling with R}, Springer.
-
-Hörmann, W. et al.~(2004). \emph{Automatic Nonuniform Random Variate Generation}. Springer.
-
-Knuth, D.E. (1969). \emph{The Art of Computer Programming}. Volume 2. Addison-Wesley.
-
-Knuth, D.E. (2002). \emph{The Art of Computer Programming}. Volume 2, third edition, ninth printing. Addison-Wesley.
-
-Law, A.M. y Kelton, W.D. (1991). \emph{Simulation, modeling and analysis}. McGraw-Hill.
-
-Liu, J.S. (2004). \emph{Monte Carlo strategies in scientific computing}. Springer.
-
-Moeschlin, O., Grycko, E., Pohl, C. y Steinert, F. (1998). \emph{Experimental stochastics}. Springer-Verlag.
-
-Nelsen, R.B. (2006). \emph{An introduction to copulas}, second edition, Springer.
-
-Nelson, R. (1995). \emph{Probability, stochastic processes, and queueing theory: the mathematics of computer performance modelling}. Springer-Verlag.
-
-Pardo, L. y Valdés, T. (1987). \emph{Simulación. Aplicaciones prácticas a la empresa}. Díaz de Santos.
-
-Robert, C.P. y G. Casella (2004). \emph{Monte Carlo statistical methods}. Springer.
-Shao, J. (2003). \emph{Mathematical statistics}. Springer.
-
-\hypertarget{artuxedculos}{%
-\subsection*{Artículos}\label{artuxedculos}}
-\addcontentsline{toc}{subsection}{Artículos}
-
-Demirhan, H. y Bitirim, N. (2016). \href{https://journal.r-project.org/archive/2016/RJ-2016-016/index.html}{CryptRndTest: an R package for testing the cryptographic randomness}. \emph{The R Journal}, 8(1), 233-247.
-
-Downham, D.Y. (1970). Algorithm AS 29: The runs up and down test. \emph{Journal of the Royal Statistical Society}. Series C (Applied Statistics), 19(2), 190-192.
-
-Gilks, W.R. y Wild, P. (1992). Adaptive rejection sampling for Gibbs sampling. \emph{Journal of the Royal Statistical Society}. Series C (Applied Statistics), 41(2), 337-348.
-
-Hall, S.W. (1994). Analysis of defectivity of semiconductor wafers by contingency table, \emph{Proceedings of the Institute of Environmental Sciences}, \textbf{1}, 177-183.
-
-Kinderman, A.J. y Monahan, J.F. (1977). Computer generation of random variables using the ratio of uniform deviates. \emph{ACM Transactions on Mathematical Software (TOMS)}, 3(3), 257-260.
-
-L'Ecuyer, P. (1999). Good parameters and implementations for combined multiple recursive random number generators. \emph{Operations Research}, 47, 159--164.
-
-L'Ecuyer, P. y Simard, R. (2007). TestU01: A C library for empirical testing of random number generators. \emph{ACM Transactions on Mathematical Software} (TOMS), 33(4), 1-40.
-
-Marsaglia, G. y Tsang, W.W. (2002). \href{http://www.jstatsoft.org/v07/i03}{Some difficult-to-pass tests of randomness}. \emph{Journal of Statistical Software}, 7(3), 1-9.
-
-Marsaglia, G., Zaman, A. y Tsang, W.W. (1990). Toward a universal random number generator. \emph{Stat. Prob. Lett.}, 9(1), 35-39.
-
-Matsumoto, M. y Nishimura, T. (1998). Mersenne Twister: A 623-dimensionally equidistributed uniform pseudo-random number generator, \emph{ACM Transactions on Modeling and Computer Simulation}, 8, 3--30.
-
-Odeh, R.E. y Evans, J.O. (1974). The percentage points of the normal distribution. \emph{Journal of the Royal Statistical Society}. Series C (Applied Statistics), 23(1), 96-97.
-
-Patefield, W.M. (1981). \href{https://doi.org/10.2307/2346669}{Algorithm AS 159: An efficient method of generating random r x c tables with given row and column totals}. \emph{Applied Statistics}, 30, 91--97.
-
-Park, S.K. y Miller , K.W. (1988). Random number generators: good ones are hard to find. \emph{Communications of the ACM}, 31(10), 1192-1201.
-
-Park, S.K., Miller, K.W. y Stockmeyer, P.K. (1993). Technical correspondence. \emph{Communications of the ACM}, 36(7), 108-110.
-
-Wichura, M.J. (1988) Algorithm AS 241: The Percentage Points of the Normal Distribution. \emph{Applied Statistics}, 37, 477--484.
+\end{exercise}
 
 \hypertarget{appendix-apendices}{%
 \appendix}
 
-
-\hypertarget{links}{%
-\chapter{Enlaces}\label{links}}
-
-\begin{itemize}
-\item
-  \textbf{\emph{Repositorio}}: \href{https://github.com/rubenfcasal/simbook}{rubenfcasal/simbook}
-\item
-  \textbf{Recursos para el aprendizaje de R}: En este \href{https://rubenfcasal.github.io/post/ayuda-y-recursos-para-el-aprendizaje-de-r}{post} se muestran algunos recursos que pueden ser útiles para el aprendizaje de R y la obtención de ayuda.
-\item
-  \href{https://bookdown.org}{\textbf{\emph{Bookdown}}}:
-
-  \begin{itemize}
-  \item
-    \href{https://rubenfcasal.github.io/book_remuestreo}{Técnicas de Remuestreo}
-    (\href{https://github.com/rubenfcasal/book_remuestreo}{github}).
-  \item
-    \href{https://rubenfcasal.github.io/bookdown_intro/rmarkdown.html}{Introducción a RMarkdown}
-  \item
-    Advanced R:
-    \href{http://adv-r.had.co.nz/}{1ª ed},
-    \href{https://adv-r.hadley.nz/}{2ª ed}
-  \item
-    \href{http://r-pkgs.had.co.nz/}{R packages}
-  \end{itemize}
-\end{itemize}
 
 \hypertarget{gof-aleat}{%
 \chapter{Bondad de Ajuste y Aleatoriedad}\label{gof-aleat}}
@@ -11165,48 +11287,50 @@ Por ejemplo, se podría emplear la función \texttt{simres::chisq.cont.test()} (
 \end{Shaded}
 
 \begin{verbatim}
-## function (x, distribution = "norm", nclass = floor(length(x)/5), 
-##     output = TRUE, nestpar = 0, ...) 
-## {
-##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##     tol <- sqrt(.Machine$double.eps)
-##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##     if (output) {
-##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
-##             border = "grey50")
-##         d.distrib <- eval(parse(text = paste("d", distribution, 
-##             sep = "")))
-##         curve(d.distrib(x, ...), add = TRUE)
-##     }
-##     else {
-##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##     }
-##     O <- xhist$counts
-##     E <- length(x)/nclass
-##     DNAME <- deparse(substitute(x))
-##     METHOD <- "Pearson's Chi-squared test"
-##     STATISTIC <- sum((O - E)^2/E)
-##     names(STATISTIC) <- "X-squared"
-##     PARAMETER <- nclass - nestpar - 1
-##     names(PARAMETER) <- "df"
-##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##     classes <- format(xbreaks)
-##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
-##         "]", sep = "")
-##     RESULTS <- list(classes = classes, observed = O, expected = E, 
-##         residuals = (O - E)/sqrt(E))
-##     if (output) {
-##         cat("\nPearson's Chi-squared test table\n")
-##         print(as.data.frame(RESULTS))
-##     }
-##     if (any(E < 5)) 
-##         warning("Chi-squared approximation may be incorrect")
-##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
-##         p.value = PVAL, method = METHOD, data.name = DNAME), 
-##         RESULTS), class = "htest")
+## function(x, distribution = "norm", nclass = floor(length(x)/5),
+##                             output = TRUE, nestpar = 0, ...) {
+##   # Función distribución
+##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##   # Puntos de corte
+##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##   tol <- sqrt(.Machine$double.eps)
+##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##   # Gráficos y frecuencias
+##   if (output) {
+##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
+##                   lty = 2, border = "grey50")
+##     # Función densidad
+##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
+##     curve(d.distrib(x, ...), add = TRUE)
+##   } else {
+##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##   }
+##   # Cálculo estadístico y p-valor
+##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
+##   E <- length(x)/nclass
+##   DNAME <- deparse(substitute(x))
+##   METHOD <- "Pearson's Chi-squared test"
+##   STATISTIC <- sum((O - E)^2/E)
+##   names(STATISTIC) <- "X-squared"
+##   PARAMETER <- nclass - nestpar - 1
+##   names(PARAMETER) <- "df"
+##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##   # Preparar resultados
+##   classes <- format(xbreaks)
+##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
+##                    sep = "")
+##   RESULTS <- list(classes = classes, observed = O, expected = E,
+##                   residuals = (O - E)/sqrt(E))
+##   if (output) {
+##     cat("\nPearson's Chi-squared test table\n")
+##     print(as.data.frame(RESULTS))
+##   }
+##   if (any(E < 5))
+##     warning("Chi-squared approximation may be incorrect")
+##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
+##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x0000000036ef0b90>
+## <bytecode: 0x000000003b68fbe0>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -12409,7 +12533,7 @@ Por defecto empleará todos los núcleos disponibles, pero se puede especificar 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4
+## [1] 8
 \end{verbatim}
 
 \begin{Shaded}
@@ -12428,7 +12552,7 @@ Por defecto empleará todos los núcleos disponibles, pero se puede especificar 
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.09    0.00    0.10
+##    0.08    0.00    0.07
 \end{verbatim}
 
 \begin{Shaded}
@@ -12450,7 +12574,7 @@ En Windows habría que crear previamente un cluster, llamar a una de las funcion
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.00    0.00    0.05
+##    0.00    0.00    0.03
 \end{verbatim}
 
 \begin{Shaded}
@@ -12517,7 +12641,7 @@ Veamos un ejemplo empleando una muestra simulada:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.03    0.05    0.07
+##    0.03    0.01    0.05
 \end{verbatim}
 
 \begin{Shaded}
@@ -12529,7 +12653,7 @@ Veamos un ejemplo empleando una muestra simulada:
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.06    0.04    0.17
+##    0.07    0.02    0.10
 \end{verbatim}
 
 \hypertarget{estudio-sim-boot}{%
@@ -12590,7 +12714,7 @@ Por ejemplo, a continuación se realiza un estudio de simulación comparando las
 
 \begin{verbatim}
 ##    user  system elapsed 
-##    0.01    0.00   12.64
+##    0.02    0.00    7.42
 \end{verbatim}
 
 \begin{Shaded}
@@ -12610,10 +12734,10 @@ Por ejemplo, a continuación se realiza un estudio de simulación comparando las
 
 \begin{verbatim}
 ##             Cobertura Longitud
-## Normal          0.872 56.76171
-## Basic           0.862 56.68745
-## Studentized     0.894 65.01878
-## Percentil       0.866 56.68745
+## Normal          0.866 57.05639
+## Basic           0.860 56.97389
+## Studentized     0.900 65.72609
+## Percentil       0.868 56.97389
 \end{verbatim}
 
 \begin{Shaded}
@@ -12626,13 +12750,13 @@ Por ejemplo, a continuación se realiza un estudio de simulación comparando las
 \hline
   & Cobertura & Longitud\\
 \hline
-Normal & 0.872 & 56.762\\
+Normal & 0.866 & 57.056\\
 \hline
-Basic & 0.862 & 56.687\\
+Basic & 0.860 & 56.974\\
 \hline
-Studentized & 0.894 & 65.019\\
+Studentized & 0.900 & 65.726\\
 \hline
-Percentil & 0.866 & 56.687\\
+Percentil & 0.868 & 56.974\\
 \hline
 \end{tabular}
 
@@ -13179,22 +13303,26 @@ Este algoritmo está implementado en la función \texttt{simres::rvng()} (ver ta
 \end{Shaded}
 
 \begin{verbatim}
-## function (n, seed = as.numeric(Sys.time()), k = 4) 
-## {
-##     seed <- seed%%10^k
-##     aux <- 10^(2 * k - k/2)
-##     aux2 <- 10^(k/2)
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         z <- seed^2
-##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
-##         u[i] <- seed/10^k
-##     }
-##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
-##         envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), k = 4) {
+##   seed <- seed %% 10^k
+##   aux <- 10^(2*k-k/2)
+##   aux2 <- 10^(k/2)
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     z <- seed^2
+##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
+##     u[i] <- seed/10^k
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
+##       envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rvng(n, seed, parameters$k))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x000000003b4c0980>
+## <bytecode: 0x0000000040ed2440>
 ## <environment: namespace:simres>
 \end{verbatim}
 
@@ -13336,6 +13464,125 @@ Esta función está implementada en el siguiente código:
 
   \begin{center}\includegraphics[width=0.7\linewidth]{25-Soluciones_files/figure-latex/unnamed-chunk-20-1} \end{center}
 \end{enumerate}
+
+\hypertarget{referencias}{%
+\chapter*{Referencias}\label{referencias}}
+\addcontentsline{toc}{chapter}{Referencias}
+
+\textbf{Bibliografía básica}
+
+Cao, R. (2002). \emph{Introducción a la simulación y a la teoría de colas}. NetBiblo.
+
+Cao R. y Fernández-Casal R. (2020). \emph{Técnicas de Remuestreo}. \url{https://rubenfcasal.github.io/book_remuestreo}.
+
+Gentle, J.E. (2003). \emph{Random number generation and Monte Carlo methods}. Springer‐Verlag.
+
+Jones, O. et al.~(2009). \emph{Introduction to Scientific Programming and Simulation Using R}. CRC.
+
+Ripley, B.D. (1987). \emph{Stochastic Simulation}. John Wiley \& Sons.
+
+Robert, C.P. y G. Casella (2010). \emph{Introducing Monte Carlo Methods with R}. Springer.
+
+Ross, S.M. (1999).\emph{Simulación}. Prentice Hall.
+
+Suess, E.A. y Trumbo, B.E. (2010). \emph{Introduction to probability simulation and Gibbs sampling with R}. Springer.
+
+\textbf{Bibliografía complementaria}
+
+Bratley, P., Fox, B.L. y Schrage L.E. (1987). \emph{A guide to simulation}. Springer-Verlag.
+
+Davison, A.C. y Hinkley, D.V. (1997). \emph{Bootstrap Methods and Their Application}. Cambridge University Press.
+
+Devroye, L. (1986). \emph{Non-uniform random variate generation}. Springer-Verlag.
+
+Evans, M. y Swartz, T. (2000). \emph{Approximating integrals via Monte Carlo and determinstic methods}. Oxford University Press.
+
+Gentle, J.E. (1998). \emph{Random number generation and Monte Carlo methods}. Springer-Verlag.
+
+Hörmann, W. et al.~(2004). \emph{Automatic Nonuniform Random Variate Generation}. Springer.
+
+Moeschlin, O., Grycko, E., Pohl, C. y Steinert, F. (1998). \emph{Experimental stochastics}. Springer-Verlag.
+
+Pardo, L. y Valdés, T. (1987). \emph{Simulación. Aplicaciones prácticas a la empresa}. Díaz de Santos.
+
+Robert, C.P. y G. Casella (2004). \emph{Monte Carlo statistical methods}. Springer.
+Shao, J. (2003). \emph{Mathematical statistics}. Springer.
+
+\hypertarget{enlaces}{%
+\section*{Enlaces}\label{enlaces}}
+\addcontentsline{toc}{section}{Enlaces}
+
+\textbf{\emph{Repositorio}}: \href{https://github.com/rubenfcasal/simbook2}{rubenfcasal/simbook2}
+
+\textbf{Recursos para el aprendizaje de R}: En este \href{https://rubenfcasal.github.io/post/ayuda-y-recursos-para-el-aprendizaje-de-r}{post} se muestran algunos recursos que pueden ser útiles para el aprendizaje de R y la obtención de ayuda.
+
+\href{https://bookdown.org}{\textbf{\emph{Bookdown}}}:
+
+\begin{itemize}
+\item
+  Cao R. y Fernández-Casal R. (2021). \emph{\href{https://rubenfcasal.github.io/book_remuestreo}{Técnicas de Remuestreo}}. \href{https://github.com/rubenfcasal/book_remuestreo}{github}.
+\item
+  \href{https://rubenfcasal.github.io/bookdown_intro/rmarkdown.html}{Introducción a RMarkdown}, apéndice del libro: Fernández-Casal R. y Cotos-Yáñez T.R. (2018). \emph{\href{https://rubenfcasal.github.io/bookdown_intro}{Escritura de libros con bookdown}}, \href{https://github.com/rubenfcasal/bookdown_intro}{github}.
+\item
+  Hyndman, R.J., y Athanasopoulos, G. (2021). \emph{\href{https://otexts.com/fpp3}{Forecasting: principles and practice}}. \href{https://www.amazon.es/dp/0987507133}{OTexts}.
+\item
+  Wickham, H. (2019). \emph{\href{https://adv-r.hadley.nz/}{Advanced R, 2ª edición}}, \href{https://www.amazon.com/dp/0815384572}{Chapman \& Hall}, \href{http://adv-r.had.co.nz/}{1ª edición.}.
+\item
+  Wickham, H. (2015). \emph{\href{http://r-pkgs.had.co.nz/}{R packages: organize, test, document, and share your code}} (actualmente 2ª edición en desarrollo con H. Bryan), \href{http://shop.oreilly.com/product/0636920034421.do}{O'Reilly, 1ª edición}.
+\end{itemize}
+
+\hypertarget{bibliografuxeda-completa}{%
+\section*{Bibliografía completa}\label{bibliografuxeda-completa}}
+\addcontentsline{toc}{section}{Bibliografía completa}
+
+Azarang, M. R. y García Dunna, E. (1996). \emph{Simulación y análisis de modelos estocásticos}. McGraw-Hill.
+
+Demirhan, H. y Bitirim, N. (2016). \href{https://journal.r-project.org/archive/2016/RJ-2016-016/index.html}{CryptRndTest: an R package for testing the cryptographic randomness}. \emph{The R Journal}, 8(1), 233-247.
+
+Downham, D.Y. (1970). Algorithm AS 29: The runs up and down test. \emph{Journal of the Royal Statistical Society}. Series C (Applied Statistics), 19(2), 190-192.
+
+Gilks, W.R. y Wild, P. (1992). Adaptive rejection sampling for Gibbs sampling. \emph{Journal of the Royal Statistical Society}. Series C (Applied Statistics), 41(2), 337-348.
+
+Hall, S.W. (1994). Analysis of defectivity of semiconductor wafers by contingency table, \emph{Proceedings of the Institute of Environmental Sciences}, \textbf{1}, 177-183.
+
+Hyndman, R.J. y Athanasopoulos, G. (2018). \emph{Forecasting: principles and practice}. OTexts.
+Disponible online: \href{https://otexts.com/fpp2}{2nd edition (forecast)}, \href{https://otexts.com/fpp3}{third edition (fable)}.
+
+Hofert, M. (2018). \emph{Elements of Copula Modeling with R}, Springer.
+
+Kinderman, A.J. y Monahan, J.F. (1977). Computer generation of random variables using the ratio of uniform deviates. \emph{ACM Transactions on Mathematical Software (TOMS)}, 3(3), 257-260.
+
+Knuth, D.E. (1969). \emph{The Art of Computer Programming}. Volume 2. Addison-Wesley.
+
+Knuth, D.E. (2002). \emph{The Art of Computer Programming}. Volume 2, third edition, ninth printing. Addison-Wesley.
+
+L'Ecuyer, P. (1999). Good parameters and implementations for combined multiple recursive random number generators. \emph{Operations Research}, 47, 159--164.
+
+L'Ecuyer, P. y Simard, R. (2007). TestU01: A C library for empirical testing of random number generators. \emph{ACM Transactions on Mathematical Software} (TOMS), 33(4), 1-40.
+
+Law, A.M. y Kelton, W.D. (1991). \emph{Simulation, modeling and analysis}. McGraw-Hill.
+
+Liu, J.S. (2004). \emph{Monte Carlo strategies in scientific computing}. Springer.
+
+Marsaglia, G. y Tsang, W.W. (2002). \href{http://www.jstatsoft.org/v07/i03}{Some difficult-to-pass tests of randomness}. \emph{Journal of Statistical Software}, 7(3), 1-9.
+
+Marsaglia, G., Zaman, A. y Tsang, W.W. (1990). Toward a universal random number generator. \emph{Stat. Prob. Lett.}, 9(1), 35-39.
+
+Matsumoto, M. y Nishimura, T. (1998). Mersenne Twister: A 623-dimensionally equidistributed uniform pseudo-random number generator, \emph{ACM Transactions on Modeling and Computer Simulation}, 8, 3--30.
+
+Nelsen, R.B. (2006). \emph{An introduction to copulas}, second edition, Springer.
+
+Nelson, R. (1995). \emph{Probability, stochastic processes, and queueing theory: the mathematics of computer performance modelling}. Springer-Verlag.
+
+Odeh, R.E. y Evans, J.O. (1974). The percentage points of the normal distribution. \emph{Journal of the Royal Statistical Society}. Series C (Applied Statistics), 23(1), 96-97.
+
+Patefield, W.M. (1981). \href{https://doi.org/10.2307/2346669}{Algorithm AS 159: An efficient method of generating random r x c tables with given row and column totals}. \emph{Applied Statistics}, 30, 91--97.
+
+Park, S.K. y Miller , K.W. (1988). Random number generators: good ones are hard to find. \emph{Communications of the ACM}, 31(10), 1192-1201.
+
+Park, S.K., Miller, K.W. y Stockmeyer, P.K. (1993). Technical correspondence. \emph{Communications of the ACM}, 36(7), 108-110.
+
+Wichura, M.J. (1988) Algorithm AS 241: The Percentage Points of the Normal Distribution. \emph{Applied Statistics}, 37, 477--484.
 
   \bibliography{book.bib,packages.bib}
 

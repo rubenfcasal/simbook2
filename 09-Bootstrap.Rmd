@@ -24,13 +24,6 @@ knitr::purl("09-Bootstrap.Rmd", documentation = 2)
 knitr::spin("09-Bootstrap.R",knit = FALSE)
 
 Pendiente: 
-5. Métodos de remuestreo	
-	5.1 Introducción al remuestreo
-	5.2 Bootstrap uniforme
-	5.4 Herramientas disponibles en R 
-	5.3 Modificaciones del bootstrap uniforme
-	  Deficiencias del bootstrap uniforme
-
 Selección del estadístico
   Interesaría un estadístico pivotal
   Bootstrap percentil: invariante frente a transformaciones monótonas, aunque debería ser insesgada y con varianza independiente del parámetro
@@ -45,7 +38,9 @@ Ejercicios
   mediana
   coeficiente de correlación
   
-Mover caso multidimensional al final de la sección. 
+Incluir expresiones teóricas en ejemplo en introducción
+Incluir aquí el caso multidimensional?
+
 -->
 
 Un par de notas:
@@ -271,48 +266,6 @@ Aunque en `R` es recomendable^[De esta forma se evitan posibles problemas numér
 muestra_boot <- sample(muestra, replace = TRUE)
 ```
 
-<!-- 
-Pendiente: Mover caso multidimensional al final de la sección. 
--->
-
-En el caso multidimensional, cuando trabajamos con un conjunto de datos con múltiples variables, podríamos emplear un procedimiento análogo, a partir de remuestras del vector de índices. 
-Por ejemplo:
-```{r}
-data(iris)
-str(iris)
-n <- nrow(iris)
-# i_boot <- floor(n*runif(n)) + 1
-# i_boot <- sample.int(n, replace = TRUE)
-i_boot <- sample(n, replace = TRUE)
-data_boot <- iris[i_boot, ]
-str(data_boot)
-```
-
-Esta forma de proceder es la que emplea por defecto el paquete `boot` que describiremos más adelante (Sección \@ref(intro-pkgboot)).
-
-::: {.exercise #unif-multi name="Bootstrap uniforme multidimensional"}
-<br>
-Considerando el conjunto de datos `Prestige` del paquete `carData`, supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e `income` (media de ingresos en la ocupación). 
-Para ello podemos considerar el coeficiente de correlación lineal de Pearson:
-$$\rho =\frac{ Cov \left( X, Y \right) }
-{ \sigma \left( X \right) \sigma \left( Y \right) }$$
-Su estimador es el coeficiente de correlación muestral:
-$$r=\frac{\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})}
-{\sqrt{ \sum_{i=1}^{n}(x_i-\overline{x})^{2}} 
-\sqrt{\sum_{i=1}^{n}(y_i-\overline{y})^{2}}},$$
-que podemos calcular en `R` empleando la función `cor()`:
-```{r}
-data(Prestige, package = "carData")
-# with(Prestige, cor(income, prestige))
-cor(Prestige$income, Prestige$prestige)
-```
-Para realizar inferencias sobre el coeficiente de correlación, como aproximación más simple, se puede considerar que la distribución muestral de $r$ es aproximadamente normal de media $\rho$ y varianza
-$$Var(r) \approx \frac{1 - \rho^2}{n - 2}.$$
-
-Aproximar mediante bootstrap uniforme (multididimensional) la distribución del estadístico $R = r -\rho$, empleando $B=1000$ réplicas, y compararla con la aproximación normal, considerando
-$$\widehat{Var}(r) = \frac{1 - r^2}{n - 2}.$$
-:::
-
 ::: {.example #media-dt-desconocida name="Inferencia sobre la media con varianza desconocida"}
 <br> 
 
@@ -365,7 +318,6 @@ cuasi_dt <- sd(muestra)
 # Remuestreo
 set.seed(1)
 B <- 1000
-remuestra <- numeric(n)
 estadistico_boot <- numeric(B)
 for (k in 1:B) {
   remuestra <- sample(muestra, n, replace = TRUE)
@@ -426,6 +378,51 @@ Por ejemplo, podemos obtener la estimación basada en normalidad mediante la fun
 ```{r}
 t.test(muestra)$conf.int
 ```
+
+:::
+
+---
+
+En el caso multidimensional, cuando trabajamos con un conjunto de datos con múltiples variables, podríamos emplear un procedimiento análogo, a partir de remuestras del vector de índices. 
+Por ejemplo:
+```{r}
+data(iris)
+str(iris)
+n <- nrow(iris)
+# i_boot <- floor(n*runif(n)) + 1
+# i_boot <- sample.int(n, replace = TRUE)
+i_boot <- sample(n, replace = TRUE)
+data_boot <- iris[i_boot, ]
+str(data_boot)
+```
+
+Esta forma de proceder es la que emplea por defecto el paquete `boot` que describiremos más adelante (Sección \@ref(intro-pkgboot)).
+
+::: {.exercise #unif-multi name="Bootstrap uniforme multidimensional"}
+<br>
+Considerando el conjunto de datos `Prestige` del paquete `carData`, supongamos que queremos realizar inferencias sobre el coeficiente de correlación entre `prestige` (puntuación de ocupaciones obtenidas a partir de una encuesta) e `income` (media de ingresos en la ocupación). 
+Para ello podemos considerar el coeficiente de correlación lineal de Pearson:
+$$\rho =\frac{ Cov \left( X, Y \right) }
+{ \sigma \left( X \right) \sigma \left( Y \right) }$$
+Su estimador es el coeficiente de correlación muestral:
+$$r=\frac{\sum_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})}
+{\sqrt{ \sum_{i=1}^{n}(x_i-\overline{x})^{2}} 
+\sqrt{\sum_{i=1}^{n}(y_i-\overline{y})^{2}}},$$
+que podemos calcular en `R` empleando la función `cor()`:
+```{r}
+data(Prestige, package = "carData")
+# with(Prestige, cor(income, prestige))
+cor(Prestige$income, Prestige$prestige)
+```
+Para realizar inferencias sobre el coeficiente de correlación, como aproximación más simple, se puede considerar que la distribución muestral de $r$ es aproximadamente normal de media $\rho$ y varianza
+$$Var(r) \approx \frac{1 - \rho^2}{n - 2}.$$
+<!-- De donde se deduciría emplear el estadístico: 
+$$R = \sqrt{n - 2} \frac{r -\rho}{\sqrt{1 - r^2}}$$ -->
+
+Aproximar mediante bootstrap uniforme (multididimensional) la distribución del estadístico $R = r -\rho$, empleando $B=1000$ réplicas, y compararla con la aproximación normal, considerando
+$$\widehat{Var}(r) = \frac{1 - r^2}{n - 2}.$$
+
+
 
 :::
 
@@ -693,7 +690,7 @@ Como ya se mostró en las Secciones \@ref(boot-unif) y \@ref(intro-paquetes) pod
 
 Como ejemplo realizamos el Ejercicio \@ref(exr:unif-multi) empleando el paquete `boot` para estudiar la correlación lineal entre `prestige` e `income` del conjunto de datos `Prestige`:
 
-```{r plot-boot-multi, fig.width=12, out.width="90%", fig.cap='Gráficos de diagnóstico para el coeficiente de correlación.'}
+```{r plot-boot-multi, fig.width=12, out.width="90%", fig.cap='Gráficos de diagnóstico para la distribución bootstrap del coeficiente de correlación.'}
 library(boot)
 
 statistic <- function(data, i){

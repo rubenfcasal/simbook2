@@ -81,8 +81,8 @@
 \contentsline {example}{{Ejemplo}{7.{1}}{integración Monte Carlo clásica}}{124}{example.7.1}%
 \contentsline {example}{{Ejemplo}{7.{2}}{integración Monte Carlo con dominio no acotado}}{127}{example.7.2}%
 \contentsline {example}{{Ejemplo}{7.{3}}{}}{128}{example.7.3}%
-\contentsline {example}{{Ejemplo}{7.{4}}{muestreo por importancia con mala densidad auxiliar}}{130}{example.7.4}%
-\contentsline {example}{{Ejemplo}{7.{5}}{simulación de normal estándar a partir de Cauchy; Sampling Importance Resampling}}{131}{example.7.5}%
+\contentsline {example}{{Ejemplo}{7.{4}}{muestreo por importancia con mala densidad auxiliar}}{129}{example.7.4}%
+\contentsline {example}{{Ejemplo}{7.{5}}{simulación de normal estándar a partir de Cauchy; Sampling Importance Resampling}}{132}{example.7.5}%
 \contentsline {exercise}{{Ejercicio}{7.{1}}{propuesto}}{132}{exercise.7.1}%
 \contentsline {example}{{Ejemplo}{7.{6}}{Estimación por máxima verosimilitud mediante un algoritmo de Newton}}{134}{example.7.6}%
 \contentsline {example}{{Ejemplo}{7.{7}}{Estimación máximo-verosimil empleando temple simulado}}{138}{example.7.7}%
@@ -96,11 +96,14 @@
 \contentsline {exercise}{{Ejercicio}{7.{7}}{Comparación de la eficiencia de la media muestral y de la mediana bajo contaminación}}{160}{exercise.7.7}%
 \contentsline {remark}{{Nota}{7}{}}{161}{remark.7}%
 \contentsline {example}{{Ejemplo}{8.{1}}{aproximación bootstrap de la distribución de la media muestral}}{166}{example.8.1}%
-\contentsline {exercise}{{Ejercicio}{8.{1}}{Bootstrap uniforme multidimensional}}{172}{exercise.8.1}%
-\contentsline {example}{{Ejemplo}{8.{2}}{Inferencia sobre la media con varianza desconocida}}{172}{example.8.2}%
+\contentsline {example}{{Ejemplo}{8.{2}}{Inferencia sobre la media con varianza desconocida}}{171}{example.8.2}%
+\contentsline {exercise}{{Ejercicio}{8.{1}}{Bootstrap uniforme multidimensional}}{175}{exercise.8.1}%
 \contentsline {exercise}{{Ejercicio}{8.{2}}{}}{177}{exercise.8.2}%
 \contentsline {example}{{Ejemplo}{8.{3}}{Inferencia sobre la media con varianza desconocida continuación}}{178}{example.8.3}%
-\contentsline {exercise}{{Ejercicio}{9.{1}}{}}{188}{exercise.9.1}%
-\contentsline {example}{{Ejemplo}{B.{1}}{Datos simulados dependientes}}{203}{example.B.1}%
-\contentsline {example}{{Ejemplo}{B.{2}}{Calidad de un generador aleatorio}}{207}{example.B.2}%
-\contentsline {remark}{{Nota}{8}{}}{230}{remark.8}%
+\contentsline {example}{{Ejemplo}{9.{1}}{Inferencia sobre el máximo de una distribución uniforme}}{184}{example.9.1}%
+\contentsline {example}{{Ejemplo}{9.{2}}{Inferencia sobre la media continuación}}{186}{example.9.2}%
+\contentsline {example}{{Ejemplo}{9.{3}}{Inferencia sobre el máximo de una distribución uniforme continuación}}{187}{example.9.3}%
+\contentsline {exercise}{{Ejercicio}{9.{1}}{}}{193}{exercise.9.1}%
+\contentsline {example}{{Ejemplo}{A.{1}}{Datos simulados dependientes}}{205}{example.A.1}%
+\contentsline {example}{{Ejemplo}{A.{2}}{Calidad de un generador aleatorio}}{209}{example.A.2}%
+\contentsline {remark}{{Nota}{8}{}}{232}{remark.8}%

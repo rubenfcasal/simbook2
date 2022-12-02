@@ -67,9 +67,11 @@ Este obra está bajo una licencia de [Creative Commons Reconocimiento-NoComercia
 (esperamos poder liberarlo bajo una licencia menos restrictiva más adelante...).
 
 ```{r include=FALSE}
-# automatically create a bib database for R packages
+# Automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'MASS','DEoptim','nortest','tseries','geoR','copula', 'sm',
   'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
+# Create .nojekyll file in the /docs folder
+file.create('docs/.nojekyll')
 ```

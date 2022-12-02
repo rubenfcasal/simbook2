@@ -498,22 +498,26 @@ simres::rvng
 ```
 
 ```
-## function (n, seed = as.numeric(Sys.time()), k = 4) 
-## {
-##     seed <- seed%%10^k
-##     aux <- 10^(2 * k - k/2)
-##     aux2 <- 10^(k/2)
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         z <- seed^2
-##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
-##         u[i] <- seed/10^k
-##     }
-##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
-##         envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), k = 4) {
+##   seed <- seed %% 10^k
+##   aux <- 10^(2*k-k/2)
+##   aux2 <- 10^(k/2)
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     z <- seed^2
+##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
+##     u[i] <- seed/10^k
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
+##       envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rvng(n, seed, parameters$k))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x000000003b4c0980>
+## <bytecode: 0x0000000040ed2440>
 ## <environment: namespace:simres>
 ```
 

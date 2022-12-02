@@ -59,19 +59,22 @@ simres::rlcg
 ```
 
 ```
-## function (n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 
-##     1) 
-## {
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         seed <- (a * seed + c)%%m
-##         u[i] <- seed/m
-##     }
-##     assign(".rng", list(seed = seed, type = "lcg", parameters = list(a = a, 
-##         c = c, m = m)), envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), a = 7^5, c = 0, m = 2^31 - 1) {
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     seed <- (a * seed + c) %% m
+##     u[i] <- seed/m # (seed + 1)/(m + 1)
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "lcg",
+##           parameters = list(a = a, c = c, m = m)), envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "lcg", parameters = list(a = a, c = c, m = m))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rlcg(n, seed, parameters$a, parameters$c, parameters$m))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x000000003d715850>
+## <bytecode: 0x0000000040e3f468>
 ## <environment: namespace:simres>
 ```
 
@@ -397,48 +400,50 @@ simres::chisq.cont.test
 ```
 
 ```
-## function (x, distribution = "norm", nclass = floor(length(x)/5), 
-##     output = TRUE, nestpar = 0, ...) 
-## {
-##     q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
-##     q <- q.distrib((1:(nclass - 1))/nclass, ...)
-##     tol <- sqrt(.Machine$double.eps)
-##     xbreaks <- c(min(x) - tol, q, max(x) + tol)
-##     if (output) {
-##         xhist <- hist(x, breaks = xbreaks, freq = FALSE, lty = 2, 
-##             border = "grey50")
-##         d.distrib <- eval(parse(text = paste("d", distribution, 
-##             sep = "")))
-##         curve(d.distrib(x, ...), add = TRUE)
-##     }
-##     else {
-##         xhist <- hist(x, breaks = xbreaks, plot = FALSE)
-##     }
-##     O <- xhist$counts
-##     E <- length(x)/nclass
-##     DNAME <- deparse(substitute(x))
-##     METHOD <- "Pearson's Chi-squared test"
-##     STATISTIC <- sum((O - E)^2/E)
-##     names(STATISTIC) <- "X-squared"
-##     PARAMETER <- nclass - nestpar - 1
-##     names(PARAMETER) <- "df"
-##     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-##     classes <- format(xbreaks)
-##     classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], 
-##         "]", sep = "")
-##     RESULTS <- list(classes = classes, observed = O, expected = E, 
-##         residuals = (O - E)/sqrt(E))
-##     if (output) {
-##         cat("\nPearson's Chi-squared test table\n")
-##         print(as.data.frame(RESULTS))
-##     }
-##     if (any(E < 5)) 
-##         warning("Chi-squared approximation may be incorrect")
-##     structure(c(list(statistic = STATISTIC, parameter = PARAMETER, 
-##         p.value = PVAL, method = METHOD, data.name = DNAME), 
-##         RESULTS), class = "htest")
+## function(x, distribution = "norm", nclass = floor(length(x)/5),
+##                             output = TRUE, nestpar = 0, ...) {
+##   # Función distribución
+##   q.distrib <- eval(parse(text = paste("q", distribution, sep = "")))
+##   # Puntos de corte
+##   q <- q.distrib((1:(nclass - 1))/nclass, ...)
+##   tol <- sqrt(.Machine$double.eps)
+##   xbreaks <- c(min(x) - tol, q, max(x) + tol)
+##   # Gráficos y frecuencias
+##   if (output) {
+##     xhist <- hist(x, breaks = xbreaks, freq = FALSE,
+##                   lty = 2, border = "grey50")
+##     # Función densidad
+##     d.distrib <- eval(parse(text = paste("d", distribution, sep = "")))
+##     curve(d.distrib(x, ...), add = TRUE)
+##   } else {
+##     xhist <- hist(x, breaks = xbreaks, plot = FALSE)
+##   }
+##   # Cálculo estadístico y p-valor
+##   O <- xhist$counts  # Equivalente a table(cut(x, xbreaks)) pero más eficiente
+##   E <- length(x)/nclass
+##   DNAME <- deparse(substitute(x))
+##   METHOD <- "Pearson's Chi-squared test"
+##   STATISTIC <- sum((O - E)^2/E)
+##   names(STATISTIC) <- "X-squared"
+##   PARAMETER <- nclass - nestpar - 1
+##   names(PARAMETER) <- "df"
+##   PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
+##   # Preparar resultados
+##   classes <- format(xbreaks)
+##   classes <- paste("(", classes[-(nclass + 1)], ",", classes[-1], "]",
+##                    sep = "")
+##   RESULTS <- list(classes = classes, observed = O, expected = E,
+##                   residuals = (O - E)/sqrt(E))
+##   if (output) {
+##     cat("\nPearson's Chi-squared test table\n")
+##     print(as.data.frame(RESULTS))
+##   }
+##   if (any(E < 5))
+##     warning("Chi-squared approximation may be incorrect")
+##   structure(c(list(statistic = STATISTIC, parameter = PARAMETER, p.value = PVAL,
+##                    method = METHOD, data.name = DNAME), RESULTS), class = "htest")
 ## }
-## <bytecode: 0x0000000039787580>
+## <bytecode: 0x000000003dcb8440>
 ## <environment: namespace:simres>
 ```
 
@@ -893,22 +898,26 @@ simres::rvng
 ```
 
 ```
-## function (n, seed = as.numeric(Sys.time()), k = 4) 
-## {
-##     seed <- seed%%10^k
-##     aux <- 10^(2 * k - k/2)
-##     aux2 <- 10^(k/2)
-##     u <- numeric(n)
-##     for (i in 1:n) {
-##         z <- seed^2
-##         seed <- trunc((z - trunc(z/aux) * aux)/aux2)
-##         u[i] <- seed/10^k
-##     }
-##     assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)), 
-##         envir = globalenv())
-##     return(u)
+## function(n, seed = as.numeric(Sys.time()), k = 4) {
+##   seed <- seed %% 10^k
+##   aux <- 10^(2*k-k/2)
+##   aux2 <- 10^(k/2)
+##   u <- numeric(n)
+##   for(i in 1:n) {
+##     z <- seed^2
+##     seed <- trunc((z - trunc(z/aux)*aux)/aux2)
+##     u[i] <- seed/10^k
+##   }
+##   # Almacenar semilla y parámetros
+##   assign(".rng", list(seed = seed, type = "vm", parameters = list(k = k)),
+##       envir = globalenv())
+##   # .rng <<- list(seed = seed, type = "vm", parameters = list(k = k))
+##   # Para continuar con semilla y parámetros:
+##   #   with(.rng, rvng(n, seed, parameters$k))
+##   # Devolver valores
+##   return(u)
 ## }
-## <bytecode: 0x0000000037f37468>
+## <bytecode: 0x0000000044659c10>
 ## <environment: namespace:simres>
 ```
 

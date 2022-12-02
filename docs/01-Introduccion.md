@@ -684,10 +684,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.31    0.02    0.41 
+##    0.31    0.01    0.33 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.31    0.02    0.41
+##    0.31    0.01    0.33
 ```
 
 ```r
@@ -698,10 +698,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.00    0.01    0.01 
+##    0.02    0.00    0.01 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.31    0.03    0.42
+##    0.33    0.01    0.34
 ```
 
 
@@ -728,7 +728,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## inner: 0 sec elapsed
+    ## inner: 0.02 sec elapsed
     ```
     
     ```r
@@ -736,7 +736,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## middle: 0 sec elapsed
+    ## middle: 0.02 sec elapsed
     ```
     
     ```r
@@ -744,7 +744,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## outer: 0.31 sec elapsed
+    ## outer: 0.3 sec elapsed
     ```
     
     ```r
@@ -764,8 +764,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ## 'data.frame':	10 obs. of  3 variables:
-    ##  $ tic: num  6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93
-    ##  $ toc: num  6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93 6.93
+    ##  $ tic: num  6.17 6.17 6.17 6.17 6.17 6.17 6.17 6.17 6.18 6.18
+    ##  $ toc: num  6.17 6.17 6.17 6.17 6.17 6.17 6.17 6.18 6.18 6.18
     ##  $ msg: chr  "1" "2" "3" "4" ...
     ```
     
@@ -779,7 +779,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##       0       0       0       0       0       0
+    ##   0.000   0.000   0.000   0.001   0.000   0.010
     ```
 
 * La función [`cpu.time()`](https://rubenfcasal.github.io/simres/reference/cpu.time.html) del paquete `simres`:
