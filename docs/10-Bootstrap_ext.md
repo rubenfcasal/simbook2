@@ -62,7 +62,7 @@ $$g\left( x \right) =\frac{n}{\theta }\left( \frac{x}{\theta } \right)^{n-1},
 \text{ si }x\in \left[ 0,\theta \right] .$$
 <!-- 
 Tomando, por ejemplo, $\theta =1$ y $n=50$, esta función de densidad resulta
- [Figura \@ref(fig:den-max)]:
+:
 
 ```r
 theta <- 1
@@ -70,14 +70,10 @@ n <- 50
 curve(n/theta * (x/theta)^(n - 1), 0, theta, ylab = "Density")
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/den-max-1} 
-
-}
-
-\caption{Función de densidad del máximo de una muestra procedente de una uniforme.}(\#fig:den-max)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="10-Bootstrap_ext_files/figure-html/den-max-1.png" alt="Función de densidad del máximo de una muestra procedente de una uniforme." width="70%" />
+<p class="caption">(\#fig:den-max)Función de densidad del máximo de una muestra procedente de una uniforme.</p>
+</div>
 -->
 Lo que confirma que $\hat{\theta}$ es un estimador sesgado de $\theta$, puesto que se tiene que $\hat{\theta}\leq \theta$ con probabilidad 1.
 A partir de esta densidad podemos calcular fácilmente el sesgo del estimador:
@@ -118,7 +114,7 @@ El siguiente código implementa el método
 bootstrap uniforme (también llamado naïve) para aproximar la
 distribución del estadístico $R=\hat{\theta}-\theta$, para una muestra
 de tamaño $n=50$, proveniente de una población con distribución
-$\mathcal{U}\left( 0,1\right)$  [Figura \@ref(fig:boot-uniforme-maximo)]:
+$\mathcal{U}\left( 0,1\right)$ :
 
 
 ```r
@@ -145,14 +141,10 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/boot-uniforme-maximo-1} 
-
-}
-
-\caption{Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.}(\#fig:boot-uniforme-maximo)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="10-Bootstrap_ext_files/figure-html/boot-uniforme-maximo-1.png" alt="Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional." width="70%" />
+<p class="caption">(\#fig:boot-uniforme-maximo)Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.</p>
+</div>
 
 Este problema podría evitarse empleando el bootstrap paramétrico descrito a continuación (ver Ejemplo \@ref(exm:boot-maximo-parametrico)).
 
@@ -197,7 +189,7 @@ es el contraste de hipótesis que se tratará en la Sección \@ref(contrastes-pa
 Continuando con el Ejemplo \@ref(exm:media-dt-desconocida) del tiempo de vida de microorganismos, podríamos pensar en emplear bootstrap paramétrico para calcular un intervalo de confianza para la media poblacional.
 
 La valided de los resultados dependerá en gran medida de que el modelo paramétrico sea adecuado para describir la variabilidad de los datos. 
-En este caso parece razonable asumir una distribución exponencial (no lo es que el modelo admita tiempos de vida negativos, como ocurriría al asumir normalidad) [Figura \@ref(fig:boot-par-aprox)]:
+En este caso parece razonable asumir una distribución exponencial (no lo es que el modelo admita tiempos de vida negativos, como ocurriría al asumir normalidad):
 
 
 ```r
@@ -210,14 +202,10 @@ curve(pexp(x, 1/mean(muestra)), lty = 3, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Aprox. normal", "Aprox. exponencial"), lty = 1:3)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/boot-par-aprox-1} 
-
-}
-
-\caption{Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.}(\#fig:boot-par-aprox)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="10-Bootstrap_ext_files/figure-html/boot-par-aprox-1.png" alt="Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas." width="70%" />
+<p class="caption">(\#fig:boot-par-aprox)Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.</p>
+</div>
 
 Podemos modificar fácilmente el código mostrado en el Ejemplo \@ref(exm:media-dt-desconocida), de forma que se emplee bootstrap paramétrico (exponencial):
 
@@ -234,7 +222,8 @@ set.seed(1)
 B <- 1000
 estadistico_boot <- numeric(B)
 for (k in 1:B) {
-  remuestra <- sample(muestra, n, replace = TRUE)
+  # remuestra <- sample(muestra, n, replace = TRUE)
+  remuestra <- rexp(n, 1/x_barra)
   x_barra_boot <- mean(remuestra)
   cuasi_dt_boot <- sd(remuestra)
   estadistico_boot[k] <- sqrt(n) * (x_barra_boot - x_barra)/cuasi_dt_boot
@@ -251,7 +240,7 @@ IC_boot
 
 ```
 ##      2.5%     97.5% 
-## 0.5030131 1.2888063
+## 0.5319787 1.3961382
 ```
 
 Para emplear el paquete `boot`, como se comentó en la Sección 
@@ -323,7 +312,7 @@ distribución en muestreo de
 $R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta$.
 
 Para implementarlo en la práctica podríamos emplear un código muy similar al 
-del ejemplo original  [Figura \@ref(fig:boot-parametrico-maximo)]:
+del ejemplo original :
 
 
 ```r
@@ -345,14 +334,10 @@ rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-\begin{figure}[!htb]
-
-{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/boot-parametrico-maximo-1} 
-
-}
-
-\caption{Distribución bootstrap paramétrica y distribución poblacional.}(\#fig:boot-parametrico-maximo)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="10-Bootstrap_ext_files/figure-html/boot-parametrico-maximo-1.png" alt="Distribución bootstrap paramétrica y distribución poblacional." width="70%" />
+<p class="caption">(\#fig:boot-parametrico-maximo)Distribución bootstrap paramétrica y distribución poblacional.</p>
+</div>
 
 :::
 
