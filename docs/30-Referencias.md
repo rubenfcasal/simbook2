@@ -45,8 +45,8 @@ Robert, C.P. y G. Casella (2004). *Monte Carlo statistical methods*. Springer.
 Shao, J. (2003). *Mathematical statistics*. Springer.
 
 
-## Enlaces {-}
-<!-- {#links} -->
+## Enlaces {.unnumbered #links}
+
 
 ***Repositorio***: [rubenfcasal/simbook2](https://github.com/rubenfcasal/simbook2)
 

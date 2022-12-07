@@ -684,10 +684,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.31    0.01    0.33 
+##    0.25    0.02    0.27 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.31    0.01    0.33
+##    0.25    0.02    0.27
 ```
 
 ```r
@@ -698,10 +698,10 @@ CPUtimeprint()
 ```
 ## Tiempo última operación:
 ##    user  system elapsed 
-##    0.02    0.00    0.01 
+##       0       0       0 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.33    0.01    0.34
+##    0.25    0.02    0.27
 ```
 
 
@@ -728,7 +728,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## inner: 0.02 sec elapsed
+    ## inner: 0 sec elapsed
     ```
     
     ```r
@@ -736,7 +736,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## middle: 0.02 sec elapsed
+    ## middle: 0 sec elapsed
     ```
     
     ```r
@@ -744,7 +744,7 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     ```
     
     ```
-    ## outer: 0.3 sec elapsed
+    ## outer: 0.25 sec elapsed
     ```
     
     ```r
@@ -764,8 +764,8 @@ Hay diversos paquetes que implementan herramientas similares, por ejemplo:
     
     ```
     ## 'data.frame':	10 obs. of  3 variables:
-    ##  $ tic: num  6.17 6.17 6.17 6.17 6.17 6.17 6.17 6.17 6.18 6.18
-    ##  $ toc: num  6.17 6.17 6.17 6.17 6.17 6.17 6.17 6.18 6.18 6.18
+    ##  $ tic: num  5.64 5.64 5.64 5.64 5.64 5.64 5.64 5.64 5.64 5.64
+    ##  $ toc: num  5.64 5.64 5.64 5.64 5.64 5.64 5.64 5.64 5.64 5.65
     ##  $ msg: chr  "1" "2" "3" "4" ...
     ```
     

@@ -370,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
-<li class="chapter" data-level="" data-path="enlaces.html"><a href="enlaces.html"><i class="fa fa-check"></i>Enlaces</a></li>
+<li class="chapter" data-level="" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i>Enlaces</a></li>
 <li class="chapter" data-level="" data-path="bibliografía-completa.html"><a href="bibliografía-completa.html"><i class="fa fa-check"></i>Bibliografía completa</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -406,25 +406,25 @@ De esta forma se consigue una sucesión de enteros aleatorios supuestamente inde
 <p>Empleando la discretización anterior se simplifica notablemente el contraste chi-cuadrado de bondad de ajuste a una uniforme, descrito en la Sección <a href="gof.html#chi2test">A.1.4</a> e implementado en la función <code>chisq.cont.test()</code>.
 En este caso bastaría con contrastar la equiprobabilidad de la secuencia de enteros (empleando directamente la función <code>chisq.test()</code>) y este método de denomina <em>contraste de frecuencias</em> (frequency test).
 Por ejemplo:</p>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb599-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar</span></span>
-<span id="cb599-2"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb599-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb599-3"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb599-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>)</span>
-<span id="cb599-4"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb599-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Discretizar</span></span>
-<span id="cb599-5"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb599-5" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb599-6"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb599-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">floor</span>(k<span class="sc">*</span>u) <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb599-7"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb599-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test chi-cuadrado</span></span>
-<span id="cb599-8"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb599-8" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">factor</span>(x, <span class="at">levels =</span> <span class="fu">seq_len</span>(k)))</span>
-<span id="cb599-9"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb599-9" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar</span></span>
+<span id="cb606-2"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb606-3"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>)</span>
+<span id="cb606-4"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Discretizar</span></span>
+<span id="cb606-5"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-5" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb606-6"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">floor</span>(k<span class="sc">*</span>u) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb606-7"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test chi-cuadrado</span></span>
+<span id="cb606-8"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-8" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">factor</span>(x, <span class="at">levels =</span> <span class="fu">seq_len</span>(k)))</span>
+<span id="cb606-9"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-9" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
 <pre><code>## 
 ##  Chi-squared test for given probabilities
 ## 
 ## data:  f
 ## X-squared = 10.26, df = 9, p-value = 0.3298</code></pre>
 <p>Este código está implementado en la función <code>simres::freq.test()</code> (fichero <a href="R/test.R"><em>test.R</em></a>) y podríamos emplear:</p>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb601-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simres)</span>
-<span id="cb601-2"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb601-2" aria-hidden="true" tabindex="-1"></a><span class="fu">freq.test</span>(u, <span class="at">nclass =</span> k)</span>
-<span id="cb601-3"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb601-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativamente</span></span>
-<span id="cb601-4"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb601-4" aria-hidden="true" tabindex="-1"></a><span class="co"># chisq.cont.test(u, distribution = &quot;unif&quot;, nclass = k, output = FALSE, min = 0, max = 1)</span></span></code></pre></div>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb608-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simres)</span>
+<span id="cb608-2"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb608-2" aria-hidden="true" tabindex="-1"></a><span class="fu">freq.test</span>(u, <span class="at">nclass =</span> k)</span>
+<span id="cb608-3"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb608-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativamente</span></span>
+<span id="cb608-4"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb608-4" aria-hidden="true" tabindex="-1"></a><span class="co"># chisq.cont.test(u, distribution = &quot;unif&quot;, nclass = k, output = FALSE, min = 0, max = 1)</span></span></code></pre></div>
 </div>
 <div id="contraste-de-series" class="section level3" number="10.3.2">
 <h3><span class="header-section-number">A.3.2</span> Contraste de series</h3>

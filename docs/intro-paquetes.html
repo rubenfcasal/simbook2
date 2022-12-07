@@ -370,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
-<li class="chapter" data-level="" data-path="enlaces.html"><a href="enlaces.html"><i class="fa fa-check"></i>Enlaces</a></li>
+<li class="chapter" data-level="" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i>Enlaces</a></li>
 <li class="chapter" data-level="" data-path="bibliografía-completa.html"><a href="bibliografía-completa.html"><i class="fa fa-check"></i>Bibliografía completa</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -448,7 +448,7 @@ microorganismos con el siguiente código:</p>
 ## 0.805333333 0.003173267 0.154099013</code></pre>
 <p>La función <code>boot.strap0()</code> anterior no es adecuada para el caso multivariante
 (por ejemplo cuando estamos interesados en regresión).
-Como se mostró en la Sección <a href="#intro-implementacion"><strong>??</strong></a>
+Como se mostró en la Sección <a href="boot-intro.html#boot-intro">8.1</a>
 sería preferible emplear remuestras del vector de índices. Por ejemplo:</p>
 <div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="intro-paquetes.html#cb509-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param datos vector, matriz o data.frame que contiene los datos.</span></span>
 <span id="cb509-2"><a href="intro-paquetes.html#cb509-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param B número de réplicas bootstrap.</span></span>
@@ -637,9 +637,7 @@ o parámetros adicionales para <code>ran.gen</code> ó <code>statistics</code>.<
 <p>Además hay otros parámetros para el procesamiento en paralelo: <code>parallel = c("no", "multicore", "snow")</code>, <code>ncpus</code>, <code>cl</code>.
 En el Apéndice <a href="intro-hpc.html#intro-hpc">C</a> se incluye una pequeña introducción al procesamiento en paralelo y se muestran algunos ejemplos sobre el uso de estos parámetros.
 También se puede consultar la ayuda de la función <code>boot()</code> (<code>?boot</code>).</p>
-<p>El paquete <code>boot</code> también incluye otras funciones que implementan métodos
-boostrap para otros tipos de datos, como la función <code>censboot()</code> para datos
-censurados (Sección <a href="#bootcen"><strong>??</strong></a>) o la función <code>tsboot()</code> para series de tiempo (Sección <a href="#bootdep"><strong>??</strong></a>).</p>
+<p>El paquete <code>boot</code> también incluye otras funciones que implementan métodos boostrap para otros tipos de datos, como la función <code>tsboot()</code> para series de tiempo (Sección <a href="#bootdep"><strong>??</strong></a>) o la función <code>censboot()</code> para datos censurados (ver p.e. Cao y Fernández-Casal, 2021, <a href="https://rubenfcasal.github.io/book_remuestreo/bootcen.html">Capítulo 8</a>).</p>
 <p>Finalmente destacar que hay numerosas extensiones implementadas en otros paquetes utilizando el paquete <code>boot</code> (ver <em>Reverse dependencies</em> en la <a href="https://cran.r-project.org/package=boot">web de CRAN</a>).
 Por ejemplo en la Sección <a href="boot-reg.html#boot-reg">9.4</a> se ilustrará el uso de la función <code>Boot()</code> del paquete <code>car</code> para hacer inferencia sobre modelos de regresión.</p>
 </div>

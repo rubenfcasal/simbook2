@@ -208,7 +208,7 @@ b)  Generar $10^{4}$ valores de la distribución doble exponencial de
     
     ```
     ##    user  system elapsed 
-    ##    0.04    0.00    0.03
+    ##    0.02    0.00    0.02
     ```
 
 
@@ -484,7 +484,7 @@ system.time(x <- rbeta2n(nsim, s1, s2))
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    0.03
+##    0.02    0.00    0.02
 ```
 
 Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):
@@ -671,7 +671,7 @@ system.time(x <- rnormARn(nsim))
 
 ```
 ##    user  system elapsed 
-##    0.09    0.00    0.09
+##    0.09    0.00    0.10
 ```
 
 Evaluamos la eficiencia:
@@ -1179,7 +1179,7 @@ simres::rcauchy.rou
 ##   attr(x, "ngen") <- ngen
 ##   return(x)
 ## }
-## <bytecode: 0x000000003e5f8e30>
+## <bytecode: 0x0000000039b74ff0>
 ## <environment: namespace:simres>
 ```
 

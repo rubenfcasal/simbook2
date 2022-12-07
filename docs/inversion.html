@@ -370,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i>Referencias</a>
 <ul>
-<li class="chapter" data-level="" data-path="enlaces.html"><a href="enlaces.html"><i class="fa fa-check"></i>Enlaces</a></li>
+<li class="chapter" data-level="" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i>Enlaces</a></li>
 <li class="chapter" data-level="" data-path="bibliografía-completa.html"><a href="bibliografía-completa.html"><i class="fa fa-check"></i>Bibliografía completa</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -451,7 +451,7 @@ Figura 4.1: Ilustración de la simulación de una distribución exponencial por 
 <span id="cb131-9"><a href="inversion.html#cb131-9" aria-hidden="true" tabindex="-1"></a>tiempo <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> tini</span>
 <span id="cb131-10"><a href="inversion.html#cb131-10" aria-hidden="true" tabindex="-1"></a>tiempo</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.02    0.00    0.02</code></pre>
+##    0.01    0.00    0.01</code></pre>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="inversion.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, </span>
 <span id="cb133-2"><a href="inversion.html#cb133-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">2.5</span>))</span>
 <span id="cb133-3"><a href="inversion.html#cb133-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dexp</span>(x, lambda), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
@@ -568,7 +568,7 @@ generar la secuencia.</p>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="inversion.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">54321</span>)</span>
 <span id="cb135-2"><a href="inversion.html#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(x <span class="ot">&lt;-</span> <span class="fu">rdexpn</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">4</span>, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.01    0.00    0.02</code></pre></li>
+##    0.02    0.03    0.04</code></pre></li>
 <li><p>Representar el histograma y compararlo con la densidad teórica.</p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="inversion.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
 <span id="cb137-2"><a href="inversion.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lines(density(x), col = &#39;blue&#39;)</span></span>

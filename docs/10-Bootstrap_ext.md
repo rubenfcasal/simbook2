@@ -28,8 +28,7 @@ Ejercicio mediana
 https://en.wikipedia.org/wiki/Median#Sampling_distribution
 -->
 
-Cuando no se dispone de ninguna información adicional sobre la distribución poblacional es razonable emplear bootstrap uniforme (naïve o no paramétrico), ya que la distribución empírica es el estimador máximo verosímil no paramétrico de la función de distribución
-poblacional.
+Cuando no se dispone de ninguna información adicional sobre la distribución poblacional es razonable emplear bootstrap uniforme (naïve o no paramétrico), ya que la distribución empírica es el estimador máximo verosímil no paramétrico de la función de distribución poblacional.
 En general (ver p.e. Cao y Fernández-Casal, 2021, [Sección 3.6](https://rubenfcasal.github.io/book_remuestreo/validez-de-la-aproximaci%C3%B3n-bootstrap.html)), el bootstrap uniforme funcionará bien cuando el estadístico sea una función suave de la muestra^[Por ejemplo si es una función diferenciable de los momentos muestrales.] (suponiendo además que la aproximación Monte Carlo converge, es decir, que las colas de la distribución poblacional no son muy pesadas; ver Sección \@ref(convergencia)).
 Si el estadístico depende de la muestra de una manera poco suave o inestable, como es el caso de los cuantiles muestrales, el bootstrap uniforme puede no funcionar muy bien (Sección \@ref(deficien-unif)), y puede ser recomendable emplear otro método de remuestreo. 
 
@@ -62,7 +61,7 @@ $$g\left( x \right) =\frac{n}{\theta }\left( \frac{x}{\theta } \right)^{n-1},
 \text{ si }x\in \left[ 0,\theta \right] .$$
 <!-- 
 Tomando, por ejemplo, $\theta =1$ y $n=50$, esta función de densidad resulta
-:
+ [Figura \@ref(fig:den-max)]:
 
 ```r
 theta <- 1
@@ -70,10 +69,14 @@ n <- 50
 curve(n/theta * (x/theta)^(n - 1), 0, theta, ylab = "Density")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="10-Bootstrap_ext_files/figure-html/den-max-1.png" alt="Función de densidad del máximo de una muestra procedente de una uniforme." width="70%" />
-<p class="caption">(\#fig:den-max)Función de densidad del máximo de una muestra procedente de una uniforme.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/den-max-1} 
+
+}
+
+\caption{Función de densidad del máximo de una muestra procedente de una uniforme.}(\#fig:den-max)
+\end{figure}
 -->
 Lo que confirma que $\hat{\theta}$ es un estimador sesgado de $\theta$, puesto que se tiene que $\hat{\theta}\leq \theta$ con probabilidad 1.
 A partir de esta densidad podemos calcular fácilmente el sesgo del estimador:
@@ -109,12 +112,10 @@ $$g_R\left( x \right) =\frac{n}{\theta }\left( \frac{x + \theta}{\theta } \right
 De esta forma vemos que el bootstrap uniforme (no paramétrico) es inconsistente.
 
 ::: {.example #boot-maximo-uniforme name="Inferencia sobre el máximo de una distribución uniforme"}
+<br>
 
-El siguiente código implementa el método
-bootstrap uniforme (también llamado naïve) para aproximar la
-distribución del estadístico $R=\hat{\theta}-\theta$, para una muestra
-de tamaño $n=50$, proveniente de una población con distribución
-$\mathcal{U}\left( 0,1\right)$ :
+El siguiente código implementa el método bootstrap uniforme (también llamado naïve) para aproximar la distribución del estadístico $R=\hat{\theta}-\theta$, para una muestra de tamaño $n=50$, proveniente de una población con distribución
+$\mathcal{U}\left( 0,1\right)$  [Figura \@ref(fig:boot-uniforme-maximo)]:
 
 
 ```r
@@ -134,17 +135,21 @@ for (k in 1:B) {
 }
 # Distribución estadístico
 xlim <- c(-theta/2, 0) # c(-theta, 0)
-hist(estadistico, freq = FALSE, main = "", lty = 2, 
+hist(estadistico, freq = FALSE, main = "", breaks = "FD",  
      border = "darkgray", xlim = xlim)
 lines(density(estadistico))
 rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="10-Bootstrap_ext_files/figure-html/boot-uniforme-maximo-1.png" alt="Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional." width="70%" />
-<p class="caption">(\#fig:boot-uniforme-maximo)Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/boot-uniforme-maximo-1} 
+
+}
+
+\caption{Distribución de las réplicas bootstrap (uniforme) del estadístico y distribución poblacional.}(\#fig:boot-uniforme-maximo)
+\end{figure}
 
 Este problema podría evitarse empleando el bootstrap paramétrico descrito a continuación (ver Ejemplo \@ref(exm:boot-maximo-parametrico)).
 
@@ -184,34 +189,40 @@ Una de las principales aplicaciones del bootstrap paramétrico
 es el contraste de hipótesis que se tratará en la Sección \@ref(contrastes-parametricos).
 
 
-::: {.example #media-dt-conocida-par name="Inferencia sobre la media continuación"}
+::: {.example #media-par name="Inferencia sobre la media, continuación"}
+<br>
 
 Continuando con el Ejemplo \@ref(exm:media-dt-desconocida) del tiempo de vida de microorganismos, podríamos pensar en emplear bootstrap paramétrico para calcular un intervalo de confianza para la media poblacional.
 
 La valided de los resultados dependerá en gran medida de que el modelo paramétrico sea adecuado para describir la variabilidad de los datos. 
-En este caso parece razonable asumir una distribución exponencial (no lo es que el modelo admita tiempos de vida negativos, como ocurriría al asumir normalidad):
+En este caso parece razonable asumir una distribución exponencial (no lo es que el modelo admita tiempos de vida negativos, como ocurriría al asumir normalidad) [Figura \@ref(fig:boot-par-aprox)]:
 
 
 ```r
+muestra <- simres::lifetimes
 # Distribución bootstrap uniforme
+# plot(ecdf(muestra), xlim = c(-.5, 3), ylab = "F(x)")
 curve(ecdf(muestra)(x), xlim = c(-.5, 3), ylab = "F(x)", type = "s")
 # Distribución bootstrap paramétrico normal
-curve(pnorm(x, mean(muestra), 0.6), lty = 2, add = TRUE)
+curve(pnorm(x, mean(muestra), sd(muestra)), lty = 2, add = TRUE)
 # Distribución bootstrap paramétrico exponencial
 curve(pexp(x, 1/mean(muestra)), lty = 3, add = TRUE)
 legend("bottomright", legend = c("Empírica", "Aprox. normal", "Aprox. exponencial"), lty = 1:3)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="10-Bootstrap_ext_files/figure-html/boot-par-aprox-1.png" alt="Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas." width="70%" />
-<p class="caption">(\#fig:boot-par-aprox)Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/boot-par-aprox-1} 
+
+}
+
+\caption{Distribución empírica de la muestra de tiempos de vida de microorganismos y aproximaciones paramétricas.}(\#fig:boot-par-aprox)
+\end{figure}
 
 Podemos modificar fácilmente el código mostrado en el Ejemplo \@ref(exm:media-dt-desconocida), de forma que se emplee bootstrap paramétrico (exponencial):
 
 
 ```r
-muestra <- simres::lifetimes
 n <- length(muestra)
 alfa <- 0.05
 # Estimaciones muestrales
@@ -291,7 +302,7 @@ boot.ci(res.boot, type = "stud")
 :::
 
 
-::: {.example #boot-maximo-parametrico name="Inferencia sobre el máximo de una distribución uniforme continuación"}
+::: {.example #boot-maximo-parametrico name="Inferencia sobre el máximo de una distribución uniforme, continuación"}
 
 En el Ejemplo \@ref(exm:boot-maximo-uniforme) la distribución poblacional era uniforme.
 Si se dispusiese de esa información, lo natural sería utilizar un bootstrap paramétrico, 
@@ -312,7 +323,7 @@ distribución en muestreo de
 $R=R\left( \mathbf{X},F \right) =\hat{\theta}-\theta$.
 
 Para implementarlo en la práctica podríamos emplear un código muy similar al 
-del ejemplo original :
+del ejemplo original  [Figura \@ref(fig:boot-parametrico-maximo)]:
 
 
 ```r
@@ -327,27 +338,263 @@ for (k in 1:B) {
 }
 # Distribución estadístico
 xlim <- c(-theta/2, 0) # c(-theta, 0)
-hist(estadistico, freq = FALSE, main = "", lty = 2, 
+hist(estadistico, freq = FALSE, main = "", breaks = "FD", 
      border = "darkgray", xlim = xlim)
 lines(density(estadistico))
 rug(estadistico, col = "darkgray")
 curve(n/theta * ((x + theta)/theta)^(n - 1), col = "blue", lty = 2, lwd = 2, add = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="10-Bootstrap_ext_files/figure-html/boot-parametrico-maximo-1.png" alt="Distribución bootstrap paramétrica y distribución poblacional." width="70%" />
-<p class="caption">(\#fig:boot-parametrico-maximo)Distribución bootstrap paramétrica y distribución poblacional.</p>
-</div>
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/boot-parametrico-maximo-1} 
+
+}
+
+\caption{Distribución bootstrap paramétrica y distribución poblacional.}(\#fig:boot-parametrico-maximo)
+\end{figure}
 
 :::
 
 
 ## Bootstrap suavizado {#modunif-boot-suav}
 
+Cuando la distribución poblacional, $F$, es continua es lógico incorporar dicha información al bootstrap. 
+Eso significa que la función de distribución tiene una función de densidad asociada, relacionadas mediante la expresión: $f(x) =F^{\prime}(x)$. 
+Una forma de remuestrear de un universo bootstrap continuo es emplear un estimador de la función de densidad, como por ejemplo el estimador no paramétrico tipo núcleo, y remuestrear de él.
 
-***Work in progress***
+Si $\left( X_1, X_2, \ldots, X_n \right)$ es una muestra aleatoria simple (m.a.s.), de una población con función de distribución $F$, absolutamente continua, y función de densidad $f$, el estimador tipo núcleo propuesto por Parzen (1962) y Rosenblatt (1956) viene dado por
+$$\hat{f}_{h}\left( x \right) =\frac{1}{nh}\sum_{i=1}^{n}K\left( \frac{x-X_i}{h} \right) =\frac{1}{n}\sum_{i=1}^{n}K_{h}\left( x-X_i \right),$$
+donde $K_{h}\left( u \right) =\frac{1}{h}K\left( \frac{u}{h} \right)$, $K$ es una función núcleo (normalmente una densidad simétrica en torno al cero) y $h>0$ es una parámetro de suavizado, llamado ventana, que regula el tamaño del entorno que se usa para llevar a cabo la estimación. 
 
----
+Es habitual seleccionar una función núcleo $K$ no negativa y con integral uno:
+$$K\left( u \right) \geq 0,~\forall u,~\int_{-\infty }^{\infty }
+K\left( u \right) du=1$$
+(i.e. una función de densidad).
+Además, frecuentemente $K$ es una función simétrica ($K\left( -u \right) =K\left( u \right)$).
+Aunque la elección de esta función no tiene gran impacto en las propiedades del estimador (salvo sus condiciones de regularidad: continuidad, diferenciabilidad, etc.) la elección del parámetro de suavizado sí es muy importante para una correcta estimación. 
+En otras palabras, el tamaño del entorno usado para la estimación no paramétrica debe ser adecuado (ni demasiado grande ni demasiado pequeño). 
+
+En `R` podemos emplear la función `density()` del paquete base para obtener
+una estimación tipo núcleo de la densidad. 
+Los principales parámetros (con los valores por defecto) son los siguientes:
+
+```
+density(x, bw = "nrd0", adjust = 1, kernel = "gaussian", n = 512, from, to)
+```
+
+- `bw`: ventana, puede ser un valor numérico o una cadena de texto que la determine
+  (en ese caso llamará internamente a la función `bw.xxx()` donde `xxx` se corresponde
+  con la cadena de texto). Las opciones son:
+
+    - `"nrd0"`, `"nrd"`: Reglas del pulgar de Silverman (1986, page 48, eqn (3.31)) y 
+      Scott (1992), respectivamente. Como es de esperar que la densidad objetivo 
+      no sea tan suave como la normal, estos criterios tenderán a seleccionar 
+      ventanas que producen un sobresuavizado de las observaciones.
+
+    - `"ucv"`, `"bcv"`: Métodos de validación cruzada insesgada y sesgada, respectivamente.
+    
+    - `"sj"`, `"sj-ste"`, `"sj-dpi"`: Métodos de Sheather y Jones (1991), 
+        "solve-the-equation" y "direct plug-in", respectivamente.
+ 
+-   `adjust`: parameto para reescalado de la ventana, las estimaciones se calculan 
+    con la ventana `adjust*bw`.
+
+-   `kernel`: cadena de texto que determina la función núcleo, las opciones son: `"gaussian"`,
+    `"epanechnikov"`, `"rectangular"`, `"triangular"`, `"biweight"`, `"cosine"` y `"optcosine"`.
+    
+-   `n`, `from`, `to`: permiten establecer la rejilla en la que se obtendrán las estimaciones
+    (si $n>512$ se emplea `fft()` por lo que se recomienda establecer `n` a un múltiplo de 2;
+    por defecto `from` y `to` se establecen como `cut = 3` veces la ventana desde los extremos 
+    de las observaciones).
+
+Como ejemplo consideraremos el conjunto de datos `precip`, que contiene el promedio de precipitación, 
+en pulgadas de lluvia, de 70 ciudades de Estados Unidos.
+
+
+```r
+x <- precip
+h <- bw.SJ(x)
+npden <- density(x, bw = h)
+# npden <- density(x, bw = "SJ")
+# h <- npden$bw
+
+# plot(npden)
+hist(x, freq = FALSE, breaks = "FD", main = "Kernel density estimation",
+     xlab = paste("Bandwidth =", formatC(h)), border = "darkgray", 
+     xlim = c(0, 80), ylim = c(0, 0.04))
+lines(npden, lwd = 2)
+rug(x, col = "darkgray")
+```
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/density-1} 
+
+}
+
+\caption{Estimación tipo núcleo de la densidad de `precip`.}(\#fig:density)
+\end{figure}
+
+Alternativamente podríamos emplear implementaciones en otros paquetes de `R`.
+Uno de los más empleados es `ks` (Duong, 2019), que admite estimación incondicional y condicional multidimensional.
+También se podrían emplear los paquetes `KernSmooth` (Wand y Ripley, 2019), `sm` (Bowman y Azzalini, 2019), `np` (Tristen y Jeffrey, 2019), `kedd` (Guidoum, 2019), `features` (Duong y Matt, 2019) y `npsp` (Fernández-Casal, 2019), entre otros.
+
+La función de distribución asociada al estimador tipo núcleo de la función de densidad viene dada por
+$$\begin{aligned}
+\hat{F}_{h}\left( x \right) &= \int_{-\infty }^{x}\hat{f}_{h}\left( y \right) dy
+=\int_{-\infty }^{x}\frac{1}{n}\sum_{i=1}^{n}\frac{1}{h}
+K\left( \frac{y-X_i}{h} \right) dy \\
+&= \frac{1}{nh}\sum_{i=1}^{n}\int_{-\infty }^{x}
+K\left( \frac{y-X_i}{h} \right) dy \\
+&= \frac{1}{n}\sum_{i=1}^{n}\int_{-\infty }^{\frac{x-X_i}{h}}K\left( u \right) du
+=\frac{1}{n}\sum_{i=1}^{n}\mathbb{K}\left( \frac{x-X_i}{h} \right)
+\end{aligned}$$
+donde $\mathbb{K}$ es la función de distribución asociada al núcleo $K$, es decir
+$$\mathbb{K}\left( t \right) =\int_{-\infty }^{t}K\left(u \right) du.$$
+
+Por ejemplo, en el caso de del conjunto de datos de precipitaciones, el siguiente código compara la estimación tipo núcleo de la distribución con la empírica [Figura \@ref(fig:pnp)]:
+
+
+```r
+Fn <- ecdf(precip)
+curve(Fn, xlim = c(0, 75), ylab = "F(x)", type = "s")
+Fnp <- function(x) sapply(x, function(y) mean(pnorm(y, precip, h)))
+curve(Fnp, lty = 2, add = TRUE) 
+legend("bottomright", legend = c("Empírica", "Tipo núcleo"), lty = 1:2)
+```
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/pnp-1} 
+
+}
+
+\caption{Estimación empírica y tipo núcleo de la función de distribución de `precip`. }(\#fig:pnp)
+\end{figure}
+
+Tendiendo en cuenta que el estimador $\hat{f}_{h}\left( x \right)$ es una combinación lineal convexa de funciones de densidad, $K_{h}\left(x-X_i \right)$, con pesos $\frac{1}{n}$, podemos simular valores $X^{\ast}$, procedentes de esta distribución empleando el método de composición descrito en la Sección \@ref(composicion).
+El primer paso consistiría en elegir (aleatoriamente y con equiprobabilidad) un índice $i\in \left\{ 1,\ldots ,n\right\}$, y posteriormente simular $X^{\ast}$ a partir de la densidad $K_{h}\left(\cdot -X_i \right)$. 
+Este último paso puede realizarse simulando un valor $V$ con densidad $K$ y haciendo $X_i+hV$.
+Por tanto, podemos pensar que el bootstrap suavizado parte del bootstrap uniforme ($X_i^{\ast}=X_{\left\lfloor nU_i\right\rfloor +1}$) y añade una perturbación ($hV_i$), cuya magnitud viene dada por el parámetro de suavizado ($h$) y cuya forma imita a la de una variable aleatoria ($V_i$) con densidad $K$.
+
+Por ejemplo, la función `density()` emplea por defecto un núcleo gaussiano, y como se muestra en la ayuda de esta función, podemos emplear un código como el siguiente para obtener `nsim` simulaciones(ver Figura \@ref(fig:density-sim)):
+
+```r
+## simulation from a density() fit:
+# a kernel density fit is an equally-weighted mixture.
+nsim <- 1e6
+set.seed(1)
+# x_boot <- sample(x, nsim, replace = TRUE)
+# x_boot <- x_boot + bandwidth * rnorm(nsim)
+x_boot <- rnorm(nsim, sample(x, nsim, replace = TRUE), h)
+# Representar
+plot(npden, main = "")
+lines(density(x_boot), col = "blue", lwd = 2, lty = 2)
+```
+
+\begin{figure}[!htb]
+
+{\centering \includegraphics[width=0.7\linewidth]{10-Bootstrap_ext_files/figure-latex/density-sim-1} 
+
+}
+
+\caption{Estimaciónes tipo núcleo de las densidades de `precip` y de una simulación.}(\#fig:density-sim)
+\end{figure}
+
+En el boostrap suavizado, la distribución de una observación $X_i^{\ast}$ de la remuestra bootstrap es continua (puede tomar infinitos valores), mientras que en el bootstrap uniforme es discreta.
+De esta forma se pueden evitar algunos de los problemas del bootstrap uniforme, como los descritos en la Sección \@ref(deficien-unif).
+Un problema importante es la elección del parámetro de suavizado, $h$, en este procedimiento de remuestreo. 
+En la práctica es razonable elegir $h$ como un valor bastante pequeño, en relación con la desviación típica de la muestra. 
+Es fácil observar que en el caso extremo $h=0$ este método de remuestreo se reduce al bootstrap uniforme.
+
+::: {.example #media-suav name="Inferencia sobre la media, continuación"}
+<br>
+
+Continuando con el Ejemplo \@ref(exm:media-dt-desconocida) del tiempo de vida de microorganismos, podríamos pensar en emplear bootstrap suavizado para calcular un intervalo de confianza para la media poblacional.
+
+
+
+```r
+muestra <- simres::lifetimes
+n <- length(muestra)
+alfa <- 0.05
+# Estimaciones muestrales
+x_barra <- mean(muestra)
+cuasi_dt <- sd(muestra)
+# Remuestreo
+set.seed(1)
+B <- 1000
+# h <- 1e-08
+# h <- 0.05*cuasi_dt
+h <- bw.SJ(muestra)/2
+estadistico_boot <- numeric(B)
+for (k in 1:B) {
+  # remuestra <- sample(muestra, n, replace = TRUE)
+  # remuestra <- rexp(n, 1/x_barra)
+  remuestra <- rnorm(n, sample(muestra, n, replace = TRUE), h)
+  x_barra_boot <- mean(remuestra)
+  cuasi_dt_boot <- sd(remuestra)
+  estadistico_boot[k] <- sqrt(n) * (x_barra_boot - x_barra)/cuasi_dt_boot
+}
+# Aproximación Monte Carlo de los ptos críticos:
+pto_crit <- quantile(estadistico_boot, c(alfa/2, 1 - alfa/2))
+# Construcción del IC
+ic_inf_boot <- x_barra - pto_crit[2] * cuasi_dt/sqrt(n)
+ic_sup_boot <- x_barra - pto_crit[1] * cuasi_dt/sqrt(n)
+IC_boot <- c(ic_inf_boot, ic_sup_boot)
+names(IC_boot) <- paste0(100*c(alfa/2, 1-alfa/2), "%")
+IC_boot
+```
+
+```
+##      2.5%     97.5% 
+## 0.4960975 1.1880279
+```
+
+Con el paquete `boot`, la recomendación es implementarlo como
+un bootstrap paramétrico:
+
+```r
+library(boot)
+ran.gen.smooth <- function(data, mle) {
+    # Función para generar muestras aleatorias mediante 
+    # bootstrap suavizado con función núcleo gaussiana,
+    # mle contendrá la ventana.
+    n <- length(data)
+    h <- mle
+    out <- rnorm(n, sample(data, n, replace = TRUE), h)
+    out
+}
+
+statistic <- function(data){
+    c(mean(data), var(data)/length(data))
+}
+
+set.seed(1)
+res.boot <- boot(muestra, statistic, R = B, sim = "parametric",
+                 ran.gen = ran.gen.smooth, mle = h)
+
+boot.ci(res.boot, type = "stud")
+```
+
+```
+## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 1000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = res.boot, type = "stud")
+## 
+## Intervals : 
+## Level    Studentized     
+## 95%   ( 0.4960,  1.1927 )  
+## Calculations and Intervals on Original Scale
+```
+
+:::
+
+En el [Capítulo 6](https://rubenfcasal.github.io/book_remuestreo/npden.html) de Cao y Fernández-Casal (2022) se describen métodos bootstrap diseñados específicamente para hacer inferencia sobre la densidad empleando el estimador no paramétrico tipo núcleo (i.e. empleando bootstrap suavizado), como la construcción de intervalos de confianza o la selección del parámetro de suavizado.
+
 
 ## Bootstrap basado en modelos {#boot-reg}
 
@@ -362,7 +609,7 @@ Nos centraremos en el caso de regresión y consideraremos como base el siguiente
 donde $Y$ es la respuesta, $\mathbf{X}=(X_1, X_2, \ldots, X_p)$ es el vector de variables explicativas, $m(\mathbf{x}) = E\left( \left. Y\right\vert_{\mathbf{X}=\mathbf{x}} \right)$ es la media condicional, denominada función de regresión (o tendencia), y $\varepsilon$ es un error aleatorio de media cero y varianza $\sigma^2$, independiente de $\mathbf{X}$ (errores homocedásticos independientes).
 
 Supondremos que el objetivo es, a partir de una muestra:
-$$\left\{ \left( X_{1i}, \ldots, X_{pi}, Y_{i} \right)  : i = 1, \ldots, n \right\},$$
+$$\left\{ \left( {X_1}_i, \ldots, {X_p}_i, Y_{i} \right)  : i = 1, \ldots, n \right\},$$
 realizar inferencias sobre la distribución condicional 
 $\left.Y \right\vert_{\mathbf{X}=\mathbf{x}}$.
 
@@ -383,10 +630,10 @@ Alternativamente se podría emplear el denominado  *Wild Bootstrap* que se descr
 
 En esta sección nos centraremos en el caso de regresión lineal:
 $$m_{\boldsymbol{\beta}}(\mathbf{x}) =  \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \cdots + \beta_{p}X_{p},$$ 
-siendo $\boldsymbol{\beta} = \left(  \beta_{0}, \beta_{1}, \ldots, \beta_{p} \right)^{T}$ el vector de parámetros (desconocidos).
+siendo $\boldsymbol{\beta} = \left(  \beta_{0}, \beta_{1}, \ldots, \beta_{p} \right)^{\top}$ el vector de parámetros (desconocidos).
 Su estimador mínimo cuadrático es:
-$$\boldsymbol{\hat{\beta}} = \left( X^{T}X\right)^{-1}X^{T}\mathbf{Y},$$
-siendo $\mathbf{Y} = \left( Y_{1}, \ldots, Y_{n} \right)^{T}$ el vector de observaciones de la variable $Y$ y $X$ la denominada *matriz del diseño* de las variables regresoras, cuyas filas son los valores observados de las variables explicativas.
+$$\boldsymbol{\hat{\beta}} = \left( X^{\top}X\right)^{-1}X^{\top}\mathbf{Y},$$
+siendo $\mathbf{Y} = \left( Y_{1}, \ldots, Y_{n} \right)^{\top}$ el vector de observaciones de la variable $Y$ y $X$ la denominada *matriz del diseño* de las variables regresoras, cuyas filas son los valores observados de las variables explicativas.
 
 
 En regresión lineal múltiple, bajo las hipótesis estructurales del modelo de normalidad y homocedásticidad, se dispone de resultados teóricos que permiten realizar inferencias sobre características de la distribución condicional. Si alguna de estas hipótesis no es cierta se podrían emplear aproximaciones basadas en resultados asintóticos, pero podrían ser poco adecuadas para tamaños muestrales no muy grandes. Alternativamente se podría emplear bootstrap.
@@ -561,7 +808,7 @@ boot.ci(boot.mod, type = c("basic", "perc", "bca"))
 Sin embargo, la variabilidad de los residuos no reproduce la de los verdaderos errores, por lo que podría ser preferible (especialmente si el tamaño muestral es pequeño) emplear la modificación descrita en Davison y Hinkley (1997, Alg. 6.3, p. 271).
 Teniendo en cuenta que:
 $$\mathbf{r} = \left( I - H \right)\mathbf{Y},$$
-siendo $H = X\left( X^{T}X\right)^{-1}X^{T}$ la matriz de proyección.
+siendo $H = X\left( X^{\top}X\right)^{-1}X^{\top}$ la matriz de proyección.
 La idea es remuestrear los residuos reescalados (de forma que su varianza sea constante) y centrados $e_i - \bar{e}$, siendo:
 $$e_i = \frac{r_i}{\sqrt{1 - h_{ii}}},$$
 donde $h_{ii}$ es el valor de influencia o leverage, el elemento $i$-ésimo de la diagonal de $H$.
@@ -591,24 +838,17 @@ donde:
 
 - `f`: es la función de estadísticos (utilizando el ajuste como argumento).
 
-- `method`: especifíca el tipo de remuestreo: remuestreo de observaciones (`"case"`)
+- `method`: especifica el tipo de remuestreo: remuestreo de observaciones (`"case"`)
   o de residuos (`"residual"`), empleando la modificación descrita anteriormente.
 
 
 ::: {.exercise #boot-car}
+<br>
 
 Emplear la función `Boot()` del paquete `car` para hacer inferencia sobre 
 el coeficiente de determinación ajustado del modelo de regresión lineal 
 que explica `prestige` a partir de `income` y `education` 
 (obtener una estimación del sesgo y de la predicción,
 y una estimación por intervalo de confianza de este estadístico).
-
-
-```r
-library(car)
-
-# set.seed(DNI)
-# ...
-```
 
 :::

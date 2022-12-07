@@ -639,7 +639,7 @@ res.boot
 
 La función `boot.strap0()` anterior no es adecuada para el caso multivariante
 (por ejemplo cuando estamos interesados en regresión).
-Como se mostró en la Sección \@ref(intro-implementacion)
+Como se mostró en la Sección \@ref(boot-intro)
 sería preferible emplear remuestras del vector de índices. Por ejemplo:
 
 
@@ -894,9 +894,7 @@ Además hay otros parámetros para el procesamiento en paralelo: `parallel = c("
 En el Apéndice \@ref(intro-hpc) se incluye una pequeña introducción al procesamiento en paralelo y se muestran algunos ejemplos sobre el uso de estos parámetros.
 También se puede consultar la ayuda de la función `boot()` (`?boot`).
 
-El paquete `boot` también incluye otras funciones que implementan métodos
-boostrap para otros tipos de datos, como la función `censboot()` para datos 
-censurados (Sección \@ref(bootcen)) o la función `tsboot()` para series de tiempo (Sección \@ref(bootdep)).
+El paquete `boot` también incluye otras funciones que implementan métodos boostrap para otros tipos de datos, como la función `tsboot()` para series de tiempo (Sección \@ref(bootdep)) o la función `censboot()` para datos censurados (ver p.e. Cao y Fernández-Casal, 2021, [Capítulo 8](https://rubenfcasal.github.io/book_remuestreo/bootcen.html)).
 
 Finalmente destacar que hay numerosas extensiones implementadas en otros paquetes utilizando el paquete `boot` (ver *Reverse dependencies* en la [web de CRAN](https://cran.r-project.org/package=boot)).
 Por ejemplo en la Sección \@ref(boot-reg) se ilustrará el uso de la función `Boot()` del paquete `car` para hacer inferencia sobre modelos de regresión.
