@@ -295,6 +295,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="boot-aplic.html"><a href="boot-aplic.html"><i class="fa fa-check"></i><b>10</b> Aplicaciones del remuestreo</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sesgo-prec.html"><a href="sesgo-prec.html"><i class="fa fa-check"></i><b>10.1</b> Estimación del sesgo y la precisión de un estimador</a></li>
+<li class="chapter" data-level="10.2" data-path="boot-ic.html"><a href="boot-ic.html"><i class="fa fa-check"></i><b>10.2</b> Intervalos de confianza bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-norm"><i class="fa fa-check"></i><b>10.2.1</b> Aproximación normal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-perc"><i class="fa fa-check"></i><b>10.2.2</b> Método percentil directo</a></li>
+<li class="chapter" data-level="10.2.3" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-basic"><i class="fa fa-check"></i><b>10.2.3</b> Método percentil básico</a></li>
+<li class="chapter" data-level="10.2.4" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-stud"><i class="fa fa-check"></i><b>10.2.4</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="10.2.5" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-bca"><i class="fa fa-check"></i><b>10.2.5</b> Método BCa</a></li>
+<li class="chapter" data-level="10.2.6" data-path="boot-ic.html"><a href="boot-ic.html#icboot-trans"><i class="fa fa-check"></i><b>10.2.6</b> Ejemplo: IC bootstrap para el coeficiente de correlación</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="boot-test.html"><a href="boot-test.html"><i class="fa fa-check"></i><b>10.3</b> Contrastes de hipótesis bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="boot-test.html"><a href="boot-test.html#contrastes-parametricos"><i class="fa fa-check"></i><b>10.3.1</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="10.3.2" data-path="boot-test.html"><a href="boot-test.html#contrastes-de-permutaciones"><i class="fa fa-check"></i><b>10.3.2</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="10.3.3" data-path="boot-test.html"><a href="boot-test.html#contrastes-semiparametricos"><i class="fa fa-check"></i><b>10.3.3</b> Contrastes bootstrap semiparamétricos</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
 <li class="chapter" data-level="A" data-path="gof-aleat.html"><a href="gof-aleat.html"><i class="fa fa-check"></i><b>A</b> Bondad de Ajuste y Aleatoriedad</a>
 <ul>
@@ -530,18 +549,18 @@ Ejemplo:</p>
 <span id="cb23-4"><a href="rrng.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">CPUtimeprint</span>()</span></code></pre></div>
 <pre><code>## Tiempo última operación:
 ##    user  system elapsed 
-##    0.08    0.00    0.07 
+##    0.11    0.00    0.13 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.08    0.00    0.07</code></pre>
+##    0.11    0.00    0.13</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="rrng.html#cb25-1" aria-hidden="true" tabindex="-1"></a>result2 <span class="ot">&lt;-</span> <span class="fu">funtest</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">3</span>)</span>
 <span id="cb25-2"><a href="rrng.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">CPUtimeprint</span>()</span></code></pre></div>
 <pre><code>## Tiempo última operación:
 ##    user  system elapsed 
-##       0       0       0 
+##    0.18    0.00    0.17 
 ## Tiempo total operación:
 ##    user  system elapsed 
-##    0.08    0.00    0.07</code></pre>
+##    0.29    0.00    0.30</code></pre>
 <p>Hay diversos paquetes que implementan herramientas similares, por ejemplo:</p>
 <ul>
 <li><p>El paquete <code>tictoc</code>:</p>
@@ -561,7 +580,7 @@ Ejemplo:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="rrng.html#cb29-1" aria-hidden="true" tabindex="-1"></a>   <span class="fu">toc</span>() <span class="co"># middle</span></span></code></pre></div>
 <pre><code>## middle: 0 sec elapsed</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="rrng.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>() <span class="co"># outer</span></span></code></pre></div>
-<pre><code>## outer: 0.08 sec elapsed</code></pre>
+<pre><code>## outer: 0.1 sec elapsed</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="rrng.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Timing in a loop and analyzing the results later using tic.log().</span></span>
 <span id="cb33-2"><a href="rrng.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tic.clearlog</span>()</span>
 <span id="cb33-3"><a href="rrng.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
@@ -575,8 +594,8 @@ Ejemplo:</p>
 <span id="cb33-11"><a href="rrng.html#cb33-11" aria-hidden="true" tabindex="-1"></a>log.times <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind.data.frame, <span class="fu">tic.log</span>(<span class="at">format =</span> <span class="cn">FALSE</span>))</span>
 <span id="cb33-12"><a href="rrng.html#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(log.times)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    10 obs. of  3 variables:
-##  $ tic: num  3.6 3.6 3.6 3.6 3.6 3.6 3.6 3.6 3.6 3.6
-##  $ toc: num  3.6 3.6 3.6 3.6 3.6 3.6 3.6 3.6 3.6 3.6
+##  $ tic: num  5.39 5.39 5.39 5.39 5.4 5.4 5.4 5.4 5.4 5.4
+##  $ toc: num  5.39 5.39 5.39 5.4 5.4 5.4 5.4 5.4 5.4 5.4
 ##  $ msg: chr  &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="rrng.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic.clearlog</span>()</span>
 <span id="cb35-2"><a href="rrng.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -584,7 +603,7 @@ Ejemplo:</p>
 <span id="cb35-4"><a href="rrng.html#cb35-4" aria-hidden="true" tabindex="-1"></a>log.times<span class="sc">$</span>timings <span class="ot">&lt;-</span> <span class="fu">with</span>(log.times, toc <span class="sc">-</span> tic)</span>
 <span id="cb35-5"><a href="rrng.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(log.times<span class="sc">$</span>timings)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##       0       0       0       0       0       0</code></pre></li>
+##   0.000   0.000   0.000   0.001   0.000   0.010</code></pre></li>
 </ul></li>
 <li><p>La función <a href="https://rubenfcasal.github.io/simres/reference/cpu.time.html"><code>cpu.time()</code></a> del paquete <code>simres</code>:</p>
 <ul>

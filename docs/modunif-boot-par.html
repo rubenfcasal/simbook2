@@ -295,6 +295,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="boot-aplic.html"><a href="boot-aplic.html"><i class="fa fa-check"></i><b>10</b> Aplicaciones del remuestreo</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sesgo-prec.html"><a href="sesgo-prec.html"><i class="fa fa-check"></i><b>10.1</b> Estimación del sesgo y la precisión de un estimador</a></li>
+<li class="chapter" data-level="10.2" data-path="boot-ic.html"><a href="boot-ic.html"><i class="fa fa-check"></i><b>10.2</b> Intervalos de confianza bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-norm"><i class="fa fa-check"></i><b>10.2.1</b> Aproximación normal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-perc"><i class="fa fa-check"></i><b>10.2.2</b> Método percentil directo</a></li>
+<li class="chapter" data-level="10.2.3" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-basic"><i class="fa fa-check"></i><b>10.2.3</b> Método percentil básico</a></li>
+<li class="chapter" data-level="10.2.4" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-stud"><i class="fa fa-check"></i><b>10.2.4</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="10.2.5" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-bca"><i class="fa fa-check"></i><b>10.2.5</b> Método BCa</a></li>
+<li class="chapter" data-level="10.2.6" data-path="boot-ic.html"><a href="boot-ic.html#icboot-trans"><i class="fa fa-check"></i><b>10.2.6</b> Ejemplo: IC bootstrap para el coeficiente de correlación</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="boot-test.html"><a href="boot-test.html"><i class="fa fa-check"></i><b>10.3</b> Contrastes de hipótesis bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="boot-test.html"><a href="boot-test.html#contrastes-parametricos"><i class="fa fa-check"></i><b>10.3.1</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="10.3.2" data-path="boot-test.html"><a href="boot-test.html#contrastes-de-permutaciones"><i class="fa fa-check"></i><b>10.3.2</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="10.3.3" data-path="boot-test.html"><a href="boot-test.html#contrastes-semiparametricos"><i class="fa fa-check"></i><b>10.3.3</b> Contrastes bootstrap semiparamétricos</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
 <li class="chapter" data-level="A" data-path="gof-aleat.html"><a href="gof-aleat.html"><i class="fa fa-check"></i><b>A</b> Bondad de Ajuste y Aleatoriedad</a>
 <ul>
@@ -417,7 +436,7 @@ lugar al llamado bootstrap paramétrico:</p>
 Como ya hemos visto en la Sección <a href="rrng.html#rrng">1.3</a>, en R (y en la mayoría de lenguajes de programación y software estadístico) se dispone de rutinas que permiten simular la mayoría de las distribuciones paramétricas habituales.
 En otros casos habrá que emplear métodos generales, preferiblemente el método de inversión descrito en el Capítulo <a href="continuas.html#continuas">4</a>.</p>
 <p>Una de las principales aplicaciones del bootstrap paramétrico
-es el contraste de hipótesis que se tratará en la Sección <a href="#contrastes-parametricos"><strong>??</strong></a>.</p>
+es el contraste de hipótesis que se tratará en la Sección <a href="boot-test.html#contrastes-parametricos">10.3.1</a>.</p>
 <div class="example">
 <p><span id="exm:media-par" class="example"><strong>Ejemplo 9.2  (Inferencia sobre la media, continuación) </strong></span><br></p>
 <p>Continuando con el Ejemplo <a href="boot-unif.html#exm:media-dt-desconocida">8.2</a> del tiempo de vida de microorganismos, podríamos pensar en emplear bootstrap paramétrico para calcular un intervalo de confianza para la media poblacional.</p>

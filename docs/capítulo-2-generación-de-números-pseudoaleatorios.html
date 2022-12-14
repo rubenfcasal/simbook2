@@ -295,6 +295,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="boot-aplic.html"><a href="boot-aplic.html"><i class="fa fa-check"></i><b>10</b> Aplicaciones del remuestreo</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sesgo-prec.html"><a href="sesgo-prec.html"><i class="fa fa-check"></i><b>10.1</b> Estimación del sesgo y la precisión de un estimador</a></li>
+<li class="chapter" data-level="10.2" data-path="boot-ic.html"><a href="boot-ic.html"><i class="fa fa-check"></i><b>10.2</b> Intervalos de confianza bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-norm"><i class="fa fa-check"></i><b>10.2.1</b> Aproximación normal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-perc"><i class="fa fa-check"></i><b>10.2.2</b> Método percentil directo</a></li>
+<li class="chapter" data-level="10.2.3" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-basic"><i class="fa fa-check"></i><b>10.2.3</b> Método percentil básico</a></li>
+<li class="chapter" data-level="10.2.4" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-stud"><i class="fa fa-check"></i><b>10.2.4</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="10.2.5" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-bca"><i class="fa fa-check"></i><b>10.2.5</b> Método BCa</a></li>
+<li class="chapter" data-level="10.2.6" data-path="boot-ic.html"><a href="boot-ic.html#icboot-trans"><i class="fa fa-check"></i><b>10.2.6</b> Ejemplo: IC bootstrap para el coeficiente de correlación</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="boot-test.html"><a href="boot-test.html"><i class="fa fa-check"></i><b>10.3</b> Contrastes de hipótesis bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="boot-test.html"><a href="boot-test.html#contrastes-parametricos"><i class="fa fa-check"></i><b>10.3.1</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="10.3.2" data-path="boot-test.html"><a href="boot-test.html#contrastes-de-permutaciones"><i class="fa fa-check"></i><b>10.3.2</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="10.3.3" data-path="boot-test.html"><a href="boot-test.html#contrastes-semiparametricos"><i class="fa fa-check"></i><b>10.3.3</b> Contrastes bootstrap semiparamétricos</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
 <li class="chapter" data-level="A" data-path="gof-aleat.html"><a href="gof-aleat.html"><i class="fa fa-check"></i><b>A</b> Bondad de Ajuste y Aleatoriedad</a>
 <ul>
@@ -393,9 +412,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="capítulo-2-generación-de-números-pseudoaleatorios" class="section level2" number="13.2">
+<div id="capítulo-2-generación-de-números-pseudoaleatorios" class="section level2" number="14.2">
 <h2><span class="header-section-number">D.2</span> Capítulo 2 <a href="gen-pseudo.html">Generación de números pseudoaleatorios</a></h2>
-<div id="sol-RANDVN" class="section level3" number="13.2.1">
+<div id="sol-RANDVN" class="section level3" number="14.2.1">
 <h3><span class="header-section-number">D.2.1</span> Ejercicio <a href="ejercicios.html#exr:RANDVN">2.1</a></h3>
 <p>Enunciado <a href="ejercicios-1.html#exr:RANDVN">2.1</a>:</p>
 <p>Uno de los primeros generadores utilizados fue el denominado método de los
@@ -413,7 +432,7 @@ se puede utilizar que:
 <span class="math display">\[x_{i+1}=\left\lfloor \left(  x_{i}^2-\left\lfloor \dfrac{x_{i}^2}{10^{(2k-\frac{k}2)}}\right\rfloor 10^{(2k-\frac{k}2)}\right)
 /10^{\frac{k}2}\right\rfloor\]</span></p>
 <p>Este algoritmo está implementado en la función <code>simres::rvng()</code> (ver también <code>simres::rng()</code>; fichero <a href="R/rng.R"><em>rng.R</em></a>):</p>
-<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="capítulo-2-generación-de-números-pseudoaleatorios.html#cb686-1" aria-hidden="true" tabindex="-1"></a>simres<span class="sc">::</span>rvng</span></code></pre></div>
+<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="capítulo-2-generación-de-números-pseudoaleatorios.html#cb745-1" aria-hidden="true" tabindex="-1"></a>simres<span class="sc">::</span>rvng</span></code></pre></div>
 <pre><code>## function(n, seed = as.numeric(Sys.time()), k = 4) {
 ##   seed &lt;- seed %% 10^k
 ##   aux &lt;- 10^(2*k-k/2)
@@ -433,7 +452,7 @@ se puede utilizar que:
 ##   # Devolver valores
 ##   return(u)
 ## }
-## &lt;bytecode: 0x000000003bb80738&gt;
+## &lt;bytecode: 0x000000003de0f978&gt;
 ## &lt;environment: namespace:simres&gt;</code></pre>
 <p>Estudiar las características del generador de cuadrados medios a partir de una secuencia de 500 valores.
 Emplear únicamente métodos gráficos.</p>

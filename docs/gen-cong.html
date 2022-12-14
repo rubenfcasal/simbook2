@@ -295,6 +295,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="boot-aplic.html"><a href="boot-aplic.html"><i class="fa fa-check"></i><b>10</b> Aplicaciones del remuestreo</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sesgo-prec.html"><a href="sesgo-prec.html"><i class="fa fa-check"></i><b>10.1</b> Estimación del sesgo y la precisión de un estimador</a></li>
+<li class="chapter" data-level="10.2" data-path="boot-ic.html"><a href="boot-ic.html"><i class="fa fa-check"></i><b>10.2</b> Intervalos de confianza bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-norm"><i class="fa fa-check"></i><b>10.2.1</b> Aproximación normal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-perc"><i class="fa fa-check"></i><b>10.2.2</b> Método percentil directo</a></li>
+<li class="chapter" data-level="10.2.3" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-basic"><i class="fa fa-check"></i><b>10.2.3</b> Método percentil básico</a></li>
+<li class="chapter" data-level="10.2.4" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-stud"><i class="fa fa-check"></i><b>10.2.4</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="10.2.5" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-bca"><i class="fa fa-check"></i><b>10.2.5</b> Método BCa</a></li>
+<li class="chapter" data-level="10.2.6" data-path="boot-ic.html"><a href="boot-ic.html#icboot-trans"><i class="fa fa-check"></i><b>10.2.6</b> Ejemplo: IC bootstrap para el coeficiente de correlación</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="boot-test.html"><a href="boot-test.html"><i class="fa fa-check"></i><b>10.3</b> Contrastes de hipótesis bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="boot-test.html"><a href="boot-test.html#contrastes-parametricos"><i class="fa fa-check"></i><b>10.3.1</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="10.3.2" data-path="boot-test.html"><a href="boot-test.html#contrastes-de-permutaciones"><i class="fa fa-check"></i><b>10.3.2</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="10.3.3" data-path="boot-test.html"><a href="boot-test.html#contrastes-semiparametricos"><i class="fa fa-check"></i><b>10.3.3</b> Contrastes bootstrap semiparamétricos</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
 <li class="chapter" data-level="A" data-path="gof-aleat.html"><a href="gof-aleat.html"><i class="fa fa-check"></i><b>A</b> Bondad de Ajuste y Aleatoriedad</a>
 <ul>
@@ -425,7 +444,7 @@ donde <span class="math inline">\(a\)</span> (<em>multiplicador</em>), <span cla
 ##   # Devolver valores
 ##   return(u)
 ## }
-## &lt;bytecode: 0x0000000018788bf0&gt;
+## &lt;bytecode: 0x0000000037145510&gt;
 ## &lt;environment: namespace:simres&gt;</code></pre>
 <p>Ejemplos de parámetros:</p>
 <ul>
@@ -472,7 +491,7 @@ Por ejemplo, el conjunto de datos <code>randu</code> contiene 400 tripletas de n
 <span id="cb39-2"><a href="gen-cong.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(u <span class="ot">&lt;-</span> <span class="fu">rlcg</span>(<span class="at">n =</span> <span class="dv">9999</span>, </span>
 <span id="cb39-3"><a href="gen-cong.html#cb39-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">seed =</span> <span class="dv">543210</span>, <span class="at">a =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">16</span> <span class="sc">+</span> <span class="dv">3</span>, <span class="at">c =</span> <span class="dv">0</span>, <span class="at">m =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">31</span>))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##       0       0       0</code></pre>
+##    0.02    0.00    0.01</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="gen-cong.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># xyz &lt;- matrix(u, ncol = 3, byrow = TRUE)</span></span>
 <span id="cb41-2"><a href="gen-cong.html#cb41-2" aria-hidden="true" tabindex="-1"></a>xyz <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">embed</span>(u, <span class="dv">3</span>)</span>
 <span id="cb41-3"><a href="gen-cong.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plot3D)</span>

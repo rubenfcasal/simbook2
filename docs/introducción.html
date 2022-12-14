@@ -295,6 +295,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="boot-aplic.html"><a href="boot-aplic.html"><i class="fa fa-check"></i><b>10</b> Aplicaciones del remuestreo</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sesgo-prec.html"><a href="sesgo-prec.html"><i class="fa fa-check"></i><b>10.1</b> Estimación del sesgo y la precisión de un estimador</a></li>
+<li class="chapter" data-level="10.2" data-path="boot-ic.html"><a href="boot-ic.html"><i class="fa fa-check"></i><b>10.2</b> Intervalos de confianza bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-norm"><i class="fa fa-check"></i><b>10.2.1</b> Aproximación normal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-perc"><i class="fa fa-check"></i><b>10.2.2</b> Método percentil directo</a></li>
+<li class="chapter" data-level="10.2.3" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-basic"><i class="fa fa-check"></i><b>10.2.3</b> Método percentil básico</a></li>
+<li class="chapter" data-level="10.2.4" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-stud"><i class="fa fa-check"></i><b>10.2.4</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="10.2.5" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-bca"><i class="fa fa-check"></i><b>10.2.5</b> Método BCa</a></li>
+<li class="chapter" data-level="10.2.6" data-path="boot-ic.html"><a href="boot-ic.html#icboot-trans"><i class="fa fa-check"></i><b>10.2.6</b> Ejemplo: IC bootstrap para el coeficiente de correlación</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="boot-test.html"><a href="boot-test.html"><i class="fa fa-check"></i><b>10.3</b> Contrastes de hipótesis bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="boot-test.html"><a href="boot-test.html#contrastes-parametricos"><i class="fa fa-check"></i><b>10.3.1</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="10.3.2" data-path="boot-test.html"><a href="boot-test.html#contrastes-de-permutaciones"><i class="fa fa-check"></i><b>10.3.2</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="10.3.3" data-path="boot-test.html"><a href="boot-test.html#contrastes-semiparametricos"><i class="fa fa-check"></i><b>10.3.3</b> Contrastes bootstrap semiparamétricos</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
 <li class="chapter" data-level="A" data-path="gof-aleat.html"><a href="gof-aleat.html"><i class="fa fa-check"></i><b>A</b> Bondad de Ajuste y Aleatoriedad</a>
 <ul>
@@ -393,7 +412,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introducción" class="section level2" number="12.1">
+<div id="introducción" class="section level2" number="13.1">
 <h2><span class="header-section-number">C.1</span> Introducción</h2>
 <p>Emplearemos la siguiente terminología:</p>
 <ul>
@@ -405,7 +424,7 @@ También podría referirse aquí a un equipo (nodo) de una red (clúster de equi
 <p>Por defecto la versión oficial de R emplea un único núcleo, aunque se puede compilar de forma que realice cálculos en paralelo (e.g. librería LAPACK).
 También están disponibles otras versiones de R que ya implementan por defecto procesamiento en paralelo (<a href="https://mran.revolutionanalytics.com/documents/rro/multithread">multithread</a>):
 - <a href="https://mran.revolutionanalytics.com">Microsoft R Open</a>: versión de R con rendimiento mejorado.</p>
-<p>Métodos simples de paralelización<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a>:</p>
+<p>Métodos simples de paralelización<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a>:</p>
 <ul>
 <li><p><em>Forking</em>: Copia el proceso de R a un nuevo núcleo (se comparte el entorno de trabajo).
 Es el más simple y eficiente pero <strong>no está disponible en Windows</strong>.</p></li>
@@ -415,8 +434,8 @@ Disponible en todos los sistemas operativos.</p></li>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="35">
-<li id="fn35"><p>Realmente las herramientas estándar son <em>OpenMP</em> para el procesamiento en paralelo con memoria compartida en un único equipo y <em>MPI</em> para la computación distribuida en múltiples nodos.<a href="introducción.html#fnref35" class="footnote-back">↩︎</a></p></li>
+<ol start="40">
+<li id="fn40"><p>Realmente las herramientas estándar son <em>OpenMP</em> para el procesamiento en paralelo con memoria compartida en un único equipo y <em>MPI</em> para la computación distribuida en múltiples nodos.<a href="introducción.html#fnref40" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -295,6 +295,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="boot-aplic.html"><a href="boot-aplic.html"><i class="fa fa-check"></i><b>10</b> Aplicaciones del remuestreo</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sesgo-prec.html"><a href="sesgo-prec.html"><i class="fa fa-check"></i><b>10.1</b> Estimación del sesgo y la precisión de un estimador</a></li>
+<li class="chapter" data-level="10.2" data-path="boot-ic.html"><a href="boot-ic.html"><i class="fa fa-check"></i><b>10.2</b> Intervalos de confianza bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-norm"><i class="fa fa-check"></i><b>10.2.1</b> Aproximación normal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-perc"><i class="fa fa-check"></i><b>10.2.2</b> Método percentil directo</a></li>
+<li class="chapter" data-level="10.2.3" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-basic"><i class="fa fa-check"></i><b>10.2.3</b> Método percentil básico</a></li>
+<li class="chapter" data-level="10.2.4" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-stud"><i class="fa fa-check"></i><b>10.2.4</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="10.2.5" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-bca"><i class="fa fa-check"></i><b>10.2.5</b> Método BCa</a></li>
+<li class="chapter" data-level="10.2.6" data-path="boot-ic.html"><a href="boot-ic.html#icboot-trans"><i class="fa fa-check"></i><b>10.2.6</b> Ejemplo: IC bootstrap para el coeficiente de correlación</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="boot-test.html"><a href="boot-test.html"><i class="fa fa-check"></i><b>10.3</b> Contrastes de hipótesis bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="boot-test.html"><a href="boot-test.html#contrastes-parametricos"><i class="fa fa-check"></i><b>10.3.1</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="10.3.2" data-path="boot-test.html"><a href="boot-test.html#contrastes-de-permutaciones"><i class="fa fa-check"></i><b>10.3.2</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="10.3.3" data-path="boot-test.html"><a href="boot-test.html#contrastes-semiparametricos"><i class="fa fa-check"></i><b>10.3.3</b> Contrastes bootstrap semiparamétricos</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
 <li class="chapter" data-level="A" data-path="gof-aleat.html"><a href="gof-aleat.html"><i class="fa fa-check"></i><b>A</b> Bondad de Ajuste y Aleatoriedad</a>
 <ul>
@@ -393,7 +412,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="contrastes-específicos-para-generadores-aleatorios" class="section level2" number="10.3">
+<div id="contrastes-específicos-para-generadores-aleatorios" class="section level2" number="11.3">
 <h2><span class="header-section-number">A.3</span> Contrastes específicos para generadores aleatorios</h2>
 <p>Los contrastes generales anteriores pueden ser muy poco adecuados para testear generadores de números pseudoaleatorios (ver e.g. L’Ecuyer y Simard, 2007). Por ese motivo se han desarrollado contrastes específicos, principalmente con el objetivo de encontrar un generador con buenas propiedades criptográficas.</p>
 <p>Muchos de estos contrastes están basados en la prueba chi-cuadrado y trabajan con enteros en lugar de los valores uniformes. El procedimiento habitual consiste en fijar un entero positivo <span class="math inline">\(K\)</span>, y discretizar los valores uniformes <span class="math inline">\(U_{1},U_{2},\ldots,U_{n}\)</span>, de la forma:
@@ -401,32 +420,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 donde <span class="math inline">\(\left\lfloor u\right\rfloor\)</span> denota la parte entera de <span class="math inline">\(u\)</span>.
 De esta forma se consigue una sucesión de enteros aleatorios supuestamente independientes con distribución uniforme en <span class="math inline">\(\{1, \ldots, K\}\)</span>.</p>
 <p>En esta sección se describirán algunos de los métodos tradicionales en este campo con fines ilustrativos. Si realmente el objetivo es diagnosticar la calidad de un generador, la recomendación sería emplear las baterías de contrastes más recientes descritas en la Sección <a href="calgen.html#baterias">2.3.2</a>.</p>
-<div id="freq-test" class="section level3" number="10.3.1">
+<div id="freq-test" class="section level3" number="11.3.1">
 <h3><span class="header-section-number">A.3.1</span> Contraste de frecuencias</h3>
 <p>Empleando la discretización anterior se simplifica notablemente el contraste chi-cuadrado de bondad de ajuste a una uniforme, descrito en la Sección <a href="gof.html#chi2test">A.1.4</a> e implementado en la función <code>chisq.cont.test()</code>.
 En este caso bastaría con contrastar la equiprobabilidad de la secuencia de enteros (empleando directamente la función <code>chisq.test()</code>) y este método de denomina <em>contraste de frecuencias</em> (frequency test).
 Por ejemplo:</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar</span></span>
-<span id="cb606-2"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb606-3"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>)</span>
-<span id="cb606-4"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Discretizar</span></span>
-<span id="cb606-5"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-5" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb606-6"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">floor</span>(k<span class="sc">*</span>u) <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb606-7"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test chi-cuadrado</span></span>
-<span id="cb606-8"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-8" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">factor</span>(x, <span class="at">levels =</span> <span class="fu">seq_len</span>(k)))</span>
-<span id="cb606-9"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb606-9" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb665-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar</span></span>
+<span id="cb665-2"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb665-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb665-3"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb665-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>)</span>
+<span id="cb665-4"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb665-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Discretizar</span></span>
+<span id="cb665-5"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb665-5" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb665-6"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb665-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">floor</span>(k<span class="sc">*</span>u) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb665-7"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb665-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test chi-cuadrado</span></span>
+<span id="cb665-8"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb665-8" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">factor</span>(x, <span class="at">levels =</span> <span class="fu">seq_len</span>(k)))</span>
+<span id="cb665-9"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb665-9" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
 <pre><code>## 
 ##  Chi-squared test for given probabilities
 ## 
 ## data:  f
 ## X-squared = 10.26, df = 9, p-value = 0.3298</code></pre>
 <p>Este código está implementado en la función <code>simres::freq.test()</code> (fichero <a href="R/test.R"><em>test.R</em></a>) y podríamos emplear:</p>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb608-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simres)</span>
-<span id="cb608-2"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb608-2" aria-hidden="true" tabindex="-1"></a><span class="fu">freq.test</span>(u, <span class="at">nclass =</span> k)</span>
-<span id="cb608-3"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb608-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativamente</span></span>
-<span id="cb608-4"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb608-4" aria-hidden="true" tabindex="-1"></a><span class="co"># chisq.cont.test(u, distribution = &quot;unif&quot;, nclass = k, output = FALSE, min = 0, max = 1)</span></span></code></pre></div>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb667-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simres)</span>
+<span id="cb667-2"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb667-2" aria-hidden="true" tabindex="-1"></a><span class="fu">freq.test</span>(u, <span class="at">nclass =</span> k)</span>
+<span id="cb667-3"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb667-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativamente</span></span>
+<span id="cb667-4"><a href="contrastes-específicos-para-generadores-aleatorios.html#cb667-4" aria-hidden="true" tabindex="-1"></a><span class="co"># chisq.cont.test(u, distribution = &quot;unif&quot;, nclass = k, output = FALSE, min = 0, max = 1)</span></span></code></pre></div>
 </div>
-<div id="contraste-de-series" class="section level3" number="10.3.2">
+<div id="contraste-de-series" class="section level3" number="11.3.2">
 <h3><span class="header-section-number">A.3.2</span> Contraste de series</h3>
 <p>El contraste anterior se puede generalizar a contrastar la uniformidad de las <span class="math inline">\(d\)</span>-uplas <span class="math inline">\((X_{t+1},X_{t+2},\ldots,X_{t+d})\)</span> con <span class="math inline">\(t=(i-1)d\)</span>, <span class="math inline">\(i=1,\ldots,m\)</span> siendo <span class="math inline">\(m=\lfloor n/d \rfloor\)</span>.
 La idea es que troceamos el hipercubo <span class="math inline">\([0, 1]^d\)</span> en <span class="math inline">\(K^d\)</span> celdas equiprobables.
@@ -437,7 +456,7 @@ Por ejemplo, la función <code>serial.test()</code> del paquete <code>randtoolbo
 Si se considera un valor <span class="math inline">\(d \geq 3\)</span> puede ser necesario reducir considerablemente el valor de <span class="math inline">\(K\)</span> para evitar considerar demasiadas categorías.
 Alternativamente se podrían considerar distintas técnicas para agrupar estas categorías, por ejemplo como se hace en el contraste del poker o del coleccionista descritos a continuación.</p>
 </div>
-<div id="el-contraste-del-poker" class="section level3" number="10.3.3">
+<div id="el-contraste-del-poker" class="section level3" number="11.3.3">
 <h3><span class="header-section-number">A.3.3</span> El contraste del poker</h3>
 <p>En el contrate del poker “clásico” se consideran conjuntos sucesivos de cinco enteros (<span class="math inline">\(d=5\)</span>) y, para cada uno, se determina cuál de las siguientes posibilidades se da:</p>
 <ol style="list-style-type: decimal">
@@ -480,7 +499,7 @@ donde <span class="math inline">\(S(d,c)\)</span> es el número de Stirling de s
 <span class="math display">\[S(d,c) = \frac{1}{c!}\sum_{i=0}^{c} (-1)^{i} \binom{c}{i} (c-i)^d.\]</span>
 Por ejemplo, la función <code>poker.test()</code> del paquete <code>randtoolbox</code> implementa este contraste para el caso de <span class="math inline">\(d=K\)</span>.</p>
 </div>
-<div id="el-contraste-del-coleccionista" class="section level3" number="10.3.4">
+<div id="el-contraste-del-coleccionista" class="section level3" number="11.3.4">
 <h3><span class="header-section-number">A.3.4</span> El contraste del coleccionista</h3>
 <p>Por simplicidad describiremos el caso de <span class="math inline">\(d=1\)</span> (con <span class="math inline">\(K\)</span> categorías).
 Considerando la sucesión de enteros aleatorios se procede (como un

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.10) (preloaded format=xelatex 2022.10.27)  7 DEC 2022 12:00
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.10) (preloaded format=xelatex 2022.10.27)  14 DEC 2022 17:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1751,21 +1751,13 @@ LaTeX Warning: Reference `prec-sesgo' on page 177 undefined on input line 10070
 File: 09-Bootstrap_files/figure-latex/plot-res-boot-1.pdf Graphic file (type pd
 f)
 <use 09-Bootstrap_files/figure-latex/plot-res-boot-1.pdf>
-[177]
-
-LaTeX Warning: Reference `icboot' on page 178 undefined on input line 10132.
-
-[178] [179]
+[177] [178] [179]
 
 LaTeX Warning: Reference `bootdep' on page 180 undefined on input line 10265.
 
 File: 09-Bootstrap_files/figure-latex/plot-boot-multi-1.pdf Graphic file (type 
 pdf)
 <use 09-Bootstrap_files/figure-latex/plot-boot-multi-1.pdf>
-
-LaTeX Warning: Reference `icboot-trans' on page 180 undefined on input line 103
-22.
-
 [180]
 File: 09-Bootstrap_files/figure-latex/plot-boot-basico-1.pdf Graphic file (type
  pdf)
@@ -1779,10 +1771,6 @@ File: 10-Bootstrap_ext_files/figure-latex/boot-uniforme-maximo-1.pdf Graphic fi
 le (type pdf)
 <use 10-Bootstrap_ext_files/figure-latex/boot-uniforme-maximo-1.pdf>
 [185]
-
-LaTeX Warning: Reference `contrastes-parametricos' on page 186 undefined on inp
-ut line 10515.
-
 File: 10-Bootstrap_ext_files/figure-latex/boot-par-aprox-1.pdf Graphic file (ty
 pe pdf)
 <use 10-Bootstrap_ext_files/figure-latex/boot-par-aprox-1.pdf>
@@ -1806,10 +1794,6 @@ pdf)
 <use 10-Bootstrap_ext_files/figure-latex/density-sim-1.pdf>
 [192] [193]
 
-LaTeX Warning: Reference `contrastes-semiparametricos' on page 194 undefined on
- input line 10962.
-
-
 LaTeX Warning: Reference `wild-bootstrap' on page 194 undefined on input line 1
 0969.
 
@@ -1820,28 +1804,79 @@ LaTeX Warning: Reference `npreg' on page 194 undefined on input line 10979.
 Missing character: There is no 𝛽 in font [lmroman10-bold]:mapping=tex-text;!
 Missing character: There is no 𝛽 in font [lmroman10-bold]:mapping=tex-text;!
 [196] [197] [198]
-Apéndice A.
+Capítulo 10.
 [199
 
+] [200]
+
+LaTeX Warning: Reference `moduni' on page 201 undefined on input line 11361.
+
+[201] [202] [203]
+Underfull \hbox (badness 10000) in paragraph at lines 11489--11491
+
+ []
+
+[204] [205]
+File: 11-Bootstrap_aplic_files/figure-latex/icboot-trans-plot-1.pdf Graphic fil
+e (type pdf)
+<use 11-Bootstrap_aplic_files/figure-latex/icboot-trans-plot-1.pdf>
+[206] [207] [208] [209]
+File: 11-Bootstrap_aplic_files/figure-latex/ks-lil-plot-1.pdf Graphic file (typ
+e pdf)
+<use 11-Bootstrap_aplic_files/figure-latex/ks-lil-plot-1.pdf>
+[210] [211]
+File: 11-Bootstrap_aplic_files/figure-latex/ks-boot-plot-1.pdf Graphic file (ty
+pe pdf)
+<use 11-Bootstrap_aplic_files/figure-latex/ks-boot-plot-1.pdf>
+
+Underfull \vbox (badness 3803) has occurred while \output is active []
+
+[212] [213]
+File: 11-Bootstrap_aplic_files/figure-latex/perm-test-cor-1.pdf Graphic file (t
+ype pdf)
+<use 11-Bootstrap_aplic_files/figure-latex/perm-test-cor-1.pdf>
+[214] [215] [216]
+File: 11-Bootstrap_aplic_files/figure-latex/semipar-test-plot-1.pdf Graphic fil
+e (type pdf)
+<use 11-Bootstrap_aplic_files/figure-latex/semipar-test-plot-1.pdf>
+File: 11-Bootstrap_aplic_files/figure-latex/semipar-var-plot-1.pdf Graphic file
+ (type pdf)
+<use 11-Bootstrap_aplic_files/figure-latex/semipar-var-plot-1.pdf>
+[217]
+Underfull \vbox (badness 10000) detected at line 12421
+ []
+
+[218]
+File: 11-Bootstrap_aplic_files/figure-latex/boot-semipar-test-plot-1.pdf Graphi
+c file (type pdf)
+<use 11-Bootstrap_aplic_files/figure-latex/boot-semipar-test-plot-1.pdf>
+[219]
+File: 11-Bootstrap_aplic_files/figure-latex/semipar-crplot-1.pdf Graphic file (
+type pdf)
+<use 11-Bootstrap_aplic_files/figure-latex/semipar-crplot-1.pdf>
+[220] [221] [222
+
 ]
+Apéndice A.
+[223]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-3-1.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-3-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[200]
+[224]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/hist-movie-1.pdf Graphic
  file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/hist-movie-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[201]
+[225]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/ecdfplot-1.pdf Graphic f
 ile (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/ecdfplot-1.pdf>
-[202]
+[226]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-1.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-4-1.pdf>
@@ -1851,34 +1886,34 @@ aphic file (type pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[203] [204]
-Overfull \hbox (3.928pt too wide) in alignment at lines 11442--11446
+[227] [228]
+Overfull \hbox (3.928pt too wide) in alignment at lines 12803--12807
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (3.928pt too wide) in alignment at lines 11446--11452
+Overfull \hbox (3.928pt too wide) in alignment at lines 12807--12813
  [] [] [] [] [] 
  []
 
-[205]
-Overfull \hbox (5.23227pt too wide) in paragraph at lines 11568--11568
+[229]
+Overfull \hbox (5.23227pt too wide) in paragraph at lines 12929--12929
 []\TU/lmtt/m/n/10 ##                    method = METHOD, data.name = DNAME), RE
 SULTS), class = "htest")[] 
  []
 
-[206]
+[230]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-7-1.pdf Gr
 aphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-7-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[207] [208]
+[231] [232]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-11-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-11-1.pdf>
-[209] [210]
+[233] [234]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1.pdf Graphic fi
 le (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/grafsec-1.pdf>
@@ -1888,7 +1923,7 @@ raphic file (type pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[211]
+[235]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-14-1.pdf>
@@ -1898,34 +1933,34 @@ raphic file (type pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[212]
+[236]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/dispret-1.pdf Graphic fi
 le (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/dispret-1.pdf>
-[213]
+[237]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-18-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-18-1.pdf>
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-19-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-19-1.pdf>
-[214]
+[238]
 File: 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-20-1.pdf G
 raphic file (type pdf)
 <use 22-Bondad_ajuste_Aleatoriedad_files/figure-latex/unnamed-chunk-20-1.pdf>
-[215] [216] [217]
-Underfull \hbox (badness 1062) in paragraph at lines 12232--12235
+[239] [240] [241]
+Underfull \hbox (badness 1062) in paragraph at lines 13593--13596
 []\TU/lmr/m/n/10 Empleando la discretización anterior se simplifica notablement
 e el contraste chi-cuadrado de
  []
 
 
-Overfull \hbox (11.2765pt too wide) in paragraph at lines 12272--12277
+Overfull \hbox (11.2765pt too wide) in paragraph at lines 13633--13638
 []\TU/lmr/m/n/10 El contraste anterior se puede generalizar a contrastar la uni
 formidad de las $[]$-uplas $[][][][] [][][] [] [] [][][]$
  []
 
-[218] [219] [220]
+[242] [243] [244]
 Apéndice B.
 File: 23-Integracion_numerica_files/figure-latex/unnamed-chunk-2-1.pdf Graphic 
 file (type pdf)
@@ -1933,44 +1968,44 @@ file (type pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[221
+[245
 
-] [222] [223] [224]
+] [246] [247] [248]
 File: 23-Integracion_numerica_files/figure-latex/unnamed-chunk-10-1.pdf Graphic
  file (type pdf)
 <use 23-Integracion_numerica_files/figure-latex/unnamed-chunk-10-1.pdf>
-[225] [226]
+[249] [250]
 Apéndice C.
-[227
+[251
 
-] [228]
-Overfull \hbox (13.2423pt too wide) in paragraph at lines 12830--12831
+] [252]
+Overfull \hbox (13.2423pt too wide) in paragraph at lines 14191--14192
 []\TU/lmr/m/n/10 También podríamos emplear balance de carga si el tiempo de com
 putación es variable (e.g. \TU/lmtt/m/n/10 parLapplyLB()
  []
 
-[229]
-Overfull \vbox (0.93646pt too high) detected at line 12966
+[253]
+Overfull \vbox (0.93646pt too high) detected at line 14327
  []
 
-[230] [231] [232
+[254] [255] [256
 
 ]
 Apéndice D.
-[233]
+[257]
 File: 25-Soluciones_files/figure-latex/simpiplot-1.pdf Graphic file (type pdf)
 <use 25-Soluciones_files/figure-latex/simpiplot-1.pdf>
-[234]
+[258]
 File: 25-Soluciones_files/figure-latex/simberplot-1.pdf Graphic file (type pdf)
 
 <use 25-Soluciones_files/figure-latex/simberplot-1.pdf>
-[235]
+[259]
 File: 25-Soluciones_files/figure-latex/simberconv-1.pdf Graphic file (type pdf)
 
 <use 25-Soluciones_files/figure-latex/simberconv-1.pdf>
 File: images/circuito2.png Graphic file (type bmp)
 <images/circuito2.png>
-[236] [237] [238]
+[260] [261] [262]
 File: 25-Soluciones_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (typ
 e pdf)
 <use 25-Soluciones_files/figure-latex/unnamed-chunk-14-1.pdf>
@@ -1980,14 +2015,14 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[239] [240]
+[263] [264]
 File: 25-Soluciones_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (typ
 e pdf)
 <use 25-Soluciones_files/figure-latex/unnamed-chunk-17-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[241] [242]
+[265] [266]
 File: 25-Soluciones_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (typ
 e pdf)
 <use 25-Soluciones_files/figure-latex/unnamed-chunk-19-1.pdf>
@@ -1997,9 +2032,9 @@ e pdf)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[243] [244] [245
+[267] [268] [269
 
-] [246]
+] [270]
 No file Simulacion.bbl.
 \tf@thm=\write5
 \openout5 = `Simulacion.thm'.
@@ -2054,7 +2089,7 @@ The property list \__xpg_alias contains the pairs (without outer braces):
 >  {spanishmx/target}  =>  {spanish}
 >  {spanishmx/variant}  =>  {mexican}
 >  {spanishmx/options}  =>  {variant=mexican}.
-[247] (Simulacion.aux
+[271] (Simulacion.aux
 LaTeX Info: Redefining \rmfamily on input line 17.
 LaTeX Info: Redefining \sffamily on input line 17.
 LaTeX Info: Redefining \ttfamily on input line 17.
@@ -2064,12 +2099,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 23324 strings out of 410500
- 486140 string characters out of 2815815
- 980706 words of memory out of 3000000
- 44040 multiletter control sequences out of 15000+600000
- 477315 words of font info for 109 fonts, out of 8000000 for 9000
+ 23439 strings out of 410500
+ 491655 string characters out of 2815815
+ 987837 words of memory out of 3000000
+ 44145 multiletter control sequences out of 15000+600000
+ 477323 words of font info for 110 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,12n,121p,1009b,668s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
-Output written on Simulacion.pdf (247 pages).
+Output written on Simulacion.pdf (271 pages).

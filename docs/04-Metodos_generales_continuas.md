@@ -208,7 +208,7 @@ b)  Generar $10^{4}$ valores de la distribución doble exponencial de
     
     ```
     ##    user  system elapsed 
-    ##    0.02    0.00    0.02
+    ##    0.03    0.00    0.03
     ```
 
 
@@ -484,7 +484,7 @@ system.time(x <- rbeta2n(nsim, s1, s2))
 
 ```
 ##    user  system elapsed 
-##    0.02    0.00    0.02
+##    0.03    0.00    0.03
 ```
 
 Para analizar la eficiencia podemos emplear el número de generaciones de la distribución auxiliar (siguiente sección):
@@ -671,7 +671,7 @@ system.time(x <- rnormARn(nsim))
 
 ```
 ##    user  system elapsed 
-##    0.09    0.00    0.10
+##    0.11    0.00    0.11
 ```
 
 Evaluamos la eficiencia:
@@ -1179,7 +1179,7 @@ simres::rcauchy.rou
 ##   attr(x, "ngen") <- ngen
 ##   return(x)
 ## }
-## <bytecode: 0x0000000039b74ff0>
+## <bytecode: 0x0000000020cac378>
 ## <environment: namespace:simres>
 ```
 
@@ -1278,7 +1278,7 @@ Observaciones:
   $f_{i}$ y se combinan aleatoriamente.
 
 
-Otro ejemplo de una mixtura discreta es el estimador tipo núcleo de la densidad (ver e.g. la ayuda de la función `density()` de R o la [Sección 3.3](https://rubenfcasal.github.io/book_remuestreo/modunif-boot-suav.html) del libro [Técnicas de Remuestreo](https://rubenfcasal.github.io/book_remuestreo)).
+Otro ejemplo de una mixtura discreta es el estimador tipo núcleo de la densidad (ver e.g. la ayuda de la función `density()` de R o la Sección \@ref(modunif-boot-suav)).
 Simular a partir de una estimación de este tipo es lo que se conoce como *bootstrap suavizado*. 
 
 En el caso de una mixtura continua tendríamos:

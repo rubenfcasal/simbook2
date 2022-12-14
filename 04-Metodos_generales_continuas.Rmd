@@ -1086,7 +1086,7 @@ Observaciones:
   $f_{i}$ y se combinan aleatoriamente.
 
 
-Otro ejemplo de una mixtura discreta es el estimador tipo núcleo de la densidad (ver e.g. la ayuda de la función `density()` de R o la [Sección 3.3](https://rubenfcasal.github.io/book_remuestreo/modunif-boot-suav.html) del libro [Técnicas de Remuestreo](https://rubenfcasal.github.io/book_remuestreo)).
+Otro ejemplo de una mixtura discreta es el estimador tipo núcleo de la densidad (ver e.g. la ayuda de la función `density()` de R o la Sección \@ref(modunif-boot-suav)).
 Simular a partir de una estimación de este tipo es lo que se conoce como *bootstrap suavizado*. 
 
 En el caso de una mixtura continua tendríamos:

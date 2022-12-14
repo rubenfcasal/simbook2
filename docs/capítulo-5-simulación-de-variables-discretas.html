@@ -295,6 +295,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="boot-aplic.html"><a href="boot-aplic.html"><i class="fa fa-check"></i><b>10</b> Aplicaciones del remuestreo</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sesgo-prec.html"><a href="sesgo-prec.html"><i class="fa fa-check"></i><b>10.1</b> Estimación del sesgo y la precisión de un estimador</a></li>
+<li class="chapter" data-level="10.2" data-path="boot-ic.html"><a href="boot-ic.html"><i class="fa fa-check"></i><b>10.2</b> Intervalos de confianza bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-norm"><i class="fa fa-check"></i><b>10.2.1</b> Aproximación normal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-perc"><i class="fa fa-check"></i><b>10.2.2</b> Método percentil directo</a></li>
+<li class="chapter" data-level="10.2.3" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-basic"><i class="fa fa-check"></i><b>10.2.3</b> Método percentil básico</a></li>
+<li class="chapter" data-level="10.2.4" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-stud"><i class="fa fa-check"></i><b>10.2.4</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="10.2.5" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-bca"><i class="fa fa-check"></i><b>10.2.5</b> Método BCa</a></li>
+<li class="chapter" data-level="10.2.6" data-path="boot-ic.html"><a href="boot-ic.html#icboot-trans"><i class="fa fa-check"></i><b>10.2.6</b> Ejemplo: IC bootstrap para el coeficiente de correlación</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="boot-test.html"><a href="boot-test.html"><i class="fa fa-check"></i><b>10.3</b> Contrastes de hipótesis bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="boot-test.html"><a href="boot-test.html#contrastes-parametricos"><i class="fa fa-check"></i><b>10.3.1</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="10.3.2" data-path="boot-test.html"><a href="boot-test.html#contrastes-de-permutaciones"><i class="fa fa-check"></i><b>10.3.2</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="10.3.3" data-path="boot-test.html"><a href="boot-test.html#contrastes-semiparametricos"><i class="fa fa-check"></i><b>10.3.3</b> Contrastes bootstrap semiparamétricos</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
 <li class="chapter" data-level="A" data-path="gof-aleat.html"><a href="gof-aleat.html"><i class="fa fa-check"></i><b>A</b> Bondad de Ajuste y Aleatoriedad</a>
 <ul>
@@ -393,9 +412,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="capítulo-5-simulación-de-variables-discretas" class="section level2" number="13.3">
+<div id="capítulo-5-simulación-de-variables-discretas" class="section level2" number="14.3">
 <h2><span class="header-section-number">D.3</span> Capítulo 5 <a href="discretas.html">Simulación de variables discretas</a></h2>
-<div id="sol-mixta-cuantil" class="section level3" number="13.3.1">
+<div id="sol-mixta-cuantil" class="section level3" number="14.3.1">
 <h3><span class="header-section-number">D.3.1</span> Ejercicio <a href="ejercicios-discretas.html#exr:mixta-cuantil">5.1</a></h3>
 <p>Enunciado <a href="ejercicios-discretas.html#exr:mixta-cuantil">5.1</a> (Simulación de una distribución mixta mediante el método de inversión generalizado):</p>
 <p>Consideramos la variable aleatoria con función de distribución dada por:
@@ -408,16 +427,16 @@ x+\frac{1}{10} &amp; \mbox{si $x\in[\frac{1}{5},\frac{9}{10}]$}\\
 \end{array}
 \right.\]</span></p>
 <p>Esta función está implementada en el siguiente código:</p>
-<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-1" aria-hidden="true" tabindex="-1"></a>fdistr <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb688-2"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>,</span>
-<span id="cb688-3"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>, x<span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb688-4"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ifelse</span>(x <span class="sc">&lt;=</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">10</span>, x <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">1</span>) ) )</span>
-<span id="cb688-5"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb688-6"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Empleando ifelse la función es vectorial (y podemos emplear curve...)</span></span>
-<span id="cb688-7"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(fdistr, <span class="at">from =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, </span>
-<span id="cb688-8"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Función de distribución&#39;</span>)</span>
-<span id="cb688-9"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Discontinuidades en 0 y 1/5</span></span>
-<span id="cb688-10"><a href="capítulo-5-simulación-de-variables-discretas.html#cb688-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">3</span><span class="sc">/</span><span class="dv">10</span>), <span class="at">lty =</span> <span class="dv">2</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-1" aria-hidden="true" tabindex="-1"></a>fdistr <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb747-2"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb747-3"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>, x<span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>,</span>
+<span id="cb747-4"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ifelse</span>(x <span class="sc">&lt;=</span> <span class="dv">9</span><span class="sc">/</span><span class="dv">10</span>, x <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">1</span>) ) )</span>
+<span id="cb747-5"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb747-6"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Empleando ifelse la función es vectorial (y podemos emplear curve...)</span></span>
+<span id="cb747-7"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(fdistr, <span class="at">from =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, </span>
+<span id="cb747-8"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&#39;Función de distribución&#39;</span>)</span>
+<span id="cb747-9"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Discontinuidades en 0 y 1/5</span></span>
+<span id="cb747-10"><a href="capítulo-5-simulación-de-variables-discretas.html#cb747-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">3</span><span class="sc">/</span><span class="dv">10</span>), <span class="at">lty =</span> <span class="dv">2</span>) </span></code></pre></div>
 <p><img src="25-Soluciones_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><strong>Nota</strong>: Esta variable toma los valores 0 y 1/5 con probabilidad 1/10.</p>
 <ol style="list-style-type: lower-alpha">
@@ -446,25 +465,25 @@ el algoritmo sería:</p>
 </ol></li>
 <li><p>El algoritmo de simulación se puede implementar a partir de la función cuantil
 (vectorial):</p>
-<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb689-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función cuantil:</span></span>
-<span id="cb689-2"><a href="capítulo-5-simulación-de-variables-discretas.html#cb689-2" aria-hidden="true" tabindex="-1"></a>fquant <span class="ot">&lt;-</span> <span class="cf">function</span>(u) </span>
-<span id="cb689-3"><a href="capítulo-5-simulación-de-variables-discretas.html#cb689-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(u <span class="sc">&lt;</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">0</span>,</span>
-<span id="cb689-4"><a href="capítulo-5-simulación-de-variables-discretas.html#cb689-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(u <span class="sc">&lt;</span> <span class="dv">2</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">*</span>(u <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>),</span>
-<span id="cb689-5"><a href="capítulo-5-simulación-de-variables-discretas.html#cb689-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">ifelse</span>(u <span class="sc">&lt;</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>, u <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>) ) )</span>
-<span id="cb689-6"><a href="capítulo-5-simulación-de-variables-discretas.html#cb689-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para generar nsim valores:</span></span>
-<span id="cb689-7"><a href="capítulo-5-simulación-de-variables-discretas.html#cb689-7" aria-hidden="true" tabindex="-1"></a>rx <span class="ot">&lt;-</span> <span class="cf">function</span>(nsim) <span class="fu">fquant</span>(<span class="fu">runif</span>(nsim))</span></code></pre></div>
+<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb748-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función cuantil:</span></span>
+<span id="cb748-2"><a href="capítulo-5-simulación-de-variables-discretas.html#cb748-2" aria-hidden="true" tabindex="-1"></a>fquant <span class="ot">&lt;-</span> <span class="cf">function</span>(u) </span>
+<span id="cb748-3"><a href="capítulo-5-simulación-de-variables-discretas.html#cb748-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(u <span class="sc">&lt;</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">0</span>,</span>
+<span id="cb748-4"><a href="capítulo-5-simulación-de-variables-discretas.html#cb748-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(u <span class="sc">&lt;</span> <span class="dv">2</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">2</span><span class="sc">*</span>(u <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>),</span>
+<span id="cb748-5"><a href="capítulo-5-simulación-de-variables-discretas.html#cb748-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">ifelse</span>(u <span class="sc">&lt;</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>, u <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>) ) )</span>
+<span id="cb748-6"><a href="capítulo-5-simulación-de-variables-discretas.html#cb748-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para generar nsim valores:</span></span>
+<span id="cb748-7"><a href="capítulo-5-simulación-de-variables-discretas.html#cb748-7" aria-hidden="true" tabindex="-1"></a>rx <span class="ot">&lt;-</span> <span class="cf">function</span>(nsim) <span class="fu">fquant</span>(<span class="fu">runif</span>(nsim))</span></code></pre></div>
 <p>Ejemplo:</p>
-<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb690-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb690-2"><a href="capítulo-5-simulación-de-variables-discretas.html#cb690-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">4</span></span>
-<span id="cb690-3"><a href="capítulo-5-simulación-de-variables-discretas.html#cb690-3" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(simx <span class="ot">&lt;-</span> <span class="fu">rx</span>(nsim))</span></code></pre></div>
+<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb749-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb749-2"><a href="capítulo-5-simulación-de-variables-discretas.html#cb749-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb749-3"><a href="capítulo-5-simulación-de-variables-discretas.html#cb749-3" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(simx <span class="ot">&lt;-</span> <span class="fu">rx</span>(nsim))</span></code></pre></div>
 <pre><code>##    user  system elapsed 
 ##       0       0       0</code></pre>
-<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb692-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(simx, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb751-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(simx, <span class="at">breaks =</span> <span class="st">&quot;FD&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="25-Soluciones_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>En este caso como no es una variable absolutamente continua mejor emplear
 la función de distribución para compararla con la teórica:</p>
-<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb693-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(simx)(x), <span class="at">from=</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">type =</span> <span class="st">&quot;s&quot;</span>)</span>
-<span id="cb693-2"><a href="capítulo-5-simulación-de-variables-discretas.html#cb693-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">fdistr</span>(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="capítulo-5-simulación-de-variables-discretas.html#cb752-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">ecdf</span>(simx)(x), <span class="at">from=</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">type =</span> <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb752-2"><a href="capítulo-5-simulación-de-variables-discretas.html#cb752-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">fdistr</span>(x), <span class="at">type =</span> <span class="st">&quot;s&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="25-Soluciones_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /></p></li>
 </ol>
 

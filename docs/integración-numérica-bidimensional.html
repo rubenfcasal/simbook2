@@ -295,6 +295,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="boot-aplic.html"><a href="boot-aplic.html"><i class="fa fa-check"></i><b>10</b> Aplicaciones del remuestreo</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sesgo-prec.html"><a href="sesgo-prec.html"><i class="fa fa-check"></i><b>10.1</b> Estimación del sesgo y la precisión de un estimador</a></li>
+<li class="chapter" data-level="10.2" data-path="boot-ic.html"><a href="boot-ic.html"><i class="fa fa-check"></i><b>10.2</b> Intervalos de confianza bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-norm"><i class="fa fa-check"></i><b>10.2.1</b> Aproximación normal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-perc"><i class="fa fa-check"></i><b>10.2.2</b> Método percentil directo</a></li>
+<li class="chapter" data-level="10.2.3" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-basic"><i class="fa fa-check"></i><b>10.2.3</b> Método percentil básico</a></li>
+<li class="chapter" data-level="10.2.4" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-stud"><i class="fa fa-check"></i><b>10.2.4</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="10.2.5" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-bca"><i class="fa fa-check"></i><b>10.2.5</b> Método BCa</a></li>
+<li class="chapter" data-level="10.2.6" data-path="boot-ic.html"><a href="boot-ic.html#icboot-trans"><i class="fa fa-check"></i><b>10.2.6</b> Ejemplo: IC bootstrap para el coeficiente de correlación</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="boot-test.html"><a href="boot-test.html"><i class="fa fa-check"></i><b>10.3</b> Contrastes de hipótesis bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="boot-test.html"><a href="boot-test.html#contrastes-parametricos"><i class="fa fa-check"></i><b>10.3.1</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="10.3.2" data-path="boot-test.html"><a href="boot-test.html#contrastes-de-permutaciones"><i class="fa fa-check"></i><b>10.3.2</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="10.3.3" data-path="boot-test.html"><a href="boot-test.html#contrastes-semiparametricos"><i class="fa fa-check"></i><b>10.3.3</b> Contrastes bootstrap semiparamétricos</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
 <li class="chapter" data-level="A" data-path="gof-aleat.html"><a href="gof-aleat.html"><i class="fa fa-check"></i><b>A</b> Bondad de Ajuste y Aleatoriedad</a>
 <ul>
@@ -393,83 +412,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="integración-numérica-bidimensional" class="section level2" number="11.2">
+<div id="integración-numérica-bidimensional" class="section level2" number="12.2">
 <h2><span class="header-section-number">B.2</span> Integración numérica bidimensional</h2>
 <p>Supongamos que nos interesa aproximar una integral de la forma:
 <span class="math display">\[I=\int_{a_x}^{b_x}\int_{a_y}^{b_y}f(x, y)dy dx\]</span>.</p>
 <p>Consideraremos como ejemplo:
 <span class="math display">\[\int_{-1}^{1} \int_{-1}^{1} \left( x^2 - y^2 \right) dx dy = 0\]</span>.</p>
-<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="integración-numérica-bidimensional.html#cb620-1" aria-hidden="true" tabindex="-1"></a>f2d <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y) x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> y<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="integración-numérica-bidimensional.html#cb679-1" aria-hidden="true" tabindex="-1"></a>f2d <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y) x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> y<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <p>Es habitual (especialmente en simulación) que la función se evalúe en una rejilla:</p>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="integración-numérica-bidimensional.html#cb621-1" aria-hidden="true" tabindex="-1"></a>ax <span class="ot">=</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb621-2"><a href="integración-numérica-bidimensional.html#cb621-2" aria-hidden="true" tabindex="-1"></a>ay <span class="ot">=</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb621-3"><a href="integración-numérica-bidimensional.html#cb621-3" aria-hidden="true" tabindex="-1"></a>bx <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb621-4"><a href="integración-numérica-bidimensional.html#cb621-4" aria-hidden="true" tabindex="-1"></a>by <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb621-5"><a href="integración-numérica-bidimensional.html#cb621-5" aria-hidden="true" tabindex="-1"></a>nx <span class="ot">=</span> <span class="dv">21</span></span>
-<span id="cb621-6"><a href="integración-numérica-bidimensional.html#cb621-6" aria-hidden="true" tabindex="-1"></a>ny <span class="ot">=</span> <span class="dv">21</span></span>
-<span id="cb621-7"><a href="integración-numérica-bidimensional.html#cb621-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(ax, bx, <span class="at">length =</span> nx)</span>
-<span id="cb621-8"><a href="integración-numérica-bidimensional.html#cb621-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">seq</span>(ay, by, <span class="at">length =</span> ny)</span>
-<span id="cb621-9"><a href="integración-numérica-bidimensional.html#cb621-9" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">outer</span>(x, y, f2d)</span>
-<span id="cb621-10"><a href="integración-numérica-bidimensional.html#cb621-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb621-11"><a href="integración-numérica-bidimensional.html#cb621-11" aria-hidden="true" tabindex="-1"></a>hx <span class="ot">&lt;-</span> x[<span class="dv">2</span>]<span class="sc">-</span>x[<span class="dv">1</span>]</span>
-<span id="cb621-12"><a href="integración-numérica-bidimensional.html#cb621-12" aria-hidden="true" tabindex="-1"></a>hy <span class="ot">&lt;-</span> y[<span class="dv">2</span>]<span class="sc">-</span>y[<span class="dv">1</span>]</span></code></pre></div>
-<div id="representación-gráfica" class="section level3" number="11.2.1">
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="integración-numérica-bidimensional.html#cb680-1" aria-hidden="true" tabindex="-1"></a>ax <span class="ot">=</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb680-2"><a href="integración-numérica-bidimensional.html#cb680-2" aria-hidden="true" tabindex="-1"></a>ay <span class="ot">=</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb680-3"><a href="integración-numérica-bidimensional.html#cb680-3" aria-hidden="true" tabindex="-1"></a>bx <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb680-4"><a href="integración-numérica-bidimensional.html#cb680-4" aria-hidden="true" tabindex="-1"></a>by <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb680-5"><a href="integración-numérica-bidimensional.html#cb680-5" aria-hidden="true" tabindex="-1"></a>nx <span class="ot">=</span> <span class="dv">21</span></span>
+<span id="cb680-6"><a href="integración-numérica-bidimensional.html#cb680-6" aria-hidden="true" tabindex="-1"></a>ny <span class="ot">=</span> <span class="dv">21</span></span>
+<span id="cb680-7"><a href="integración-numérica-bidimensional.html#cb680-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(ax, bx, <span class="at">length =</span> nx)</span>
+<span id="cb680-8"><a href="integración-numérica-bidimensional.html#cb680-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">seq</span>(ay, by, <span class="at">length =</span> ny)</span>
+<span id="cb680-9"><a href="integración-numérica-bidimensional.html#cb680-9" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">outer</span>(x, y, f2d)</span>
+<span id="cb680-10"><a href="integración-numérica-bidimensional.html#cb680-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb680-11"><a href="integración-numérica-bidimensional.html#cb680-11" aria-hidden="true" tabindex="-1"></a>hx <span class="ot">&lt;-</span> x[<span class="dv">2</span>]<span class="sc">-</span>x[<span class="dv">1</span>]</span>
+<span id="cb680-12"><a href="integración-numérica-bidimensional.html#cb680-12" aria-hidden="true" tabindex="-1"></a>hy <span class="ot">&lt;-</span> y[<span class="dv">2</span>]<span class="sc">-</span>y[<span class="dv">1</span>]</span></code></pre></div>
+<div id="representación-gráfica" class="section level3" number="12.2.1">
 <h3><span class="header-section-number">B.2.1</span> Representación gráfica</h3>
 <p>Puede ser de utilidad las herramientas de los paquetes <code>plot3D</code> y <code>plot3Drgl</code>
 (también se pueden utilizar las funciones <code>spersp</code>, <code>simage</code>, <code>spoints</code> y <code>splot</code>
 del paquete <code>npsp</code>).</p>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="integración-numérica-bidimensional.html#cb622-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(plot3D)) <span class="fu">stop</span>(<span class="st">&#39;Required pakage `plot3D` not installed.&#39;</span>)</span>
-<span id="cb622-2"><a href="integración-numérica-bidimensional.html#cb622-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb622-3"><a href="integración-numérica-bidimensional.html#cb622-3" aria-hidden="true" tabindex="-1"></a><span class="co"># persp3D(z = z, x = x, y = y)</span></span>
-<span id="cb622-4"><a href="integración-numérica-bidimensional.html#cb622-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb622-5"><a href="integración-numérica-bidimensional.html#cb622-5" aria-hidden="true" tabindex="-1"></a>persp3D.f2d <span class="ot">&lt;-</span> <span class="cf">function</span>(f2d, <span class="at">ax=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">bx=</span><span class="dv">1</span>, <span class="at">ay=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">by=</span><span class="dv">1</span>, <span class="at">nx=</span><span class="dv">21</span>, <span class="at">ny=</span><span class="dv">21</span>, ...) { </span>
-<span id="cb622-6"><a href="integración-numérica-bidimensional.html#cb622-6" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">seq</span>(ax, bx, <span class="at">length =</span> nx)</span>
-<span id="cb622-7"><a href="integración-numérica-bidimensional.html#cb622-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">seq</span>(ay, by, <span class="at">length =</span> ny)</span>
-<span id="cb622-8"><a href="integración-numérica-bidimensional.html#cb622-8" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">outer</span>(x, y, f2d)</span>
-<span id="cb622-9"><a href="integración-numérica-bidimensional.html#cb622-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">persp3D</span>(x, y, z, ...)</span>
-<span id="cb622-10"><a href="integración-numérica-bidimensional.html#cb622-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb622-11"><a href="integración-numérica-bidimensional.html#cb622-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb622-12"><a href="integración-numérica-bidimensional.html#cb622-12" aria-hidden="true" tabindex="-1"></a><span class="fu">persp3D.f2d</span>(f2d, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="integración-numérica-bidimensional.html#cb681-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(plot3D)) <span class="fu">stop</span>(<span class="st">&#39;Required pakage `plot3D` not installed.&#39;</span>)</span>
+<span id="cb681-2"><a href="integración-numérica-bidimensional.html#cb681-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb681-3"><a href="integración-numérica-bidimensional.html#cb681-3" aria-hidden="true" tabindex="-1"></a><span class="co"># persp3D(z = z, x = x, y = y)</span></span>
+<span id="cb681-4"><a href="integración-numérica-bidimensional.html#cb681-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb681-5"><a href="integración-numérica-bidimensional.html#cb681-5" aria-hidden="true" tabindex="-1"></a>persp3D.f2d <span class="ot">&lt;-</span> <span class="cf">function</span>(f2d, <span class="at">ax=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">bx=</span><span class="dv">1</span>, <span class="at">ay=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">by=</span><span class="dv">1</span>, <span class="at">nx=</span><span class="dv">21</span>, <span class="at">ny=</span><span class="dv">21</span>, ...) { </span>
+<span id="cb681-6"><a href="integración-numérica-bidimensional.html#cb681-6" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">seq</span>(ax, bx, <span class="at">length =</span> nx)</span>
+<span id="cb681-7"><a href="integración-numérica-bidimensional.html#cb681-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">seq</span>(ay, by, <span class="at">length =</span> ny)</span>
+<span id="cb681-8"><a href="integración-numérica-bidimensional.html#cb681-8" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">outer</span>(x, y, f2d)</span>
+<span id="cb681-9"><a href="integración-numérica-bidimensional.html#cb681-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">persp3D</span>(x, y, z, ...)</span>
+<span id="cb681-10"><a href="integración-numérica-bidimensional.html#cb681-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb681-11"><a href="integración-numérica-bidimensional.html#cb681-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb681-12"><a href="integración-numérica-bidimensional.html#cb681-12" aria-hidden="true" tabindex="-1"></a><span class="fu">persp3D.f2d</span>(f2d, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="at">ticktype =</span> <span class="st">&quot;detailed&quot;</span>) </span></code></pre></div>
 <p><img src="23-Integracion_numerica_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="método-del-trapezoide-1" class="section level3" number="11.2.2">
+<div id="método-del-trapezoide-1" class="section level3" number="12.2.2">
 <h3><span class="header-section-number">B.2.2</span> Método del trapezoide</h3>
 <p>Error <span class="math inline">\(O(n^{-\frac{2}{d}})\)</span>.</p>
-<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="integración-numérica-bidimensional.html#cb623-1" aria-hidden="true" tabindex="-1"></a>trapezoid.mat <span class="ot">&lt;-</span> <span class="cf">function</span>(z, hx, hy) { </span>
-<span id="cb623-2"><a href="integración-numérica-bidimensional.html#cb623-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Integración numérica bidimensional</span></span>
-<span id="cb623-3"><a href="integración-numérica-bidimensional.html#cb623-3" aria-hidden="true" tabindex="-1"></a><span class="co"># utilizando el método del trapezoide (se aproxima f linealmente)</span></span>
-<span id="cb623-4"><a href="integración-numérica-bidimensional.html#cb623-4" aria-hidden="true" tabindex="-1"></a>  f.vec <span class="ot">&lt;-</span> <span class="fu">apply</span>(z, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">trapezoid.vec</span>(x, hx))</span>
-<span id="cb623-5"><a href="integración-numérica-bidimensional.html#cb623-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">trapezoid.vec</span>(f.vec, hy)) </span>
-<span id="cb623-6"><a href="integración-numérica-bidimensional.html#cb623-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb623-7"><a href="integración-numérica-bidimensional.html#cb623-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb623-8"><a href="integración-numérica-bidimensional.html#cb623-8" aria-hidden="true" tabindex="-1"></a><span class="co"># trapezoid.mat(z, hx, hy) </span></span>
-<span id="cb623-9"><a href="integración-numérica-bidimensional.html#cb623-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb623-10"><a href="integración-numérica-bidimensional.html#cb623-10" aria-hidden="true" tabindex="-1"></a>trapezoid.f2d <span class="ot">&lt;-</span> <span class="cf">function</span>(f2d, <span class="at">ax=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">bx=</span><span class="dv">1</span>, <span class="at">ay=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">by=</span><span class="dv">1</span>, <span class="at">nx=</span><span class="dv">21</span>, <span class="at">ny=</span><span class="dv">21</span>) { </span>
-<span id="cb623-11"><a href="integración-numérica-bidimensional.html#cb623-11" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">seq</span>(ax, bx, <span class="at">length =</span> nx)</span>
-<span id="cb623-12"><a href="integración-numérica-bidimensional.html#cb623-12" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">seq</span>(ay, by, <span class="at">length =</span> ny)</span>
-<span id="cb623-13"><a href="integración-numérica-bidimensional.html#cb623-13" aria-hidden="true" tabindex="-1"></a>  hx <span class="ot">&lt;-</span> x[<span class="dv">2</span>]<span class="sc">-</span>x[<span class="dv">1</span>]</span>
-<span id="cb623-14"><a href="integración-numérica-bidimensional.html#cb623-14" aria-hidden="true" tabindex="-1"></a>  hy <span class="ot">&lt;-</span> y[<span class="dv">2</span>]<span class="sc">-</span>y[<span class="dv">1</span>]</span>
-<span id="cb623-15"><a href="integración-numérica-bidimensional.html#cb623-15" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">outer</span>(x, y, f2d)</span>
-<span id="cb623-16"><a href="integración-numérica-bidimensional.html#cb623-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trapezoid.mat</span>(z, hx, hy)</span>
-<span id="cb623-17"><a href="integración-numérica-bidimensional.html#cb623-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb623-18"><a href="integración-numérica-bidimensional.html#cb623-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb623-19"><a href="integración-numérica-bidimensional.html#cb623-19" aria-hidden="true" tabindex="-1"></a><span class="fu">trapezoid.f2d</span>(f2d, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">101</span>, <span class="dv">101</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="integración-numérica-bidimensional.html#cb682-1" aria-hidden="true" tabindex="-1"></a>trapezoid.mat <span class="ot">&lt;-</span> <span class="cf">function</span>(z, hx, hy) { </span>
+<span id="cb682-2"><a href="integración-numérica-bidimensional.html#cb682-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Integración numérica bidimensional</span></span>
+<span id="cb682-3"><a href="integración-numérica-bidimensional.html#cb682-3" aria-hidden="true" tabindex="-1"></a><span class="co"># utilizando el método del trapezoide (se aproxima f linealmente)</span></span>
+<span id="cb682-4"><a href="integración-numérica-bidimensional.html#cb682-4" aria-hidden="true" tabindex="-1"></a>  f.vec <span class="ot">&lt;-</span> <span class="fu">apply</span>(z, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">trapezoid.vec</span>(x, hx))</span>
+<span id="cb682-5"><a href="integración-numérica-bidimensional.html#cb682-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">trapezoid.vec</span>(f.vec, hy)) </span>
+<span id="cb682-6"><a href="integración-numérica-bidimensional.html#cb682-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb682-7"><a href="integración-numérica-bidimensional.html#cb682-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb682-8"><a href="integración-numérica-bidimensional.html#cb682-8" aria-hidden="true" tabindex="-1"></a><span class="co"># trapezoid.mat(z, hx, hy) </span></span>
+<span id="cb682-9"><a href="integración-numérica-bidimensional.html#cb682-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb682-10"><a href="integración-numérica-bidimensional.html#cb682-10" aria-hidden="true" tabindex="-1"></a>trapezoid.f2d <span class="ot">&lt;-</span> <span class="cf">function</span>(f2d, <span class="at">ax=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">bx=</span><span class="dv">1</span>, <span class="at">ay=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">by=</span><span class="dv">1</span>, <span class="at">nx=</span><span class="dv">21</span>, <span class="at">ny=</span><span class="dv">21</span>) { </span>
+<span id="cb682-11"><a href="integración-numérica-bidimensional.html#cb682-11" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">seq</span>(ax, bx, <span class="at">length =</span> nx)</span>
+<span id="cb682-12"><a href="integración-numérica-bidimensional.html#cb682-12" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">seq</span>(ay, by, <span class="at">length =</span> ny)</span>
+<span id="cb682-13"><a href="integración-numérica-bidimensional.html#cb682-13" aria-hidden="true" tabindex="-1"></a>  hx <span class="ot">&lt;-</span> x[<span class="dv">2</span>]<span class="sc">-</span>x[<span class="dv">1</span>]</span>
+<span id="cb682-14"><a href="integración-numérica-bidimensional.html#cb682-14" aria-hidden="true" tabindex="-1"></a>  hy <span class="ot">&lt;-</span> y[<span class="dv">2</span>]<span class="sc">-</span>y[<span class="dv">1</span>]</span>
+<span id="cb682-15"><a href="integración-numérica-bidimensional.html#cb682-15" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">outer</span>(x, y, f2d)</span>
+<span id="cb682-16"><a href="integración-numérica-bidimensional.html#cb682-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trapezoid.mat</span>(z, hx, hy)</span>
+<span id="cb682-17"><a href="integración-numérica-bidimensional.html#cb682-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb682-18"><a href="integración-numérica-bidimensional.html#cb682-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb682-19"><a href="integración-numérica-bidimensional.html#cb682-19" aria-hidden="true" tabindex="-1"></a><span class="fu">trapezoid.f2d</span>(f2d, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">101</span>, <span class="dv">101</span>) </span></code></pre></div>
 <pre><code>## [1] -8.881784e-18</code></pre>
 </div>
-<div id="comandos-de-r-1" class="section level3" number="11.2.3">
+<div id="comandos-de-r-1" class="section level3" number="12.2.3">
 <h3><span class="header-section-number">B.2.3</span> Comandos de R</h3>
 <p>Suponiendo que la función es vectorial, podemos emplear:</p>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="integración-numérica-bidimensional.html#cb625-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>( <span class="cf">function</span>(y) {</span>
-<span id="cb625-2"><a href="integración-numérica-bidimensional.html#cb625-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(y, <span class="cf">function</span>(y) {</span>
-<span id="cb625-3"><a href="integración-numérica-bidimensional.html#cb625-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">integrate</span>(<span class="cf">function</span>(x) <span class="fu">f2d</span>(x,y), ax, bx)<span class="sc">$</span>value }) }, </span>
-<span id="cb625-4"><a href="integración-numérica-bidimensional.html#cb625-4" aria-hidden="true" tabindex="-1"></a>    ay, by)</span></code></pre></div>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="integración-numérica-bidimensional.html#cb684-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>( <span class="cf">function</span>(y) {</span>
+<span id="cb684-2"><a href="integración-numérica-bidimensional.html#cb684-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(y, <span class="cf">function</span>(y) {</span>
+<span id="cb684-3"><a href="integración-numérica-bidimensional.html#cb684-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">integrate</span>(<span class="cf">function</span>(x) <span class="fu">f2d</span>(x,y), ax, bx)<span class="sc">$</span>value }) }, </span>
+<span id="cb684-4"><a href="integración-numérica-bidimensional.html#cb684-4" aria-hidden="true" tabindex="-1"></a>    ay, by)</span></code></pre></div>
 <pre><code>## -2.775558e-17 with absolute error &lt; 1.1e-14</code></pre>
 <p>Si la función no es vectorial y solo admite parámetros escalares:</p>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="integración-numérica-bidimensional.html#cb627-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(<span class="cf">function</span>(y) {</span>
-<span id="cb627-2"><a href="integración-numérica-bidimensional.html#cb627-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(y, <span class="cf">function</span>(y) {</span>
-<span id="cb627-3"><a href="integración-numérica-bidimensional.html#cb627-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">integrate</span>(<span class="cf">function</span>(x) {</span>
-<span id="cb627-4"><a href="integración-numérica-bidimensional.html#cb627-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sapply</span>(x, <span class="cf">function</span>(x) <span class="fu">f2d</span>(x,y)) }, ax, bx)<span class="sc">$</span>value }) },</span>
-<span id="cb627-5"><a href="integración-numérica-bidimensional.html#cb627-5" aria-hidden="true" tabindex="-1"></a>    ay, by)</span></code></pre></div>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="integración-numérica-bidimensional.html#cb686-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(<span class="cf">function</span>(y) {</span>
+<span id="cb686-2"><a href="integración-numérica-bidimensional.html#cb686-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(y, <span class="cf">function</span>(y) {</span>
+<span id="cb686-3"><a href="integración-numérica-bidimensional.html#cb686-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">integrate</span>(<span class="cf">function</span>(x) {</span>
+<span id="cb686-4"><a href="integración-numérica-bidimensional.html#cb686-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sapply</span>(x, <span class="cf">function</span>(x) <span class="fu">f2d</span>(x,y)) }, ax, bx)<span class="sc">$</span>value }) },</span>
+<span id="cb686-5"><a href="integración-numérica-bidimensional.html#cb686-5" aria-hidden="true" tabindex="-1"></a>    ay, by)</span></code></pre></div>
 <p>Fuente: <a href="http://tolstoy.newcastle.edu.au/R/help/04/10/5951.html">tolstoy.newcastle.edu.au</a>.</p>
 <p>Alternativamente se podría emplear la función <code>cubintegrate()</code> del paquete <a href="https://bnaras.github.io/cubature/"><code>cubature</code></a>.</p>
 

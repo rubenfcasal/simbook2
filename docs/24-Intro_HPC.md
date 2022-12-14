@@ -81,7 +81,7 @@ system.time(res.boot <- mclapply(1:100, func)) # En Windows llama a lapply() (mc
 
 ```
 ##    user  system elapsed 
-##    0.06    0.00    0.06
+##    0.07    0.00    0.08
 ```
 
 ```r
@@ -161,7 +161,7 @@ system.time(res.boot <- boot(muestra, statistic, R = B))
 
 ```
 ##    user  system elapsed 
-##    0.05    0.00    0.04
+##    0.05    0.00    0.05
 ```
 
 ```r
@@ -230,7 +230,7 @@ print(t.fin)
 
 ```
 ##    user  system elapsed 
-##    0.03    0.00    7.37
+##    0.00    0.00    7.74
 ```
 
 ```r

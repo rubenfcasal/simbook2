@@ -674,7 +674,7 @@ con al menos dos parámetros (con las opciones por defecto),
 los datos y el vector de índices de remuestreo, 
 y que devuelve el vector de estadísticos.
 
-Por ejemplo, para hacer inferencia sobre la mediana del tiempo de microorganismos,
+Por ejemplo, para hacer inferencia sobre la mediana del tiempo de vida de microorganismos,
 podríamos emplear el siguiente código:
 
 ```r
@@ -770,7 +770,7 @@ Además de estos métodos, las principales funciones de interés serían:
 * `boot.array()`: genera la matriz de índices a partir de la que se obtuvieron las remuestras (permite reconstruir las remuestras bootstrap).
   
 * `boot.ci()`: construye distintos tipos de intervalos de confianza 
-  (se tratarán en el Sección \@ref(icboot)) dependiendo del parámetro `type`:
+  (se tratarán en el Sección \@ref(boot-ic)) dependiendo del parámetro `type`:
   
     - `"norm"`: utiliza la distribución asintótica normal considerando las
         aproximaciones bootstrap del sesgo y de la varianza.

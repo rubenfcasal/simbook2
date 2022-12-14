@@ -295,6 +295,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.2" data-path="boot-reg.html"><a href="boot-reg.html#boot-residual"><i class="fa fa-check"></i><b>9.4.2</b> Bootstrap residual</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="boot-aplic.html"><a href="boot-aplic.html"><i class="fa fa-check"></i><b>10</b> Aplicaciones del remuestreo</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="sesgo-prec.html"><a href="sesgo-prec.html"><i class="fa fa-check"></i><b>10.1</b> Estimación del sesgo y la precisión de un estimador</a></li>
+<li class="chapter" data-level="10.2" data-path="boot-ic.html"><a href="boot-ic.html"><i class="fa fa-check"></i><b>10.2</b> Intervalos de confianza bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-norm"><i class="fa fa-check"></i><b>10.2.1</b> Aproximación normal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-perc"><i class="fa fa-check"></i><b>10.2.2</b> Método percentil directo</a></li>
+<li class="chapter" data-level="10.2.3" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-basic"><i class="fa fa-check"></i><b>10.2.3</b> Método percentil básico</a></li>
+<li class="chapter" data-level="10.2.4" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-stud"><i class="fa fa-check"></i><b>10.2.4</b> Método percentil-<em>t</em></a></li>
+<li class="chapter" data-level="10.2.5" data-path="boot-ic.html"><a href="boot-ic.html#boot-ic-bca"><i class="fa fa-check"></i><b>10.2.5</b> Método BCa</a></li>
+<li class="chapter" data-level="10.2.6" data-path="boot-ic.html"><a href="boot-ic.html#icboot-trans"><i class="fa fa-check"></i><b>10.2.6</b> Ejemplo: IC bootstrap para el coeficiente de correlación</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="boot-test.html"><a href="boot-test.html"><i class="fa fa-check"></i><b>10.3</b> Contrastes de hipótesis bootstrap</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="boot-test.html"><a href="boot-test.html#contrastes-parametricos"><i class="fa fa-check"></i><b>10.3.1</b> Contrastes bootstrap paramétricos</a></li>
+<li class="chapter" data-level="10.3.2" data-path="boot-test.html"><a href="boot-test.html#contrastes-de-permutaciones"><i class="fa fa-check"></i><b>10.3.2</b> Contrastes de permutaciones</a></li>
+<li class="chapter" data-level="10.3.3" data-path="boot-test.html"><a href="boot-test.html#contrastes-semiparametricos"><i class="fa fa-check"></i><b>10.3.3</b> Contrastes bootstrap semiparamétricos</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Apendices</b></span></li>
 <li class="chapter" data-level="A" data-path="gof-aleat.html"><a href="gof-aleat.html"><i class="fa fa-check"></i><b>A</b> Bondad de Ajuste y Aleatoriedad</a>
 <ul>
@@ -473,7 +492,7 @@ En su forma más simple permite realizar bootstrap uniforme (que en la práctica
 con al menos dos parámetros (con las opciones por defecto),
 los datos y el vector de índices de remuestreo,
 y que devuelve el vector de estadísticos.</p>
-<p>Por ejemplo, para hacer inferencia sobre la mediana del tiempo de microorganismos,
+<p>Por ejemplo, para hacer inferencia sobre la mediana del tiempo de vida de microorganismos,
 podríamos emplear el siguiente código:</p>
 <div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="intro-paquetes.html#cb511-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
 <span id="cb511-2"><a href="intro-paquetes.html#cb511-2" aria-hidden="true" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> lifetimes</span>
@@ -539,7 +558,7 @@ al eliminar una observación; este gráfico también se puede obtener establecie
 <code>jack = TRUE</code> en <code>plot.boot()</code>).</p></li>
 <li><p><code>boot.array()</code>: genera la matriz de índices a partir de la que se obtuvieron las remuestras (permite reconstruir las remuestras bootstrap).</p></li>
 <li><p><code>boot.ci()</code>: construye distintos tipos de intervalos de confianza
-(se tratarán en el Sección <a href="#icboot"><strong>??</strong></a>) dependiendo del parámetro <code>type</code>:</p>
+(se tratarán en el Sección <a href="boot-ic.html#boot-ic">10.2</a>) dependiendo del parámetro <code>type</code>:</p>
 <ul>
 <li><p><code>"norm"</code>: utiliza la distribución asintótica normal considerando las
 aproximaciones bootstrap del sesgo y de la varianza.</p></li>
@@ -674,7 +693,7 @@ Por ejemplo en la Sección <a href="boot-reg.html#boot-reg">9.4</a> se ilustrar�
 Figura 8.9: Gráficos de diagnóstico para la distribución bootstrap del coeficiente de correlación.
 </p>
 </div>
-<p>En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección <a href="#icboot-trans"><strong>??</strong></a>).</p>
+<p>En este caso podemos observar que la distribución bootstrap del estimador es asimétrica, por lo que asumir que su distribución es normal podría no ser adecuado (por ejemplo para la construcción de intervalos de confianza, que se tratarán en la Sección <a href="boot-ic.html#icboot-trans">10.2.6</a>).</p>
 <p>Como comentario final, nótese que en principio el paquete boot está diseñado para obtener réplicas bootstrap de un estimador, por lo que si lo que nos interesa es emplear otro estadístico habría que construirlo a partir de ellas (como hacen otras funciones secundarias como <code>boot.ci()</code>).
 Por ejemplo, si queremos emplear el estadístico <span class="math inline">\(R = \hat \theta - \theta\)</span>
 (bootstrap percentil básico o natural), podemos obtener la correspondiente distribución bootstrap (aproximada por Monte Carlo) con el siguiente código:</p>
